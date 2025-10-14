@@ -1,4 +1,4 @@
-%% SIMULAZIONE CODA M/M/1
+%% 1-SIMULAZIONE CODA M/M/1
 % Script to check confidence intervals in the simulation of an M/M/1 queue
 rng 'default' % Reset generatori numeri casuali
 
