@@ -1,4 +1,4 @@
-%% EXTREMELY NAIVE script to simulate (s,S) periodic review policy
+%% 2-EXTREMELY NAIVE script to simulate (s,S) periodic review policy
 % L'obbiettivo è capire se la politica è buona oppure no -> ma cosa vuol
 % dire buona o cattiva? Bisogna decidere una regola per capire se siamo
 % soddisfatti o no
@@ -24,13 +24,19 @@ demand = repmat(10,T,1); % Costruisce un vettore in cui la domanda è sempre 10 
                          % è il caso semplice per debug per programma
 % demand = normrnd(T,1,mu,sigma); % Qui non c'è la minima idea di
                                   % modularità
+                                  % La deviazione standard non deve essere
+                                  % molto grande altrimenti assumo anche
+                                  % domande negative, che ovviamente non ha
+                                  % senso
 
 % Define system STATE -> non è detto che faccio partire il sistema vuoto
 % Definisco lo stato inizale del sistema
 endInv = bigS;     % state initialization
 onOrder = 0;       % from past period
 
-% simulation FOR loop -> SIMULAZIONE TEMPO DISCRETO
+% simulation FOR loop -> SIMULAZIONE TEMPO DISCRETO: modello a tempo
+% discreto, successione regolare, il tempo simulato avanza di delta_t
+% sempre nello stesso modo
 for t = 1:T
     onHand(t) = endInv+onOrder;   % deliver items -> livello di magazzino on hand
     if demand(t) <= onHand(t) % Confronto la domanda
