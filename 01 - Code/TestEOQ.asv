@@ -12,7 +12,7 @@ fixedCharge = 10000;
 % Make inSample scenario
 rng default
 horizonInSample = 80000;
-D = 5; % Per ogni periodo la domanda è costante
+D = 5;
 inSampleDemand = D*ones(1,horizonInSample);
 EOQ = sqrt(2*D*fixedCharge/onHandCost)
 initialStock = EOQ;
@@ -24,8 +24,6 @@ upperBounds = [100*initialStock;100*initialStock];
 
 % Use pattern search
 xStar = patternsearch(objfun,upperBounds,[],[],[],[],zeros(2,1),upperBounds);
-    % Uso pattern search per ottimizzare
-    
 smallS_Pattern = xStar(1);
 bigS_Pattern = xStar(1)+xStar(2);
 fprintf(1,'Pattern Search: smallS = %.2f, bigS = %.2f\n', smallS_Pattern, bigS_Pattern);
@@ -37,7 +35,4 @@ fprintf(1,'Pattern Search: smallS = %.2f, bigS = %.2f\n', smallS_Pattern, bigS_P
 % 2. Input Analysis -> ad es. capire le distribuzioni che si vanno ad usare
 % 3. Coding -> programma di simulazione
 % 4. Output Analysis -> ad es. tirare fuori gli intervalli di confidenza,
-% analisi di varianza
-% 5. Verifica -> il software è coerente con il modello: il programma fa 
-% quello che ti aspetti (debug)
-% 6. Validazione -> il modello matematico è corretto
+% an

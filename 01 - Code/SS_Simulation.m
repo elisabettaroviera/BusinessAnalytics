@@ -10,6 +10,15 @@ function [totalCost, freqStockout] = SS_Simulation(smallS, bigS, demandScenarios
 % lostPenalty := valore per le vendite perse
 % unitCost := costo di unità della merce
 % fixedCharge := valore minimo di merce nel riordino
+% initialStock := magazzino iniziale -> è importante il transitorio o no?
+
+% totalCost -> voglio monimizzare il costo totale, quindi ho bisogno
+% di avere delle variabili di costo
+% è un vettore per ogni simulazione effettuata
+% onHandCost -> costo di giacenza
+% lostPenalty -> coefficiente di pnealità della domanda persa
+% unitCost -> costo unitario della merce
+% fixedCharge -> costo fisso di riordino
 
 % allocate sample path vectors
 % Note: scenarios are stored along ROWS

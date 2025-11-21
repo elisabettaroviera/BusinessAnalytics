@@ -3,7 +3,7 @@
 % Economics
 unitCost = 10;
 onHandCost = 0.1*unitCost;
-lostPenalty = 2*unitCost;
+lostPenalty = 2*unitCost; % Penalità molto alta
 fixedCharge = 1000;
 
 % Demand distribution
@@ -12,7 +12,7 @@ fixedCharge = 1000;
 pd = makedist('NegativeBinomial','R',20,'P',.3); % Definiamo la distribuzione di probabilità della domanda
 % Make inSample scenario
 rng default
-horizonInSample = 30000;
+horizonInSample = 30000; % Unica replicazine, ma molto lunga
 % Note: scenarios are stored along ROWS
 inSampleDemand = random(pd,1,horizonInSample);
 % Make outSample scenario (not used here, but fundamental to check robustness)
