@@ -13,6 +13,9 @@
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{tikz}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
 
 % Personalizzazione del titolo in alto
 \makeatletter
@@ -1027,861 +1030,1606 @@ Il risultato mostra che, oltre ai tempi di setup, il periodo di rotazione è for
 
 \section{CAP 5 -- Schedulazione nella produzione e nei servizi}
 \paragraph{Recap}
-Manca
+La \textbf{schedulazione} consiste nell’assegnare \textbf{risorse} a \textbf{job} nel tempo, rispettando \textbf{vincoli tecnologici} e di \textbf{capacità} e ottimizzando una \textbf{misura di prestazione}; rispetto alla \textbf{pianificazione della produzione} (es., \textbf{MRP}) opera a un livello di dettaglio superiore.  
+I job sono descritti da \textbf{operazioni} con \textbf{precedenze}, \textbf{tempi di processo}, \textbf{tempi di rilascio} e \textbf{due date}; tipicamente si assume lavorazione su \textbf{una macchina per volta}, \textbf{una sola operazione per macchina} e \textbf{assenza di interruzioni}, pur con possibili violazioni (lot streaming, batch, pre-emption).  
 
-\subsection{Obiettivo: Massimizzazione del Profitto}
-L'obiettivo di un'impresa è tipicamente la massimizzazione del profitto, $\Pi$, definito come la differenza tra Ricavo Totale $R(q)$ e Costo Totale $C(q)$:
-\[
-\Pi(q) = R(q) - C(q) = p(q)q - C(q)
-\]
-dove $p(q)$ è la funzione di domanda inversa (prezzo in funzione della quantità) e $q$ è la quantità prodotta/venduta.
+Le strutture di problema derivano da diverse \textbf{precedenze} e layout di macchine (\textbf{macchina singola}, \textbf{parallele} $P/Q/R$, \textbf{flow shop}, \textbf{job shop}, \textbf{open shop}), e le prestazioni si misurano tramite funzioni di penalità sui tempi di completamento (\textbf{$C_i$}, \textbf{$F_i$}, \textbf{$L_i$}, \textbf{$T_i$}, \textbf{$E_i$}, \textbf{$U_i$}), anche in forma \textbf{aggregata} (min-sum o min-max, con \textbf{pesi} $w_i$). Alcune misure risultano \textbf{equivalenti} fino a costanti (lateness totale e flow time totale) e $L_{\max}$ implica ottimalità anche per $T_{\max}$, con $T_{\max}=\max\{L_{\max},0\}$. Le misure \textbf{regolari} (non decrescenti in $C_i$) permettono di ricavare il \textbf{timing} dal \textbf{sequenziamento} tramite \textbf{soluzioni attive}; con misure \textbf{non regolari} (es., somma pesata di earliness e tardiness) sequencing e timing non coincidono e la soluzione ottima non è necessariamente attiva o semiattiva.  
 
-\paragraph{Condizione di Ottimalità}
-Per massimizzare il profitto in termini di quantità $q$, la condizione del primo ordine è:
-\[
-\frac{d\Pi}{dq} = \frac{dR}{dq} - \frac{dC}{dq} = 0 \quad \implies \quad MR = MC
-\]
-Il \textbf{Ricavo Marginale ($MR$)} deve eguagliare il \textbf{Costo Marginale ($MC$)}.
+La notazione di \textbf{Graham} \textbf{$\alpha|\beta|\gamma$} classifica i problemi tramite layout, vincoli aggiuntivi e misura obiettivo. Esistono casi risolvibili in modo \textbf{polinomiale} (regole \textbf{EDD}, \textbf{WSPT}, algoritmo di \textbf{Johnson}), ma in generale i problemi sono \textbf{NP-hard} e si ricorre a \textbf{euristiche} e \textbf{metaeuristiche}, includendo regole avanzate come \textbf{ATC}. La formulazione tramite \textbf{grafo disgiuntivo} rappresenta precedenze (archi congiuntivi) e vincoli di capacità (archi disgiuntivi), e il \textbf{cammino critico} determina il \textbf{makespan}; da tale grafo si può derivare un \textbf{MILP} per $J//C_{\max}$, utile come base per strategie \emph{destroy and repair} pur non essendo trattabile in pratica. Nella ricerca locale, perturbare archi disgiuntivi sul \textbf{cammino critico} evita cicli ed è l’unica perturbazione utile per $J//C_{\max}$.  
 
-\subsubsection{Ricavo Marginale ed Elasticità della Domanda}
-Il Ricavo Marginale si esprime come:
-\[
-MR = \frac{dR}{dq} = p + q \frac{dp}{dq}
-\]
-L'\textbf{Elasticità della Domanda rispetto al Prezzo} ($\eta$) è definita come la variazione percentuale della quantità domandata rispetto alla variazione percentuale del prezzo:
-\[
-\eta = \frac{dq/q}{dp/p} = \frac{dq}{dp} \frac{p}{q}
-\]
-Poiché la domanda è inversamente proporzionale al prezzo, l'elasticità è negativa ($\eta < 0$).
+La procedura \textbf{shifting bottleneck} decompone $J//C_{\max}$ in problemi su macchina singola del tipo \textbf{$1/r_i/L_{\max}$}, usando \textbf{teste} $h_{ib}$ (rilasci $r_{ib}$) e \textbf{code} $t_{ib}$ per costruire \textbf{due date locali} $d_{ib}=K-t_{ib}$; il collo di bottiglia è la macchina con \textbf{$L_{\max}$} peggiore e viene congelata iterativamente fino a schedulare tutte le macchine, con possibili raffinamenti ed estensioni a \textbf{$J/r_i/L_{\max}$}.
 
-\paragraph{Relazione tra MR ed Elasticità}
-Il Ricavo Marginale può essere espresso in termini di prezzo ed elasticità, poiché $q \frac{dp}{dq} = p \frac{q}{p} \frac{dp}{dq} = p \frac{1}{\eta}$:
-\[
-MR = p \left( 1 + \frac{1}{\eta} \right)
-\]
-L'ottimo $MR=MC$ implica la \textbf{regola di prezzo ottimale} (o Indice di Lerner):
-\[
-\frac{p^* - MC}{p^*} = -\frac{1}{\eta}
-\]
-Un'impresa con un maggiore potere di mercato (elasticità $\eta$ più vicina a zero in valore assoluto) può applicare un *mark-up* superiore al costo marginale.
+\subsection{Modelli classici di machine scheduling}
 
-\subsection{Discriminazione di Prezzo}
-La discriminazione di prezzo si verifica quando l'impresa applica prezzi diversi a diversi clienti o gruppi di clienti per lo stesso prodotto.
+Risolvere un problema di \textbf{schedulazione} richiede di assegnare \textbf{risorse} a \textbf{job} da eseguire nel tempo, rispettando \textbf{vincoli tecnologici} e di \textbf{capacità}, in modo da ottimizzare una \textbf{misura di prestazione}.  \\
+Un problema di scheduling si pone a un livello di dettaglio superiore rispetto a un problema di \textbf{pianificazione della produzione} (ad esempio a livello \textbf{MRP}). Esiste una grande varietà di problemi di scheduling, ma si inizia con la definizione di un \textbf{problema minimale}.
 
-\paragraph{Discriminazione di Terzo Grado (Segmentazione del Mercato)}
-Se il mercato può essere segmentato in due o più segmenti (es. studenti e adulti, residenti e turisti), l'impresa deve ottimizzare il prezzo per ciascun segmento $i$:
-\[
-\frac{p_i - MC}{p_i} = -\frac{1}{\eta_i}
-\]
-L'impresa applicherà un prezzo più alto al segmento con la \textbf{domanda meno elastica} (elasticità $\eta_i$ più vicina a zero).
-La condizione di ottimalità richiede che i Ricavi Marginali per tutti i mercati eguaglino il Costo Marginale:
-\[
-MR_1 = MR_2 = \dots = MC
-\]
+\paragraph{Caratteristiche dei job}
+I job sono caratterizzati da:
+\begin{itemize}[label=-]
+    \item Un \textbf{set di operazioni} da eseguire, legate da \textbf{vincoli di precedenza};
+    \item \textbf{Tempi di lavorazione} per l’esecuzione su ogni macchina;
+    \item \textbf{Date di rilascio} e \textbf{date di consegna}.
+\end{itemize}
+Assunzioni comuni sono che un job possa essere in lavorazione su \textbf{al più una macchina per volta}, che ogni macchina possa lavorare \textbf{un job per volta}, e che le lavorazioni \textbf{non possano essere interrotte}. Ognuna di tali assunzioni può essere violata (\textbf{lot streaming}, \textbf{processori batch}, \textbf{pre-emption}).
 
-\subsection{Modelli di Scelta Discreta (Discrete Choice Models - DCM)}
-I DCM si concentrano sul comportamento del cliente, in contrasto con l'approccio microeconomico che usa la curva di domanda aggregata.
-L'obiettivo è rappresentare ciò che la gente fa, basandosi sull'ipotesi che i clienti scelgano l'alternativa che massimizza la loro utilità.
+\paragraph{Soluzioni e diagrammi di Gantt}
+Una soluzione di un problema di scheduling è caratterizzata dalle \textbf{sequenze di lavorazione} sulle macchine.   Una soluzione può essere visualizzata mediante un \textbf{diagramma di Gantt}, che rappresenta graficamente l’allocazione temporale dei job sulle macchine. \\
+Dall’esempio si ricava che una stessa istanza può ammettere più soluzioni ammissibili, caratterizzate da diverse sequenze sulle macchine.
 
-\paragraph{Funzione di Utilità Random}
-Sia $\mathcal{C} = \{0, 1, \dots, n\}$ l'insieme delle alternative, dove $0$ è l'alternativa di *no-purchase* (non acquistare). L'utilità dell'alternativa $j$ per l'individuo $i$ è:
-\[
-U_{ij} = V_{ij} + \epsilon_{ij}
-\]
-dove:
-\begin{itemize}[label=$\circ$]
-    \item $V_{ij}$ è la \textbf{componente deterministica} (o utilità media), che dipende dalle caratteristiche del cliente $i$ e del prodotto $j$ (es. prezzo, qualità).
-    \item $\epsilon_{ij}$ è la \textbf{componente stocastica} (o errore), che rappresenta l'ignoranza del modellatore, le preferenze intrinseche non osservabili, o l'errore di misurazione.
+\subsection{Tipi di flusso}
+
+\paragraph{Strutture di precedenza}
+Esistono diverse \textbf{strutture di precedenza} tra le operazioni dei job, che caratterizzano la \textbf{tecnologia del ciclo di lavorazione}.  
+Sono possibili \textbf{strutture lineari}, oppure \textbf{strutture arbitrarie} rappresentabili mediante \textbf{grafi}.
+Le precedenze si traducono in \textbf{vincoli} di un problema di ottimizzazione.
+\\
+Il \textbf{flusso dei materiali} caratterizza diverse strutture in termini di macchine:
+\begin{itemize}[label=-]
+    \item \textbf{macchina singola};
+    \item \textbf{macchine parallele} (identiche: $p_{im}=p_i$, correlate: $p_{im}=p_{ism}$, scorrelate);
+    \item \textbf{flow shop};
+    \item \textbf{job shop};
+    \item \textbf{open shop}.
+\end{itemize}
+Oltre a tali strutture prototipali, si osservano varianti sul tema, e sono possibili \textbf{strutture ibride} (ad esempio \textbf{flexible flow shop}).
+
+\subsection{Misure di prestazione}
+Si indica con \textbf{$C_i$} il \textbf{tempo di completamento} del job $i\in[n]$, ovvero il tempo di completamento della sua \textbf{ultima operazione}.
+
+\paragraph{Funzioni di penalità}
+Un tipico modo per costruire misure di prestazione è associare ad ogni job $J_i$ un \textbf{termine di penalità} $\gamma_i(C_i)$.
+I termini tipicamente utilizzati sono:
+\begin{itemize}[label=-]
+    \item \textbf{tempo di completamento}: $\gamma_i(C_i)=C_i$;
+    \item \textbf{flow time}: $\gamma_i(C_i)=F_i=C_i-r_i$;
+    \item \textbf{lateness}: $\gamma_i(C_i)=L_i=C_i-d_i$;
+    \item \textbf{tardiness}: $\gamma_i(C_i)=T_i=\max\{C_i-d_i,0\}$;
+    \item \textbf{earliness}: $\gamma_i(C_i)=E_i=\max\{d_i-C_i,0\}$;
+    \item \textbf{indicatore di ritardo}:
+    \(
+    \gamma_i(C_i)=U_i=
+    \begin{cases}
+    1 & \text{se } C_i>d_i,\\
+    0 & \text{se } C_i\le d_i.
+    \end{cases}
+    \)
 \end{itemize}
 
-\paragraph{Probabilità di Scelta}
-La probabilità che l'individuo $i$ scelga l'alternativa $j$ è:
+\paragraph{Pesi e priorità dei job}
+È possibile associare \textbf{pesi $w_i$} ai job, allo scopo di esprimere una \textbf{priorità}.  
+Si può per esempio valutare per ogni job $J_i$ la \textbf{tardiness pesata} $w_iT_i$.
+\\ Sulla base di questi ``\textbf{mattoncini}'' si possono costruire misure di prestazione \textbf{aggregate}, ottenendo funzioni del tipo:
 \[
-P_{ij} = \mathbb{P}\{U_{ij} > U_{ik}, \quad \forall k \in \mathcal{C}, k \ne j\}
-\]
-Questa probabilità dipende dalla distribuzione delle componenti stocastiche $\epsilon$.
-
-\subsubsection{Il Modello Logit}
-Il modello Logit deriva dall'assunzione che gli errori stocastici $\epsilon_{ij}$ siano \textbf{indipendenti e identicamente distribuiti (IID)} secondo una \textbf{distribuzione di Gumbel} (o di Valore Estremo di Tipo I).
-La probabilità di scelta $P_j$ (omettendo l'indice $i$ per omogeneità) è data da:
-\[
-P_j = \frac{e^{V_j}}{\sum_{k \in \mathcal{C}} e^{V_k}}
+\min\sum_{i=1}^n\gamma_i(C_i),
+\qquad
+\min\max_{i=1,\dots,n}\gamma_i(C_i).
 \]
 
-\paragraph{Proprietà della Scelta Irrilevante (IIA)}
-Una conseguenza fondamentale dell'assunzione IID (e quindi del modello Logit) è la \textbf{Proprietà dell'Indipendenza dalle Alternative Irrilevanti (IIA - Independence from Irrelevant Alternatives)}.
-\[
-\frac{P_j}{P_k} = \frac{e^{V_j}}{e^{V_k}} = e^{V_j - V_k}
-\]
-Il rapporto tra le probabilità di scelta di due alternative $j$ e $k$ dipende \textbf{solo} dalle utilità deterministiche $V_j$ e $V_k$, e non da qualsiasi altra alternativa presente nell'insieme di scelta $\mathcal{C}$.
-
-\paragraph{Fallimento della Proprietà IIA}
-La proprietà IIA fallisce in presenza di \textbf{sostituti vicini} (es. il paradosso del bus rosso/blu). Se le componenti stocastiche sono correlate tra alternative simili, il modello Logit non è appropriato.
-
-\subsubsection{Modelli Generalizzati e Distribuzioni di Valore Estremo}
-Per superare i limiti dell'IIA, si ricorre a modelli più generali, come il \textbf{Nested Logit} o il \textbf{Mixed Logit} (che permettono correlazioni tra gli errori).
-
-\paragraph{Distribuzioni di Valore Estremo Generalizzate (GEV)}
-Le distribuzioni di valore estremo generalizzate $H_{\xi}(x)$ sono una famiglia di distribuzioni che include:
-\[
-H_{\xi}(x) = \exp \left\{ - (1 + \xi x)^{-1/\xi} \right\}, \quad \xi \ne 0
-\]
-con l'aggiunta di parametri di posizione $\mu \in \mathbb{R}$ e scala $\sigma > 0$: $H_{\xi, \mu, \sigma}(x) = H_{\xi}\left(\frac{x-\mu}{\sigma}\right)$.
-
-\begin{itemize}[label=$\circ$]
-    \item Se $\mathbf{\xi > 0}$: \textbf{Distribuzione di Fréchet}. Ha una coda pesante (*heavy tail*) e un decadimento lento.
-    \item Se $\mathbf{\xi = 0}$: \textbf{Distribuzione di Gumbel}. Ottenuta come limite per $\xi \to 0$. È fondamentale per il modello Logit.
-    \item Se $\mathbf{\xi < 0}$: \textbf{Distribuzione di Weibull}. Ha un estremo destro finito.
+\paragraph{Principali misure di prestazione aggregate}
+Le principali misure di prestazione aggregate sono:
+\begin{itemize}[label=-]
+    \item \textbf{flow time totale}: $\sum_i F_i$;
+    \item \textbf{flow time totale pesato}: $\sum_i w_iF_i$;
+    \item \textbf{massima lateness}: $L_{\max}=\max_i L_i$;
+    \item \textbf{tardiness totale pesata}: $\sum_i w_iT_i$;
+    \item \textbf{makespan}: $C_{\max}=\max_i C_i$;
+    \item \textbf{numero di job in ritardo}: $\sum_i U_i$.
 \end{itemize}
-La distribuzione di Gumbel è quella che, quando usata come distribuzione per gli errori $\epsilon$, genera il modello Logit.
+
+\paragraph{Equivalenza tra misure di prestazione}
+Alcune misure sono tra di loro \textbf{equivalenti}, nel senso che una soluzione ottima rispetto a una di esse è ottima anche per l’altra.
+Ad esempio, la \textbf{lateness totale} è equivalente al \textbf{flow time totale}:
+\[
+\sum_{i=1}^n L_i
+=
+\sum_{i=1}^n C_i-\sum_{i=1}^n d_i
+=
+\sum_{i=1}^n F_i+\sum_{i=1}^n(r_i-d_i).
+\]
+
+Le due misure differiscono per una \textbf{costante}. Inoltre, una soluzione ottima rispetto a \textbf{$L_{\max}$} è ottima anche rispetto a \textbf{$T_{\max}$} (ma non è assicurato il viceversa):
+\(
+T_{\max}=\max\{L_{\max},0\}.
+\)
+
+\paragraph{Misure di prestazione regolari}
+Le misure di prestazione finora elencate sono \textbf{funzioni non decrescenti} dei tempi di completamento; si parla in questo caso di \textbf{misure di prestazione regolari}.
+Nel caso di misure regolari, le informazioni di \textbf{tempistica} possono essere ricavate dal \textbf{sequenziamento}, in quanto ogni operazione è eseguita \textbf{al più presto} (\textbf{soluzioni attive}).
+
+\paragraph{Misure di prestazione non regolari}
+Nel caso di \textbf{misure non regolari}, ciò non è più vero e il problema risulta \textbf{più complesso}.
+Tali misure sono utili per tenere conto dell’\textbf{inopportunità di completare un job prima della due date}, ad esempio adottando come misura:
+\[
+\sum_{i=1}^n\bigl(w_i^T T_i + w_i^T E_i\bigr).
+\]
+
+In questo caso esiste una regione in cui la funzione \textbf{decresce} al crescere del tempo di completamento, e \textbf{sequencing e timing non coincidono} e la soluzione ottima non è necessariamente attiva o semiattiva.
+
+\subsection{Notazione di Graham}
+
+Per classificare i problemi di schedulazione si utilizza la codifica a tre campi \textbf{$\alpha|\beta|\gamma$} dovuta a \textbf{Graham}.
+
+\paragraph{Campo $\alpha$: layout delle macchine}
+Il campo $\alpha$ descrive il \textbf{layout delle macchine}:
+\begin{itemize}[label=-]
+    \item \textbf{$1$}: macchina singola;
+    \item \textbf{$P,Q,R$}: macchine parallele identiche, correlate e scorrelate;
+    \item \textbf{$F$}: flow shop (ad esempio $F2$);
+    \item \textbf{$J$}: job shop.
+\end{itemize}
+
+\paragraph{Campo $\beta$: vincoli aggiuntivi}
+Il campo $\beta$ descrive la presenza di eventuali \textbf{vincoli aggiuntivi}:
+\begin{itemize}[label=-]
+    \item \textbf{res}: risorse aggiuntive;
+    \item \textbf{prec}: vincoli di precedenza tra job;
+    \item \textbf{$r_i$}: tempi di rilascio non nulli;
+    \item \textbf{$\bar d_i$}: deadline hard;
+    \item \textbf{$s_{ij}$}: setup dipendenti dalla sequenza;
+    \item \textbf{perm}: flow shop a permutazione, la frequenza di job si mantiene su tutte le macchine;
+    \item \textbf{no-wait}: assenza di buffer tra operazioni: ragioni tecnologiche impongono che le operazioni vengano eseguite consecutivamente senza interruzioni.
+\end{itemize}
+
+\paragraph{Campo $\gamma$: misura di prestazione}
+Il campo $\gamma$ descrive la \textbf{misura di prestazione} da ottimizzare.
+
+\subsection{Algoritmi di soluzione}
+Esistono alcuni casi semplici risolvibili mediante \textbf{algoritmi polinomiali}:
+\begin{itemize}[label=-]
+    \item \textbf{$1//L_{\max}$}: regola \textbf{EDD} che ordina i job in ordine di \textbf{due date} crescente;
+    \item \textbf{$1//\sum_i w_i c_i$}: regola \textbf{WSPT} (weigthed shortest processing time) che ordina i job in ordine decrescente del rapporto $w_i/p_i$;
+    \item \textbf{$F2//C_{\max}$}: algoritmo di \textbf{Johnson} (in questo caso la soluzione ottima applica la stessa sequenza sulle due macchine).
+\end{itemize}
+
+\paragraph{Problemi NP-hard ed euristiche}
+In generale, i problemi di schedulazione sono \textbf{NP-hard} e vengono affrontati
+mediante \textbf{euristiche}, sia costruttive sia iterative (\textbf{metaeuristiche} basate su ricerca locale).
+Le \textbf{regole di priorità} costituiscono una strategia costruttiva di base.
+
+\paragraph{Regola ATC (Apparent Tardiness Cost)} Esistono anche regole non banali, come la \textbf{regola ATC (Apparent Tardiness Cost)},
+proposta per problemi \textbf{$J//\sum_i w_i T_i$}.
+L’espressione della priorità del job $J_i$ sulla macchina $M_j$ al tempo $t$ è:
+\[
+\frac{w_i}{p_{ij}}
+\exp\!\left(
+-
+\left[
+\frac{d_i - t - p_{ij} -
+\sum_{q=j+1}^{m_i}(W_{iq}+p_{iq})}{k \bar{p}}
+\right]^+
+\right),
+\]
+dove $w_i$ è il peso del job $J_i$ e $p_{ij}$ è il suo tempo di processo sulla macchina
+$M_j$; la notazione $[x]^+$ è equivalente a $\max\{0,x\}$; $W_{iq}$ è una stima del tempo
+di attesa di $J_i$ sulla macchina $M_q$; $m_i$ è il numero di macchine che il job deve
+ancora visitare; $k$ è un parametro da selezionare; $\bar{p}$ è il tempo di processo
+medio dei job in coda.
+
+\paragraph{Interpretazione del termine di slack}
+L’espressione
+\[
+t^* = d_i - p_{ij} -
+\sum_{q=j+1}^{m_i}(W_{iq}+p_{iq})
+\]
+può essere interpretata come il massimo tempo di inizio di $J_i$ su $M_j$, ottenuto
+sottraendo un lead time stimato dalla due date $d_i$.
+Se $t \le t^*$ si può ritenere di essere in tempo, altrimenti si corre il rischio di
+arrivare in ritardo.
+Se si è in tempo, il termine tra parentesi quadre è positivo, e la priorità cresce
+esponenzialmente al crescere di $t$. \\
+Quando si è in ritardo, il termine tra parentesi quadre è negativo, per cui
+l’argomento dell’esponenziale è zero. La priorità è quindi $w_i/p_{ij}$, che coincide
+con la regola WSPT.
+
+\paragraph{Relazione con la tardiness totale pesata}
+Se molti job sono in ritardo, la tardiness totale pesata diventa una funzione obiettivo
+quasi equivalente al tempo di completamento totale pesato:
+\[
+\sum_i w_i T_i =
+\sum_i w_i \max\{C_i-d_i,0\}
+\approx
+\sum_i w_i C_i - \sum_i w_i d_i .
+\]
+
+Il problema di minimizzazione di $\sum_i w_i C_i$ è risolto, su macchina singola,
+dalla regola WSPT.
+
+\paragraph{Lookahead e ricerca locale}
+La miopia delle regole di priorità può essere ridotta introducendo un certo grado di
+lookahead, ad esempio mediante strategie di \emph{beam search}.
+Una vasta classe di algoritmi iterativi si basa su perturbazioni locali della soluzione
+corrente, che definiscono una struttura di vicinato.\\
+I principali problemi sono:
+\begin{itemize}[label=-]
+    \item sfuggire a minimi locali (tabu search, algoritmi genetici, questi richiedono attenta codifica e decodifica delle soluzioni);
+    \item esplorare grandi vicinati in maniera efficiente (LNS, Large Neighborhood
+    Search, utile anche per misure non regolari);
+    \item evitare la creazione di cicli.
+\end{itemize}
+Molte di tali questioni richiedono una formulazione mediante un grafo disgiuntivo.
+
+\subsection{Grafi disgiuntivi}
+In un \textbf{grafo disgiuntivo}, i nodi rappresentano le operazioni, con l’aggiunta di nodi
+dummy iniziali e finali.
+Gli \textbf{archi congiuntivi} rappresentano vincoli di precedenza tecnologici, associati ai
+cicli di ciascun job.
+Gli \textbf{archi disgiuntivi} vanno orientati e rappresentano i vincoli di capacità per ogni
+macchina (una clique per macchina).
+Il \textbf{cammino critico}, ossia il cammino di lunghezza massima dal nodo iniziale al nodo
+finale, fornisce il makespan.
+
+\subsection{Modello MILP per $J//C_{max}$}
+
+\paragraph{Formulazione} Sulla base del grafo disgiuntivo possiamo costruire un modello MILP per il problema $J//C_{max}$.
+Sia $N=\{0,1,\dots,N-1,N\}$ l’insieme dei nodi, dove $0$ e $N$ sono nodi dummy.
+Sia $P$ l’insieme degli archi congiuntivi e $D$ l’insieme degli archi disgiuntivi.
+La variabile binaria $x_{ij}$, se posta pari a $1$, indica che l’operazione $i$ precede
+l’operazione $j$.
+
+\begin{align*}
+\min \quad & C_N \\
+\text{s.t.}\quad
+& C_j \ge C_i + p_j && \forall (i,j)\in P \\
+& C_j \ge C_i + p_j - M(1-x_{ij}) && \forall (i,j)\in D \\
+& C_i \ge C_j + p_i - M x_{ij} && \forall (i,j)\in D \\
+& x_{ij}\in\{0,1\} && \forall (i,j)\in D \\
+& C_i \ge p_i && \forall i\in N .
+\end{align*}
+
+Il modello può essere adattato ad altre misure di prestazione, ma non è trattabile in
+pratica a causa di bound deboli. Tuttavia costituisce una base utile per
+metaeuristiche e approcci LNS (\emph{destroy and repair}).
+
+\paragraph{Il ruolo del cammino critico}
+In una strategia di ricerca locale, perturbazioni arbitrarie delle sequenze possono
+creare cicli. Nel problema $J//C_{\max}$, se si perturbano archi disgiuntivi appartenenti al
+cammino critico, non si possono creare cicli, e tali perturbazioni sono le sole utili.
+
+\subsection{Procedura Shifting Bottleneck}
+
+\paragraph{Idea generale}
+La procedura \emph{shifting bottleneck}, originariamente pensata per il problema
+$J//C_{\max}$, sfrutta il grafo disgiuntivo per decomporre il problema in una
+sequenza di problemi del tipo $1/r_i/L_{\max}$, per i quali sono disponibili algoritmi branch-and-bound efficienti.
+Se una macchina $M_b$ è il collo di bottiglia, le altre macchine possono essere
+trattate come risorse a capacità infinita, eliminando i relativi archi disgiuntivi corrispondenti alle altre macchine
+e mantenere solo quelle corrispondenti alle altre macchine.
+
+\paragraph{Teste e code nel grafo disgiuntivo}
+Si consideri il nodo $O_{ib}$ del grafo, corrispondente all’operazione del job $J_i$
+sulla macchina $M_b$, e sia $C_{ib}$ il suo tempo di completamento.
+Si consideri il \textbf{cammino critico} dal nodo fittizio iniziale al nodo $O_{ib}$.
+La sua lunghezza $h_{ib}$ è la somma dei tempi di processo delle operazioni di $J_i$
+che precedono l’operazione $O_{ib}$, e ne costituisce la \textbf{testa}, ovvero il
+\textbf{tempo di rilascio} dell’operazione $O_{ib}$.
+In modo analogo si definisce la \textbf{coda} $t_{ib}$ come la lunghezza del cammino
+critico dal nodo $O_{ib}$ al nodo fittizio finale. In questo caso $t_{ib}$ è la somma
+dei tempi di processo delle operazioni che seguono $O_{ib}$.
+
+\paragraph{Approssimazione del makespan}
+Si definisce una data di consegna per il job $J_i$ sulla macchina $M_b$,
+approssimando il makespan come
+\(
+C_{\max} = \max_i \{C_i\} \;\approx\; \max_i \{C_{ib} + t_{ib}\}.
+\)
+Se si sottrae una costante arbitraria $K$ dalla misura di prestazione, la soluzione
+ottima del problema non cambia, ottenendo il problema equivalente:
+\[
+\max_i \{C_{ib} + t_{ib}\} - K
+= \max_i \{C_{ib} - (K - t_{ib})\}
+= \max_i \{C_{ib} - d_{ib}\},
+\]
+dove è stata introdotta una \textbf{due date locale}
+\(
+d_{ib} = K - t_{ib}.
+\)
+Più lunga è la coda $t_{ib}$, più stretta è la data di consegna $d_{ib}$.
+
+\paragraph{Riduzione a $1/r_i/L_{max}$}
+Il problema $J//C_{\max}$ si riconduce quindi a un problema
+$1/r_i/L_{\max}$, in cui:
+\(
+r_{ib} = h_{ib}, \; d_{ib} = K - t_{ib}.
+\)
+I tempi di rilascio sono dati dalle \textbf{teste}, mentre le date di consegna
+dipendono dalle \textbf{code}.
+
+\paragraph{Identificazione del collo di bottiglia}
+Un modo ragionevole per identificare il \textbf{collo di bottiglia} consiste nel
+risolvere i problemi $1/r_i/L_{\max}$ per tutte le macchine, definendo per ciascuna
+le teste e le code delle operazioni.
+Il collo di bottiglia è la macchina che presenta il valore di $L_{\max}$ peggiore.
+Dopo avere risolto i problemi su macchina singola, si individua il collo di bottiglia
+$M_b$ e la relativa sequenza. È quindi possibile orientare gli archi disgiuntivi
+corrispondenti a $M_b$ e rischedulare le altre macchine.
+In pratica, si risolvono i problemi su macchina singola per le rimanenti $M-1$
+macchine, aggiornando teste e code. Il procedimento prosegue fino ad avere
+schedulato tutte le macchine, congelandole una per volta.
+Sono possibili raffinamenti iterativi, e la strategia si estende facilmente al problema
+$J/r_i/L_{max}$; sono state proposte anche ulteriori estensioni.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% PDF 6 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{CAP 6 --Pricing}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% PDF 7 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{CAP 7 --Il principio della programmazione dinamica}
-\subsection{Il principio della programmazione dinamica}
-\paragraph{Definizione e Idea Centrale}
-La \textbf{Programmazione Dinamica (DP)} non è un algoritmo come l'algoritmo del simplesso per la programmazione lineare. È piuttosto un principio notevolmente generale e flessibile che può essere utilizzato per progettare una gamma di algoritmi di ottimizzazione. In sostanza, è un principio per generare algoritmi di ottimizzazione.
-L'idea centrale della DP si basa sulla \textbf{scomposizione} di un problema di decisione dinamico a stadi multipli in una sequenza di problemi a stadio singolo più semplici. Le decisioni si prendono in base alle informazioni che arrivano in momenti successivi.
-In questo principio, i problemi si decompongono a stadio singolo, andando a fare tagli rispetto al tempo e non rispetto agli scenari. La DP è anche alla base del \textit{reinforcement learning}.
+\section{CAP 7 -- Il principio della programmazione dinamica}
 
-\paragraph{Requisiti di Struttura}
-La DP non è un approccio universale, poiché la sua applicazione richiede una \textbf{struttura specifica} nel modello di sistema, che deve essere \textbf{Markoviano}. Deve esserci il concetto di "Stato".
-La DP può essere applicata a una vasta gamma di problemi:
-\begin{itemize}[label=$\circ$]
-    \item \textbf{Problemi Continui e Discreti}: la caratteristica discreta/continua può riferirsi a variabili di stato, variabili di decisione o alla rappresentazione del tempo (si guardano solo tempi discreti).
-    \item \textbf{Problemi Deterministici e Stocastici}.
-    \item \textbf{Problemi a Orizzonte Finito e Infinito}.
-\end{itemize}
+\section{CAP 8 -- Implementazione della programmazione dinamica}
 
-\subsection{Implementazione della programmazione dinamica}
-\paragraph{Problemi di Decisione Dinamici e Tempo Discreto}
-Trattiamo \textbf{modelli a tempo discreto}. Non ha senso considerare problemi a tempo continuo.
-Le convenzioni temporali adottate sono:
-\begin{itemize}[label=$\diamond$]
-    \item \textbf{Istanti di tempo} ($t=0, 1, 2, \dots$): si osserva lo stato del sistema e si prende una decisione.
-    \item \textbf{Intervalli di tempo} ($t=1, 2, \dots$): il tempo che intercorre tra gli istanti $t-1$ e $t$. Il sistema evolve in questo intervallo, e un nuovo stato viene raggiunto all'istante $t$.
-\end{itemize}
-Le decisioni sono prese prima di osservare la realizzazione dei fattori di rischio.
+\subsection{Allocazione discreta di risorse: il problema dello zaino}
 
-\paragraph{Dinamiche del Sistema: Equazione di Transizione di Stato}
-Le dinamiche del sistema sono rappresentate dall'equazione di transizione di stato:
+\paragraph{Definizione del problema}
+Il problema dello \textbf{zaino} richiede di selezionare un sottoinsieme di oggetti di \textbf{valore totale massimo}, rispettando un vincolo di \textbf{capacità} (budget).
+
+Per modellare la selezione di ciascun oggetto si introducono variabili decisionali \textbf{binarie}:
 \[
-s_{t+1}=g_{t+1}(s_{t},x_{t},\xi_{t+1})
-\]
-dove:
-\begin{itemize}[label=-]
-    \item $g_{t+1}$ è la \textbf{funzione di transizione di stato} sull'intervallo di tempo $t+1$.
-    \item $s_{t}$ è il vettore delle \textbf{variabili di stato} all'istante $t$, che riassume tutte le informazioni necessarie dall'evoluzione passata del sistema.
-    \item $x_{t}$ è il vettore delle \textbf{variabili di decisione} (o di controllo) all'istante $t$.
-    \item $\xi_{t+1}$ è un \textbf{fattore esogeno} (fattore di rischio) la cui realizzazione durante l'intervallo $t+1$ influenza la transizione al nuovo stato.
-\end{itemize}
-
-\paragraph{Tipi di Variabili di Stato}
-È utile distinguere diverse tipologie di variabili di stato:
-\begin{itemize}[label=$\circ$]
-    \item \textbf{Variabili di stato fisico}: descrivono lo stato di risorse fisiche o finanziarie. Sono direttamente influenzate dalle nostre decisioni.
-    \item \textbf{Variabili di stato informativo}: informazioni rilevanti (es. prezzo di un'azione) che non sono influenzate dall'attività di un singolo decisore in mercati liquidi.
-    \item \textbf{Variabili di stato di credenza (*Belief state*)}: rilevanti in problemi affetti da incertezza sull'incertezza. I parametri del modello (o di una distribuzione di probabilità) diventano variabili di stato.
-\end{itemize}
-
-\subsubsection{Politiche di Decisione (Policy)}
-Le decisioni $x_{t}$ sono prese all'istante $t$, dopo aver osservato lo stato $s_{t}$.
-La politica deve essere \textbf{non anticipativa} perché esclude la previsione del futuro, a meno che il problema non sia deterministico. Una politica di decisione implementabile è detta non-anticipativa.
-Una politica di decisione \textit{closed-loop} (a \textbf{feedback}) e non-anticipativa è espressa nella forma:
-\[
-x_{t} = \mu_{t}(s_{t}) \in X(s_{t})
-\]
-dove $\mu_{t}(\cdot)$ è una funzione che mappa lo stato $s_{t}$ in una decisione ammissibile $x_t$.
-
-\subsection{Modelli della programmazione dinamica}
-\paragraph{Funzione Obiettivo}
-L'obiettivo generale è ottimizzare una funzione obiettivo sull'orizzonte di pianificazione. La DP si presta a problemi in cui la funzione obiettivo è \textbf{additiva nel tempo}, cioè è la somma dei costi sostenuti (o dei premi guadagnati) in ogni istante di tempo.
-
-\paragraph{Dipendenza nel Processo dei Dati ($\xi_t$)}
-I vettori casuali nel processo dei dati possono avere diversi gradi di dipendenza reciproca:
-\begin{itemize}[label=$\circ$]
-    \item \textbf{Indipendenza tra gli stadi (Caso facile)}: gli elementi del processo dei dati sono mutualmente indipendenti (il processo non ha memoria).
-    \item \textbf{Processo Markoviano (Caso abbastanza facile)}: $\xi_{t+1}$ dipende solo dall'ultima realizzazione $\xi_{t}$ dei fattori di rischio (Modello Markoviano del primo ordine).
-    \item \textbf{Caso più generale}: $\xi_{t+1}$ dipende dall'intera storia $\xi_{[t]}$ osservata fino al tempo $t$.
-\end{itemize}
-
-\subsubsection{Problemi a Orizzonte Finito Scontato}
-Un problema stocastico con orizzonte finito $T$ può essere espresso come:
-\[
-\text{opt}_{\mu \in \mathcal{M}} E_{0} \left[ \sum_{t=0}^{T-1} \gamma^{t} f_{t}(s_{t}, \mu_{t}(s_{t})) + \gamma^{T} F_{T}(s_{T}) \right]
-\]
-dove:
-\begin{itemize}[label=$\ast$]
-    \item $f_{t}(s_{t},x_{t})$ è il \textbf{Contributo immediato} (costo o premio).
-    \item $F_{T}(s_{T})$ è il \textbf{Costo/premio terminale}, che dipende solo dallo stato finale $s_{T}$.
-    \item $\gamma \in (0, 1)$ è il \textbf{fattore di sconto}, comune nelle applicazioni finanziarie. Per l'orizzonte infinito, è necessario per la convergenza della somma.
-\end{itemize}
-
-\section{CAP 8 --Programmazione dinamica numerica per stati discreti}
-\subsection{Programmazione dinamica approssimativa e apprendimento per rinforzo per stati discreti}
-\paragraph{Stima dei Contributi e Reinforcement Learning (RL)}
-In alcuni casi, la determinazione del contributo immediato $f_{t}(s_{t}, x_{t})$ tramite l'aspettativa condizionale $E_{t}[ h(s_{t}, x_{t}, \xi_{t+1}) ]$ può essere difficile da calcolare o può mancare un modello sensato.
-In tali situazioni, l'unica possibilità è osservare un campione di contributi casuali, o tramite \textbf{simulazione Monte Carlo} o \textbf{sperimentazione *online*}, come è tipico nell'apprendimento per rinforzo (\textit{reinforcement learning}).
-
-
-
-\subsection{Implementazione della programmazione dinamica}
-\subsection{Allocazione discreta delle risorse: il problema dello zaino (Knapsack Problem)}
-Il problema dello zaino richiede di selezionare un sottoinsieme di oggetti di massimo valore totale, soggetti a un vincolo di budget (capacità).
-Il problema è deterministico. Introduciamo variabili di decisione binarie $x_k$ per modellare la selezione di ogni oggetto:
-\[
-x_{k}=\begin{cases}1 & \text{se l'oggetto } k \text{ è selezionato,} \\ 0 & \text{altrimenti.}\end{cases}
-\]
-Il problema può essere formulato come un programma lineare binario puro:
-\[
-\max \sum_{k=1}^{n}v_{k}x_{k} \quad \text{s.t.} \quad \sum_{k=1}^{n}w_{k}x_{k}\le B \quad x_{k}\in\{0,1\} \quad \forall k.
-\]
-Si assume un'allocazione discreta del budget, poiché la selezione di un oggetto è una decisione "tutto o niente".
-Il problema non è intrinsecamente dinamico, ma può essere riformulato come un problema sequenziale di allocazione delle risorse introducendo un indice temporale discreto fittizio $k$, corrispondente agli oggetti. Per ogni indice $k=1,\dots,n$, dobbiamo decidere se includere l'oggetto $k$ nel sottoinsieme.
-La decisione dell'ultimo oggetto ($k=n$) è banale, poiché si considera solo il sottoinsieme $\{n\}$ dato il budget residuo.
-La selezione degli oggetti successivi è influenzata dalle decisioni passate solo attraverso il budget residuo.
-
-\paragraph{Variabile di Stato e Transizione}
-La variabile di stato naturale al passo $k$ è il budget disponibile $s_{k}$ prima di selezionare l'oggetto $k$. La variabile di decisione è $x_{k}$.
-L'equazione di transizione di stato è:
-\[
-s_{k+1}=s_{k}-w_{k}x_{k}, \quad k=1,\dots,n,
-\]
-con condizione iniziale $s_{1}=B$. Assumendo che i requisiti di risorsa $w_{k}$ siano interi, anche la variabile di stato sarà un numero intero.
-
-\paragraph{Funzione di Valore e Ricorrenza DP}
-Definiamo la funzione di valore $V_{k}(s)$ come il profitto derivante dalla selezione ottimale del sottoinsieme all'interno dell'insieme di oggetti $\{k,k+1,\dots,n\}$, quando il budget residuo è $s$.
-La ricorsione della DP è:
-\[
-V_{k}(s)= \begin{cases} V_{k+1}(s) & \text{per } 0\le s<w_{k} \\ \max \{V_{k+1}(s), V_{k+1}(s-w_{k})+v_{k}\} & \text{per } w_{k}\le s\le B \end{cases}
-\]
-Questa equazione stabilisce che al passo $k$, si considera l'oggetto $k$:
-\begin{itemize}[label=$\circ$]
-    \item Se il suo peso $w_{k}$ non rientra nel budget residuo $s$ ($s<w_{k}$), l'oggetto viene escluso. La funzione di valore rimane $V_{k+1}(s)$.
-    \item Altrimenti, si confrontano due alternative: 1) Includere l'oggetto $k$, guadagnando $v_{k}$ e allocando in modo ottimale il budget aggiornato $s-w_{k}$ agli oggetti successivi, oppure 2) Non includere l'oggetto $k$, allocando tutto il budget residuo $s$ in modo ottimale agli oggetti successivi.
-\end{itemize}
-La condizione terminale per l'ultimo oggetto $k=n$ è:
-\[
-V_{n}(s)=\begin{cases}0 & \text{per } 0\le s<w_{n} \\ v_{n} & \text{per } w_{n}\le s\le B\end{cases}
+x_k =
+\begin{cases}
+1 & \text{se l’oggetto } k \text{ è selezionato},\\
+0 & \text{altrimenti}.
+\end{cases}
 \]
 
-\paragraph{Complessità Computazionale}
-La complessità computazionale di questa procedura, assumendo dati interi, è $O(nB)$, che non è polinomiale ma pseudo-polinomiale. L'implicazione pratica è che, quando $B$ è un numero grande, si deve costruire una tabella enorme, rendendo l'algoritmo poco efficiente.
+Il problema può essere formulato come un problema di \textbf{programmazione lineare binaria pura}:
+\[
+\max \sum_{k=1}^{n} v_k x_k
+\]
+\[
+\text{s.t. } \sum_{k=1}^{n} w_k x_k \le B
+\]
+\[
+x_k \in \{0,1\} \quad \forall k.
+\]
 
-\subsection{Problema dello zaino: implementazione MATLAB}
-\paragraph{Struttura della Soluzione}
-La funzione \texttt{DPKnapsack} riceve i vettori \texttt{value} e \texttt{weight} e la capacità scalare \texttt{capacity}. Restituisce il sottoinsieme ottimale di oggetti (vettore binario \texttt{X}) e il valore totale (\texttt{reward}).
-\begin{itemize}[label=$\circ$]
-    \item La funzione di valore è memorizzata nella matrice \texttt{valueTable}, con $n$ colonne (oggetti) e $B+1$ righe (stati $s=0, 1,\dots,B$).
-    \item Le decisioni ottimali per ogni stato sono raccolte nella matrice \texttt{decisionTable} (funzione di politica in forma tabellare).
-    \item Il ciclo \texttt{for} più esterno implementa la ricorsione all'indietro della DP.
-    \item Dopo il ciclo principale, la soluzione ottimale viene costruita procedendo in avanti rispetto agli oggetti, prendendo decisioni e aggiornando la variabile di stato (\texttt{resCapacity}) di conseguenza.
-\end{itemize}
+Si assume un’allocazione discreta del budget, poiché la selezione di un’attività è una decisione \textbf{tutto-o-niente}.
+
+\paragraph{Motivazione dell’approccio DP}
+Il problema può essere risolto in modo efficiente con algoritmi \textbf{branch-and-cut} per la programmazione lineare intera, ma qui si adotta un approccio basato sul principio della \textbf{programmazione dinamica}.
+
+\subsection{Riformulazione sequenziale del problema}
+
+\paragraph{Indice temporale fittizio e stadi decisionali}
+Il problema non è intrinsecamente dinamico, ma può essere riformulato come un problema di \textbf{allocazione sequenziale di risorse} introducendo un indice discreto fittizio \(k\), associato agli oggetti.
+
+Per ogni stadio \(k = 1, \dots, n\), si decide se includere o meno l’oggetto \(k\) nel sottoinsieme.
+
+\paragraph{Stato e dipendenza dalle decisioni passate}
+Allo stadio \(k=1\) si dispone del budget \(B\) e si deve scegliere se includere il primo oggetto, affrontando un compromesso tra \textbf{ricompensa immediata} e \textbf{ricompense future}.  
+Allo stadio \(k=n\) il problema è banale, poiché resta da valutare solo l’ultimo oggetto dato il budget residuo.
+
+La selezione degli oggetti successivi dipende dalle decisioni passate soltanto attraverso il \textbf{budget residuo}. La variabile di stato naturale allo stadio \(k\) è il budget disponibile \(s_k\) prima di selezionare l’oggetto \(k\), mentre la variabile decisionale è la variabile binaria \(x_k\).
+
+\paragraph{Equazione di transizione dello stato}
+Poiché non esiste l’oggetto \(k=0\), si usa la transizione:
+\[
+s_{k+1} = s_k - w_k x_k, \quad k = 1, \dots, n,
+\]
+con condizione iniziale
+\[
+s_1 = B.
+\]
+Assumendo che i pesi \(w_k\) siano \textbf{interi}, anche la variabile di stato assume valori \textbf{interi}.
+
+\subsection{Funzione valore e ricorsione DP}
+
+\paragraph{Definizione della funzione valore}
+Si definisce la funzione valore:
+\[
+V_k(s) := \text{profitto della selezione ottimale degli oggetti } \{k, k+1, \dots, n\}\text{ con budget residuo } s.
+\]
+Nel caso discreto, è possibile \textbf{tabulare} tutte le funzioni \(V_k(s)\) per \(k=1,\dots,n\) e \(s\in\{0,\dots,B\}\).
+
+\paragraph{Equazione di Bellman}
+La ricorsione DP è:
+\[
+V_k(s) =
+\begin{cases}
+V_{k+1}(s) & \text{se } 0 \le s < w_k,\\[6pt]
+\max\{ V_{k+1}(s),\; V_{k+1}(s - w_k) + v_k \} & \text{se } w_k \le s \le B.
+\end{cases}
+\]
+
+\paragraph{Interpretazione della ricorsione}
+Allo stadio \(k\), si considera l’oggetto \(k\).  
+Se \(s < w_k\), l’oggetto non entra nel budget residuo e quindi la funzione valore resta \textbf{invariata}.  
+Se \(s \ge w_k\), si confrontano due alternative: includere l’oggetto (ottenendo \(v_k\) e aggiornando lo stato a \(s-w_k\)) oppure escluderlo (lasciando lo stato a \(s\)).  
+Poiché la decisione è \textbf{binaria}, l’ottimizzazione a singolo stadio è immediata.
+
+\paragraph{Condizione terminale}
+Per l’ultimo oggetto \(k=n\):
+\[
+V_n(s) =
+\begin{cases}
+0 & \text{se } 0 \le s < w_n,\\
+v_n & \text{se } w_n \le s \le B.
+\end{cases}
+\]
+
+\subsection{Implementazione MATLAB del problema dello zaino}
+
+\paragraph{Obiettivo della funzione}
+La funzione \texttt{DPKnapsack} ha lo scopo di calcolare la soluzione ottima del problema dello \textbf{zaino} dato un vettore di \textbf{valori}, un vettore di \textbf{pesi} e una \textbf{capacità}.  
+L’output è la selezione ottima come vettore \textbf{binario} e il \textbf{valore totale} ottenuto.
+
+\paragraph{Idea di memorizzazione: tabelle di valore e decisione}
+La funzione valore viene memorizzata in una tabella \texttt{valueTable}, indicizzata per \textbf{stadio} (oggetto) e per \textbf{stato} (budget residuo).  
+Poiché MATLAB indicizza a partire da \(1\), lo stato \(s\) corrisponde alla riga \(s+1\).
+
+In parallelo, la tabella \texttt{decisionTable} memorizza, per ogni coppia \textbf{stato--stadio}, la \textbf{decisione ottima} (includere o non includere).
+
+\paragraph{Ricorsione backward e ricostruzione forward}
+La tabulazione implementa una ricorsione \textbf{backward} sugli stadi, calcolando le funzioni valore a ritroso.  
+Successivamente, la soluzione ottima viene ricostruita procedendo \textbf{forward} sugli oggetti, usando la tabella delle decisioni e aggiornando lo stato (budget residuo) coerentemente.
+
+\paragraph{Complessità computazionale}
+Assumendo dati interi, la complessità è \(O(nB)\), quindi \textbf{pseudo-polinomiale}. Quando \(B\) è grande, occorre costruire una tabella molto grande e l’algoritmo può diventare poco efficiente.
 
 \subsection{Allocazione continua del budget}
-Consideriamo una versione continua del problema di allocazione delle risorse, dove un budget $B$ deve essere allocato a $n$ attività. L'allocazione all'attività $k$ è una variabile di decisione continua $x_{k}\ge 0$.
-Il contributo al profitto dipende dall'allocazione delle risorse attraverso una funzione crescente e concava $f_{k}(\cdot)$:
-\[
-\max \sum_{k=1}^{n}f_{k}(x_{k}) \quad \text{s.t.} \quad \sum_{k=1}^{n}x_{k}\le B \quad x_{k}\ge 0 \quad k=1,\dots,n.
-\]
-Se le funzioni di profitto sono concave, il problema è relativamente facile da risolvere. Se la funzione è concava (come $f_{k}(x)=\sqrt{x}$), si assegna a tutti una porzione equa.
 
-\paragraph{Formulazione DP per il Continuo}
-Il problema può essere riformulato in un framework DP associando un indice temporale fittizio $k=1,\dots,n$ a ciascuna attività.
-Sia $V_{k}(s)$ il profitto ottimale derivante dall'allocazione di un budget residuo $s$ (la variabile di stato) alle attività nell'insieme $\{k, k+1,\dots,n\}$.
-L'equazione di transizione di stato è:
+\paragraph{Formulazione del problema}
+Si considera una versione \textbf{continua} del problema di allocazione delle risorse: un budget \(B\) deve essere allocato tra \(n\) attività, con decisioni continue \(x_k \ge 0\), \(k=1,\dots,n\).  
+Il contributo di profitto dell’attività \(k\) dipende dall’allocazione tramite una funzione \(f_k(\cdot)\) \textbf{crescente e concava}:
 \[
-s_{k+1} = s_{k} - x_{k},
+\max \sum_{k=1}^{n} f_k(x_k)
 \]
-con condizione iniziale $s_{1} = B$.
-Le funzioni di valore soddisfano le equazioni di ottimalità:
 \[
-V_{k}(s_{k}) = \max_{0\le x_{k}\le s_{k}} \left\{ f_{k}(x_{k}) + V_{k+1}(s_{k} - x_{k}) \right\}
+\text{s.t. } \sum_{k=1}^{n} x_k \le B,
+\qquad
+x_k \ge 0 \quad \forall k.
+\]
+
+\paragraph{Uso completo del budget}
+Poiché le funzioni di profitto sono \textbf{strettamente crescenti}, si può assumere che il budget sia interamente utilizzato, quindi il vincolo di budget è soddisfatto come \textbf{uguaglianza} nella soluzione ottima.
+
+\paragraph{Soluzione interna e Lagrangiana}
+Assumendo una soluzione interna \(x_k^\ast>0\), il problema diventa un problema non lineare con un solo vincolo di uguaglianza.  
+Introducendo il moltiplicatore di Lagrange \(\lambda\), la lagrangiana è:
+\[
+L(x,\lambda)=\sum_{k=1}^{n}\sqrt{x_k}+\lambda\left(\sum_{k=1}^{n}x_k-B\right).
+\]
+Le condizioni del primo ordine sono:
+\[
+\frac{1}{2\sqrt{x_k}}+\lambda=0,\quad k=1,\dots,n,
+\]
+\[
+\sum_{k=1}^{n}x_k-B=0,
+\]
+che implicano un’allocazione \textbf{uniforme}:
+\[
+x_k^\ast=\frac{B}{n},\quad k=1,\dots,n.
+\]
+In questo caso, la funzione obiettivo è \textbf{concava} e le condizioni di ottimalità sono \textbf{necessarie e sufficienti}.
+
+\subsection{Allocazione continua del budget: formulazione DP}
+
+\paragraph{Riformulazione DP}
+Il problema può essere riformulato in un quadro di \textbf{programmazione dinamica} introducendo un indice discreto fittizio \(k=1,\dots,n\) associato alle attività.  
+Sia \(V_k(s)\) il profitto ottimale ottenibile allocando un budget residuo \(s\) alle attività \(\{k,k+1,\dots,n\}\).
+
+\paragraph{Transizione dello stato}
+La transizione dello stato è:
+\[
+s_{k+1}=s_k-x_k,
+\]
+con condizione iniziale \(s_1=B\).
+
+\paragraph{Equazioni di ottimalità}
+Le funzioni valore soddisfano:
+\[
+V_k(s_k)=\max_{0\le x_k\le s_k}\left\{f_k(x_k)+V_{k+1}(s_k-x_k)\right\},
 \]
 con condizione terminale:
 \[
-V_{n}(s_{n}) = \max_{0\le x_{n}\le s_{n}} f_{n}(x_{n}) = f_{n}(s_{n}).
+V_n(s_n)=\max_{0\le x_n\le s_n} f_n(x_n)=f_n(s_n).
 \]
-Nel caso continuo, la funzione di valore $V_{t}(s)$ appartiene a uno spazio infinito-dimensionale di funzioni. Poiché possiamo valutare $V_{t}(s)$ solo su un insieme finito di stati, è necessario ricorrere a un metodo di approssimazione o interpolazione (come l'interpolazione polinomiale o le spline cubiche) per trovare i valori di stato al di fuori della griglia.
+Il vincolo \(s_k\ge 0\) è garantito imponendo il vincolo sulla decisione \(0\le x_k\le s_k\), poiché la transizione è deterministica.
 
-\subsection{Interludio: interpolazione di funzioni con spline cubiche in MATLAB}
-È noto che l'interpolazione polinomiale soffre di oscillazioni inaccettabili. Una bella funzione, concava e monotonicamente crescente, può essere approssimata da una funzione non monotona, cosa che creerebbe problemi nelle procedure di ottimizzazione.
-Un'alternativa standard è ricorrere a una funzione polinomiale a tratti di ordine inferiore, dove ogni tratto è un polinomio associato a un singolo sotto-intervallo della griglia.
-Una scelta comune è utilizzare le **spline cubiche**, facilmente realizzabili in MATLAB tramite una coppia di funzioni:
-\begin{itemize}[label=$\circ$]
-    \item \texttt{spline}: restituisce un oggetto spline, basato sui valori della griglia.
-    \item \texttt{ppval}: valuta la spline su punti arbitrari, al di fuori della griglia dei dati.
-\end{itemize}
+\paragraph{Funzioni valore in spazio infinito-dimensionale}
+Nel caso continuo, la funzione valore \(V_k(s)\) è un oggetto in uno spazio funzionale \textbf{infinito-dimensionale}.  
+Poiché la valutazione è possibile solo su un insieme finito di stati, occorre usare \textbf{approssimazione} o \textbf{interpolazione} per stimare i valori fuori dalla griglia.
 
-\subsection{Soluzione del problema di allocazione continua del budget con DP numerica}
-Si utilizza una spline cubica per approssimare la funzione di valore del problema di allocazione continua del budget. Si imposta una griglia uniforme per l'intervallo $[0, B]$, replicata per ogni stadio. La griglia include $m+1$ valori di stato, con passo di discretizzazione $\delta s = B/m$.
-Dobbiamo risolvere un sottoproblema della forma (3) per ogni punto della griglia, cosa che può essere eseguita dalla funzione MATLAB \texttt{fminbnd}.
-Si interpola al di fuori della griglia con spline cubiche per approssimare i valori di $V_{k}(s)$ per un budget residuo $s$ arbitrario.
-La politica ottimale $x^{\ast}_{t} = \mu^{\ast}_{t}(s_{t})$ è implicita nella sequenza delle funzioni di valore.
+\subsection{Intermezzo: interpolazione con spline cubiche in MATLAB}
 
-\subsection{Dimensionamento stocastico del lotto (Stochastic Lot Sizing)}
-Il termine di costo immediato dipende dalla realizzazione del fattore di rischio $\xi_{t+1}$ (domanda $d_{t+1}$) durante il periodo di tempo $t+1$ dopo aver preso la decisione $x_{t}$.
-Ciò implica che la ricorsione DP ha un costo immediato stocastico della forma $h_{t}(s_{t}, x_{t}, \xi_{t+1})$.
-La ricorsione DP risultante (nell'esempio di Bertsekas, Vol. 1) è:
+\paragraph{Limiti dell’interpolazione polinomiale}
+È noto che l’interpolazione polinomiale può soffrire di \textbf{oscillazioni inaccettabili}.  
+Una funzione \textbf{concava} e \textbf{monotona crescente} può essere approssimata da una funzione \textbf{non monotona}, con effetti negativi sulle procedure di ottimizzazione.
+
+\paragraph{Spline cubiche come alternativa}
+Un’alternativa standard consiste nell’uso di funzioni polinomiali a tratti di ordine più basso, in cui ogni tratto è associato a un sottointervallo della griglia.  
+Una scelta comune sono le \textbf{spline cubiche}, ottenute in MATLAB tramite \texttt{spline} (costruzione) e \texttt{ppval} (valutazione in punti arbitrari, anche fuori griglia).
+
+\paragraph{Accuratezza, griglia e questioni aperte}
+L’errore può essere significativo con griglie grossolane e migliora con griglie più fitte. Restano aperti temi come: la garanzia che una funzione monotona venga approssimata da una spline monotona, la scelta dei nodi per un buon compromesso tra costo computazionale ed errore, e la generalizzazione a dimensioni superiori.
+
+\subsection{Risoluzione numerica del problema continuo tramite DP}
+
+\paragraph{Idea della discretizzazione e interpolazione}
+Si usa una \textbf{spline cubica} per approssimare la funzione valore del problema continuo.  
+Si imposta una griglia uniforme su \([0,B]\), replicata per ciascuno stadio. La griglia contiene \(m+1\) valori di stato, con passo \(\delta s=B/m\), cioè stati del tipo \(j\,\delta s\), \(j=0,1,\dots,m\).
+
+\paragraph{Risoluzione dei sottoproblemi e policy implicita}
+Per ogni punto della griglia si risolve un sottoproblema del tipo:
 \[
-V_{t}(I_{t}) = \min_{x_{t}\in X(I_{t})} E_{d_{t+1}} \left[ c x_{t} + \beta \left( I_{t} + x_{t} - d_{t+1} \right)^{2} + V_{t+1} \left( \max \left\{0, I_{t} + x_{t} - d_{t+1} \right\} \right) \right]
+V_k(s_k)=\max_{0\le x_k\le s_k}\left\{f_k(x_k)+V_{k+1}(s_k-x_k)\right\},
 \]
-dove $I_{t} \in \{0, 1, 2,\dots, I_{\max}\}$ è lo stato (livello di inventario) al tempo $t$.
-L'incertezza è modellata da una funzione di massa di probabilità (vettore di probabilità $\pi_{k}$) per ogni possibile valore di domanda $k=0, 1, 2,\dots, d_{\max}$.
-La funzione MATLAB \texttt{MakePolicy} calcola le funzioni di valore e la politica ottima in forma tabellare.
+tramite ottimizzazione numerica.  
+I valori fuori dalla griglia sono stimati via spline cubiche. La condizione al bordo su \(V_n(\cdot)\) è banale e si arresta il calcolo a \(V_2(\cdot)\) quando si vuole risolvere il problema per un budget specifico \(B\).  
+La politica ottima \(x_t^\ast=\mu_t^\ast(s_t)\) non è memorizzata in una tabella esplicita, ma è \textbf{implicita} nella sequenza delle funzioni valore.
 
-\subsection{Sfruttare la struttura: usare il percorso minimo per il dimensionamento deterministico del lotto}
-Nel dimensionamento deterministico del lotto (assumendo solo costi di ordine fisso $\phi$ e costi di mantenimento dell'inventario $h$, con inventari iniziali e terminali pari a zero), si può sfruttare la struttura del problema.
-La condizione di Wagner–Whitin implica che al tempo $t$ si dovrebbero considerare solo le seguenti possibilità di ordine:
-\[
-x_{t} \in \left\{ 0, d_{t+1}, (d_{t+1} + d_{t+2}), (d_{t+1} + d_{t+2} + d_{t+3}), \dots, \sum_{\tau=t+1}^{T} d_{\tau} \right\}
-\]
-Grazie a questa proprietà, il problema a articolo singolo può essere riformulato come un **problema del percorso minimo (shortest path)** su una rete piuttosto piccola, dove gli archi rappresentano il numero di intervalli di tempo coperti dal prossimo ordine.
+\subsection{Implementazione MATLAB: idea generale}
 
-\subsection{Dimensionamento stocastico del lotto: politiche S e (s, S)}
-Nel dimensionamento stocastico del lotto (senza penalità per vendite perse, ma con costi di mantenimento $h$ e di stockout/arretrato $b$), si considera una penalità convessa: $q(s) = h \max\{0, s\} + b \max\{0, -s\}$.
-La ricorsione DP può essere scritta come:
-\[
-V_{t}(I_{t}) = \min_{x_{t}\ge 0} \left\{ c x_{t} + H(I_{t} + x_{t}) + E \left[ V_{t+1}(I_{t} + x_{t} - d_{t+1}) \right] \right\}
-\]
-dove $y_{t} = I_{t} + x_{t}$ è l'inventario disponibile dopo l'ordine e $H(y_{t})$ è la funzione del costo di un periodo:
-\[
-H(y_{t}) = E \left[ q(y_{t} - d_{t+1}) \right] = h E \max\{0, y_{t} - d_{t+1}\} + b E \max\{0, d_{t+1} - y_{t}\}
-\]
-In assenza di costi di ordine fissi, la politica ottimale è una **politica base-stock** (o *order-up-to*):
-\[
-x^{\ast}_{t} = \mu^{\ast}_{t}(I_{t}) = \begin{cases} S_{t} - I_{t} & \text{se } I_{t} < S_{t} \\ 0 & \text{se } I_{t} \ge S_{t} \end{cases}
-\]
-dove $S_{t}$ è il livello di inventario obiettivo (target inventory level).
-Se si includono costi di ordine fissi, la politica ottimale diventa una **politica $(s, S)$**.
+\paragraph{Scopo di \texttt{findPolicy}}
+La funzione \texttt{findPolicy} serve a costruire, stadio per stadio, un’\textbf{approssimazione} delle funzioni valore tramite \textbf{spline cubiche}, usando una griglia uniforme del budget.  
+Riceve il budget totale, una lista di funzioni di profitto (una per attività) e il numero di punti della griglia.  
+Restituisce una lista di spline che rappresentano le funzioni valore approssimate; la prima funzione non viene usata direttamente quando l’interesse è risolvere il problema per un budget iniziale specifico.
 
-\subsection{Le maledizioni della programmazione dinamica (The curses of DP)}
-La DP è un principio potente e flessibile, ma presenta alcune importanti limitazioni:
-\begin{itemize}[label=$\circ$]
-    \item \textbf{La maledizione della dimensionalità dello stato (Curse of state dimensionality)}: è necessaria la funzione di valore per ogni elemento nello spazio degli stati. Questo non è fattibile per spazi di stato enormi.
-    \item \textbf{La maledizione dell'ottimizzazione (Curse of optimization)}: la DP decompone un problema intrattabile a stadi multipli in una sequenza di sottoproblemi a stadio singolo. Tuttavia, anche i sottoproblemi a stadio singolo possono essere molto difficili da risolvere.
-    \item \textbf{La maledizione dell'aspettativa (Curse of expectation)}: se i fattori di rischio $\xi_{t}$ sono rappresentati da variabili casuali continue, l'aspettativa richiede il calcolo di un difficile integrale multidimensionale; è necessaria una strategia di discretizzazione.
-    \item \textbf{La maledizione della modellazione (Curse of modeling)}: il sistema stesso può essere così complesso da rendere impossibile trovare un modello esplicito delle transizioni di stato.
-\end{itemize}
+\paragraph{Scopo di \texttt{applyPolicy}}
+La funzione \texttt{applyPolicy} applica la politica ottima \textbf{in avanti nel tempo} utilizzando le funzioni valore approssimate: a ogni stadio sceglie l’allocazione che massimizza la somma tra contributo immediato e valore futuro, aggiorna il budget residuo e costruisce il vettore delle allocazioni ottime insieme al valore complessivo ottenuto.
+
+\subsection{Controllo stocastico delle scorte}
+
+\paragraph{Impostazione del problema}
+Si considera una variazione \textbf{stocastica} del problema di lot-sizing, assumendo una \textbf{domanda aleatoria discreta}. In questo caso è naturale adottare una rappresentazione \textbf{tabellare} della funzione valore.
+
+\paragraph{Dinamica dello stato con stockout (lost sales)}
+Occorre specificare la dinamica dello stato in caso di stockout. Qui si assumono \textbf{vendite perse}:
+\[
+\boxed{
+I_{t+1}=\max\{0,\; I_t + x_t - d_{t+1}\}
+}
+\]
+dove \(\big(d_t\big)_{t=1,\dots,T}\) è una sequenza di variabili i.i.d., e \(x_t\) è la quantità ordinata al tempo \(t\) e consegnata immediatamente.
+
+\paragraph{Sequenza degli eventi}
+Al tempo \(t\) si osserva l’inventario a mano \(I_t\).  
+Poi si decide l’ordine \(x_t\), che viene ricevuto immediatamente e porta la disponibilità a \(I_t+x_t\).  
+Durante l’intervallo \(t+1\) si osserva la domanda aleatoria \(d_{t+1}\) e si aggiorna l’inventario secondo la dinamica sopra.
+
+\paragraph{Spazio degli stati e azioni ammissibili}
+Per tabulare la funzione valore occorre fissare un limite superiore allo stato. Si assume un vincolo \(I_t\le I_{\max}\), che implica:
+\[
+X(I_t)=\{0,1,\dots, I_{\max}-I_t\}.
+\]
+
+\paragraph{Costo immediato e stato terminale}
+Il costo immediato include un costo lineare d’ordine \(c\,x_t\) e una penalità quadratica sull’inventario contabile dopo la domanda del periodo successivo:
+\[
+\boxed{
+\phi\,(I_t+x_t-d_{t+1})^2.
+}
+\]
+L’inventario fisico non può essere negativo ed è determinato dalla dinamica con \(\max\{0,\cdot\}\); un inventario contabile negativo rappresenta domanda non soddisfatta.  
+Per semplicità, il costo terminale è nullo:
+\[
+F_T(I_T)=0.
+\]
+
+\paragraph{Ricorsione DP con costo immediato stocastico}
+Il costo immediato dipende dalla realizzazione del fattore aleatorio nel periodo successivo alla decisione; quindi nella ricorsione compare un termine \textbf{stocastico}. La ricorsione è:
+\[
+\boxed{
+V_t(I_t)=
+\min_{x_t\in X(I_t)}
+\mathbb{E}_{d_{t+1}}
+\Big[
+c\,x_t
++\phi\,(I_t+x_t-d_{t+1})^2
++V_{t+1}\big(\max\{0,\; I_t+x_t-d_{t+1}\}\big)
+\Big]
+}
+\]
+per \(t=0,1,\dots,T-1\) e \(I_t\in\{0,1,2,\dots,I_{\max}\}\).
+
+\paragraph{Modellare l’incertezza}
+Poiché la domanda è discreta e i.i.d., è sufficiente una \textbf{funzione di massa di probabilità}, cioè un vettore \(\pi_k\) per i possibili valori \(k=0,1,\dots,d_{\max}\).  
+Occorre inoltre specificare lo stato iniziale \(I_0\) e l’orizzonte \(T\).
+
+\subsection{Lot-sizing stocastico: idea delle procedure MATLAB}
+
+\paragraph{Scopo di \texttt{MakePolicy}}
+La funzione \texttt{MakePolicy} serve ad apprendere le funzioni valore \textbf{a ritroso} (\textbf{backward}) e la \textbf{politica ottima} in forma tabellare, dato un limite massimo di inventario, una distribuzione discreta della domanda e i parametri economici.  
+L’output è una tabella dei valori (funzione valore per ogni stato e istante) e una tabella delle azioni (decisione ottima d’ordine per ogni stato e istante).
+
+\paragraph{Scopo di \texttt{SimulatePolicy}}
+La funzione \texttt{SimulatePolicy} serve a \textbf{simulare} l’applicazione della politica ottima su molti scenari di domanda generati casualmente, per ottenere una stima statistica del costo totale e confrontarla con il valore previsto dalla funzione valore.
+
+\subsection{Sfruttare la struttura: cammini minimi per il lot-sizing deterministico}
+
+\paragraph{Motivazione}
+Nel problema toy di lot-sizing è semplice memorizzare funzioni valore e politica in una tabella, ma ciò è \textbf{inefficiente} quando i valori possibili di domanda sono molti, e diventa impossibile con spazio degli stati \textbf{continuo}.  
+Talvolta è possibile semplificare drasticamente il problema sfruttando la \textbf{struttura}.
+
+\paragraph{Lot-sizing deterministico con costi fissi e holding}
+Si consideri una versione deterministica con soli \textbf{costi fissi d’ordine} \(\phi\) e \textbf{costi di giacenza} \(h\), con inventario iniziale e finale pari a zero, e domanda non nulla nel primo periodo.  
+In linea di principio, una ricorsione DP è:
+\[
+\boxed{
+V_t(I_t)=\min_{x_t \ge d_{t+1}-I_t}
+\left\{
+\phi\,\delta(x_t)
++h\,(I_t+x_t-d_{t+1})
++V_{t+1}(I_{t+1})
+\right\},
+\quad t=0,\dots,T-1
+}
+\]
+con condizione:
+\[
+\boxed{
+V_T(I_T)\equiv 0.
+}
+\]
+Il vincolo su \(x_t\) garantisce che la domanda sia sempre soddisfatta e che lo stato non diventi negativo.
+
+\paragraph{Teorema: proprietà di Wagner--Whitin}
+Per il lot-sizing deterministico non capacitated con \textbf{costi fissi} e \textbf{costi lineari di inventario}, esiste una soluzione ottima tale che:
+\[
+\boxed{
+I_t\,x_t=0,\quad t=0,1,\dots,T-1.
+}
+\]
+Il messaggio è che non è mai ottimale ordinare quando l’inventario è positivo: si ordina solo se l’inventario è \textbf{nullo}.
+
+\paragraph{Rete di flusso e interpretazione}
+Considerando una rappresentazione come rete, deve valere il bilancio globale:
+\[
+\boxed{
+\sum_{t=0}^{T-1} x_t = \sum_{t=1}^{T} d_t.
+}
+\]
+Si introduce un nodo fittizio \(0\) il cui inflow rappresenta l’ammontare totale ordinato.  
+I nodi \(t=1,\dots,T\) rappresentano gli istanti associati alla fine di ciascun intervallo, cioè la domanda si soddisfa alla fine dell’intervallo.
+
+Il bilancio al nodo \(t\) corrisponde alla transizione:
+\[
+\boxed{
+I_t = I_{t-1} + x_{t-1} - d_t.
+}
+\]
+Se, contrariamente al teorema, \(I_{t-1}>0\) e \(x_{t-1}>0\), allora reindirizzando l’inflow orizzontale \(I_{t-1}\) lungo l’arco d’ordine associato a \(x_{t-1}\) si può migliorare il costo totale.
+
+\paragraph{Conseguenza pratica: scelte d’ordine candidate}
+All’istante \(t\) basta considerare solo:
+\[
+\boxed{
+x_t \in \left\{
+0,\;
+d_{t+1},\;
+(d_{t+1}+d_{t+2}),\;
+(d_{t+1}+d_{t+2}+d_{t+3}),\;
+\dots,\;
+\sum_{\tau=t+1}^{T} d_{\tau}
+\right\}.
+}
+\]
+
+\paragraph{Riformulazione come cammino minimo}
+Con questa proprietà, il problema a singolo item si riformula come un \textbf{cammino minimo} su una rete piccola: dal nodo iniziale \(0\) al nodo terminale, scegliendo archi che rappresentano quanti periodi vengono coperti dal prossimo ordine.  
+Il costo di ciascun arco incorpora il \textbf{costo fisso d’ordine} e il \textbf{costo di giacenza} risultante.  
+Poiché la rete ha un numero limitato di nodi, questa formulazione porta a un algoritmo molto efficiente di complessità \textbf{polinomiale}.
+
+\subsection{Lot-sizing stocastico: politiche \(S\) e \((s,S)\)}
+
+\paragraph{Backlog e penalità convessa}
+La proprietà di Wagner--Whitin non vale nel caso stocastico, ma in alcuni casi esistono risultati strutturali.  
+Si assume che non vi siano \textbf{vendite perse} e che sia consentito backlog, con costo totale che include:
+\[
+\boxed{
+q(s)=h\max\{0,s\}+b\max\{0,-s\},
+}
+\]
+dove \(s\) può essere positivo (inventario) o negativo (backlog), \(h\) è il costo di giacenza e \(b>h\) è il costo di backlog.  
+La funzione \(q(\cdot)\) è \textbf{convessa} e tende a \(+\infty\) quando \(s\to \pm\infty\).
+
+\paragraph{Costo variabile e obiettivo atteso}
+Trascurando i costi fissi e includendo un costo variabile lineare unitario \(c\), l’obiettivo è minimizzare:
+\[
+\boxed{
+\mathbb{E}_0\left[
+\sum_{t=0}^{T-1}
+\left(
+c\,x_t + q(I_t+x_t-d_{t+1})
+\right)
+\right].
+}
+\]
+
+\paragraph{Ricorsione DP e funzione \(H(\cdot)\)}
+La ricorsione DP è:
+\[
+\boxed{
+V_t(I_t)=\min_{x_t\ge 0}
+\left\{
+c\,x_t + H(I_t+x_t) + \mathbb{E}\!\left[V_{t+1}(I_t+x_t-d_{t+1})\right]
+\right\},
+}
+\]
+dove:
+\[
+\boxed{
+H(y_t):=\mathbb{E}\!\left[q(y_t-d_{t+1})\right]
+= h\,\mathbb{E}\!\left[\max\{0,y_t-d_{t+1}\}\right]
++b\,\mathbb{E}\!\left[\max\{0,d_{t+1}-y_t\}\right].
+}
+\]
+Si introduce \(y_t\) come inventario disponibile dopo l’ordine (lead time nullo):
+\[
+y_t := I_t + x_t,
+\]
+con condizione terminale:
+\[
+\boxed{
+V_T(I_T)=0.
+}
+\]
+Si assume distribuzione della domanda costante nel tempo.
+
+\paragraph{Riscrittura tramite \(G_t(\cdot)\)}
+La ricorsione si riscrive come:
+\[
+\boxed{
+V_t(I_t)=\min_{y_t \ge I_t} G_t(y_t) - c\,I_t,
+}
+\]
+dove:
+\[
+\boxed{
+G_t(y_t)=c\,y_t + H(y_t) + \mathbb{E}\!\left[V_{t+1}(y_t-d_{t+1})\right].
+}
+\]
+
+\paragraph{Convessità e livello obiettivo \(S_t\)}
+Si assume (senza prova) che \(V_t(\cdot)\) e \(G_t(\cdot)\) siano \textbf{convesse} per ogni \(t\), e che \(G_t(\cdot)\to +\infty\) quando \(y\to \pm\infty\).  
+Ne segue che \(G_t(\cdot)\) ha un minimizzatore non vincolato finito:
+\[
+\boxed{
+S_t = \arg\min_{y_t\in\mathbb{R}} G_t(y_t).
+}
+\]
+
+\paragraph{Politica base-stock (order-up-to)}
+La politica ottima è una politica \textbf{base-stock}:
+\[
+\boxed{
+x_t^\ast=\mu_t^\ast(I_t)=
+\begin{cases}
+S_t-I_t, & \text{se } I_t<S_t,\\
+0, & \text{se } I_t\ge S_t.
+\end{cases}
+}
+\]
+I valori \(S_t\) sono livelli obiettivo: si ordina quanto serve per raggiungere il target ottimo. In orizzonte finito, il problema è determinare la sequenza ottima di livelli \(S_t\).
+
+\paragraph{Politiche \((s,S)\) con costi fissi}
+Se si introducono costi fissi, si perde convessità. Tuttavia una proprietà correlata (K-convessità) porta a una politica ottima:
+\[
+\boxed{
+\mu_t^\ast(I_t)=
+\begin{cases}
+S_t-I_t, & \text{se } I_t<s_t,\\
+0, & \text{se } I_t\ge s_t,
+\end{cases}
+}
+\]
+dipendente da due sequenze \(s_t\) e \(S_t\), con \(s_t\le S_t\). In ambiente stazionario è ottima una politica stazionaria \((s,S)\).  
+Si ordina solo quando l’inventario è sotto \textbf{small \(s\)}, riportandolo a \textbf{big \(S\)}; \(S-s\) è una quantità minima d’ordine che aiuta a controllare i costi fissi.
+
+\subsection{Le maledizioni della programmazione dinamica}
+
+\paragraph{Limiti della DP}
+La \textbf{DP} è potente e flessibile, ma presenta limitazioni importanti.
+
+\paragraph{Maledizione della dimensionalità dello stato}
+Serve la funzione valore per ogni elemento dello spazio degli stati. Se lo spazio è finito e piccolo, si possono usare tabelle; per spazi enormi ciò non è fattibile.
+
+\paragraph{Maledizione dell’ottimizzazione}
+La DP decompone un problema multistadio in sottoproblemi a singolo stadio, ma anche questi sottoproblemi possono essere difficili da risolvere.
+
+\paragraph{Maledizione dell’aspettativa}
+Se i fattori di rischio \(\xi_t\) sono continui, l’aspettativa richiede integrali multidimensionali difficili; serve quindi una discretizzazione.
+
+\paragraph{Maledizione della modellazione}
+Il sistema può essere troppo complesso per avere un modello esplicito delle transizioni di stato. In DP il problema è più complicato perché le transizioni sono almeno in parte influenzate dalle decisioni di controllo.
 
 
 \section{CAP 9 -- Modelli della programmazione dinamica}
-\subsection{Modellazione per la DP}
-Il principio della DP è un concetto flessibile per la scomposizione di un problema decisionale a stadi multipli in una sequenza di problemi a stadio singolo, bilanciando il contributo immediato e i contributi attesi dalle decisioni future.
-Ciò dipende dalla funzione di valore definita dalla ricorsione DP:
+\section{CAP 9 -- Modeling for Dynamic Programming}
+
+\subsection{Frontespizio e riferimenti}
+
+\paragraph{Titolo e autore}
+\textbf{Business Analytics} (2020/21). \textbf{Modeling for dynamic programming}. \textbf{Prof.\ Paolo Brandimarte}, Dipartimento di Scienze Matematiche, Politecnico di Torino.
+
+\paragraph{Riferimenti}
+Le slide sono tratte dal libro: \textbf{P.\ Brandimarte}, \emph{From Shortest Paths to Reinforcement Learning: A MATLAB-Based Introduction to Dynamic Programming}, Springer, 2021.
+Ulteriori riferimenti: P.\ Brandimarte, \emph{An Introduction to Financial Markets: A Quantitative Approach}, Wiley, 2018; J.Y.\ Campbell, L.M.\ Viceira, \emph{Strategic Asset Allocation}, Oxford University Press, 2002; W.B.\ Powell, \emph{Approximate Dynamic Programming: Solving the Curses of Dimensionality} (2nd ed.), Wiley, 2011; G.J.\ van Ryzin, K.T.\ Talluri, \emph{An Introduction to Revenue Management}, INFORMS Tutorials in OR, 2005.
+
+\subsection{Principio di modellazione nella programmazione dinamica}
+
+\paragraph{Idea generale della programmazione dinamica}
+Il principio della \textbf{programmazione dinamica (DP)} è un concetto \textbf{flessibile} per la decomposizione di un \textbf{problema decisionale multistadio} in una sequenza di \textbf{problemi a singolo stadio}, bilanciando il \textbf{contributo immediato} e i \textbf{contributi attesi} delle decisioni future.
+
+\paragraph{Funzione valore e ricorsione DP}
+Il principio si fonda sulla \textbf{funzione valore}, definita dalla ricorsione di DP:
 \[
-V_{t}(s_{t})= \text{opt}_{x_{t}\in X(s_{t})} \left\{ f_{t}(s_{t},x_{t})+\gamma E[V_{t+1}(s_{t+1}) | s_{t}, x_{t}] \right\}
-\quad \text{(1)}
+\boxed{
+V_t(s_t) = \operatorname{opt}_{x_t \in X(s_t)}
+\left\{
+f_t(s_t, x_t) + \gamma\, \mathbb{E}\!\left[\,V_{t+1}(s_{t+1}) \mid s_t, x_t \right]
+\right\}.
+}
+\tag{1}
 \]
-Questa è solo una possibile forma di ricorsione DP.
-Alcune situazioni prevedono lo scambio del valore atteso con l'ottimizzazione.
-Un rifacimento più radicale viene talvolta adottato, in cui si scambiano aspettativa e ottimizzazione. Questo può verificarsi a causa della struttura informativa del problema o può essere il risultato di manipolazioni volte a evitare la soluzione di un difficile sottoproblema di ottimizzazione stocastica.
 
-\paragraph{Stati Post-Decisione e Q-Learning}
-Si ottengono introducendo gli \textbf{stati post-decisione} (*post-decision states*).
-Un caso ben noto si verifica nel \textbf{Q-learning}, una forma di *reinforcement learning* (RL) dove la funzione di valore dello stato $V(s)$ è sostituita dai \textbf{Q-fattori} $Q(s,x)$, che rappresentano il valore delle coppie stato-azione.
-Un grosso vantaggio è che non è necessario conoscere le distribuzioni di probabilità. Il *reinforcement learning* è una \textbf{programmazione dinamica *model free*} (senza modello), un algoritmo puramente statistico che \textbf{NON conosce} le probabilità di transizione $\Pi_{i,j}(\cdot)$.
+\paragraph{Forme alternative della ricorsione DP}
+L’Eq.\ (1) è solo \textbf{una possibile forma} della ricorsione di DP. Si possono adottare forme più specifiche, ad esempio quando i \textbf{fattori di rischio} sono \textbf{variabili aleatorie discrete} e l’aspettazione si riduce a una \textbf{somma}.
 
-\paragraph{Descrizione dello Stato e Modello Markoviano}
-Anche trovare una descrizione adeguata dello stato del sistema può richiedere un'attenta modellazione. Ad esempio, potrebbe essere necessaria una ridefinizione dello spazio degli stati per eliminare le dipendenze dal percorso (*path-dependencies*) e ottenere un modello Markoviano aumentato ed equivalente, al fine di rendere il problema trattabile con l'approccio DP.
-È naturale pensare agli stati e alle decisioni di controllo come scalari o vettori, ma possono anche consistere in oggetti diversi, come insiemi.
-La modellazione va di pari passo con la conoscenza algoritmica, quando si affronta un problema decisionale con la DP.
+\paragraph{Scambio tra aspettazione e ottimizzazione}
+In alcuni casi si adotta una riformulazione più radicale, in cui si \textbf{scambiano} gli operatori di \textbf{aspettazione} e \textbf{ottimizzazione}. Ciò può dipendere dalla \textbf{struttura informativa del problema} oppure essere il risultato di una manipolazione volta a evitare la soluzione di un \textbf{sottoproblema stocastico difficile}.
 
-\subsubsection{Esempi di Modellazione e Dipendenza dal Percorso}
-\begin{itemize}[label=$\circ$]
-    \item \textbf{Opzione Call Europea}: Si può esercitare solo alla scadenza. Il \textit{pay-off} è $\max(S_T - K, 0)$, dove $K$ è lo *strike price*. Quello che conta è il prezzo adesso, non come ci si è arrivati, soprattutto se si ha un processo Markoviano.
-    \item \textbf{Opzione Call Americana}: Si può esercitare in qualsiasi momento prima della scadenza. Quando bisogna esercitarla? Si sfrutta la programmazione dinamica, e il tempo che manca alla scadenza inciderà sulla scelta.
-    \item \textbf{Opzione Call Asiatica}: Il *pay-off* è $\max(\text{media dei prezzi osservati} - K, 0)$. La media dei prezzi osservati precedentemente dipende dal percorso. Per eliminare questa dipendenza, non Markoviana, si \textbf{aggiunge una nuova variabile di stato aumentata} (tendenzialmente un integrale) rendendo il processo di nuovo Markoviano.
-\end{itemize}
+\paragraph{Q-learning e stati post-decisione}
+Un caso ben noto è il \textbf{Q-learning}, una forma di \textbf{reinforcement learning} in cui \(V(s)\) è sostituita da \textbf{Q-factors} \(Q(s,x)\), che rappresentano il valore delle \textbf{coppie stato--azione}. Più in generale, lo scambio tra ottimizzazione e aspettazione può essere ottenuto introducendo il concetto di \textbf{stato post-decisione}.
 
-\subsection{Processi Decisionali di Markov Finiti (Finite MDPs)}
-Il termine \textbf{Processo Decisionale di Markov (MDP)} è riservato a problemi caratterizzati da spazi discreti di stato e azione.
-Poiché stati e azioni sono discreti, possono essere enumerati e associati a numeri interi. Consideriamo solo MDPs finiti.
-\begin{itemize}[label=$\circ$]
-    \item \textbf{Spazio degli Stati}: $\mathcal{S}=\{1,...,N\}$, dove $N$ è la dimensione dello spazio.
-    \item \textbf{Azioni/Decisioni}: $a \in \mathcal{A}_{t}(i)$ o $\mathcal{A}(i)$ denota l'insieme di azioni ammissibili nello stato $i$ al tempo $t$.
-\end{itemize}
-L'obiettivo è tirare fuori le probabilità di transizione $\pi_{t+1}(i,a,j)$, che sono difficilmente calcolabili. In un MDP, le probabilità di transizione dipendono dall'azione selezionata:
+\paragraph{Scelta della rappresentazione dello stato}
+Trovare una descrizione adeguata dello \textbf{stato del sistema} può richiedere un’attenta modellazione: può essere necessaria una \textbf{ridefinizione dello spazio degli stati} per eliminare \textbf{dipendenze dal percorso} e ottenere un modello \textbf{markoviano aumentato ed equivalente}.
+
+\paragraph{Natura degli stati e delle decisioni}
+Sebbene sia naturale pensare a stati e decisioni come \textbf{scalari} o \textbf{vettori}, essi possono consistere in oggetti diversi, ad esempio \textbf{insiemi}.
+
+\paragraph{Ruolo delle capacità di modellazione}
+Le \textbf{capacità di modellazione} procedono di pari passo con la \textbf{conoscenza algoritmica} nell’affrontare un problema decisionale tramite DP; tali capacità si affinano solo con l’esperienza su una \textbf{vasta gamma di problemi}.
+
+\subsection{Processi decisionali di Markov finiti}
+
+\paragraph{Definizione di MDP}
+Il termine \textbf{processo decisionale di Markov (MDP)} è riservato a problemi con \textbf{spazi di stato} e \textbf{spazi delle azioni discreti}. Il termine \textbf{azione} è spesso adottato per riferirsi alle decisioni di controllo. Stati e azioni discreti possono essere \textbf{enumerati} e associati a numeri interi.
+
+\paragraph{MDP finiti e notazione degli stati}
+Si considerano \textbf{MDP finiti}. Anche se gli stati possono corrispondere a vettori in uno spazio multidimensionale, si usa una notazione del tipo
 \[
+\boxed{
+i, j \in S = \{1, \dots, N\},
+}
+\]
+dove \(N\) è la \textbf{dimensione dello spazio degli stati}.
+
+\paragraph{Azioni ammissibili}
+Si usa \(a\) o \(a_t\) per indicare le azioni; \(A_t(i)\) o \(A(i)\) denota l’insieme delle \textbf{azioni ammissibili} nello stato \(i\) al tempo \(t\). L’insieme di tutte le azioni possibili è \(A\).
+
+\paragraph{Dinamica markoviana controllata}
+Il sistema sottostante è una \textbf{catena di Markov finita a tempo discreto}. Nei MDP le \textbf{probabilità di transizione} dipendono dall’azione selezionata:
+\[
+\boxed{
 \pi_{t+1}(i,a,j)
+}
 \]
-è la probabilità di una transizione dallo stato $i$ allo stato $j$ durante l'intervallo di tempo $t+1$, dopo aver scelto l'azione $a$ al tempo $t$.
+è la probabilità di transizione dallo stato \(i\) allo stato \(j\) durante l’intervallo \(t+1\), dopo aver scelto l’azione \(a\) al tempo \(t\).
 
-\subsubsection{Esempio: Controllo Stocastico dell'Inventario}
-Consideriamo il problema del controllo stocastico dell'inventario in cui la domanda può assumere valori in $\{0,1,2\}$ con probabilità $0.1, 0.7, 0.2$ rispettivamente. Il livello massimo di inventario è $I_{t}\le2$.
-\begin{itemize}[label=$\circ$]
-    \item \textbf{Spazio degli Stati}: $\mathcal{S}=\{0,1,2\}$.
-    \item \textbf{Insiemi di Azioni Ammissibili} ($\mathcal{A}(i)$ è l'ammontare ordinato $x_t$): $\mathcal{A}(0)=\{0,1,2\}$, $\mathcal{A}(1)=\{0,1\}$, $\mathcal{A}(2)=\{0\}$.
-\end{itemize}
-Le matrici di probabilità di transizione $\Pi(a)$, dove $\pi_{ij}(a)$ è la probabilità $\pi(i,a,j)$, sono (sulle righe lo stato corrente, sulle colonne lo stato futuro):
+\subsection{Esempio: controllo stocastico di inventario}
+\paragraph{Sintesi dell’esempio}
+Dall’esempio si evince come, con \textbf{spazio di stato finito} e \textbf{azioni ammissibili dipendenti dallo stato}, le \textbf{matrici di transizione} dipendano dall’azione e possano essere rappresentate in forma tabellare.
+
+\subsection{Ricorsioni DP per MDP}
+
+\paragraph{Ricorsione a orizzonte finito}
+Nel contesto MDP, la funzione valore al tempo \(t\) è un vettore finito-dimensionale con componenti \(V_t(i)\) e soddisfa:
 \[
-\Pi(0)= \left[ \begin{matrix} 0.2 & 0.7 & 0.1 \\ 0.9 & 0.1 & 0 \\ 1 & 0 & 0 \end{matrix} \right], \quad \Pi(1)= \left[ \begin{matrix} 0.9 & 0.1 & 0 \\ 1 & 0 & 0 \\ \cdot & \cdot & \cdot \end{matrix} \right], \quad \Pi(2)= \left[ \begin{matrix} 1 & 0 & 0 \\ \cdot & \cdot & \cdot \\ \cdot & \cdot & \cdot \end{matrix} \right].
+\boxed{
+V_t(i) = \operatorname{opt}_{a \in A(i)}
+\left\{
+f_t(i,a) + \gamma \sum_{j \in S}
+\pi_{t+1}(i,a,j)\, V_{t+1}(j)
+\right\}, \quad i \in S.
+}
+\tag{2}
 \]
-(Per $a=0$: non ordino nulla; per $a=1$: ordino 1; per $a=2$: ordino 2). Il punto è usato per le righe corrispondenti a stati in cui un'azione non è ammissibile. Ad esempio, l'azione $a=2$ è ammissibile solo nello stato $i=0$.
 
-\subsection{Ricorsioni della DP (DP Recursions)}
-
-\paragraph{Orizzonte Finito}
-In un MDP, la funzione di valore a qualsiasi istante di tempo $t$ si riduce a un vettore finito-dimensionale con componenti $V_{t}(i)$ e soddisfa:
+\paragraph{Caso a orizzonte infinito scontato}
+Nel caso a \textbf{orizzonte infinito scontato}:
 \[
-V_{t}(i)= \text{opt}_{a\in\mathcal{A}(i)} \left\{ f_{t}(i,a)+\gamma\sum_{j\in\mathcal{S}}\pi_{t+1}(i,a,j)V_{t+1}(j) \right\}, \quad i\in\mathcal{S}
+\boxed{
+V(i) = \operatorname{opt}_{a \in A(i)}
+\left\{
+f(i,a) + \gamma \sum_{j \in S}
+\pi(i,a,j)\, V(j)
+\right\}, \quad i \in S.
+}
+\tag{3}
 \]
-Questo è il calcolo delle *Value Function* all'indietro.
 
-\paragraph{Orizzonte Infinito Scontato}
-Nel caso di orizzonte infinito scontato, sparisce il contributo del tempo e la funzione di valore è un punto fisso dell'operatore:
+\paragraph{Contributo immediato stocastico}
+Se il contributo immediato è stocastico e dipende dallo stato successivo, lo si denota \(h(i,a,j)\) e si riscrive:
 \[
-V(i)=\text{opt}_{a\in\mathcal{A}(i)} \left\{ f(i,a)+\gamma\sum_{j\in\mathcal{S}}\pi(i,a,j)V(j) \right\}, \quad i\in\mathcal{S}. \quad \text{(3)}
+\boxed{
+V(i) = \operatorname{opt}_{a \in A(i)}
+\sum_{j \in S}
+\pi(i,a,j)\,
+\left\{
+h(i,a,j) + \gamma V(j)
+\right\}, \quad i \in S.
+}
+\tag{4}
 \]
-Se il fattore di sconto $\gamma < 1$ (fattore di contrazione), un punto fisso esiste ed è unico.
 
-\paragraph{Contributo Immediato Stocastico}
-Se il contributo immediato è stocastico e dipende dallo stato successivo $j$ (dipendenza dalla realizzazione dei fattori di rischio), lo denotiamo come $h(i,a,j)$:
+\paragraph{Relazione tra contributi}
+In principio,
 \[
-V(i)=\text{opt}_{a\in\mathcal{A}(i)}\sum_{j\in\mathcal{S}}\pi(i,a,j) \left\{ h(i,a,j)+\gamma V(j) \right\}, \quad i\in\mathcal{S}. \quad \text{(4)}
+\boxed{
+f(i,a) = \sum_{j \in S} \pi(i,a,j)\, h(i,a,j),
+}
 \]
-L'ottimizzazione è fuori, il valore atteso è dentro. Qui $h(i,a,j)+\gamma V(j)$ rappresenta il contributo immediato stocastico più il valore futuro scontato.
+ma ciò può essere \textbf{impraticabile} quando \(N\) è finito ma enorme oppure quando le \textbf{probabilità di transizione non sono note}.
 
-\subsubsection{Esempio: Arresto Ottimale Ricorrente (*Recurrent Optimal Stopping*)}
-Consideriamo una catena lineare di stati $k=1, 2, \dots, n$, in cui lo stato può solo muoversi a destra o può essere resettato, ottenendo una ricompensa (*reward*) e un riavvio del sistema. I *reward* $R_k$ sono crescenti lungo la catena ($R_k < R_{k+1}$), creando un *tradeoff* tra raccogliere il *reward* immediato e attendere opportunità migliori.
+\subsection{Esempio: arresto ottimo ricorrente}
 
-\begin{itemize}[label=$\circ$]
-    \item \textbf{Stato 1}: Non c'è alcuna decisione da prendere. Si rimane nello stato 1 con probabilità $\pi_{1,1}$ o si passa allo stato 2 con probabilità $\pi_{1,2}$.
-    \item \textbf{Stati Intermedi} ($k=2, \dots, n-1$): Si sceglie tra due azioni: \textbf{Wait} (Aspettare) o \textbf{Reset} (Esercitare subito).
-    \begin{itemize}
-        \item \textbf{Wait}: Nessuna ricompensa, si rimane in $k$ con probabilità $\pi_{k,k}$ o si passa a $k+1$ con $\pi_{k,k+1}$.
-        \item \textbf{Reset}: Si ottiene la ricompensa immediata $R_k$ e si torna allo stato 1 (transizione deterministica).
-    \end{itemize}
-    \item \textbf{Stato Finale} ($n$): Si ottiene la massima ricompensa $R_n$ e si torna allo stato 1.
-\end{itemize}
+\paragraph{Sintesi dell’esempio}
+Dall’esempio si evince il \textbf{trade-off} tra \textbf{ricompensa immediata} e \textbf{attesa} di opportunità migliori, e come la struttura della catena consenta una formulazione DP esplicita sui valori \(V(k)\).
 
-I contributi immediati sono:
+\subsection{Valutazione delle politiche e Q-factors}
+
+\paragraph{Policy evaluation e policy iteration}
+Una politica stazionaria ammissibile \(\mu\) associa a ciascuno stato \(i\) un’azione \(a=\mu(i)\in A(i)\). La funzione valore associata a \(\mu\) si ottiene risolvendo un sistema lineare:
 \[
-f(k, \text{wait})=0 \quad \text{e} \quad f(k, \text{reset})=R_{k}.
+\boxed{
+V^\mu(i)= f\bigl(i,\mu(i)\bigr)+\gamma \sum_{j\in S}\pi\bigl(i,\mu(i),j\bigr)\,V^\mu(j),
+\quad i\in S.
+}
+\tag{5}
 \]
-Le equazioni DP per trovare il valore stazionario $V(i)$ sono (con fattore di sconto $\gamma$):
-\begin{align*}
-V(1)&=\gamma\pi_{1,1}V(1)+\gamma\pi_{1,2}V(2) \\
-V(k)&=\max\left\{R_{k}+\gamma V(1), \quad \gamma\pi_{k,k}V(k)+\gamma\pi_{k,k+1}V(k+1)\right\}, \quad k=2,\dots,n-1 \\
-V(n)&=R_{n}+\gamma V(1)
-\end{align*}
-Questo sistema di equazioni lineari a tratti (a causa dell'operatore $\max$) può essere risolto con metodi iterativi come la *Value Iteration*.
+Questa relazione è fondamentale nei metodi basati su \textbf{policy iteration}: si valuta una politica candidata e poi si tenta di migliorarla.
 
-\subsection{Valutazione della Politica e Q-fattori}
-Le difficoltà nell'affrontare gli MDPs derivano dalla dimensione dello spazio degli stati (curse of dimensionality) e dalla difficoltà o impossibilità di trovare l'intero set di probabilità di transizione $\pi(i, a, j)$ (curse of modeling).
-Un ingrediente per aggirare queste difficoltà è l'utilizzo del \textbf{campionamento Monte Carlo}. Un altro è riscrivere la ricorsione DP basandosi sui \textbf{Q-fattori} $Q(i, a)$, che misurano il valore di intraprendere l'azione $a$ quando si è nello stato $i$.
-
-\paragraph{Valutazione della Politica}
-Data una politica stazionaria ammissibile $\mu$ che mappa ogni stato $i$ in un'azione $a=\mu(i)$, la funzione di valore dello stato $V_{\mu}(i)$ può essere trovata risolvendo un sistema di equazioni lineari (senza ottimizzazione):
+\paragraph{Definizione di Q-factor per una politica}
+Il \textbf{Q-factor} associato a \(\mu\) è la mappa \(S\times A \to \mathbb{R}\):
 \[
-V_{\mu}(i) = f(i, \mu(i)) + \gamma\sum_{j\in\mathcal{S}}\pi(i, \mu(i), j) \cdot V_{\mu}(j), \quad i \in \mathcal{S}. \quad \text{(5)}
+\boxed{
+Q^\mu(i,a) := f(i,a)+\gamma \sum_{j\in S}\pi(i,a,j)\,V^\mu(j).
+}
+\tag{6}
 \]
-Questa equazione è fondamentale per i metodi numerici basati sulla *Policy Iteration*.
+L’idea è applicare \(a\) nello stato \(i\) e poi seguire la politica \(\mu\).
 
-\paragraph{Definizione dei Q-fattori}
-Il \textbf{Q-fattore per la politica stazionaria $\mu$} è definito come:
+\paragraph{Q-factors ottimi e relazione con \(V\)}
+Sostituendo la funzione valore ottima in (6) si ottengono i \textbf{Q-factors ottimi}. Vale:
 \[
-Q_{\mu}(i, a) = f(i, a) + \gamma\sum_{j\in\mathcal{S}}\pi(i, a, j) \cdot V_{\mu}(j). \quad \text{(6)}
+\boxed{
+V(j)\equiv \operatorname{opt}_{a\in A(j)} Q(j,a), \quad j\in S.
+}
 \]
-L'idea è di applicare l'azione $a$ nello stato corrente $i$, e poi seguire la politica $\mu$.
 
-\paragraph{Ricorsione DP con Q-fattori}
-I \textbf{Q-fattori ottimali} sono definiti inserendo la funzione di valore ottimale $V(j)$ nella (6):
+\paragraph{Ricorsione DP in termini di Q-factors}
+La ricorsione di DP può essere riscritta come:
 \[
-Q(i, a) = f(i, a) + \gamma\sum_{j\in\mathcal{S}}\pi(i, a, j)V(j), \quad i \in \mathcal{S}, a \in \mathcal{A}(i). \quad \text{(7)}
+\boxed{
+Q(i,a)= f(i,a)+\gamma \sum_{j\in S}\pi(i,a,j)\left[\operatorname{opt}_{\tilde a\in A(j)} Q(j,\tilde a)\right],
+\quad i\in S,\; a\in A(i).
+}
+\tag{8}
 \]
-Poiché $V(j) \equiv \text{opt}_{a\in\mathcal{A}(j)} Q(j, a)$, possiamo riscrivere la ricorsione DP in termini di Q-fattori:
+
+\paragraph{Vantaggi e svantaggi}
+Lo \textbf{svantaggio} è che si passa da \(V(i)\) a funzioni \textbf{stato--azione} \(Q(i,a)\), aggravando potenzialmente la \textbf{curse of dimensionality}. Il \textbf{vantaggio} è lo \textbf{scambio} tra \textbf{aspettazione} e \textbf{ottimizzazione}, utile anche perché i Q-factors possono essere \textbf{appresi tramite campionamento statistico} (DP \textbf{model-free}) e, se necessario, rappresentati con architetture di approssimazione dalla \textbf{regressione lineare} alle \textbf{reti neurali profonde}.
+
+\subsection{Diverse forme di DP stocastica}
+
+\paragraph{Ricorsione DP di base}
+Si consideri nuovamente la ricorsione di DP:
 \[
-Q(i, a) = f(i, a) + \gamma\sum_{j\in\mathcal{S}}\pi(i, a, j) \left( \text{opt}_{\tilde{a}\in\mathcal{A}(j)} Q(j, \tilde{a}) \right), \quad i \in \mathcal{S}, a \in \mathcal{A}(i). \quad \text{(8)}
+\boxed{
+V_t(s_t) = \operatorname{opt}_{x_t \in X(s_t)}
+\left\{
+f_t(s_t, x_t) + \gamma \,\mathbb{E}\!\left[\,V_{t+1}(s_{t+1}) \mid s_t, x_t \right]
+\right\}.
+}
 \]
-\begin{itemize}[label=$\bullet$]
-    \item \textbf{Svantaggio}: Invece di $V(i)$, si lavora con $Q(i, a)$, il che peggiora la maledizione della dimensionalità (*curse of dimensionality*).
-    \item \textbf{Vantaggio}: Si \textbf{scambiano aspettativa e ottimizzazione}. È spesso più facile risolvere molti problemi di ottimizzazione semplici (deterministici) che un singolo problema grande (stocastico).
-\end{itemize}
-Inoltre, i Q-fattori possono essere appresi tramite campionamento statistico, aprendo la strada alla DP \textit{model-free}.
 
-\subsection{Diverse Sfumature della DP Stocastica}
-La ricorsione DP di base (1) si basa sulle seguenti assunzioni:
-\begin{enumerate}
-    \item Si osserva lo stato $s_t$ al tempo $t$.
-    \item Si prende una decisione ammissibile $x_t \in X(s_t)$.
-    \item Si osserva un contributo immediato $f_t(s_t, x_t)$.
-    \item Si passa a un nuovo stato $s_{t+1}$, che dipende dai fattori di rischio $\xi_{t+1}$.
-\end{enumerate}
-Per trovare $V_t(\cdot)$, si deve risolvere un problema di ottimizzazione stocastica con un'aspettativa impegnativa. Tuttavia, in alcuni casi la struttura informativa richiede di \textbf{scambiare aspettativa e ottimizzazione}.
+\paragraph{Ipotesi sottostanti}
+Si osserva lo \textbf{stato} \(s_t\) all’istante \(t\); si prende una \textbf{decisione ammissibile} \(x_t\in X(s_t)\); si osserva un \textbf{contributo immediato} \(f_t(s_t,x_t)\); si passa a un nuovo stato \(s_{t+1}\) che dipende dai \textbf{fattori di rischio realizzati} \(\xi_{t+1}\), secondo una distribuzione che può dipendere da \(s_t\) e \(x_t\).
 
-\subsubsection{Esempio: Dimensionamento del Lotto con Lookahead Limitato}
-Se all'istante $t$ si ha la conoscenza perfetta della domanda $d_{t+1}$, il contributo di costo immediato è deterministico:
+\paragraph{Difficoltà e motivazione dello scambio}
+Per determinare \(V_t(\cdot)\) a partire da \(V_{t+1}(\cdot)\) si dovrebbe risolvere un problema di \textbf{ottimizzazione stocastica} che può includere un’\textbf{aspettazione} impegnativa; nei MDP i \textbf{Q-factors} consentono di scambiare \textbf{ottimizzazione} e \textbf{aspettazione}, e talvolta lo scambio è richiesto dalla \textbf{struttura informativa}.
+
+\subsection{Esempio: lot-sizing con lookahead limitato}
+
+\paragraph{Sintesi dell’esempio}
+Dall’esempio si evince che, se la domanda del periodo successivo è \textbf{nota} al tempo \(t\), la ricorsione naturale può assumere una forma in cui l’\textbf{ottimizzazione interna è deterministica} e l’\textbf{aspettazione è esterna}.
+
+\subsection{Variabili di stato post-decisione}
+
+\paragraph{Ricorsione in forma scambiata}
+Una forma alternativa è:
 \[
-f_t(I_t, x_t, d_{t+1}) = h I_t + c x_t + \phi \cdot \delta(x_t) + q \cdot \max\left\{ 0, d_{t+1} - I_t - x_t \right\},
+\boxed{
+V_t(s_t)= \mathbb{E}_t\!\left[\operatorname{opt}_{x_t\in X(s_t)}\left\{f_t(x_t,s_t)+\gamma V_{t+1}(s_{t+1})\right\}\right].
+}
+\tag{9}
 \]
-dove $h$ è il costo di mantenimento, $c$ e $\phi$ sono i costi di ordinazione (variabile e fisso) e $q$ è la penalità per le vendite perse.
-Se prima si osserva la domanda $d_{t+1}$ e poi si prende la decisione $x_t$, la ricorsione DP è:
+
+\paragraph{Vantaggi potenziali}
+Il problema di ottimizzazione interno è \textbf{deterministico} e l’aspettazione esterna può essere stimata tramite \textbf{campionamento statistico}.
+
+\paragraph{Introduzione dello stato post-decisione}
+Si introduce uno stato intermedio osservato dopo la decisione \(x_t\) ma prima della realizzazione di \(\xi_{t+1}\), detto \textbf{stato post-decisione} \(s_t^x\). Si scinde la transizione in due passi:
 \[
-V_t(I_t) = E_{d_{t+1}} \left[ \min_{x_t\ge 0} \left\{ f_t(I_t, x_t, d_{t+1}) + V_{t+1}(I_{t+1}) \right\} \right].
+\boxed{
+s_t^x = g_t^{(1)}(s_t,x_t),
+\qquad
+s_{t+1}= g_{t+1}^{(2)}(s_t^x,\xi_{t+1}).
+}
+\tag{10--11}
 \]
-L'aspettativa è fuori e la minimizzazione è dentro.
 
-\subsection{Variabili di Stato Post-Decisione}
-La ricorsione DP con operatori scambiati (aspettativa fuori, ottimizzazione dentro) presenta vantaggi: il problema di ottimizzazione interno è deterministico e l'aspettativa esterna può essere stimata tramite campionamento statistico.
-Questo può essere ottenuto riscrivendo le dinamiche del sistema basate sulle \textbf{variabili di stato post-decisione} ($s_x^t$).
-Lo stato $s_x^t$ è uno stato intermedio osservato dopo che la decisione $x_t$ è stata presa, ma prima che il fattore di rischio $\xi_{t+1}$ sia realizzato.
-
-\paragraph{Splitting della Transizione}
-Si scompone l'equazione di transizione standard $s_{t+1} = g_{t+1}(s_t, x_t, \xi_{t+1})$ in due fasi:
-\begin{align*}
-s_x^t &= g_1^t(s_t, x_t) \quad \text{(Stato post-decisione)} \quad \text{(10)} \\
-s_{t+1} &= g_2^{t+1}(s_x^t, \xi_{t+1}) \quad \text{(Transizione successiva)} \quad \text{(11)}
-\end{align*}
-Nel dimensionamento del lotto, lo stato post-decisione è il livello di inventario $I_x^t$ dopo l'ordine, ma prima della domanda: $I_x^t = I_t + x_t$.
-
-\paragraph{Funzione di Valore Post-Decisione}
-Si introduce il valore dello stato post-decisione $V_x^t(s_x^t)$:
+\paragraph{Relazione tra funzioni valore}
+Si definisce il valore del post-decision state \(V_t^x(s_t^x)\) e vale:
 \[
-V_x^t(s_x^t) = E \left[ V_{t+1}(s_{t+1}) | s_x^t \right]. \quad \text{(12)}
+\boxed{
+V_t^x(s_t^x)= \mathbb{E}\!\left[\,V_{t+1}(s_{t+1}) \mid s_t^x\right].
+}
+\tag{12}
 \]
-La ricorsione DP standard può essere riscritta come un problema di ottimizzazione deterministico:
+Quindi la ricorsione standard può essere riscritta come ottimizzazione deterministica:
 \[
-V_t(s_t) = \text{opt}_{x_t\in X(s_t)} \left\{ f_t(s_t, x_t) + \gamma V_x^t(s_x^t) \right\}. \quad \text{(13)}
-\]
-Combinando (12) e (13), si ottiene nuovamente una ricorsione DP con lo scambio tra aspettativa e ottimizzazione (spostando l'indice indietro di un passo $t-1$):
-\[
-V_x^{t-1}(s_x^{t-1}) = E \left[ \text{opt}_{x_t\in X(s_t)} \left\{ f_t(s_t, x_t) + \gamma V_x^t(s_x^t) \right\} | s_x^{t-1} \right]. \quad \text{(14)}
-\]
-I Q-fattori rientrano naturalmente in questo *framework*, poiché la coppia stato-azione $(i, a)$ può essere considerata uno stato post-decisione.
-
-\subsection{Aumento dello Stato nella Gestione dell'Inventario}
-Se il *lead time* di consegna ($LT \ge 1$) è un numero intero di intervalli di tempo, è necessario introdurre variabili di stato che tengano traccia di ciò che è stato ordinato in passato ed è ancora in transito.
-Sia $z_{t, \tau}$ l'ammontare che verrà consegnato $\tau$ intervalli di tempo dopo il tempo corrente $t$, dove $\tau = 0, 1, 2, \dots, LT-1$.
-\begin{itemize}[label=$\circ$]
-    \item \textbf{Inventario disponibile}: $z_{t, 0}$ è ciò che è immediatamente disponibile.
-    \item \textbf{Transizione Inventario *on-hand*}: $I_{t+1} = I_t + z_{t, 0} - d_{t+1}$ (ignorando l'incertezza sulla domanda).
-    \item \textbf{Transizione variabili di stato aggiuntive}: L'ammontare ordinato $x_t$ al tempo $t$ sarà disponibile $LT$ intervalli dopo. Quindi:
-    \[
-    z_{t+1, LT-1} = x_t.
-    \]
-    Per $\tau < LT-1$, l'equazione di transizione è un semplice scorrimento temporale:
-    \[
-    z_{t+1, \tau} = z_{t, \tau+1}, \quad \tau = 0, 1, \dots, LT-2. \quad \text{(15)}
-    \]
-\end{itemize}
-Allo stesso modo, per gli articoli deperibili, è necessario descrivere l'inventario per età, introducendo un *array* di variabili di stato $I_{t, \tau}$ che rappresentano l'ammontare di inventario *on-hand* al tempo $t$ con un'età di $\tau$ periodi di tempo.
-
-\subsection{Gestione delle Entrate (*Revenue Management*)}
-La gestione delle entrate (o *yield management*) mira a massimizzare le entrate derivanti dalla vendita di risorse deperibili.
-\begin{itemize}[label=$\circ$]
-    \item \textbf{Approcci}: basato sulla quantità (limitazione della disponibilità) e basato sul prezzo (prezzi dinamici).
-    \item \textbf{Modello}: $C$ unità di una singola risorsa (es. posti a sedere) allocate a $n$ classi di tariffa $j=1, \dots, n$, con prezzi $p_1 > p_2 > \dots > p_n$.
-\end{itemize}
-Le caratteristiche essenziali da considerare sono:
-\begin{enumerate}
-    \item \textbf{Comportamento del Cliente}: In un mercato perfettamente segmentato, ogni passeggero acquista una sola classe. Con le preferenze, è necessario un \textbf{modello di scelta}.
-    \item \textbf{Tempistica della Domanda}: I modelli sono "statici" se le richieste per le diverse classi non si intersecano nel tempo, e "dinamici" se le richieste sono intervallate nel tempo.
-\end{enumerate}
-La politica decisionale può essere espressa in termini di \textbf{livelli di protezione} (quantità massima disponibile per classe) o \textbf{prezzi di offerta} (*bid-prices*, prezzo minimo di vendita di un posto).
-
-\subsubsection{Modello Statico con Segmentazione Perfetta della Domanda}
-Le domande per le classi sono indipendenti e avvengono sequenzialmente (es. $D_n$ prima, poi $D_{n-1}$, ecc.). Gli stadi decisionali sono associati alle classi, indicizzate in ordine decrescente $j=n, n-1, \dots, 1$.
-Lo stato naturale è $s_j$, la capacità residua all'inizio dello stadio $j$, con stato iniziale $s_n=C$.
-Si cerca la sequenza di funzioni di valore $V_j(s_j)$ per trovare la massima entrata attesa $V_n(C)$. La condizione al contorno è $V_0(s_0) = 0$.
-
-\paragraph{Ricorsione DP con Scambio di Operatori}
-Per ogni classe $j$, si assume la seguente sequenza di eventi (non intuitiva, ma giustificabile):
-\begin{enumerate}
-    \item Si osserva la domanda $D_j$ per la classe $j$.
-    \item Si decide quante richieste accettare, $x_j$.
-    \item Si raccoglie l'entrata $p_j x_j$ e si procede allo stadio $j-1$ con $s_{j-1} = s_j - x_j$.
-\end{enumerate}
-La ricorsione DP assume la forma scambiata:
-\[
-V_j(s_j) = E_{D_j} \left[ \max_{0\le x_j\le\min\{s_j,D_j\}} \left\{ p_j x_j + V_{j-1}(s_j - x_j) \right\} \right].
-\]
-Con uno scorrimento di indici ($j+1 \to j$), si ha:
-\[
-V_{j+1}(s) = E \left[ \max_{0\le x\le\min\{s,D_{j+1}\}} \left\{ p_{j+1} x + V_{j}(s - x) \right\} \right]. \quad \text{(16)}
+\boxed{
+V_t(s_t)= \operatorname{opt}_{x_t\in X(s_t)}\left\{f_t(s_t,x_t)+\gamma V_t^x(s_t^x)\right\}.
+}
+\tag{13}
 \]
 
-\paragraph{Valore Marginale Atteso della Capacità}
-Introducendo il valore marginale atteso della capacità $\Delta V_j(s) = V_j(s) - V_j(s-1)$ (il costo opportunità di un posto), si può riscrivere l'equazione (16):
+\paragraph{Passo all’indietro e nuovo scambio}
+Scrivendo la relazione un passo indietro e sostituendo (13), si ottiene una ricorsione che presenta nuovamente lo \textbf{scambio} tra \textbf{aspettazione} e \textbf{ottimizzazione}:
 \[
-V_{j+1}(s) = V_j(s) + E \left[ \max_{0\le x\le\min\{s,D_{j+1}\}} \left( x \sum_{z=1} \left( p_{j+1} - \Delta V_j(s + 1 - z) \right) \right) \right]. \quad \text{(17)}
+\boxed{
+V_{t-1}^x(s_{t-1}^x)
+=
+\mathbb{E}\!\left[
+\operatorname{opt}_{x_t\in X(s_t)}
+\left(
+f_t(s_t,x_t)+\gamma V_t^x(s_t^x)
+\right)
+\Bigm| s_{t-1}^x
+\right].
+}
+\tag{14}
 \]
+
+\paragraph{Connessione con i Q-factors}
+La coppia \textbf{stato--azione} \((i,a)\) può essere interpretata come \textbf{stato post-decisione} prima di osservare la transizione casuale al nuovo stato; la formulazione in termini di \textbf{Q-factors} si inserisce naturalmente in questo quadro.
+
+\subsection{Aumento dello stato nella gestione delle scorte}
+
+\paragraph{Inventario on-hand vs inventario disponibile}
+L’\textbf{inventario on-hand} appare naturale come variabile di stato, ma le decisioni d’ordine dovrebbero basarsi sull’\textbf{inventario disponibile}, che include \textbf{on-order} e \textbf{backlog}.
+
+\paragraph{Limite dell’equazione di stato standard}
+L’equazione
+\[
+\boxed{
+I_{t+1}= I_t + x_t - d_{t+1}
+}
+\]
+assume disponibilità immediata di quanto ordinato al tempo \(t\).
+
+\paragraph{Lead time e variabili di pipeline}
+Se il \textbf{lead time} è un intero \(LT\ge 1\), si introducono variabili \(z_{t,\tau}\) (pipeline), con \(\tau=0,1,\dots,LT-1\). Vale:
+\[
+\boxed{
+I_{t+1}= I_t + z_{t,0} - d_{t+1}
+}
+\]
+(trascurando l’incertezza) e la decisione \(x_t\) entra come:
+\[
+\boxed{
+z_{t+1,LT-1}= x_t.
+}
+\]
+Per \(\tau<LT-1\), le transizioni sono uno shift temporale:
+\[
+\boxed{
+z_{t+1,\tau}= z_{t,\tau+1},
+\qquad \tau=0,1,\dots,LT-2.
+}
+\tag{15}
+\]
+
+\paragraph{Items deperibili e stato per età}
+Per prodotti \textbf{deperibili} si introduce un array \(I_{t,\tau}\) che descrive l’inventario per età; le transizioni dipendono dalla politica di issuing \textbf{FIFO} o \textbf{LIFO}.
+
+\subsection{Revenue management}
+
+\paragraph{Definizione e obiettivo}
+Il \textbf{revenue management} consiste in modelli e tecniche per massimizzare il \textbf{ricavo} ottenuto vendendo \textbf{risorse deperibili}; l’idea nasce (come \textbf{yield management}) nell’industria aerea.
+
+\paragraph{Approcci quantity-based e price-based}
+Esistono due approcci: \textbf{quantity-based} (si limita la disponibilità della risorsa per massimizzare il ricavo) e \textbf{price-based} (si aggiustano dinamicamente i prezzi, \textbf{dynamic pricing}). Si considerano modelli DP quantity-based assumendo costo marginale nullo o trascurabile, così che massimizzare il profitto equivale a massimizzare il ricavo.
+
+\paragraph{Classi tariffarie e prezzi}
+Si considerino \(C\) unità di risorsa da allocare a \(n\) classi \(j=1,\dots,n\), vendute a prezzi \(p_j\) con:
+\[
+\boxed{
+p_1 > p_2 > \cdots > p_n.
+}
+\]
+I posti sono fisicamente \textbf{identici}, ma differenziati tramite \textbf{ancillaries} (cancellazione, vincoli, pasti, ecc.).
+
+\paragraph{Caratteristiche essenziali}
+La domanda \(D_j\) è casuale e può realizzarsi con schemi diversi. Due aspetti sono essenziali: \textbf{comportamento dei clienti} (segmentazione perfetta vs preferenze da modellare con un \textbf{choice model}) e \textbf{timing della domanda} (sequentialità auspicabile; caso peggiore quando arrivano prima i clienti low-budget).
+
+\paragraph{Modelli statici e dinamici; protection levels e bid-prices}
+Un modello con intervalli disgiunti, ciascuno dedicato a una sola classe, è \textbf{statico}; se le richieste sono interleaved nel tempo è \textbf{dinamico}. La policy si esprime tramite \textbf{protection levels} oppure \textbf{bid-prices} (prezzo minimo accettabile per vendere un posto).
+
+\subsection{Modello statico con segmentazione perfetta della domanda}
+
+\paragraph{Assunzioni, stadi e stato}
+Le domande sono indipendenti e avvengono sequenzialmente (prima \(D_n\)); nessun cliente cambia classe. Gli stadi decisionali sono \(j=n,n-1,\dots,1\). La variabile di stato è la \textbf{capacità residua} \(s_j\), con stato iniziale \(s_n=C\). Condizione al contorno:
+\[
+\boxed{
+V_0(s_0)=0,\qquad s_0=0,1,\dots,C.
+}
+\]
+
+\paragraph{Ricorsione DP in forma scambiata}
+La ricorsione assume la forma scambiata:
+\[
+\boxed{
+V_j(s_j)=
+\mathbb{E}\!\left[
+\max_{0\le x_j \le \min\{s_j,D_j\}}
+\left(
+p_j x_j + V_{j-1}(s_j-x_j)
+\right)
+\right].
+}
+\]
+Con uno shift di indice e notazione compatta:
+\[
+\boxed{
+V_{j+1}(s)=
+\mathbb{E}\!\left[
+\max_{0\le x \le \min\{s,D_{j+1}\}}
+\left(
+p_{j+1}x + V_j(s-x)
+\right)
+\right].
+}
+\tag{16}
+\]
+
+\subsection{Valore marginale atteso e livelli di protezione}
+
+\paragraph{Valore marginale atteso della capacità}
+Si definisce:
+\[
+\boxed{
+\Delta V_j(s):= V_j(s)-V_j(s-1),
+}
+\]
+che misura il \textbf{costo opportunità} di un posto dato \(s\).
+
+\paragraph{Somma telescopica e riscrittura}
+Si ottiene:
+\[
+\boxed{
+V_{j+1}(s)
+=
+V_j(s)
++
+\mathbb{E}\!\left[
+\max_{0\le x \le \min\{s,D_{j+1}\}}
+\left(
+\sum_{z=1}^{x}\bigl(p_{j+1}-\Delta V_j(s+1-z)\bigr)
+\right)
+\right].
+}
+\]
+La riscrittura usa una \textbf{somma telescopica}:
+\[
+\boxed{
+V_j(s-x)= V_j(s)-\sum_{z=1}^{x}\Delta V_j(s+1-z).
+}
+\]
+
+\paragraph{Proprietà dei valori marginali}
+Si possono provare:
+\[
+\boxed{
+\Delta V_j(s+1)\le \Delta V_j(s),
+\qquad
+\Delta V_{j+1}(s)\ge \Delta V_j(s),
+\qquad \forall s,j.
+}
+\]
+
+\paragraph{Regola di accettazione e protezione annidata}
+I termini \(p_{j+1}-\Delta V_j(s+1-z)\) sono decrescenti in \(z\): si aumenta \(x\) finché compare il primo termine negativo o si raggiunge \(\min\{s,D_{j+1}\}\). Si ottiene un livello di protezione \textbf{annidato}:
+\[
+\boxed{
+y_j^\ast:= \max\{\,y:\; p_{j+1}<\Delta V_j(y)\,\},
+\qquad j=1,\dots,n-1.
+}
+\tag{18}
+\]
+La decisione ottima allo stadio \(j+1\) è:
+\[
+\boxed{
+x_{j+1}^\ast(s_{j+1},D_{j+1})
+=
+\min\{(s_{j+1}-y_j^\ast)^+,\; D_{j+1}\}.
+}
+\]
+Lo scambio tra aspettazione e ottimizzazione è giustificato dal fatto che non serve conoscere \(D_{j+1}\) in anticipo: si accetta finché si raggiunge la protezione o si esaurisce la capacità o termina lo stadio.
+
+\subsection{Modello dinamico con segmentazione perfetta della domanda}
+
+\paragraph{Assunzioni e probabilità di arrivo}
+Si rilassa la sequenzialità della domanda, mantenendo una segmentazione rigida. Il tempo è discretizzato in \(t=1,\dots,T\) assumendo \textbf{al più un arrivo per intervallo}. Sia \(\lambda_j(t)\) la probabilità di arrivo della classe \(j\) nell’intervallo \(t\), con vincolo:
+\[
+\boxed{
+\sum_{j=1}^{n}\lambda_j(t)\le 1,
+\qquad \forall t.
+}
+\]
+
+\paragraph{Funzione valore e condizioni al contorno}
+Si determinano \(V_t(s)\) (capacità residua \(s\)) con:
+\[
+\boxed{
+V_t(0)=0,\quad t=1,\dots,T,
+\qquad
+V_{T+1}(s)=0,\quad s=0,1,\dots,C.
+}
+\]
+
+\paragraph{Ricavo disponibile e decisione binaria}
+Sia \(R(t)\) il \textbf{ricavo disponibile} al tempo \(t\): vale \(p_j\) se arriva un cliente di classe \(j\), \(0\) altrimenti. Alla richiesta si decide con \(x\in\{0,1\}\) se accettare o meno.
+
+\paragraph{Ricorsione DP in forma scambiata}
+La ricorsione assume la forma scambiata:
+\[
+\boxed{
+V_t(s)=
+\mathbb{E}\!\left[
+\max_{x\in\{0,1\}}
+\left\{
+R(t)\,x+V_{t+1}(s-x)
+\right\}
+\right].
+}
+\]
+Usando i \textbf{valori marginali attesi} si ottiene una politica in termini di \textbf{protection levels}, qui potenzialmente \textbf{time-varying}.
+
+\subsection{Modello dinamico con scelta del cliente}
+
+\paragraph{Modello di scelta}
+Se la segmentazione perfetta viene rilassata, occorre un \textbf{choice model}. La decisione di controllo al tempo \(t\) è il sottoinsieme \(S_t\subseteq N=\{1,\dots,n\}\) delle classi offerte.
+
+\paragraph{Ricavi e probabilità di scelta}
+Si introduca \(p_0=0\) per il caso di \textbf{non-acquisto}. Con probabilità \(\lambda\) arriva un potenziale passeggero; dato \(S_t\), la probabilità di scelta della classe \(j\) è \(P_j(S_t)\), includendo \(P_0(S_t)\), con vincoli:
+\[
+\boxed{
+P_j(S)\ge 0,\quad S\subseteq N,\; j\in S\cup\{0\},
+\qquad
+\sum_{j\in S}P_j(S)+P_0(S)=1,\quad S\subseteq N.
+}
+\]
+
+\paragraph{Probabilità di acquisto dipendenti dalla decisione}
+Le probabilità dipendenti dalla decisione sono \(\lambda P_j(S_t)\) per \(j=1,\dots,n\), e \((1-\lambda)+\lambda P_0(S_t)\) per \(j=0\).
+
+\paragraph{Ricorsione DP}
+In questo caso la decisione deve essere dichiarata prima della scelta del passeggero, quindi la ricorsione è nella forma standard:
+\[
+\boxed{
+V_t(s)
+=
+\max_{S_t\subseteq N}
+\left\{
+\sum_{j\in S_t}\lambda P_j(S_t)\bigl(p_j+V_{t+1}(s-1)\bigr)
++
+\bigl(\lambda P_0(S_t)+1-\lambda\bigr)\,V_{t+1}(s)
+\right\}.
+}
+\]
+\paragraph{Osservazione conclusiva}
+La forma della ricorsione riflette la \textbf{struttura informativa}: qui la massimizzazione è sull’\textbf{aspettazione} perché la decisione precede la scelta del cliente.
 
 \section{CAP 10 -- Programmazione dinamica numerica per stati discreti}
-\subsection{Catene di Markov a Tempo Discreto (Discrete-time Markov chains)}
-Una catena di Markov a tempo discreto è un processo stocastico con una variabile di stato $s_{t}$, $t=0, 1, 2, \dots$ che può assumere un numero finito o infinito numerabile di valori $i \in \mathcal{S}$.
-La proprietà fondamentale di Markov è che lo stato futuro dipende solo dallo stato corrente e non dalla storia precedente (mancanza di memoria):
-\[
-\mathbb{P}\{s_{t+1}=j | s_{t}=i, s_{t-1}=i_{t-1}, \dots, s_{0}=i_{0}\} = \mathbb{P}\{s_{t+1}=j | s_{t}=i\} = \pi_{t+1}(i, j).
-\]
-Le probabilità di transizione $\pi_{t+1}(i, j)$ sono:
-\begin{itemize}[label=$\circ$]
-    \item La probabilità che il sistema transiti dallo stato $i$ allo stato $j$ nell'intervallo di tempo $t+1$.
-    \item Soddisfano $\pi_{t+1}(i, j) \ge 0$ e $\sum_{j \in \mathcal{S}} \pi_{t+1}(i, j) = 1$.
-\end{itemize}
-Se le probabilità di transizione non dipendono dal tempo, la catena è \textbf{stazionaria} o \textbf{omogenea}: $\pi_{t+1}(i, j) = \pi(i, j)$.
+\subsection{Catene di Markov a tempo discreto}
 
-\paragraph{Notazione e Transizione (Caso Finito)}
-Nel caso finito, lo spazio degli stati $\mathcal{S}$ ha dimensione $N$. La matrice di transizione $\Pi$ è una matrice $N \times N$, dove $\Pi_{i, j} = \pi(i, j)$.
-La probabilità di transizione a due passi è data da:
-\[
-\pi^{(2)}(i, j) = \sum_{k \in \mathcal{S}} \pi(i, k) \pi(k, j).
-\]
-In forma matriciale, questo è il prodotto $\Pi^2$. La probabilità di transizione a $k$ passi è data da $\Pi^k$.
+\paragraph{Definizione di catena di Markov a tempo discreto}
+Una \textbf{catena di Markov a tempo discreto} è un processo stocastico con variabile di stato $s_t$, $t = 0,1,2,\dots$, che assume valori in un insieme \textbf{discreto}.  
+Se lo spazio degli stati è numerabile, è possibile associare ciascuno stato a un numero intero e rappresentare il processo mediante una \textbf{rete}.
 
-\paragraph{Distribuzioni di Probabilità dello Stato}
-La distribuzione di probabilità dello stato al tempo $t$ è un vettore riga $p_t = [p_t(1), \dots, p_t(N)]$, dove $p_t(i)$ è la probabilità che il sistema sia nello stato $i$.
-La dinamica di questa distribuzione è:
+\paragraph{Probabilità di transizione}
+Le transizioni tra stati sono rappresentate da archi diretti etichettati con le \textbf{probabilità di transizione}.  
+Le probabilità di transizione sono \textbf{probabilità condizionate} che dipendono solo dallo stato corrente:
 \[
-p_{t+1}(j) = \sum_{i \in \mathcal{S}} p_t(i) \pi(i, j).
-\]
-In forma matriciale:
-\[
-p_{t+1} = p_t \Pi.
-\]
-Se una catena di Markov ha una \textbf{distribuzione stazionaria} $\pi$, essa soddisfa l'equazione:
-\[
-\pi = \pi \Pi.
+\pi(i,j) := \mathbb{P}\{ s_{t+1} = j \mid s_t = i \}.
 \]
 
-\subsection{Problemi Decisionali di Markov (Markov Decision Problems - MDPs)}
-In un MDP, l'azione (decisione) $a \in \mathcal{A}(i)$ è scelta dall'insieme delle azioni ammissibili $\mathcal{A}(i)$, quando il sistema è nello stato $i$.
-Le probabilità di transizione dipendono dall'azione scelta:
+\paragraph{Catene omogenee}
+Nel caso di problemi a \textbf{orizzonte infinito} si utilizzano catene \textbf{omogenee} (o \textbf{time-invariant}), in cui le probabilità di transizione non dipendono dal tempo.
+
+\paragraph{Matrice di transizione}
+Una catena di Markov a tempo discreto può essere descritta raccogliendo le probabilità di transizione in una \textbf{matrice di transizione a un passo} $\Pi$, in cui l’elemento $\pi_{ij}$ rappresenta la probabilità di transizione dallo stato $i$ allo stato $j$.
+
+\paragraph{Proprietà di normalizzazione}
+Poiché dopo una transizione il processo deve necessariamente trovarsi in uno stato dello spazio degli stati, ogni riga della matrice di transizione somma a uno:
 \[
-\pi_{t+1}(i, a, j).
+\sum_{j=1}^N \pi(i,j) = 1, \quad \forall i.
 \]
-Per un MDP finito con orizzonte infinito scontato e una politica stazionaria (non dipendente dal tempo) $\mu: \mathcal{S} \to \mathcal{A}$, la funzione di valore $V(i)$ è il punto fisso dell'equazione DP:
+
+\subsection{Catene di Markov controllate e MDP}
+
+\paragraph{Azioni e transizioni controllate}
+Nei \textbf{processi decisionali markoviani} (MDP), le transizioni sono parzialmente controllate tramite la selezione di azioni.  
+In ciascuno stato $i$ è disponibile un insieme finito di azioni ammissibili $A(i)$.  
+Per ogni azione $a \in A(i)$ sono definite probabilità di transizione:
 \[
-V(i) = \max_{a \in \mathcal{A}(i)} \left\{ f(i, a) + \gamma \sum_{j \in \mathcal{S}} \pi(i, a, j) V(j) \right\}, \quad i \in \mathcal{S}. \quad \text{(9)}
+\pi(i,a,j).
 \]
-Definiamo l'operatore DP $\mathcal{T}$:
+
+\paragraph{Distribuzione stazionaria}
+Per valutare le prestazioni di una politica di controllo stazionaria, si può considerare la \textbf{probabilità di lungo periodo} di trovarsi in ciascuno stato, indicata con $q(i)$ e raccolta nel vettore $q$.  
+Tali probabilità potrebbero non esistere se la catena non soddisfa opportune proprietà strutturali.
+
+\paragraph{Proprietà strutturali delle catene}
+Una catena può presentare stati \textbf{transienti}, \textbf{ricorrenti}, \textbf{assorbenti} e \textbf{periodicità}.  
+Si assume una \textbf{unichain}, tale che ogni stato possa essere visitato infinitamente spesso nel lungo periodo e raggiunto da ogni altro stato in tempo finito con probabilità positiva.  
+Nel seguito si assume che il processo di Markov sia \textbf{ben comportato} per ogni politica di controllo.
+
+\subsection{MDP a orizzonte temporale finito}
+
+\paragraph{Ricorsione di programmazione dinamica}
+Per un MDP a \textbf{orizzonte finito}, la ricorsione di DP è:
 \[
-\mathcal{T}V(i) = \max_{a \in \mathcal{A}(i)} \left\{ f(i, a) + \gamma \sum_{j \in \mathcal{S}} \pi(i, a, j) V(j) \right\}. \quad \text{(10)}
+V_t(i) = \operatorname{opt}_{a \in A(i)}
+\left\{
+f(i,a) + \sum_j \pi(i,a,j)\, V_{t+1}(j)
+\right\}, \quad i \in S.
 \]
-La funzione di valore ottimale $V^*$ è il punto fisso dell'operatore $\mathcal{T}$: $V^* = \mathcal{T}V^*$.
-Quando $\gamma < 1$, l'operatore $\mathcal{T}$ è una contrazione e ammette un unico punto fisso.
 
+\paragraph{Cosa insegna l’esempio (arresto ottimo su random walk)}
+L’esempio mostra che, in un problema di arresto ottimo a orizzonte finito, la politica risultante può essere \textbf{non stazionaria} e dipendere dal tempo residuo (confronto tra \texttt{wait} e \texttt{stop} tramite DP).
 
-\subsection{Algoritmi Iterativi per la Soluzione di MDPs a Orizzonte Infinito}
-Per risolvere l'equazione (9) (che è non lineare a causa dell'operatore $\max$), si utilizzano metodi iterativi: l'Iterazione del Valore (Value Iteration - VI) e l'Iterazione della Politica (Policy Iteration - PI).
+\subsection{Processi decisionali markoviani a orizzonte infinito}
 
-\subsubsection{Iterazione del Valore (Value Iteration - VI)}
-VI utilizza l'operatore $\mathcal{T}$ in modo iterativo. Dato un vettore di valori iniziali $V^{(0)}$, l'iterazione è:
+\paragraph{Equazioni di Bellman a orizzonte infinito}
+Nel caso di un \textbf{MDP a orizzonte infinito}, la funzione valore è definita implicitamente da equazioni del tipo:
 \[
-V^{(k+1)} = \mathcal{T}V^{(k)}, \quad k=0, 1, 2, \dots
+V(i) = \operatorname{opt}_{a \in A(i)}
+\left\{
+f(i,a) + \sum_j \pi(i,a,j)\, V(j)
+\right\}, \quad i \in S,
+\tag{2}
 \]
-La convergenza è garantita grazie alla proprietà di contrazione dell'operatore $\mathcal{T}$.
-VI è spesso lento a convergere ai valori precisi, ma tende a stabilire la politica ottimale $\mu^*$ in un numero minore di iterazioni rispetto a PI.
+oppure, quando il contributo immediato dipende anche dallo stato successivo,
+\[
+V(i) = \operatorname{opt}_{a \in A(i)}
+\sum_{j \in S} \pi(i,a,j)
+\left\{
+h(i,a,j) + V(j)
+\right\}, \quad i \in S.
+\tag{3}
+\]
 
-\paragraph{Passi della VI}
-\begin{enumerate}
-    \item \textbf{Inizializzazione}: Scegliere $V^{(0)}$ e porre $k=0$.
-    \item \textbf{Iterazione del Valore}: $V^{(k+1)}(i) = \max_{a \in \mathcal{A}(i)} \left\{ f(i, a) + \gamma \sum_{j \in \mathcal{S}} \pi(i, a, j) V^{(k)}(j) \right\}, \quad i \in \mathcal{S}$.
-    \item \textbf{Test di Convergenza}: Se $\max_{i} |V^{(k+1)}(i) - V^{(k)}(i)| < \epsilon$ (con $\epsilon$ piccolo), STOP.
-    \item \textbf{Miglioramento della Politica}: Se l'obiettivo è trovare anche la politica ottima, essa viene generata alla fine tramite:
-    \[
-    \mu^*(i) = \arg\max_{a \in \mathcal{A}(i)} \left\{ f(i, a) + \gamma \sum_{j \in \mathcal{S}} \pi(i, a, j) V^*(j) \right\}, \quad i \in \mathcal{S}.
-    \]
-\end{enumerate}
+\paragraph{Rappresentazione vettoriale}
+Per MDP finiti, lo spazio degli stati è:
+\[
+S = \{1,\dots,n\},
+\]
+e la funzione valore $V : S \to \mathbb{R}$ è rappresentabile come vettore $V \in \mathbb{R}^n$ con componenti $V(i)$.
 
-\subsubsection{Iterazione della Politica (Policy Iteration - PI)}
-PI alterna due fasi: Valutazione della Politica e Miglioramento della Politica. Converge in un numero finito di passi, ma ogni passo di Valutazione della Politica può essere costoso.
-
-\paragraph{Passi della PI}
-\begin{enumerate}
-    \item \textbf{Inizializzazione}: Scegliere una politica ammissibile $\mu^{(0)}$ e porre $k=0$.
-    \item \textbf{Valutazione della Politica} (Policy Evaluation): Calcolare la funzione di valore $V_{\mu^{(k)}}$ risolvendo il sistema di equazioni lineari (Eq. 5 nel DPChapter3):
-    \[
-    V_{\mu^{(k)}}(i) = f(i, \mu^{(k)}(i)) + \gamma \sum_{j \in \mathcal{S}} \pi(i, \mu^{(k)}(i), j) V_{\mu^{(k)}}(j), \quad i \in \mathcal{S}. \quad \text{(12)}
-    \]
-    Questo sistema è di forma $V = c + \gamma \Pi_{\mu} V$, dove $\Pi_{\mu}$ è la matrice di transizione definita dalla politica $\mu$, e può essere risolto come:
-    \[
-    V_{\mu^{(k)}} = (I - \gamma \Pi_{\mu^{(k)}})^{-1} c_{\mu^{(k)}}.
-    \]
-    \item \textbf{Miglioramento della Politica} (Policy Improvement): Trovare la nuova politica $\mu^{(k+1)}$ più avida (*greedy*) rispetto a $V_{\mu^{(k)}}$:
-    \[
-    \mu^{(k+1)}(i) = \arg\max_{a \in \mathcal{A}(i)} \left\{ f(i, a) + \gamma \sum_{j \in \mathcal{S}} \pi(i, a, j) V_{\mu^{(k)}}(j) \right\}, \quad i \in \mathcal{S}.
-    \]
-    \item \textbf{Test di Convergenza}: Se $\mu^{(k+1)} = \mu^{(k)}$, STOP. Altrimenti, porre $k \leftarrow k+1$ e tornare al passo 2.
-\end{enumerate}
-
-\subsubsection{Iterazione Generalizzata della Politica (Generalized Policy Iteration - GPI)}
-L'Iterazione Generalizzata della Politica (GPI) è un concetto astratto che generalizza VI e PI, dove l'algoritmo alterna i passi di Valutazione della Politica e Miglioramento della Politica senza richiedere la convergenza esatta della fase di valutazione.
-\begin{itemize}[label=$\circ$]
-    \item \textbf{VI come caso estremo}: La valutazione della politica è eseguita per una sola iterazione: $V^{(k+1)} \leftarrow \mathcal{T}V^{(k)}$.
-    \item \textbf{PI come caso estremo}: La valutazione della politica è eseguita fino a convergenza (risolvendo il sistema lineare).
-\end{itemize}
-In un contesto numerico, la fase di Valutazione della Politica in PI può essere troncata dopo un certo numero di iterazioni di $\mathcal{T}_{\mu}$ prima di passare a una nuova politica, creando un continuum di approcci.
-
-\subsection{Relazione con il Reinforcement Learning (RL)}
-La differenza tra VI e PI diventa particolarmente rilevante nel contesto del *Reinforcement Learning* (RL), noto anche come DP *model-free* (senza conoscere le probabilità di transizione $\pi(i, a, j)$ e possibilmente i contributi immediati $f(i, a)$).
-
-\paragraph{Q-Learning (Controparte di VI)}
-\begin{itemize}[label=$\circ$]
-    \item Il \textbf{Q-learning} è la controparte RL dell'Iterazione del Valore.
-    \item La funzione di valore $V(s)$ è sostituita dai Q-fattori $Q(s, a)$.
-    \item È uno schema di apprendimento \textbf{*off-policy*}, il che significa che una politica viene applicata (es. per esplorazione) per apprendere un'altra (la politica ottimale).
-    \item L'aggiornamento dei Q-fattori è dato da:
-    \[
-    Q(s_{t}, a_{t}) \leftarrow Q(s_{t}, a_{t}) + \alpha \left[ r_{t+1} + \gamma \max_{a} Q(s_{t+1}, a) - Q(s_{t}, a_{t}) \right]. \quad \text{(13)}
-    \]
+\paragraph{Strategie di soluzione}
+Esistono due strategie fondamentali:
+\begin{itemize}[label=-]
+\item \textbf{Value iteration}: iterazioni economiche, convergenza al valore ottimo solo nel limite;
+\item \textbf{Policy iteration}: iterazioni più costose, ma convergenza in tempo finito per MDP finiti (numero finito di politiche).
 \end{itemize}
 
-\paragraph{SARSA (Controparte di PI)}
-\begin{itemize}[label=$\circ$]
-    \item Le controparti RL dell'Iterazione della Politica (PI) si basano su uno schema di apprendimento \textbf{*on-policy*}, mirando ad apprendere il valore della stessa politica che si sta applicando.
-    \item Un approccio ben noto è \textbf{SARSA} (State-Action-Reward-State-Action).
-    \item L'aggiornamento SARSA è dato da:
+\subsection{Operatori di Bellman}
+
+\paragraph{Operatore ottimo}
+Data una funzione valore generica $\tilde V$, si definisce l’operatore $T$:
+\[
+[T\tilde V](i) =
+\operatorname{opt}_{a \in A(i)}
+\sum_{j \in S} \pi(i,a,j)
+\left\{
+h(i,a,j) + \tilde V(j)
+\right\}, \quad i \in S.
+\tag{4}
+\]
+
+\paragraph{Operatore associato a una politica}
+Data una politica stazionaria generica $\mu$, si definisce l’operatore $T_\mu$:
+\[
+[T_\mu \tilde V](i) =
+\sum_{j \in S} \pi(i,\mu(i),j)
+\left\{
+h(i,\mu(i),j) + \tilde V(j)
+\right\}, \quad i \in S.
+\tag{5}
+\]
+
+\paragraph{Ruolo degli operatori e punti fissi}
+L’operatore $T$ è centrale per la \textbf{value iteration}, mentre $T_\mu$ è centrale per la \textbf{policy iteration}.  
+Il vettore valore ottimo $V$ è un \textbf{punto fisso} di $T$:
+\[
+V = TV.
+\tag{6}
+\]
+La funzione valore $V^\mu$ di una politica stazionaria $\mu$ è il punto fisso di $T_\mu$.
+
+\paragraph{Condizioni di esistenza}
+Per un MDP finito con \textbf{sconto stretto} ($\gamma < 1$) e contributi per stadio \textbf{limitati} (esiste $M$ con $|h(i,a,j)| \le M$), si assume che $T$ e $T_\mu$ siano \textbf{operatori di contrazione}, con punto fisso unico.
+
+\paragraph{Miglioramento delle politiche}
+L’operatore $T$ fornisce una caratterizzazione della politica stazionaria ottima e consente di \textbf{migliorare} una politica non ottima usando il valore $V^\mu$, che viene ottenuto tramite $T_\mu$.
+
+\subsection{Value iteration}
+
+\paragraph{Idea di base}
+Con sconto stretto ($\gamma<1$), si cerca un punto fisso di $T$ tramite iterazione:
+\[
+V^{(k+1)} = T V^{(k)}.
+\]
+Se $V^{(k)} \to V$, allora $V$ è un punto fisso di $T$ e rappresenta la soluzione.
+
+\subsection{Algoritmo di Value Iteration}
+
+\begin{algorithm}[H]
+\caption{Value Iteration per MDP a orizzonte infinito}
+\begin{algorithmic}[1]
+\State Scegliere una funzione valore iniziale $V^{(0)}$ (ad esempio $V^{(0)}(i)=0$ per ogni $i \in S$)
+\State Scegliere una tolleranza $\varepsilon$
+\State Inizializzare $k=0$ e \texttt{stop}=\texttt{false}
+\While{\texttt{stop} $\neq$ \texttt{true}}
+    \For{ogni stato $i \in S$}
+        \State
+        \[
+        V^{(k+1)}(i) =
+        \operatorname{opt}_{a \in A(i)}
+        \left\{
+        f(i,a) + \sum_{j \in S} \pi(i,a,j)\, V^{(k)}(j)
+        \right\}
+        \]
+    \EndFor
+    \If{$\|V^{(k+1)} - V^{(k)}\|_1 < \varepsilon$}
+        \State \texttt{stop}=\texttt{true}
+    \Else
+        \State $k = k + 1$
+    \EndIf
+\EndWhile
+\State Porre $\hat V = V^{(k+1)}$
+\State Per ogni $i \in S$, determinare una politica stimata ottima:
+\[
+\hat\mu(i) \in
+\arg\operatorname{opt}_{a \in A(i)}
+\left\{
+f(i,a) + \sum_j \pi(i,a,j)\, \hat V(j)
+\right\}
+\]
+\State Restituire $\hat V$ e $\hat\mu$
+\end{algorithmic}
+\end{algorithm}
+
+\paragraph{Cosa insegna l’esempio numerico (value iteration)}
+L’esempio illustra che la politica ottima ottenuta da value iteration può dipendere in modo sensibile da probabilità di transizione e fattore di sconto, e che la convergenza in iterazioni può variare significativamente con tali parametri.
+
+\subsection{Policy iteration}
+
+\paragraph{Motivazione}
+Con value iteration può accadere di individuare presto la politica ottima (da valori approssimati) ma senza valutarne ancora con precisione il valore.  
+Policy iteration mira invece alla valutazione (più) diretta del valore di una politica.
+
+\paragraph{Policy evaluation come sistema lineare}
+Per una politica stazionaria $\mu$, $T_\mu$ non include ottimizzazione:
+\[
+[T_\mu \tilde V](i)= f\bigl(i,\mu(i)\bigr)+\sum_{j\in S}\pi\bigl(i,\mu(i),j\bigr)\tilde V(j),\quad i\in S.
+\]
+Il valore $V^\mu$ soddisfa:
+\[
+V^\mu(i)= f\bigl(i,\mu(i)\bigr)+\sum_{j\in S}\pi\bigl(i,\mu(i),j\bigr)V^\mu(j),\quad i\in S.
+\]
+Definendo la matrice di transizione indotta $\Pi^\mu$ e il vettore dei contributi $f^\mu$:
+\[
+f^\mu :=
+\begin{bmatrix}
+f\bigl(1,\mu(1)\bigr)\\
+f\bigl(2,\mu(2)\bigr)\\
+\vdots\\
+f\bigl(n,\mu(n)\bigr)
+\end{bmatrix},
+\tag{9}
+\]
+si ottiene il sistema:
+\[
+V^\mu = f^\mu + \gamma \Pi^\mu V^\mu,
+\qquad
+\bigl(I-\gamma \Pi^\mu\bigr)V^\mu=f^\mu.
+\]
+Formalmente:
+\[
+V^\mu = \bigl(I-\gamma \Pi^\mu\bigr)^{-1}f^\mu.
+\]
+Per matrici grandi e sparse, metodi diretti possono essere proibitivi; si adottano quindi metodi iterativi.
+
+\paragraph{Policy improvement}
+Data $V^\mu$, una politica migliorata $\tilde\mu$ è definita da:
+\[
+\tilde\mu(i)\in
+\arg\operatorname{opt}_{a\in A(i)}
+\left\{
+f(i,a)+\sum_j \pi(i,a,j)\,V^\mu(j)
+\right\},\quad i\in S.
+\]
+Per un problema di massimizzazione:
+\[
+V^\mu(i)\le V^{\tilde\mu}(i),\quad i\in S,
+\]
+(con disuguaglianza invertita in minimizzazione). Se $\mu$ non è ottima, la disuguaglianza è stretta per almeno uno stato.  
+Poiché il numero di politiche stazionarie deterministiche è finito, una sequenza di miglioramenti porta a una politica ottima.
+
+\subsection{Algoritmo di Policy Iteration}
+
+\begin{algorithm}[H]
+\caption{Policy Iteration per MDP finito a orizzonte infinito}
+\begin{algorithmic}[1]
+\State Definire una politica stazionaria iniziale arbitraria $\mu^{(0)}$
+\State Inizializzare $k=0$ e \texttt{stop}=\texttt{false}
+\While{\texttt{stop} $\neq$ \texttt{true}}
+    \State \textbf{Policy evaluation:} risolvere
     \[
-    Q(s_{t}, a_{t}) \leftarrow Q(s_{t}, a_{t}) + \alpha \left[ r_{t+1} + \gamma Q(s_{t+1}, a_{t+1}) - Q(s_{t}, a_{t}) \right]. \quad \text{(14)}
+    \bigl(I-\gamma \Pi^{\mu^{(k)}}\bigr)V^{\mu^{(k)}} = f^{\mu^{(k)}}
     \]
-\end{itemize}
+    \State \textbf{Policy improvement:} porre, per ogni $i\in S$,
+    \[
+    \mu^{(k+1)}(i)\in
+    \arg\operatorname{opt}_{a\in A(i)}
+    \left\{
+    f(i,a)+\sum_j \pi(i,a,j)\,V^{\mu^{(k)}}(j)
+    \right\}
+    \]
+    \If{$\mu^{(k+1)}=\mu^{(k)}$}
+        \State \texttt{stop}=\texttt{true}
+    \Else
+        \State $k=k+1$
+    \EndIf
+\EndWhile
+\State Restituire la funzione valore ottima e la politica stazionaria ottima
+\end{algorithmic}
+\end{algorithm}
 
-\paragraph{Limitazioni in RL}
-In RL, non è possibile apprendere il valore di una politica in modo esatto (soprattutto se richiede costose simulazioni Monte Carlo o esperimenti *online*). È necessario eseguire un passo di miglioramento (*improving step*) prima o poi.
-Il modo preciso in cui ciò viene implementato lascia spazio a diverse varianti, portando a una serie di strategie RL.
+\paragraph{Cosa insegna l’esempio numerico (policy iteration)}
+L’esempio evidenzia che policy iteration può raggiungere la politica ottima in un numero finito (spesso piccolo) di passi di miglioramento, grazie alla valutazione esplicita della politica corrente.
 
+\subsection{Value iteration vs. policy iteration}
+
+\paragraph{Confronto e collegamento}
+Value iteration impiega molte iterazioni economiche e converge nel limite; policy iteration usa poche iterazioni potenzialmente costose e converge in tempo finito per MDP finiti.  
+La valutazione di una politica può anche essere eseguita iterativamente tramite:
+\[
+V^{(k+1)}_\mu(i)= f\bigl(i,\mu(i)\bigr)+\sum_{j\in S}\pi\bigl(i,\mu(i),j\bigr)V^{(k)}_\mu(j),\quad i\in S,
+\tag{10}
+\]
+e interrompendo in modo prematuro tale procedura si ottiene una stima $\widehat V_\mu$ da usare nel miglioramento, dando luogo a \textbf{optimistic policy iteration} e, più in generale, a metodi di \textbf{generalized policy iteration}.  
+Value iteration e policy iteration possono quindi essere visti come estremi di un continuum di approcci.
+
+\subsection{Collegamento con Reinforcement Learning}
+
+\paragraph{DP model-free e Q-factors}
+Quando le probabilità di transizione (e possibilmente i contributi immediati) non sono note, si passa a una DP \textbf{model-free}. In tale contesto, la funzione valore è tipicamente sostituita dai \textbf{Q-factors} $Q(s,a)$ dipendenti da stati e azioni.
+
+\paragraph{Q-learning e SARSA}
+Il \textbf{Q-learning} è il corrispettivo RL della value iteration ed è un metodo \textbf{off-policy}.  
+I corrispettivi RL della policy iteration sono \textbf{on-policy}; un approccio noto è \textbf{SARSA}.
+
+\paragraph{Osservazione operativa in RL}
+In RL non è in generale possibile valutare esattamente il valore di una politica se ciò richiede simulazioni Monte Carlo costose o esperimenti online; è quindi necessario effettuare un passo di miglioramento prima o poi, generando diverse varianti di strategie.
 
 \section{CAP 11 -- Programmazione dinamica approssimativa e apprendimento per rinforzo per stati discreti}
-\subsection{Programmazione Dinamica Approssimativa (ADP)}
-Quando lo spazio degli stati $\mathcal{S}$ è troppo grande per essere risolto in forma tabellare con la Programmazione Dinamica (DP) (la \textbf{maledizione della dimensionalità}), dobbiamo ricorrere alla Programmazione Dinamica Approssimativa (Approximate Dynamic Programming - ADP).
-La sua idea centrale è \textbf{approssimare la funzione di valore} $V(s)$ (o i Q-fattori $Q(s, a)$) utilizzando una funzione $\tilde{V}(s; \theta)$ (o $\tilde{Q}(s, a; \theta)$) che dipende da un vettore di parametri $\theta$ di dimensione molto più piccola.
-\[
-V(s) \approx \tilde{V}(s; \theta) \quad \text{o} \quad Q(s, a) \approx \tilde{Q}(s, a; \theta).
-\]
-L'uso di una funzione di valore approssimata trasforma la ricorsione DP in un problema di ottimizzazione parametrica stocastica.
 
-\paragraph{Vantaggi dell'Approssimazione}
-\begin{itemize}[label=$\circ$]
-    \item La dipendenza dal vettore di parametri $\theta$ consente di \textbf{generalizzare} i risultati a stati non visitati o stati che non sono nella griglia di risoluzione.
-    \item La dimensione del problema è ridotta da $N=|\mathcal{S}|$ alla dimensione di $\theta$.
-\end{itemize}
-
-\paragraph{Esempi di Funzioni di Approssimazione}
-Le funzioni di approssimazione possono includere:
-\begin{itemize}[label=$\circ$]
-    \item \textbf{Funzioni lineari a tratti} (piecewise linear functions).
-    \item \textbf{Polinomi} o \textbf{Spline} (come visto nel caso dell'allocazione continua del budget).
-    \item \textbf{Reti Neurali} (Neuro-Dynamic Programming).
-\end{itemize}
-
-\subsection{Apprendimento per Rinforzo (Reinforcement Learning - RL)}
-Il Reinforcement Learning (RL) si basa sull'idea di apprendere \textbf{*in situ*} (sul campo, attraverso simulazione o sperimentazione *online*) la funzione di valore o i Q-fattori, senza la necessità di un modello esplicito delle dinamiche di transizione $\pi(i, a, j)$ e dei contributi immediati $f(i, a)$.
-
-
-\paragraph{DP Model-Free}
-RL è una forma di Programmazione Dinamica \textbf{*model-free*}.
-\begin{itemize}[label=$\circ$]
-    \item Potremmo \textbf{non avere un modello} del sistema (es. $\pi(i, a, j)$).
-    \item Potremmo avere un modello ma questo è \textbf{troppo complicato} da applicare (es. DP con probabilità di transizione complesse).
-\end{itemize}
-In entrambi i casi, l'apprendimento avviene tramite \textbf{sperimentazione}, raccogliendo sequenze di (stato, azione, ricompensa, stato successivo): $(s_t, a_t, r_{t+1}, s_{t+1})$.
-
-\paragraph{Equazioni di Bellman per Q-Fattori}
-Nel contesto degli MDPs a orizzonte infinito, i Q-fattori ottimali $Q(i, a)$ soddisfano l'equazione di Bellman (come punto fisso):
-\[
-Q(i, a) = f(i, a) + \gamma\sum_{j\in\mathcal{S}}\pi(i, a, j) \left( \max_{\tilde{a}\in\mathcal{A}(j)} Q(j, \tilde{a}) \right). \quad \text{(1)}
-\]
-
-\subsection{Q-Learning: L'Algoritmo}
-Il Q-learning è un algoritmo di *Temporal Difference* (TD) e rappresenta la controparte *model-free* dell'Iterazione del Valore (VI).
-Si basa sull'aggiornamento iterativo del Q-fattore $Q(s_t, a_t)$ (lo stato-azione corrente) utilizzando la ricompensa immediata $r_{t+1}$ e una stima del valore futuro, $r_{t+1} + \gamma \max_{a} Q(s_{t+1}, a)$.
-
-\paragraph{Aggiornamento Q-Learning}
-L'aggiornamento avviene in ogni passo, quando il sistema transita da $(s_t, a_t)$ a $s_{t+1}$ con ricompensa $r_{t+1}$:
-\[
-Q(s_{t}, a_{t}) \leftarrow Q(s_{t}, a_{t}) + \alpha \left[ r_{t+1} + \gamma \max_{a} Q(s_{t+1}, a) - Q(s_{t}, a_{t}) \right]. \quad \text{(2)}
-\]
-dove:
-\begin{itemize}[label=$\circ$]
-    \item $\alpha$ è il \textbf{tasso di apprendimento} (*learning rate*), $\alpha \in (0, 1)$. È un parametro che controlla quanto il nuovo valore stimato influenzi il valore corrente. Per garantire la convergenza, $\alpha$ deve diminuire nel tempo.
-    \item $r_{t+1}$ è la \textbf{ricompensa immediata} ottenuta con la transizione.
-    \item $\gamma \max_{a} Q(s_{t+1}, a)$ è la \textbf{migliore stima del valore futuro} dello stato successivo $s_{t+1}$.
-\end{itemize}
-
-\paragraph{Vantaggi del Q-Learning}
-\begin{itemize}[label=$\circ$]
-    \item È un approccio \textbf{*off-policy*} (aperto), che consente di apprendere i Q-fattori ottimali $Q^*$ anche utilizzando una politica di esplorazione non ottimale, il che è essenziale per garantire la copertura dello spazio degli stati.
-    \item Raggiunge la convergenza stocastica all'ottimo globale (se le condizioni su $\alpha$ sono soddisfatte e se tutti gli stati-azione sono visitati un numero infinito di volte).
-\end{itemize}
-
-\subsection{Esempio: Arresto Ottimale Ricorrente (Risoluzione con Q-Learning)}
-Si usa il problema di arresto ottimale ricorrente (già visto) con 4 stati ($n=4$) e *reward* $R_k$.
-\begin{itemize}[label=$\circ$]
-    \item \textbf{Stati}: $\mathcal{S}=\{1, 2, 3, 4\}$.
-    \item \textbf{Azioni ammissibili}: $\mathcal{A}(1)=\{\text{wait}\}$; $\mathcal{A}(2)=\mathcal{A}(3)=\{\text{wait}, \text{reset}\}$; $\mathcal{A}(4)=\{\text{reset}\}$.
-    \item \textbf{Transizioni/Ricompense}: Definite in una struttura \texttt{systemObj} (in MATLAB).
-\end{itemize}
-L'algoritmo \texttt{QLearning} riceve come input: l'oggetto di sistema, il tipo di ottimizzazione (*max* o *min*), il fattore di sconto $\gamma$, il numero di passi di apprendimento (*numSteps*), l'inizializzazione dei Q-fattori, il tasso di apprendimento $\alpha$, e i parametri di esplorazione.
-
-\subsubsection{Esplorazione vs. Sfruttamento (*Exploitation vs. Exploration*)}
-Perché l'algoritmo converga, è necessario \textbf{esplorare} tutte le coppie stato-azione.
-
-\paragraph{Politica $\epsilon$-Greedy}
-Una strategia comune per bilanciare sfruttamento e esplorazione è la \textbf{politica $\epsilon$-greedy}.
-\begin{itemize}[label=$\circ$]
-    \item Con probabilità $1-\epsilon$, l'agente \textbf{sfrutta} (sceglie l'azione $a^*$ che massimizza il Q-fattore corrente: $\max_{a} Q(s, a)$).
-    \item Con probabilità $\epsilon$, l'agente \textbf{esplora} (sceglie un'azione casuale dall'insieme ammissibile $\mathcal{A}(s)$).
-\end{itemize}
-Se l'inizializzazione è insufficiente, è possibile che l'agente non provi mai un'azione che è effettivamente l'ottimale.
-
-\paragraph{Esempio di Mancata Esplorazione}
-Se i Q-fattori per l'azione *reset* negli stati 2 e 3 sono inizializzati a zero e i *reward* immediati sono tutti non negativi, l'azione *reset* potrebbe non essere mai provata, specialmente se la politica *wait* fornisce un buon valore iniziale.
-Ad esempio, con $Q(\cdot, \text{reset})=0$ per stati 2 e 3, e $\epsilon=0$ (pura sfruttamento):
-\begin{itemize}
-    \item Lo stato 4 è l'unico con azione *reset*.
-    \item Lo stato 3, con $Q(3, \text{wait})=21.2052$ e $Q(3, \text{reset})=1.0000$, sceglie \textbf{wait}. L'azione *reset* non viene mai scelta.
-\end{itemize}
-Questo dimostra la necessità di bilanciare \textbf{sfruttamento} (scegliere l'azione migliore finora) e \textbf{esplorazione} (provare azioni sconosciute).
-
-\subsection{SARSA: State-Action-Reward-State-Action}
-SARSA è un altro algoritmo TD per apprendere i Q-fattori. A differenza di Q-learning, è un approccio \textbf{*on-policy*}: apprende il valore della politica *che sta effettivamente utilizzando* per l'esplorazione.
-
-\paragraph{Aggiornamento SARSA}
-L'aggiornamento è dato da:
-\[
-Q(s_{t}, a_{t}) \leftarrow Q(s_{t}, a_{t}) + \alpha \left[ r_{t+1} + \gamma Q(s_{t+1}, a_{t+1}) - Q(s_{t}, a_{t}) \right]. \quad \text{(3)}
-\]
-\begin{itemize}[label=$\circ$]
-    \item La differenza con Q-learning sta nel termine di valore futuro. In SARSA si usa $Q(s_{t+1}, a_{t+1})$, dove $a_{t+1}$ è \textbf{l'azione effettivamente scelta} nello stato $s_{t+1}$ (che sarà $a_{t+1} = \mu(s_{t+1})$), mentre Q-learning usa $\max_{a} Q(s_{t+1}, a)$ (l'azione ottimale).
-    \item Questo rende SARSA \textbf{dipendente dalla politica di esplorazione}: se la politica di esplorazione è insufficiente, anche la politica appresa $Q(s, a)$ non sarà l'ottimale $Q^*(s, a)$.
-\end{itemize}
-
-\subsection{Differenze tra Q-Learning e SARSA}
-\begin{itemize}[label=$\bullet$]
-    \item \textbf{Q-Learning (*Off-Policy*)}: Apprende il valore della \textbf{politica ottima} $Q^*$ indipendentemente dalla politica di comportamento utilizzata (purché esplorativa). È un approccio più ambizioso.
-    \item \textbf{SARSA (*On-Policy*)}: Apprende il valore della \textbf{politica di comportamento} utilizzata (es. la politica $\epsilon$-greedy). È più cauto e non salta all'ottimo immediatamente.
-\end{itemize}
-
-
-\paragraph{Implicazioni pratiche}
-In ambienti pericolosi (es. robotica, ambienti con penalità), SARSA è spesso preferito:
-\begin{itemize}[label=$\circ$]
-    \item SARSA tiene conto della \textbf{penalità di esplorazione} della politica $\epsilon$-greedy che sta seguendo. Se l'esplorazione può portare a stati di costo molto elevato, SARSA apprenderà una politica che eviterà quelle regioni, anche se la politica ottima $Q^*$ potrebbe teoricamente passare attraverso di esse con bassissima probabilità.
-    \item Q-learning, puntando all'ottimo $Q^*$, non tiene conto dell'esplorazione e potrebbe apprendere un percorso che, pur essendo ottimo, è rischioso se l'agente esplora con la politica $\epsilon$-greedy.
-\end{itemize}
-
-\subsection{Approssimazione della Funzione di Valore (Value Function Approximation)}
-Nel caso di spazi di stato enormi (continuo o discreto ma molto grande), non è possibile memorizzare i Q-fattori in una tabella. Si usa la \textbf{Value Function Approximation} (VFA).
-\[
-\tilde{V}(s; \theta) \quad \text{o} \quad \tilde{Q}(s, a; \theta).
-\]
-
-\paragraph{Aggiornamento dei Parametri}
-L'obiettivo è minimizzare l'errore tra il Q-fattore approssimato e la stima del Q-fattore ottenuta dal campionamento (il termine tra parentesi quadre nell'aggiornamento Q-learning/SARSA).
-Utilizzando il gradiente stocastico, si aggiornano i parametri $\theta$ in base al gradiente dell'errore (o *loss function*):
-\[
-\theta_{t+1} = \theta_t + \alpha \left[ \text{Target Value} - \tilde{Q}(s_t, a_t; \theta_t) \right] \cdot \nabla \tilde{Q}(s_t, a_t; \theta_t).
-\]
-\begin{itemize}[label=$\circ$]
-    \item \textbf{Target Value (Q-Learning)}: $r_{t+1} + \gamma \max_{a} \tilde{Q}(s_{t+1}, a; \theta_t)$.
-    \item \textbf{Target Value (SARSA)}: $r_{t+1} + \gamma \tilde{Q}(s_{t+1}, a_{t+1}; \theta_t)$.
-\end{itemize}
-Questo è il fondamento del \textbf{Deep Reinforcement Learning} (es. Deep Q-Networks - DQN), dove la funzione di approssimazione $\tilde{Q}$ è una Rete Neurale Profonda.
-
-\section{Simulazione}
+\section{CAP 12 -- Simulazione}
 Scrivere un paragrafo per fare recap dei problemi affrontati di simulazione.
 
 \end{document}
