@@ -1,311 +1,829 @@
 \relax 
 \@writefile{toc}{\contentsline {section}{\numberline {1}CAP 1 -- Introduzione alle decisioni in condizioni di incertezza}{1}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Recap}{1}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Introduzione}{1}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.1}Motivazione: perché considerare l’incertezza}{1}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Previsioni puntuali e decisioni}{1}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Errore quadratico medio (MSE)}{1}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Perdita assoluta e penalità asimmetriche}{1}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Modelli decisionali in ambito business}{2}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Differenza tra rischio e incertezza}{2}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.2}Modelli decisionali statistici}{2}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Il modello classico del newsvendor}{2}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Teorema: regola di Leibniz}{2}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Teorema: regola di Leibniz}{3}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Esempio: newsvendor nel caso normale}{3}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Espressione generale del profitto e riscrittura con costi di underage/overage}{4}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Modelli con vincoli probabilistici (chance-constrained models)}{4}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.3}Proprietà di convessità dei modelli di programmazione stocastica}{5}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {2}CAP 2 -- Elementi di complessità computazionale}{5}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Recap}{5}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Complessità di problemi e algoritmi}{5}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Complessità intrinseca di un problema}{5}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Caratterizzazione della complessità di problemi: classi P, NPC e NPH}{6}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Classe NP}{7}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Riduzione in tempo polinomiale}{7}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Problemi NP-difficili}{7}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Problemi NP-completi}{7}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Dai problemi di decisione ai problemi di ottimizzazione}{8}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{L’impatto della codifica di un problema}{9}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3}CAP 3 --Metodi di decomposizione in ottimizazione}{9}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Motivazione}{9}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.1}Strutture Complicanti nei Modelli}{10}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Struttura a Blocchi Angolare}{10}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Metodi Interconnessi di Decomposizione}{10}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Decomposizione Duale (Lagrangiana)}{11}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Problema Primale (P)}{11}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Funzione Lagrangiana}{11}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Sottoproblemi Disaccoppiati}{11}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Problema Duale e Coordinamento}{11}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Sottogradiente}{11}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Decomposizione a Forma di L e Tagli di Ottimalità/Fattibilità}{11}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.1}Programmazione Stocastica a Due Stadi (SLP)}{12}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.2}Decomposizione a Forma di L (Benders)}{12}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Tagli di Ottimalità}{12}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Tagli di Fattibilità}{12}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Decomposizione di Dantzig-Wolfe (D-W)}{12}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Problema Primale (P)}{12}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Rappresentazione Poliedrica}{13}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Problema Master Ristretto (RMP)}{13}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.1}Generazione di Colonne (Pricing Problem)}{13}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Risultati del Pricing Problem (PP)}{13}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4}CAP 4 -- Sistemi MRP/ERP e approccio JIT}{13}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Recap}{13}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Limiti degli approcci classici di gestione delle scorte}{14}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Inadeguatezza dei modelli tradizionali}{14}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Effetto di amplificazione della variabilità}{14}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Evoluzione dai modelli MRP ai sistemi ERP}{14}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Lot-sizing multilivello e difficoltà computazionali}{14}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Evoluzione verso MRPII ed ERP}{14}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Logica MRP}{15}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Assunzione di capacità infinita}{15}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Record MRP}{15}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Esplosione dei fabbisogni e struttura del processo MRP}{15}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Domanda indipendente e MPS}{15}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Ordini pianificati, rilascio e regole di lot-sizing}{15}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Il problema del nervosismo}{16}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Effetto di bordo, nervosismo e strategie di mitigazione}{16}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.6}Master Production Scheduling e pianificazione della capacità}{16}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Master Production Scheduling (MPS)}{16}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Capacity Requirements Planning (CRP)}{16}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.7}Factory Physics e legge di Little}{16}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Legge di Little}{16}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.8}Ruolo della variabilità nel flusso dei materiali}{17}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Modello di una singola macchina}{17}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Effetto della variabilità}{17}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.9}Buffering Law e produzione livellata}{17}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Buffering Law}{17}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Produzione livellata e fonti di variabilità}{17}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.10}Approccio Just-In-Time (Toyota)}{17}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Principi dell’approccio Just-In-Time}{17}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.11}Toyota Goal Chasing}{17}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Sequenziamento e regolarità dei flussi}{17}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Formalizzazione del problema}{18}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Funzione obiettivo del goal chasing}{18}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Ruolo dei tempi di setup nel JIT}{18}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.12}Modello di rotazione ciclica dei prodotti}{18}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Impostazione del modello}{18}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Limite inferiore del periodo di rotazione}{19}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5}CAP 5 -- Schedulazione nella produzione e nei servizi}{19}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Recap}{19}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Modelli classici di machine scheduling}{19}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Caratteristiche dei job}{19}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Soluzioni e diagrammi di Gantt}{20}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Tipi di flusso}{20}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Strutture di precedenza}{20}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Misure di prestazione}{20}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Funzioni di penalità}{20}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Pesi e priorità dei job}{20}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Principali misure di prestazione aggregate}{21}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Equivalenza tra misure di prestazione}{21}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Misure di prestazione regolari}{21}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Misure di prestazione non regolari}{21}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Notazione di Graham}{21}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Campo $\alpha $: layout delle macchine}{21}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Campo $\beta $: vincoli aggiuntivi}{22}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Campo $\gamma $: misura di prestazione}{22}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.5}Algoritmi di soluzione}{22}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Problemi NP-hard ed euristiche}{22}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Regola ATC (Apparent Tardiness Cost)}{22}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Interpretazione del termine di slack}{22}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Relazione con la tardiness totale pesata}{23}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Lookahead e ricerca locale}{23}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.6}Grafi disgiuntivi}{23}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.7}Modello MILP per $J//C_{max}$}{23}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Formulazione}{23}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Il ruolo del cammino critico}{23}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.8}Procedura Shifting Bottleneck}{24}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Idea generale}{24}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Teste e code nel grafo disgiuntivo}{24}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Approssimazione del makespan}{24}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Riduzione a $1/r_i/L_{max}$}{24}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Identificazione del collo di bottiglia}{24}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {6}CAP 6 --Pricing}{24}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {7}CAP 7 -- Il principio della programmazione dinamica}{24}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {8}CAP 8 -- Implementazione della programmazione dinamica}{24}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.1}Allocazione discreta di risorse: il problema dello zaino}{24}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Definizione del problema}{24}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Motivazione dell’approccio DP}{25}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.2}Riformulazione sequenziale del problema}{25}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Indice temporale fittizio e stadi decisionali}{25}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Stato e dipendenza dalle decisioni passate}{25}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Equazione di transizione dello stato}{25}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.3}Funzione valore e ricorsione DP}{25}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Definizione della funzione valore}{25}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Equazione di Bellman}{26}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Interpretazione della ricorsione}{26}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Condizione terminale}{26}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.4}Implementazione MATLAB del problema dello zaino}{26}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Obiettivo della funzione}{26}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Idea di memorizzazione: tabelle di valore e decisione}{26}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Ricorsione backward e ricostruzione forward}{26}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Complessità computazionale}{26}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.5}Allocazione continua del budget}{26}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Formulazione del problema}{26}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Uso completo del budget}{26}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Soluzione interna e Lagrangiana}{27}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.6}Allocazione continua del budget: formulazione DP}{27}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Riformulazione DP}{27}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Transizione dello stato}{27}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Equazioni di ottimalità}{27}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Funzioni valore in spazio infinito-dimensionale}{27}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.7}Intermezzo: interpolazione con spline cubiche in MATLAB}{27}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Limiti dell’interpolazione polinomiale}{27}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Spline cubiche come alternativa}{28}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Accuratezza, griglia e questioni aperte}{28}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.8}Risoluzione numerica del problema continuo tramite DP}{28}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Idea della discretizzazione e interpolazione}{28}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Risoluzione dei sottoproblemi e policy implicita}{28}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.9}Implementazione MATLAB: idea generale}{28}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Scopo di \texttt  {findPolicy}}{28}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Scopo di \texttt  {applyPolicy}}{28}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.10}Controllo stocastico delle scorte}{28}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Impostazione del problema}{28}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Dinamica dello stato con stockout (lost sales)}{28}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Sequenza degli eventi}{29}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Spazio degli stati e azioni ammissibili}{29}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Costo immediato e stato terminale}{29}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Ricorsione DP con costo immediato stocastico}{29}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Modellare l’incertezza}{29}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.11}Lot-sizing stocastico: idea delle procedure MATLAB}{29}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Scopo di \texttt  {MakePolicy}}{29}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Scopo di \texttt  {SimulatePolicy}}{29}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.12}Sfruttare la struttura: cammini minimi per il lot-sizing deterministico}{29}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Motivazione}{29}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Lot-sizing deterministico con costi fissi e holding}{30}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Teorema: proprietà di Wagner--Whitin}{30}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Rete di flusso e interpretazione}{30}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Conseguenza pratica: scelte d’ordine candidate}{30}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Riformulazione come cammino minimo}{30}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.13}Lot-sizing stocastico: politiche \(S\) e \((s,S)\)}{30}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Backlog e penalità convessa}{30}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Costo variabile e obiettivo atteso}{31}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Ricorsione DP e funzione \(H(\cdot )\)}{31}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Riscrittura tramite \(G_t(\cdot )\)}{31}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Convessità e livello obiettivo \(S_t\)}{31}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Politica base-stock (order-up-to)}{31}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Politiche \((s,S)\) con costi fissi}{31}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.14}Le maledizioni della programmazione dinamica}{32}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Limiti della DP}{32}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Maledizione della dimensionalità dello stato}{32}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Maledizione dell’ottimizzazione}{32}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Maledizione dell’aspettativa}{32}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Maledizione della modellazione}{32}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {9}CAP 9 -- Modelli della programmazione dinamica}{32}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {10}CAP 9 -- Modeling for Dynamic Programming}{32}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.1}Frontespizio e riferimenti}{32}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Titolo e autore}{32}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Riferimenti}{32}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.2}Principio di modellazione nella programmazione dinamica}{32}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Idea generale della programmazione dinamica}{32}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Funzione valore e ricorsione DP}{32}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Forme alternative della ricorsione DP}{32}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Scambio tra aspettazione e ottimizzazione}{33}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Q-learning e stati post-decisione}{33}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Scelta della rappresentazione dello stato}{33}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Natura degli stati e delle decisioni}{33}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Ruolo delle capacità di modellazione}{33}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.3}Processi decisionali di Markov finiti}{33}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Definizione di MDP}{33}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{MDP finiti e notazione degli stati}{33}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Azioni ammissibili}{33}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Dinamica markoviana controllata}{33}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.4}Esempio: controllo stocastico di inventario}{33}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Sintesi dell’esempio}{33}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.5}Ricorsioni DP per MDP}{34}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Ricorsione a orizzonte finito}{34}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Caso a orizzonte infinito scontato}{34}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Contributo immediato stocastico}{34}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Relazione tra contributi}{34}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.6}Esempio: arresto ottimo ricorrente}{34}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Sintesi dell’esempio}{34}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.7}Valutazione delle politiche e Q-factors}{34}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Policy evaluation e policy iteration}{34}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Definizione di Q-factor per una politica}{34}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Q-factors ottimi e relazione con \(V\)}{35}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Ricorsione DP in termini di Q-factors}{35}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Vantaggi e svantaggi}{35}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.8}Diverse forme di DP stocastica}{35}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Ricorsione DP di base}{35}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Ipotesi sottostanti}{35}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Difficoltà e motivazione dello scambio}{35}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.9}Esempio: lot-sizing con lookahead limitato}{35}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Sintesi dell’esempio}{35}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.10}Variabili di stato post-decisione}{35}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Ricorsione in forma scambiata}{35}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Vantaggi potenziali}{35}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Introduzione dello stato post-decisione}{35}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Relazione tra funzioni valore}{36}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Passo all’indietro e nuovo scambio}{36}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Connessione con i Q-factors}{36}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.11}Aumento dello stato nella gestione delle scorte}{36}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Inventario on-hand vs inventario disponibile}{36}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Limite dell’equazione di stato standard}{36}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Lead time e variabili di pipeline}{36}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Items deperibili e stato per età}{36}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.12}Revenue management}{36}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Definizione e obiettivo}{36}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Approcci quantity-based e price-based}{37}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Classi tariffarie e prezzi}{37}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Caratteristiche essenziali}{37}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Modelli statici e dinamici; protection levels e bid-prices}{37}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.13}Modello statico con segmentazione perfetta della domanda}{37}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Assunzioni, stadi e stato}{37}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Ricorsione DP in forma scambiata}{37}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.14}Valore marginale atteso e livelli di protezione}{37}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Valore marginale atteso della capacità}{37}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Somma telescopica e riscrittura}{37}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Proprietà dei valori marginali}{38}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Regola di accettazione e protezione annidata}{38}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.15}Modello dinamico con segmentazione perfetta della domanda}{38}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Assunzioni e probabilità di arrivo}{38}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Funzione valore e condizioni al contorno}{38}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Ricavo disponibile e decisione binaria}{38}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Ricorsione DP in forma scambiata}{38}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.16}Modello dinamico con scelta del cliente}{38}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Modello di scelta}{38}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Ricavi e probabilità di scelta}{38}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Probabilità di acquisto dipendenti dalla decisione}{39}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Ricorsione DP}{39}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Osservazione conclusiva}{39}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {11}CAP 10 -- Programmazione dinamica numerica per stati discreti}{39}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {11.1}Catene di Markov a tempo discreto}{39}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Definizione di catena di Markov a tempo discreto}{39}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Probabilità di transizione}{39}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Catene omogenee}{39}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Matrice di transizione}{39}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Proprietà di normalizzazione}{39}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {11.2}Catene di Markov controllate e MDP}{39}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Azioni e transizioni controllate}{39}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Distribuzione stazionaria}{40}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Proprietà strutturali delle catene}{40}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {11.3}MDP a orizzonte temporale finito}{40}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Ricorsione di programmazione dinamica}{40}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Cosa insegna l’esempio (arresto ottimo su random walk)}{40}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {11.4}Processi decisionali markoviani a orizzonte infinito}{40}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Equazioni di Bellman a orizzonte infinito}{40}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Rappresentazione vettoriale}{40}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Strategie di soluzione}{40}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {11.5}Operatori di Bellman}{40}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Operatore ottimo}{40}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Operatore associato a una politica}{41}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Ruolo degli operatori e punti fissi}{41}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Condizioni di esistenza}{41}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Miglioramento delle politiche}{41}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {11.6}Value iteration}{41}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Idea di base}{41}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {11.7}Algoritmo di Value Iteration}{42}{}\protected@file@percent }
-\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Value Iteration per MDP a orizzonte infinito}}{42}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Cosa insegna l’esempio numerico (value iteration)}{42}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {11.8}Policy iteration}{42}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Motivazione}{42}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Policy evaluation come sistema lineare}{42}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Policy improvement}{43}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {11.9}Algoritmo di Policy Iteration}{43}{}\protected@file@percent }
-\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Policy Iteration per MDP finito a orizzonte infinito}}{43}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Cosa insegna l’esempio numerico (policy iteration)}{43}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {11.10}Value iteration vs. policy iteration}{43}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Confronto e collegamento}{43}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {11.11}Collegamento con Reinforcement Learning}{44}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{DP model-free e Q-factors}{44}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Q-learning e SARSA}{44}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Osservazione operativa in RL}{44}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {12}CAP 11 -- Programmazione dinamica approssimativa e apprendimento per rinforzo per stati discreti}{44}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {13}CAP 12 -- Simulazione}{44}{}\protected@file@percent }
-\gdef \@abspage@last{44}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.3}Decision trees}{5}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Dalle decisioni statiche a quelle adattive}{5}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Tipologie di nodi}{5}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Struttura di un albero di decisione}{5}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Strategia e criterio di ottimalità}{5}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Valore monetario atteso e procedura backward}{5}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Esempio: introduzione di un nuovo prodotto (idea generale)}{5}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Valore dell’informazione}{6}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.4}EVPI and VSS}{6}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Problema statico di ottimizzazione stocastica}{6}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Ottimizzazione con informazione perfetta}{6}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Relazione tra i due valori}{6}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Valore atteso dell’informazione perfetta (EVPI)}{6}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Esempio: scelta di una strategia di investimento (idea generale)}{6}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Interpretazione dell’EVPI}{6}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Soluzione a valore atteso}{6}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Valutazione della soluzione a valore atteso}{7}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Valore della soluzione stocastica (VSS)}{7}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Collegamento con modelli multi-stadio}{7}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.5}An introductory two-stage model: Assemble-to-order}{7}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Contesto e motivazione}{7}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Struttura del problema}{7}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Dati di mercato}{8}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Modello deterministico a valore atteso}{8}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Limiti della soluzione deterministica}{8}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Modello stocastico a due stadi}{8}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Soluzione del modello stocastico}{9}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Confronto corretto tra le soluzioni}{9}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Valutazione della soluzione deterministica}{9}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Valore della soluzione stocastica}{9}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.6}Two-stage models}{9}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Dall’ATO ai modelli a due stadi con ricorso}{9}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Decisioni di primo e secondo stadio}{9}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Formulazione annidata del modello}{10}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Ricorso fisso e non-linearità indotta dal ricorso}{10}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Difficoltà computazionali della funzione di ricorso}{10}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Discretizzazione tramite scenari}{10}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Modello deterministico equivalente (LP a grande scala)}{10}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Fattibilità del secondo stadio e concetti di ricorso completo}{11}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Penalità e modelli elastici}{11}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.7}The plant location model}{11}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Descrizione del problema e rete bipartita}{11}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Dati del modello}{11}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Struttura a due stadi e variabili}{11}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Formulazione MILP a due stadi con ricorso}{11}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Scenari estremi e necessità di formulazioni elastiche}{12}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Modello elastico con domanda non soddisfatta penalizzata}{12}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Osservazioni di modellazione}{12}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.8}A two-stage newsvendor model}{12}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Motivazione e struttura informativa}{12}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Nodi e predecessori}{12}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Set e dati}{12}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Variabili decisionali}{13}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Formulazione (stochastic MILP)}{13}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Interpretazione dei vincoli}{13}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.9}Multistage stochastic linear programming with recourse}{13}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Generalizzazione ai modelli multistadio}{13}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Funzione di ricorso e riscrittura compatta}{14}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Formulazione funzionale e non-anticipatività}{14}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Alberi di scenario multistadio}{14}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Non-anticipatività nel tree}{14}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.10}A multistage financial planning model with proportional transaction costs}{14}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Asset--liability management su albero di scenario}{14}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Variabili}{15}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Modello}{15}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Interpretazione dei vincoli}{15}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Osservazioni operative}{15}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.11}Multiperiod vs. multistage models}{15}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Esplosione dell’albero di scenario nei modelli multistadio}{15}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Strutture ad albero e differenza concettuale}{16}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Multiperiod non significa multistage}{16}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Caso particolare del two-stage multiperiod}{16}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.12}A two-stage multiperiod model: Unit commitment}{16}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Domanda aleatoria come processo discreto nel tempo}{16}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Classi di generatori e struttura dei costi}{16}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Variabili decisionali (primo e secondo stadio)}{16}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Formulazione del modello}{17}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Interpretazione dei vincoli e dell’obiettivo}{17}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Osservazioni critiche sul modello}{17}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.13}Scenario generation and stability in stochastic programming}{17}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Ruolo centrale dell’albero di scenario}{17}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Complicazioni principali}{17}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Due classi di approcci alla generazione di scenari}{18}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Interpretazione come integrazione numerica (quadratura)}{18}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Esempio: generazione scenari tramite moment matching (idea)}{18}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Critiche al moment matching e alternative basate su distanze}{19}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Linee guida pratiche per la struttura dell’albero}{19}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.14}In- and out-of-sample stability}{19}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Perché serve controllare la stabilità}{19}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Problema “esatto” e problema approssimato}{20}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Soluzioni indotte da alberi diversi}{20}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{In-sample stability}{20}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Out-of-sample stability}{20}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Valutazione out-of-sample: due stadi vs multistadio}{20}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Rolling horizon vs shrinking horizon}{20}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Test economico alternativo: scambio degli alberi}{21}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Osservazione finale: limiti operativi dello stochastic programming}{21}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.15}Convessità nei modelli di programmazione stocastica}{21}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Vincoli probabilistici congiunti}{21}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Struttura dell’insieme ammissibile}{21}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Vincolo probabilistico lineare con distribuzione normale}{21}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Convessità della funzione di ricorso}{22}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Dimostrazione della convessità}{22}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Osservazioni finali}{23}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2}CAP 2 -- Elementi di complessità computazionale}{23}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Recap}{23}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Complessità di problemi e algoritmi}{23}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Complessità intrinseca di un problema}{23}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Caratterizzazione della complessità di problemi: classi P, NPC e NPH}{24}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Classe NP}{25}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Riduzione in tempo polinomiale}{25}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Problemi NP-difficili}{25}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Problemi NP-completi}{25}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Dai problemi di decisione ai problemi di ottimizzazione}{27}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{L’impatto della codifica di un problema}{27}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}CAP 3 --Metodi di decomposizione in ottimizazione}{28}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Motivation}{28}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Ruolo dei metodi di decomposizione}{28}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Problemi separabili}{28}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Problema separabile}{28}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Interpretazione nei modelli di programmazione lineare}{28}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Fattori complicanti}{29}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Assenza di struttura completamente separabile}{29}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Struttura block-angular}{29}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Rilassamento dei vincoli di interazione}{29}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Variabili di interazione}{29}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Fissaggio delle variabili}{29}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Panoramica dei metodi di decomposizione}{29}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Classificazione dei metodi}{29}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Part 1 -- Dual decomposition and progressive hedging for stochastic programming}{30}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.1}Dual decomposition}{30}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Problema di partenza}{30}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Osservazione sulle unità di misura}{30}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Dualizzazione del vincolo di budget}{30}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Problemi primali decomposi}{30}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Interpretazione economica del moltiplicatore}{30}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Sottogradiente della funzione duale}{30}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Schema domanda--offerta}{30}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Osservazioni sulla dual decomposition}{31}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Lagrangiano aumentato}{31}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.2}Progressive hedging for multistage stochastic programming}{31}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Rappresentazione dell’incertezza}{31}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Formulazione split-variable}{31}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Vincoli di non anticipatività}{31}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Esempio di non anticipatività}{31}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Insiemi di scenari indistinguibili}{31}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Formulazione del problema multistadio}{31}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Problema stocastico con non anticipatività}{32}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Dualizzazione e regolarizzazione}{32}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Osservazioni finali}{32}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.6}Part 2 -- Benders decomposition and L-shaped decomposition for stochastic programming}{32}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.6.1}Background: Kelley's cutting planes}{32}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Problema convesso e iperpiani di supporto}{32}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Approssimazione dal basso}{32}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Idea dell’algoritmo di Kelley}{32}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.6.2}Kelley's cutting planes come algoritmo}{33}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Algoritmo (cutting planes di Kelley)}{33}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.6.3}Convexity properties of stochastic programs}{33}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Due-stadi SLP con ricorso}{33}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Funzione di ricorso con costo deterministico}{33}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Dominio effettivo}{33}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Nota sulle ipotesi}{33}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Dualità LP e forma duale della funzione di ricorso}{33}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Dimostrazione di convessità (caso con regione duale non aleatoria)}{34}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Convexity of the recourse function}{34}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.6.4}L-shaped decomposition}{34}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Deterministic equivalent}{34}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Riformulazione con variabile ausiliaria}{34}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{L-shaped decomposition: optimality cuts}{35}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{L-shaped decomposition: feasibility cuts}{35}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Schema iterativo dell’L-shaped decomposition}{35}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{L-shaped decomposition: variations on the theme}{36}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.7}Part 3 -- Dantzig--Wolfe decomposition and column generation}{36}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.7.1}Cutting stock by column generation}{36}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Problema di cutting stock}{36}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Modello MILP con variabili per rotolo}{36}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Modello a pattern di taglio}{36}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.7.2}Generating a new column by pricing}{37}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{LP-rilassato del modello ristretto}{37}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Costo ridotto e scelta della colonna entrante}{37}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Pricing come knapsack}{37}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Osservazioni su branch-and-price e complessità}{37}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.7.3}Dantzig--Wolfe decomposition}{37}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Modello LP e separazione dei vincoli}{37}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Poliedro facile e Minkowski--Weyl}{38}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Rappresentazione mediante combinazioni convesse e coniche}{38}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Master Problem (MP)}{38}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Restricted Master Problem (RMP)}{38}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Costo ridotto per punti estremi e direzioni estreme}{39}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Auxiliary problem e pricing problem (PP)}{39}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Casi per l'aggiunta di colonne}{39}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Interpretazione intuitiva}{39}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}CAP 4 -- Sistemi MRP/ERP e approccio JIT}{40}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Recap}{40}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Limiti degli approcci classici di gestione delle scorte}{40}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Inadeguatezza dei modelli tradizionali}{40}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Effetto di amplificazione della variabilità}{40}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Evoluzione dai modelli MRP ai sistemi ERP}{40}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Lot-sizing multilivello e difficoltà computazionali}{40}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Evoluzione verso MRPII ed ERP}{40}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Logica MRP}{41}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Assunzione di capacità infinita}{41}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Record MRP}{41}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Esplosione dei fabbisogni e struttura del processo MRP}{41}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Domanda indipendente e MPS}{41}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Ordini pianificati, rilascio e regole di lot-sizing}{41}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Il problema del nervosismo}{42}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Effetto di bordo, nervosismo e strategie di mitigazione}{42}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6}Master Production Scheduling e pianificazione della capacità}{42}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Master Production Scheduling (MPS)}{42}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Capacity Requirements Planning (CRP)}{42}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.7}Factory Physics e legge di Little}{42}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Legge di Little}{42}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.8}Ruolo della variabilità nel flusso dei materiali}{43}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Modello di una singola macchina}{43}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Effetto della variabilità}{43}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.9}Buffering Law e produzione livellata}{43}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Buffering Law}{43}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Produzione livellata e fonti di variabilità}{43}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.10}Approccio Just-In-Time (Toyota)}{43}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Principi dell’approccio Just-In-Time}{43}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.11}Toyota Goal Chasing}{43}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Sequenziamento e regolarità dei flussi}{43}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Formalizzazione del problema}{44}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Funzione obiettivo del goal chasing}{44}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Ruolo dei tempi di setup nel JIT}{44}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.12}Modello di rotazione ciclica dei prodotti}{44}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Impostazione del modello}{44}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Limite inferiore del periodo di rotazione}{45}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}CAP 5 -- Schedulazione nella produzione e nei servizi}{45}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Recap}{45}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Modelli classici di machine scheduling}{45}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Caratteristiche dei job}{45}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Soluzioni e diagrammi di Gantt}{46}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Tipi di flusso}{46}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Strutture di precedenza}{46}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Misure di prestazione}{46}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Funzioni di penalità}{46}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Pesi e priorità dei job}{46}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Principali misure di prestazione aggregate}{47}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Equivalenza tra misure di prestazione}{47}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Misure di prestazione regolari}{47}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Misure di prestazione non regolari}{47}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Notazione di Graham}{47}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Campo $\alpha $: layout delle macchine}{47}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Campo $\beta $: vincoli aggiuntivi}{48}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Campo $\gamma $: misura di prestazione}{48}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.5}Algoritmi di soluzione}{48}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Problemi NP-hard ed euristiche}{48}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Regola ATC (Apparent Tardiness Cost)}{48}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Interpretazione del termine di slack}{48}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Relazione con la tardiness totale pesata}{49}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Lookahead e ricerca locale}{49}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.6}Grafi disgiuntivi}{49}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.7}Modello MILP per $J//C_{max}$}{49}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Formulazione}{49}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Il ruolo del cammino critico}{49}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.8}Procedura Shifting Bottleneck}{50}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Idea generale}{50}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Teste e code nel grafo disgiuntivo}{50}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Approssimazione del makespan}{50}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Riduzione a $1/r_i/L_{max}$}{50}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Identificazione del collo di bottiglia}{50}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}CAP 6 -- Fondamenti microeconomici del pricing e modelli di scelta discreta}{50}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Driver del profitto}{50}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Modello base del profitto}{50}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Caso base}{51}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Sensibilità del profitto ai fattori}{51}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Osservazioni}{51}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Prezzo e volume}{51}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Riduzione del prezzo}{51}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Aumento del prezzo}{51}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Catene causali}{51}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Pricing e revenue management}{51}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Profitto e costi}{51}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Revenue management}{52}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Strategie di pricing}{52}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Forme di competizione}{52}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Tipologie di interazione}{52}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Esempio: trasporto aereo}{52}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.5}Pricing nella pratica}{52}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Cambio di paradigma}{52}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Posizionamento di prezzo}{52}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Attributi del prodotto}{52}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Scelta del modello}{52}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.6}Meccanismi alternativi}{52}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Oltre il prezzo}{52}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.7}Parte 1 -- Pricing e funzioni di domanda}{53}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Un modello introduttivo: relazione lineare tra domanda e prezzo}{53}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Interpretazione dei parametri}{53}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Dominio di validità}{53}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Forma troncata della funzione di domanda}{53}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Funzione di domanda inversa}{53}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.8}Massimizzazione dei ricavi e del profitto}{53}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Profitto come funzione della quantità}{53}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Condizione di ottimalità}{54}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Caso lineare con costo variabile costante}{54}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Osservazioni}{54}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Soluzione ottima per la massimizzazione dei ricavi}{54}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Interpretazione geometrica}{54}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.9}Stima del modello}{54}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Problema della stima}{54}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Apprendimento e sperimentazione}{55}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Errore di stima}{55}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Problemi pratici aggiuntivi}{55}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.10}Parte 1 -- Limiti dei modelli di domanda lineare}{55}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Criticità del modello lineare}{55}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.11}La funzione di costo}{55}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Costo fisso e costo variabile}{55}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Costo fisso vs. costo con carica fissa}{56}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Costo marginale e costo medio}{56}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Regolarità della funzione di costo}{56}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Economie e diseconomie di scala}{56}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.12}Funzioni di domanda}{56}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Classi di modelli di domanda}{56}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Input e output dei modelli}{56}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.13}La funzione di domanda lineare}{57}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Forma del modello}{57}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Questioni aperte}{57}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Pendenza della domanda}{57}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.14}Funzioni di domanda: elasticità puntuale}{57}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Elasticità di prezzo della domanda}{57}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Classificazione della domanda}{57}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.15}Esempio: funzione di domanda lineare}{57}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Elasticità vs. pendenza}{57}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Elasticità nel caso lineare}{58}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Domanda a elasticità costante}{58}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Nota tecnica}{58}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Stima tramite trasformazione logaritmica}{58}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Elasticità come derivata logaritmica}{59}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Ricavi con domanda a elasticità costante}{59}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.16}Parte 1 -- Interpretare i modelli di domanda: willingness-to-pay}{59}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Confronto tra modelli e razionale economico}{59}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Reserve price e willingness-to-pay}{59}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Esempio con segmentazione: studenti e non studenti}{59}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Domanda a tratti}{59}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Popolazione differenziata e funzione a gradini}{59}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.17}Surplus del consumatore e discriminazione di prezzo}{60}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Definizione di consumer surplus}{60}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Consumer surplus in forma geometrica}{60}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Interpretazione economica}{60}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Prezzo unico e perdite di ricavo}{60}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Discriminazione di prezzo}{60}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.18}Esempio di discriminazione di prezzo}{60}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Caso senza discriminazione}{60}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Caso con discriminazione}{60}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Tipi di discriminazione}{61}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.19}Formalizzare willingness-to-pay e consumer surplus}{61}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Distribuzione della willingness-to-pay}{61}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Modello continuo e funzione $w(x)$}{61}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Surplus del consumatore aggregato}{61}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.20}Esempio: consumer surplus con domanda lineare e costo}{62}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Dati e prezzo limite}{62}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Prezzo ottimo, domanda, profitto e surplus}{62}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Obiettivo di estrarre consumer surplus}{62}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.21}Esempio: consumer surplus e discriminazione di prezzo}{62}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Domanda aggregata come somma di due popolazioni}{62}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Prezzo ottimo per la popolazione 1}{62}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Prezzo ottimo per la popolazione 2}{62}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Profitto totale e surplus addizionale}{63}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.22}La funzione logit}{63}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Da willingness-to-pay a domanda}{63}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Probit e logit}{63}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Definizione della funzione logistica}{63}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Derivata della funzione logistica}{63}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Funzione di domanda logit decrescente}{63}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Willingness-to-pay corrispondente}{64}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Esempio numerico}{64}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.23}Parte 1 -- Un modello ibrido}{64}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Prezzi e quantità come variabili decisionali}{64}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Domanda lineare per due beni complementari}{64}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Vincoli di capacità}{64}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.24}Ottimizzazione dei prezzi con domanda legata alle vendite}{64}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Prima formulazione (non sensata)}{64}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Soluzione della prima formulazione}{64}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Prezzi nulli o negativi per beni complementari}{65}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Effetti su capacità e ricavi}{65}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.25}Che cosa non funziona nel primo modello?}{65}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Collegamento rigido tra domanda e vendite}{65}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Inventory rationing}{65}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.26}Formulazione alternativa: disaccoppiare vendite e domanda}{65}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Seconda formulazione (con razionamento)}{65}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Soluzione della seconda formulazione}{65}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Interpretazione della differenza tra le due formulazioni}{65}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.27}Parte 2 -- Modelli di teoria dei giochi}{65}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Problemi decisionali con più decisori}{65}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Ipotesi semplificative}{66}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Problema centralizzato e interazione tra decisioni}{66}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Perché non si può decomporre}{66}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Caso non cooperativo}{66}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Sequenziale vs. simultaneo}{66}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Equilibrio e perdita di performance}{67}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.28}Giochi con decisioni continue}{67}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Equilibrio di Nash con azioni continue}{67}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.29}Competizione di Cournot}{67}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Impostazione del modello}{67}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Funzioni di reazione (best response)}{67}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Sistema per l’equilibrio di Cournot}{67}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Prezzo di equilibrio e profitti}{68}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.30}Competizione di Bertrand}{68}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Impostazione del problema}{68}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Quantità venduta in funzione dei prezzi}{68}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Definizione di equilibrio di Bertrand--Nash}{68}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Undercutting e (assenza di) equilibrio con costi diversi}{69}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Equilibrio con costi marginali uguali}{69}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Conseguenze e discreto passo di prezzo}{69}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Osservazioni finali}{69}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.31}Parte 2 -- Competizione di prezzo con beni non omogenei: modello di Hotelling}{69}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Beni differenziati e scelta del consumatore}{69}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Costo di trasporto e utilità}{69}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Problemi di massimizzazione dei profitti}{70}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Condizioni del primo ordine ed equilibrio nei prezzi}{70}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Profitto dell’impresa A}{70}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Caso simmetrico}{70}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Esistenza di prezzi di equilibrio positivi}{70}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.32}Esistenza di equilibrio nel modello di Hotelling}{70}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Caso simmetrico e condizione su $a$}{70}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Prezzo limite per catturare tutto il mercato}{71}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Profitto quando il mercato è diviso}{71}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Condizione di esistenza dell’equilibrio}{71}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.33}Giochi simultanei vs. giochi sequenziali}{71}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Motivazione dei giochi sequenziali}{71}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Da Cournot a von Stackelberg}{71}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Problema del leader}{71}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Quantità ottima del leader}{72}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Quantità del follower}{72}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Confronto dei profitti}{72}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.34}Esempio}{72}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Dati}{72}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Caso 1: monopolio/cartello}{72}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Caso 2: Cournot (simultaneo)}{72}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Caso 3: von Stackelberg (sequenziale)}{73}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.35}Parte 2 -- Conviene sempre muovere per primi?}{73}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Vantaggio del leader e limiti}{73}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Esempio: battle of the sexes (Juliet muove per prima)}{73}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Un caso diverso: Morticia}{73}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Interpretazione economica dei due giochi}{73}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.36}Pricing e double marginalization}{74}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Impostazione B2B: produttore e retailer}{74}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Caso 1: impresa verticalmente integrata}{74}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Caso 2: supply chain decentralizzata}{74}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Problema del produttore e prezzo all’ingrosso di equilibrio}{74}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Prezzo retail e domanda nel caso decentralizzato}{74}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Profitto complessivo nel caso decentralizzato}{75}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Double marginalization e coordinamento della supply chain}{75}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.37}Parte 3 -- Modelli di scelta discreta}{75}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.38}Conjoint analysis}{75}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Idea di base e utilizzi}{75}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Modello a rating}{75}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Limiti e interazioni}{75}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Dati di scelta: revealed vs. stated preferences}{75}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Design degli esperimenti e stima dei modelli}{76}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.39}Microfondazioni dei modelli MNL: utilità casuali}{76}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Utilità rappresentativa e componente casuale}{76}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Probabilità condizionata e integrazione}{76}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Caso i.i.d. Gumbel}{76}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Derivazione del modello MNL}{77}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Assunzione IIA}{77}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Esempio (red--blue bus problem)}{77}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.40}Supplemento tecnico -- EVT e massimi a blocchi}{77}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Distribuzione dei massimi a blocchi}{77}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Esempio: uniforme}{77}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Normalizzazione: confronto con il CLT}{78}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Normalizzazione per i massimi}{78}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Esempio: esponenziale}{78}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Definizione: distribuzione GEV}{78}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Interpretazione del parametro di forma}{78}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Dominio di attrazione e teorema FTG}{78}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Teorema (Fisher--Tippett--Gnedenko)}{79}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7}CAP 7 -- Il principio della programmazione dinamica}{79}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Che cos'è la programmazione dinamica}{79}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Definizione di programmazione dinamica}{79}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Idea centrale}{79}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Problemi multistadio e multiperiodo}{79}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Approccio open-loop e closed-loop}{79}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Strategia decisionale}{79}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Ambito di applicazione della programmazione dinamica}{79}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Limiti della programmazione dinamica}{79}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Classi di problemi trattabili}{79}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Dimensione del problema}{79}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Problemi decisionali dinamici}{80}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Modelli a tempo discreto}{80}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Decisioni e intervalli}{80}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Convenzione temporale}{80}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.4}Orizzonte temporale e dinamica del sistema}{80}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Orizzonte finito e infinito}{80}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Equazione di transizione di stato}{80}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.5}Variabili di stato e processi}{80}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Tipologie di variabili di stato}{80}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Processi decisionali e stocastici}{81}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.6}Informazione e non anticipatività}{81}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Disponibilità dell’informazione}{81}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Storia osservata}{81}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Politiche non anticipative}{81}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.7}Dipendenza temporale dei fattori di rischio}{81}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Struttura del processo dei dati}{81}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Endogeneità ed esogeneità}{81}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Obiettivo additivo}{81}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.8}Problemi a orizzonte finito scontati}{81}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Formulazione generale}{81}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Interpretazione dei termini}{81}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Fattore di sconto}{82}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.9}Contributi stocastici e apprendimento}{82}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Contributo dipendente dal rischio}{82}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Aspettazione condizionata}{82}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Difficoltà pratiche}{82}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.10}Problemi a orizzonte infinito}{82}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Problemi scontati a orizzonte infinito}{82}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Ruolo del fattore di sconto}{82}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Criterio del costo medio}{82}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Orizzonte non definito}{82}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.11}Politiche decisionali}{82}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Vincolo di fattibilità delle decisioni}{82}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Caso deterministico e stocastico}{82}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Non anticipatività}{83}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Politiche in feedback}{83}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Politica come sequenza di funzioni}{83}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Politiche stazionarie}{83}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Formulazione del problema in termini di politiche}{83}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Politiche deterministiche e randomizzate}{83}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Vincoli probabilistici sugli stati}{83}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Esplorazione e sfruttamento}{83}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.12}Un esempio: il lot-sizing dinamico a singolo prodotto}{83}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Formulazione del problema}{83}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Significato delle variabili}{83}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Struttura dei costi}{84}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Funzione indicatrice del costo fisso}{84}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Variabili di stato e controllo}{84}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Equazione di transizione}{84}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.13}Domanda incerta e modelli alternativi}{84}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Vendite perse}{84}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Clienti pazienti e backlog}{84}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Backlog con una variabile di stato}{84}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Backlog con due variabili di stato}{84}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Ulteriori problematiche}{85}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.14}Uno sguardo al principio di programmazione dinamica: il problema del cammino minimo}{85}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Rete diretta aciclica}{85}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Archi e costi}{85}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Successori e predecessori}{85}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Cammini e lunghezza}{85}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Interpretazione dinamica}{85}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Approccio greedy}{85}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Valore degli stati}{85}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Definizione del valore ottimo}{85}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Proprietà di annidamento}{85}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Ricorsione di Bellman}{85}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Programmazione dinamica all’indietro}{86}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Funzione valore}{86}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.15}Esempio numerico}{86}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Condizione terminale e primi nodi etichettabili}{86}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Etichettatura del nodo 5}{86}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Etichettatura del nodo 3}{86}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Etichettatura dei nodi 1, 2 e 0}{86}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Ricostruzione del cammino minimo}{86}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.16}Cammini minimi su reti strutturate}{86}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Caso strutturato e interpretazione dinamica}{86}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Contributo terminale e nodo fittizio}{86}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.17}Il principio di decomposizione della programmazione dinamica}{87}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Decomposizione in problemi a singolo stadio}{87}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Problema deterministico}{87}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Problema stocastico}{87}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Decisioni come funzioni della storia}{87}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Riduzione tramite stato}{87}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Additività della funzione obiettivo}{87}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Regola myopica}{87}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Significato della funzione valore}{87}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.18}Equazione di Bellman}{87}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Problema a singolo stadio parametrizzato dallo stato}{87}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Politica ottima in feedback}{88}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.19}Teorema: principio di ottimalità della programmazione dinamica}{88}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Enunciato}{88}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Osservazione sulla dimostrazione}{88}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.20}DP stocastica per orizzonti finiti}{88}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Risoluzione all’indietro}{88}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Ultimo istante decisionale}{88}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Ricorsione fino a $V_1$}{88}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Prima decisione}{89}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Uso delle funzioni valore: caso deterministico}{89}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Uso delle funzioni valore: simulazione Monte Carlo}{89}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.21}DP stocastica per orizzonti infiniti}{89}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Problema a orizzonte infinito}{89}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Equazione al punto fisso}{89}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {8}CAP 8 -- Implementazione della programmazione dinamica}{89}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.1}Allocazione discreta di risorse: il problema dello zaino}{89}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Definizione del problema}{89}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Motivazione dell’approccio DP}{90}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.2}Riformulazione sequenziale del problema}{90}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Indice temporale fittizio e stadi decisionali}{90}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Stato e dipendenza dalle decisioni passate}{90}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Equazione di transizione dello stato}{90}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.3}Funzione valore e ricorsione DP}{90}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Definizione della funzione valore}{90}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Equazione di Bellman}{90}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Interpretazione della ricorsione}{90}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Condizione terminale}{91}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.4}Implementazione MATLAB del problema dello zaino}{91}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Obiettivo della funzione}{91}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Idea di memorizzazione: tabelle di valore e decisione}{91}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Ricorsione backward e ricostruzione forward}{91}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Complessità computazionale}{91}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.5}Allocazione continua del budget}{91}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Formulazione del problema}{91}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Uso completo del budget}{91}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Soluzione interna e Lagrangiana}{91}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.6}Allocazione continua del budget: formulazione DP}{92}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Riformulazione DP}{92}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Transizione dello stato}{92}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Equazioni di ottimalità}{92}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Funzioni valore in spazio infinito-dimensionale}{92}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.7}Intermezzo: interpolazione con spline cubiche in MATLAB}{92}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Limiti dell’interpolazione polinomiale}{92}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Spline cubiche come alternativa}{92}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Accuratezza, griglia e questioni aperte}{92}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.8}Risoluzione numerica del problema continuo tramite DP}{93}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Idea della discretizzazione e interpolazione}{93}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Risoluzione dei sottoproblemi e policy implicita}{93}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.9}Implementazione MATLAB: idea generale}{93}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Scopo di \texttt  {findPolicy}}{93}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Scopo di \texttt  {applyPolicy}}{93}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.10}Controllo stocastico delle scorte}{93}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Impostazione del problema}{93}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Dinamica dello stato con stockout (lost sales)}{93}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Sequenza degli eventi}{93}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Spazio degli stati e azioni ammissibili}{93}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Costo immediato e stato terminale}{94}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Ricorsione DP con costo immediato stocastico}{94}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Modellare l’incertezza}{94}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.11}Lot-sizing stocastico: idea delle procedure MATLAB}{94}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Scopo di \texttt  {MakePolicy}}{94}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Scopo di \texttt  {SimulatePolicy}}{94}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.12}Sfruttare la struttura: cammini minimi per il lot-sizing deterministico}{94}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Motivazione}{94}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Lot-sizing deterministico con costi fissi e holding}{94}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Teorema: proprietà di Wagner--Whitin}{95}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Rete di flusso e interpretazione}{95}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Conseguenza pratica: scelte d’ordine candidate}{95}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Riformulazione come cammino minimo}{95}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.13}Lot-sizing stocastico: politiche \(S\) e \((s,S)\)}{95}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Backlog e penalità convessa}{95}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Costo variabile e obiettivo atteso}{95}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Ricorsione DP e funzione \(H(\cdot )\)}{96}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Riscrittura tramite \(G_t(\cdot )\)}{96}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Convessità e livello obiettivo \(S_t\)}{96}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Politica base-stock (order-up-to)}{96}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Politiche \((s,S)\) con costi fissi}{96}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.14}Le maledizioni della programmazione dinamica}{96}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Limiti della DP}{96}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Maledizione della dimensionalità dello stato}{96}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Maledizione dell’ottimizzazione}{97}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Maledizione dell’aspettativa}{97}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Maledizione della modellazione}{97}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {9}CAP 9 -- Modelli della programmazione dinamica}{97}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {10}CAP 9 -- Modeling for Dynamic Programming}{97}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.1}Frontespizio e riferimenti}{97}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Titolo e autore}{97}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Riferimenti}{97}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.2}Principio di modellazione nella programmazione dinamica}{97}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Idea generale della programmazione dinamica}{97}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Funzione valore e ricorsione DP}{97}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Forme alternative della ricorsione DP}{97}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Scambio tra aspettazione e ottimizzazione}{97}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Q-learning e stati post-decisione}{97}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Scelta della rappresentazione dello stato}{98}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Natura degli stati e delle decisioni}{98}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Ruolo delle capacità di modellazione}{98}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.3}Processi decisionali di Markov finiti}{98}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Definizione di MDP}{98}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{MDP finiti e notazione degli stati}{98}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Azioni ammissibili}{98}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Dinamica markoviana controllata}{98}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.4}Esempio: controllo stocastico di inventario}{98}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Sintesi dell’esempio}{98}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.5}Ricorsioni DP per MDP}{98}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Ricorsione a orizzonte finito}{98}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Caso a orizzonte infinito scontato}{99}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Contributo immediato stocastico}{99}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Relazione tra contributi}{99}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.6}Esempio: arresto ottimo ricorrente}{99}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Sintesi dell’esempio}{99}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.7}Valutazione delle politiche e Q-factors}{99}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Policy evaluation e policy iteration}{99}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Definizione di Q-factor per una politica}{99}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Q-factors ottimi e relazione con \(V\)}{99}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Ricorsione DP in termini di Q-factors}{99}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Vantaggi e svantaggi}{100}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.8}Diverse forme di DP stocastica}{100}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Ricorsione DP di base}{100}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Ipotesi sottostanti}{100}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Difficoltà e motivazione dello scambio}{100}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.9}Esempio: lot-sizing con lookahead limitato}{100}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Sintesi dell’esempio}{100}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.10}Variabili di stato post-decisione}{100}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Ricorsione in forma scambiata}{100}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Vantaggi potenziali}{100}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Introduzione dello stato post-decisione}{100}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Relazione tra funzioni valore}{100}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Passo all’indietro e nuovo scambio}{100}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Connessione con i Q-factors}{101}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.11}Aumento dello stato nella gestione delle scorte}{101}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Inventario on-hand vs inventario disponibile}{101}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Limite dell’equazione di stato standard}{101}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Lead time e variabili di pipeline}{101}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Items deperibili e stato per età}{101}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.12}Revenue management}{101}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Definizione e obiettivo}{101}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Approcci quantity-based e price-based}{101}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Classi tariffarie e prezzi}{101}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Caratteristiche essenziali}{101}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Modelli statici e dinamici; protection levels e bid-prices}{102}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.13}Modello statico con segmentazione perfetta della domanda}{102}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Assunzioni, stadi e stato}{102}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Ricorsione DP in forma scambiata}{102}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.14}Valore marginale atteso e livelli di protezione}{102}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Valore marginale atteso della capacità}{102}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Somma telescopica e riscrittura}{102}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Proprietà dei valori marginali}{102}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Regola di accettazione e protezione annidata}{102}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.15}Modello dinamico con segmentazione perfetta della domanda}{103}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Assunzioni e probabilità di arrivo}{103}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Funzione valore e condizioni al contorno}{103}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Ricavo disponibile e decisione binaria}{103}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Ricorsione DP in forma scambiata}{103}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.16}Modello dinamico con scelta del cliente}{103}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Modello di scelta}{103}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Ricavi e probabilità di scelta}{103}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Probabilità di acquisto dipendenti dalla decisione}{103}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Ricorsione DP}{103}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Osservazione conclusiva}{103}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {11}CAP 10 -- Programmazione dinamica numerica per stati discreti}{104}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {11.1}Catene di Markov a tempo discreto}{104}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Definizione di catena di Markov a tempo discreto}{104}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Probabilità di transizione}{104}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Catene omogenee}{104}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Matrice di transizione}{104}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Proprietà di normalizzazione}{104}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {11.2}Catene di Markov controllate e MDP}{104}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Azioni e transizioni controllate}{104}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Distribuzione stazionaria}{104}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Proprietà strutturali delle catene}{104}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {11.3}MDP a orizzonte temporale finito}{104}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Ricorsione di programmazione dinamica}{104}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Cosa insegna l’esempio (arresto ottimo su random walk)}{105}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {11.4}Processi decisionali markoviani a orizzonte infinito}{105}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Equazioni di Bellman a orizzonte infinito}{105}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Rappresentazione vettoriale}{105}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Strategie di soluzione}{105}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {11.5}Operatori di Bellman}{105}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Operatore ottimo}{105}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Operatore associato a una politica}{105}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Ruolo degli operatori e punti fissi}{105}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Condizioni di esistenza}{105}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Miglioramento delle politiche}{106}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {11.6}Value iteration}{106}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Idea di base}{106}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {11.7}Algoritmo di Value Iteration}{106}{}\protected@file@percent }
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Value Iteration per MDP a orizzonte infinito}}{106}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Cosa insegna l’esempio numerico (value iteration)}{106}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {11.8}Policy iteration}{106}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Motivazione}{106}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Policy evaluation come sistema lineare}{107}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Policy improvement}{107}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {11.9}Algoritmo di Policy Iteration}{107}{}\protected@file@percent }
+\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Policy Iteration per MDP finito a orizzonte infinito}}{107}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Cosa insegna l’esempio numerico (policy iteration)}{108}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {11.10}Value iteration vs. policy iteration}{108}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Confronto e collegamento}{108}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {11.11}Collegamento con Reinforcement Learning}{108}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{DP model-free e Q-factors}{108}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Q-learning e SARSA}{108}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Osservazione operativa in RL}{108}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {12}CAP 11 -- Programmazione dinamica approssimativa e apprendimento per rinforzo per stati discreti}{108}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {12.1}Approximate Dynamic Programming e DP model-free}{108}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Approximate Dynamic Programming}{108}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Reinforcement Learning}{108}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {12.2}Valori di stato, Q-factors e necessità di rappresentazioni compatte}{109}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Perché $V(s)$ non basta in RL model-free}{109}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Q-factors}{109}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {12.3}Campionamento e stima in contesti non stazionari}{109}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Monte Carlo}{109}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Complicazioni negli MDP}{109}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {12.4}Il tradeoff esplorazione--exploitation}{109}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Scelta dell’azione durante l’apprendimento}{109}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Problema statico semplificato}{109}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {12.5}Multi-armed bandits}{110}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Idea}{110}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {12.6}Politiche randomizzate per l’esplorazione}{110}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Compromesso tra estremi}{110}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Approccio $\varepsilon $-greedy}{110}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Esplorazione di Boltzmann}{110}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {12.7}Non stazionarietà e smoothing esponenziale}{110}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Media campionaria e aggiornamento incrementale}{110}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Passo costante in contesti non stazionari}{110}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Smoothing esponenziale e ruolo di $\alpha $}{110}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Learning rate decrescente}{110}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {12.8}Apprendimento tramite differenze temporali e SARSA}{111}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Operatore $T_\mu $ e punto fisso}{111}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Punto fisso in termini di Q-factors della politica}{111}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {12.9}Schema di punto fisso, smoothing e differenze temporali}{111}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Riformulazione astratta}{111}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Schema incrementale con learning rate}{111}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Sostituzione dell’aspettativa con osservazioni}{111}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Differenza temporale e aggiornamento (SARSA)}{111}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Significato di SARSA e natura on-policy}{111}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Esplorazione e policy iteration generalizzata (ottimistica)}{112}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Miglioramento greedy della politica}{112}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {12.10}Q-learning per MDP finiti}{112}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Equazioni per i Q-factors ottimali}{112}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Logica off-policy e scelta dell’azione}{112}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Target campionato e aggiornamento con smoothing}{112}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Forma a differenze temporali}{112}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Confronto SARSA vs Q-learning}{113}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {13}CAP 12 -- Simulazione}{113}{}\protected@file@percent }
+\gdef \@abspage@last{113}
