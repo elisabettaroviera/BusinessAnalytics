@@ -11,45 +11,66 @@
 \usepackage{fancyhdr}
 \usepackage{amsmath,amssymb}
 \usepackage{amsmath}
+
 % Operatore "opt" (max o min a seconda del contesto)
 \DeclareMathOperator*{\opt}{opt}
+
 \usepackage{graphicx}
 \usepackage{tikz}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 \usepackage[dvipsnames,svgnames]{xcolor}
 
+% ------------------------------
+% INDICE: solo section, senza titolo
+% ------------------------------
+\setcounter{tocdepth}{1}      % mostra solo \section
+\renewcommand{\contentsname}{} % rimuove "Contents"
 
 % Personalizzazione del titolo in alto
 \makeatletter
 \renewcommand{\maketitle}{
     \begin{center}
-        \vspace{-2cm}  % Sposta il titolo verso l'alto
-        {\LARGE \textbf{\@title}} \\[0.5cm]  % Titolo grande e in grassetto
+        \vspace{-2cm}
+        {\LARGE \textbf{\@title}} \\[-0.2cm]
     \end{center}
 }
-\makeatother
+
 
 % Impostazioni per i numeri di pagina
-\pagestyle{fancy}  % Usa il pacchetto fancyhdr per personalizzare
-\fancyhf{}  % Cancella intestazioni e piè di pagina predefiniti
-\fancyfoot[R]{\thepage}  % Posiziona il numero di pagina in basso a destra
-\renewcommand{\headrulewidth}{0pt}  % Rimuove la linea nell'intestazione
-\renewcommand{\footrulewidth}{0pt}  % Rimuove la linea nel piè di pagina
-
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[R]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
 
 % Dettagli del documento
 \title{Business Analytics}
-\date{}  
-
+\date{}
 
 \begin{document}
 
-\maketitle 
+\maketitle
+\vspace{-1.2cm}
+\tableofcontents
 
+\vspace{-1cm}
 \textcolor{NavyBlue}{\section{CAP 1 -- Introduzione alle decisioni in condizioni di incertezza}}
 
-\paragraph{Recap} \textcolor{red}{MANCA!!}
+\paragraph{Recap}
+Le decisioni di business avvengono spesso in presenza di \textcolor{NavyBlue}{\textbf{incertezza}} e non possono essere ricondotte alla sola costruzione di una previsione puntuale. La distinzione tra \textcolor{NavyBlue}{\textbf{Business Analytics descrittiva, predittiva e prescrittiva}} chiarisce che l’obiettivo finale non è prevedere una variabile aleatoria, ma \textbf{supportare una decisione}, tenendo conto delle conseguenze economiche delle scelte.
+
+Una previsione è sempre legata a una \textcolor{NavyBlue}{\textbf{funzione di perdita}}: il valore “migliore” dipende da come vengono penalizzati gli errori. Il valore atteso è ottimale solo in presenza di penalità simmetriche; in generale, \textbf{errori di segno opposto possono avere impatti diversi} e portare a decisioni ottimali basate su mediane o quantili. Non esiste quindi una previsione universalmente corretta, ma solo previsioni \textbf{coerenti con il criterio decisionale}.
+
+Nei modelli decisionali l’attenzione si sposta dalla previsione alla \textcolor{NavyBlue}{\textbf{scelta di un vettore di decisioni}} sotto incertezza. Se i fattori di rischio non sono probabilisticamente modellabili si ottiene un approccio \textcolor{NavyBlue}{\textbf{robusto}}; se invece sono descritti da una distribuzione nota si ottiene un \textcolor{NavyBlue}{\textbf{problema di ottimizzazione stocastica}}. In entrambi i casi, sostituire l’incertezza con il valore medio può produrre decisioni fortemente subottimali.
+
+Il modello del \textcolor{NavyBlue}{\textbf{newsvendor}} mostra in modo esplicito come la decisione ottimale derivi dal bilanciamento tra \textbf{costo di sottostima} e \textbf{costo di sovrastima}, e non dalla domanda media. Questo esempio evidenzia che l’incertezza entra direttamente nella struttura economica del problema.
+
+I \textcolor{NavyBlue}{\textbf{vincoli probabilistici}} permettono di imporre il rispetto dei vincoli solo con una certa probabilità, ma possono generare insiemi ammissibili non convessi e problemi computazionalmente difficili. Gli \textcolor{NavyBlue}{\textbf{alberi di decisione}} consentono invece di rappresentare decisioni \textbf{adattive}, distinguendo chiaramente tra scelte e realizzazioni casuali e risolvendo il problema tramite \textcolor{NavyBlue}{\textbf{backward induction}}.
+
+Il valore dell’informazione viene quantificato tramite \textcolor{NavyBlue}{\textbf{EVPI}} e \textcolor{NavyBlue}{\textbf{VSS}}, che misurano rispettivamente il beneficio dell’informazione perfetta e il guadagno ottenuto risolvendo il modello stocastico rispetto a una soluzione deterministica a valore atteso. Valori elevati indicano che modellare esplicitamente l’incertezza è essenziale.
+
+L’introduzione ai \textcolor{NavyBlue}{\textbf{modelli a due stadi con ricorso}} chiarisce la distinzione tra decisioni \textcolor{NavyBlue}{\textbf{here-and-now}} e decisioni \textcolor{NavyBlue}{\textbf{wait-and-see}}, mostrando come l’adattamento delle decisioni dopo l’osservazione dell’incertezza migliori la qualità delle soluzioni. Questo costituisce la base per l’estensione ai modelli multistadio e ai temi di generazione degli scenari e stabilità delle soluzioni.
 
 \paragraph{Introduzione} Si distinguono tre principali tipologie di \emph{Business Analytics}
 \begin{itemize}[label=-]
@@ -318,9 +339,7 @@ aver osservato la domanda.\\
     \item $x_i \in \mathbb{Z}_+$, $i=1,\dots,n_i$, numero di componenti prodotti.
     \item $y_j \in \mathbb{Z}_+$, $j=1,\dots,n_j$, numero di prodotti finali assemblati.
 \end{itemize}
-
 Il \textcolor{NavyBlue}{\textbf{problema di massimizzazione del profitto}} può essere formulato così
-
 \begin{align*}
 \max \quad & - \sum_{i \in [n_i]} C_i x_i + \sum_{j \in [n_j]} P_j y_j \\[0.3em]
 \text{s.t.} \quad
@@ -385,9 +404,7 @@ a seconda dei casi, dal modello \textbf{stocastico} oppure dal modello
 \sum_{s \in S} \pi^s R^s(\mathbf{x}^\circ).
 \]
 
-
 \subsection{Modelli a due stadi}
-
 \paragraph{Dall’ATO ai modelli a due stadi con ricorso}
 Il modello \emph{assemble-to-order} fornisce una buona introduzione ai \textbf{modelli di programmazione lineare stocastica a due stadi con ricorso} (\emph{recourse}), che rappresentano l’esempio più semplice di modelli di ottimizzazione adattivi.
 In un modello a due stadi si distinguono due tipi di decisioni:
@@ -733,355 +750,344 @@ In pratica il modello verrebbe risolto ripetutamente con una logica \textcolor{N
 
 \subsection{Modelli multiperiodali e multistadio}
 \paragraph{Esplosione dell’albero di scenario nei modelli multistadio}
-Un problema chiaro nei modelli di programmazione stocastica \textbf{multistadio} è la possibile \textbf{esplosione dell’albero di scenario}. Il numero di nodi necessario per rappresentare l’incertezza può diventare un fattore fortemente limitante.\footnote{Nel testo si rimanda a rimedi e approcci alla generazione di scenari nella Sezione 8. Si menziona anche che, nei modelli finanziari, un’ulteriore criticità riguarda la generazione di opportunità di arbitraggio spurie.}
+Un problema chiaro nei modelli di programmazione stocastica \textbf{multistadio} è la possibile 
+\textbf{esplosione dell’albero di scenario}. Il numero di nodi necessario per rappresentare l’incertezza può diventare
+ un fattore fortemente limitante.
+Questo problema è meno rilevante per una struttura ad albero \textbf{lineare}.
+ È però importante osservare che una struttura ad albero lineare 
+  \textbf{non corrisponde a un modello multistadio}, bensì a un \textbf{modello a due stadi multiperiodale}.
 
-\paragraph{Strutture ad albero e differenza concettuale}
-Questo problema è meno rilevante per una struttura ad albero \textbf{lineare} come quella illustrata in Fig.~9. È però importante osservare che una struttura ad albero lineare di questo tipo \textbf{non corrisponde a un modello multistadio}, bensì a un \textbf{modello a due stadi multiperiodale}.
-
-\paragraph{Multiperiod non significa multistage}
-\textbf{Multiperiod} non significa \textbf{multistage}. È possibile avere un modello multiperiodale ma \textbf{statico} se tutte le decisioni sono prese \textbf{here-and-now} e poi implementate nei periodi successivi senza adattamento al flusso informativo.  
+\paragraph{Multiperiodo non significa multistage} È possibile avere un modello multiperiodale ma \textbf{statico} se tutte le decisioni sono prese \textbf{here-and-now} e poi implementate nei periodi successivi senza adattamento al flusso informativo.  
 Al contrario, \textbf{multistage} implica \textbf{adattamento} delle decisioni nel tempo, soggetto a vincoli di \textbf{non-anticipatività} delle politiche decisionali.
 
 \paragraph{Caso particolare del two-stage multiperiod}
-La struttura in Fig.~9 è peculiare: è \textbf{a due stadi}, ma coinvolge \textbf{più periodi}. Apparentemente viola la non-anticipatività, perché dopo la prima diramazione successiva alla radice sarebbe possibile prevedere perfettamente il cammino futuro. Tuttavia, una tale struttura può avere senso quando:
+La struttura è peculiare: è \textbf{a due stadi}, ma coinvolge \textbf{più periodi}. Apparentemente viola la non-anticipatività, perché dopo la prima diramazione successiva alla radice sarebbe possibile prevedere perfettamente il cammino futuro. Tuttavia, una tale struttura può avere senso quando:
 \begin{itemize}[label=-]
-    \item si devono prendere \textbf{decisioni strutturali o di design} \textbf{here-and-now} che non possono essere adattate;
-    \item segue un flusso di decisioni di controllo nel tempo, per le quali non si può trarre vantaggio dalla struttura lineare dell’albero.
+    \item Si devono prendere \textbf{decisioni strutturali o di design} \textbf{here-and-now} che non possono essere adattate.
+    \item Segue un flusso di decisioni di controllo nel tempo, per le quali non si può trarre vantaggio dalla struttura lineare dell’albero.
 \end{itemize}
 Il modello di pianificazione energetica della sezione successiva illustra un caso di questo tipo.
 
-\subsection{A two-stage multiperiod model: Unit commitment}
-
+\subsubsection{Un modello multiperiodo a due stadi: Unit commitment}
 \paragraph{Domanda aleatoria come processo discreto nel tempo}
-Si consideri un modello stocastico di \textbf{unit commitment}, problema di pianificazione energetica in cui l’incertezza della domanda è modellata come processo stocastico a tempo discreto:
+Si consideri un modello stocastico di \textcolor{NavyBlue}{\textbf{unit commitment}}, problema di pianificazione energetica
+ in cui l’incertezza della domanda è modellata come processo stocastico a tempo discreto
 \[
-d(\omega)=\big(d_1(\omega),\dots,d_T(\omega)\big),
+\xi(\omega)=\big(d_1(\omega),\dots,d_T(\omega)\big),
 \qquad
 t\in\{1,\dots,T\},\;\omega\in\Omega,
 \]
-dove $T$ è la lunghezza dell’orizzonte di pianificazione e $\Omega$ è l’insieme (finito) dei cammini campionari. Si denoti con $p_\omega$ la probabilità dello scenario $\omega$.
+dove $T$ è la lunghezza dell’orizzonte di pianificazione e $\Omega$ è l’insieme (finito) dei cammini campionari. 
+Si denoti con $\pi^\omega$ la probabilità dello scenario $\omega$.
 
 \paragraph{Classi di generatori e struttura dei costi}
-Si dispone di un insieme di $K$ classi di unità generatrici. Una unità della classe $k$ (con $k=1,\dots,K$) può produrre in un intervallo $[L_k,U_k]$ quando è attiva. Per ciascuna classe $k$ sono disponibili $N_k$ unità.
-
-La potenza erogata è una variabile \textbf{semicontinua}: può essere zero, ma se l’unità è attiva deve produrre almeno $L_k$. Se una unità della classe $k$ è attiva al tempo $t$, si sostiene un costo $F_k$ per mantenerla al livello minimo $L_k$, e un costo variabile lineare $c_k$ per ogni unità aggiuntiva di potenza oltre $L_k$. Si sostiene inoltre un costo di avviamento $S_k$ per accendere una unità della classe $k$.\footnote{Per semplicità, non si considerano costi di spegnimento, vincoli di ramp-up, né vincoli di permanenza minima nello stato on/off dopo uno switch.}
-
-\paragraph{Variabili decisionali (primo e secondo stadio)}
-Si introducono:
-\begin{itemize}[label=-]
-    \item $u_{kt}\in\mathbb{Z}_+$: numero totale di unità della classe $k$ attive nel periodo $t$;
-    \item $v_{kt}\in\mathbb{Z}_+$: numero di unità della classe $k$ accese all’inizio del periodo $t$;
-\end{itemize}
-che sono variabili di \textbf{primo stadio}.  
-Si introduce inoltre la variabile di \textbf{secondo stadio} (scenario-dipendente):
-\[
-P^{\omega}_{kt}\ge 0,
-\]
-che rappresenta la potenza totale erogata dalla classe $k$ nel periodo $t$ nello scenario $\omega$.
-
-\paragraph{Formulazione del modello}
-\[
-\boxed{
-\begin{aligned}
-\min\;&
-\sum_{k=1}^{K}\sum_{t=1}^{T}\Big(F_k\,u_{kt}+S_k\,v_{kt}\Big)
-\;+\;
-\sum_{\omega\in\Omega}p_\omega
+Si dispone di un insieme di $I$ classi di unità generatrici. Una unità della classe $i$ (con $i=1,\dots,I$) 
+può produrre in un intervallo $[m_i,M_i]$ quando è attiva. Per ciascuna classe $i$ sono disponibili $a_i$ unità.
+\\ \hspace*{1.5em} Si consideri un insieme di $I$ classi di unità di generazione, che possono fornire
+un livello di output nell’intervallo $[m_i, M_i]$, $i \in [I]$, quando sono attive.
+Per ciascuna classe $i$ sono disponibili $a_i$ unità.
+Anche in questo caso, la potenza erogata è una variabile decisionale
+\emph{semicontinua}, che può assumere valore nullo, ma che presenta
+un livello minimo $m_i$ per un’unità attiva.
+Se un’unità di generazione della classe $i$ è attiva al tempo $t$, si sostiene
+un costo $E_i$ per mantenerla al livello minimo $m_i$, e un costo variabile
+lineare $C_i$ per ogni unità addizionale di potenza erogata.
+Si sostiene inoltre un costo di avviamento $s_i$ per l’accensione di un’unità
+della classe $i$.
+\\ \hspace*{1.5em} Viene introdotta una variabile decisionale intera non negativa $u_{it}$ che denota
+il numero totale di unità della classe $i$ attive durante l’intervallo temporale $t$.
+Data la struttura dei costi, non risulta necessario rappresentare ciascuna singola unità.
+Si considera inoltre una variabile intera non negativa $s_{it}$ che rappresenta
+il numero di unità della classe $i$ che vengono accese all’inizio
+dell’intervallo temporale $t$.
+Tali variabili costituiscono decisioni di \emph{primo stadio}.
+Al contrario, la variabile non negativa $q_{it}^{\omega}$, che rappresenta
+l’output totale della classe $i$ durante l’intervallo temporale $t$,
+è una variabile decisionale di \emph{secondo stadio}, indicizzata per scenario.
+Il \textcolor{NavyBlue}{\textbf{modello}} può essere formulato come segue
+\begin{align*}
+\min \quad 
+& \sum_{i \in [I],\, t \in [T]}
+\left( E_i u_{it} + F_i s_{it} \right)
++ \sum_{\omega \in \Omega} \pi^{\omega}
 \left[
-\sum_{k=1}^{K}\sum_{t=1}^{T}
-c_k\Big(P^{\omega}_{kt}-L_k\,u_{kt}\Big)
-\right]
-\\[2mm]
-\text{s.t. }\;&
-\sum_{k=1}^{K}P^{\omega}_{kt}\ge d_t(\omega),
-\qquad t=1,\dots,T,\;\omega\in\Omega
-\\
-& L_k\,u_{kt}\le P^{\omega}_{kt}\le U_k\,u_{kt},
-\qquad k=1,\dots,K,\;t=1,\dots,T,\;\omega\in\Omega
-\\
-& v_{kt}\ge u_{kt}-u_{k,t-1},
-\qquad k=1,\dots,K,\;t=1,\dots,T
-\\
-& u_{kt}\le N_k,
-\qquad k=1,\dots,K,\;t=1,\dots,T
-\\
-& u_{kt}\in\mathbb{Z}_+,\; v_{kt}\in\mathbb{Z}_+,\; P^{\omega}_{kt}\ge 0,
-\qquad k=1,\dots,K,\;t=1,\dots,T,\;\omega\in\Omega.
-\end{aligned}}
-\]
-
-\paragraph{Interpretazione dei vincoli e dell’obiettivo}
-La funzione obiettivo (40) comprende:
-\begin{itemize}[label=-]
-    \item costi di mantenimento al livello minimo e costi di startup, per unità attive (primo stadio);
-    \item costi variabili proporzionali alla potenza erogata \emph{oltre} il minimo $L_k$, aggregati in valore atteso rispetto agli scenari (secondo stadio).
-\end{itemize}
-I vincoli (41) impongono la soddisfazione della domanda in ogni periodo e scenario. I vincoli (42) impongono che la potenza totale della classe $k$ resti tra minimo e massimo, coerentemente con il numero di unità attive. I vincoli (43) definiscono correttamente le variabili di startup (sono nulle quando si spegne o quando il numero di unità resta invariato). I vincoli (44) limitano il numero di unità attive a quelle disponibili.
+\sum_{i \in [I],\, t \in [T]}
+C_i \left( q_{it}^{\omega} - m_i u_{it} \right)
+\right] \\[0.4em]
+\text{s.t.} \quad
+& \sum_{i \in [I]} q_{it}^{\omega} \ge d_t(\omega),
+&& t \in [T],\ \omega \in \Omega \\[0.3em]
+& m_i u_{it} \le q_{it}^{\omega} \le M_i u_{it},
+&& i \in [I],\ t \in [T],\ \omega \in \Omega \\[0.3em]
+& s_{it} \ge u_{it} - u_{i,t-1},
+&& i \in [I],\ t \in [T] \\[0.3em]
+& u_{it} \le a_i,
+&& i \in [I],\ t \in [T] \\[0.3em]
+& u_{it} \in \mathbb{Z}_+,\ 
+s_{it} \in \mathbb{Z}_+,\ 
+q_{it}^{\omega} \ge 0,
+&& i \in [I],\ t \in [T],\ \omega \in \Omega.
+\end{align*}
 
 \paragraph{Osservazioni critiche sul modello}
-Si notano due aspetti rilevanti:
+Si notano due aspetti rilevanti
 \begin{itemize}[label=-]
-    \item \textbf{Fattibilità e scenari estremi.} Se il vincolo di domanda (41) è imposto come vincolo rigido in ogni scenario, la soluzione può diventare molto costosa e guidata da pochi scenari improbabili con picchi di domanda elevati. Come nel plant location model, può essere opportuno introdurre una formulazione elastica, ad esempio includendo una unità “di ultima istanza” con capacità illimitata (fornitore esterno) o una penalità per domanda non soddisfatta.
+    \item \textbf{Fattibilità e scenari estremi.} Se il vincolo di domanda è imposto come vincolo rigido in ogni scenario, la soluzione può diventare molto costosa e guidata da pochi scenari improbabili con picchi di domanda elevati. Come nel plant location model, può essere opportuno introdurre una formulazione elastica, ad esempio includendo una unità “di ultima istanza” con capacità illimitata (fornitore esterno) o una penalità per domanda non soddisfatta.
     \item \textbf{Flusso informativo.} Il modello è multiperiodale ma a due stadi: dopo aver osservato la prima domanda al tempo $t=1$, si assume di conoscere tutte le domande per $t\in\{2,\dots,T\}$. Questo non è realistico e si potrebbe pensare a un modello multistadio con vincoli di non-anticipatività. Tuttavia, qui non c’è modo di sfruttare tale informazione, perché le variabili di design sono \emph{here-and-now}. Inoltre, nel modello non esiste uno stato energetico (l’energia non è immagazzinabile), e quindi i periodi sono indipendenti tra loro in termini di potenza erogata.
 \end{itemize}
 
-\subsection{Scenario generation and stability in stochastic programming}
-
+\subsection{Generazione di scenari e stabilità nella programmazione stocastica}
 \paragraph{Ruolo centrale dell’albero di scenario}
-L’ingrediente chiave nei modelli di programmazione stocastica multistadio è l’\textbf{albero di scenario} e la qualità della soluzione dipende in modo critico da quanto bene l’incertezza viene catturata. In principio, si potrebbe campionare un modello dinamico dei fattori di rischio tramite simulazione Monte Carlo. Tuttavia, emergono complicazioni aggiuntive.
+Nei modelli di programmazione stocastica \textbf{multistadio}, l’elemento chiave è l’\textcolor{NavyBlue}{\textbf{albero di scenario}}:
+ la qualità della soluzione dipende in modo critico da quanto bene l’albero rappresenta l’incertezza. In linea di principio si potrebbe campionare un modello dinamico dei fattori di rischio tramite \textbf{simulazione Monte Carlo}, ma sorgono ulteriori difficoltà.
 
 \paragraph{Complicazioni principali}
 \begin{itemize}[label=-]
-    \item La dimensione del campione deve rimanere limitata, perché si associano variabili decisionali agli stati e il costo computazionale di risolvere un problema di ottimizzazione stocastica (non solo calcolare una media campionaria) può essere notevole.
-    \item Occorre generare decisioni non-anticipative, il che richiede una struttura ad albero soggetta a crescita esponenziale della complessità. Se da ogni nodo si diramano 100 successori, dopo tre passi si hanno un milione di scenari.
-    \item Non si sta solo valutando un valore atteso, come nella simulazione Monte Carlo standard, ma si stanno prendendo decisioni risolvendo un problema di ottimizzazione. Qualunque incoerenza o bias nell’albero di scenario verrà sfruttata dal solver, producendo una soluzione apparentemente buona \emph{in-sample} ma probabilmente scarsa \emph{out-of-sample}.
+    \item La \textcolor{NavyBlue}{\textbf{dimensione del campione}} deve restare contenuta, perché si associano variabili decisionali agli stati e risolvere un problema di ottimizzazione stocastica (non solo calcolare una media campionaria) può essere computazionalmente oneroso.
+    \item Le decisioni devono essere \textcolor{NavyBlue}{\textbf{non-anticipative}}: ciò richiede una struttura ad albero soggetta a crescita \textbf{esponenziale}. Ad esempio, con 100 rami per nodo si ottengono un milione di scenari dopo tre passi.
+    \item Non si sta solo stimando un valore atteso, ma si stanno \textcolor{NavyBlue}{\textbf{prendendo decisioni}} risolvendo un problema di ottimizzazione: qualunque \textbf{bias} o incoerenza nell’albero verrà sfruttata dal solver, producendo una soluzione magari buona \emph{in-sample} ma debole \emph{out-of-sample}.
 \end{itemize}
-È stato dedicato molto sforzo di ricerca alla generazione di scenari; qui se ne possono solo fornire cenni. Qualunque strategia si adotti, è importante verificare la \textbf{stabilità} della soluzione risultante, come discusso brevemente in Sezione~8.1.
+Qualunque strategia di generazione scenari si scelga, è quindi importante controllare la \textbf{stabilità} della soluzione risultante.
 
 \paragraph{Due classi di approcci alla generazione di scenari}
-Esistono due classi fondamentali di metodi:
+Si distinguono due approcci fondamentali
 \begin{itemize}[label=-]
-    \item \textbf{Generazione stocastica di scenari.} Basata su campionamento casuale Monte Carlo, affidandosi alla “forza bruta” di una grande numerosità campionaria. Questo può essere sostenibile in un problema a due stadi, molto meno in un contesto multistadio. Le prestazioni possono migliorare con tecniche di riduzione della varianza, ad esempio \emph{importance sampling}.
-    \item \textbf{Generazione deterministica di scenari.} Invece della forza bruta, si tenta una scelta “intelligente” degli scenari, usando metodi come la quadratura gaussiana, sequenze a bassa discrepanza (es. sequenze di Sobol) o generazione ottimizzata di scenari.
+    \item \textcolor{NavyBlue}{\textbf{Generazione stocastica di scenari.}} Basata su campionamento casuale \textbf{Monte Carlo} e quindi sulla “forza bruta” di una grande numerosità campionaria. È più gestibile nei modelli \textbf{a due stadi} che nei multistadio; le prestazioni possono essere migliorate con tecniche di \textbf{riduzione della varianza}, ad esempio \emph{importance sampling}.
+    \item \textcolor{NavyBlue}{\textbf{Generazione deterministica di scenari.}} Invece della forza bruta, si selezionano scenari in modo “intelligente” tramite metodi quali \textbf{quadratura gaussiana}, \textbf{sequenze a bassa discrepanza} (ad es.\ \textbf{Sobol}) o procedure di generazione \textbf{ottimizzata}.
 \end{itemize}
 
 \paragraph{Interpretazione come integrazione numerica (quadratura)}
-Tutte queste strategie possono essere interpretate nel quadro generale dell’\textbf{integrazione numerica} (quadratura). Si consideri il valore atteso di una funzione $f(x,\tilde{\xi})$, dove $x$ è un vettore di variabili decisionali e $\tilde{\xi}$ un vettore di variabili aleatorie con densità congiunta $\phi(\xi)$. Integrando rispetto a $\xi$ si definisce
+La generazione scenari può essere vista come un problema di \textbf{integrazione numerica}. Se $f(x,\tilde{\xi})$ dipende dalle decisioni $x$ e da variabili aleatorie $\tilde{\xi}$ con densità congiunta $h(\xi)$, allora
 \[
-F(x) = \mathbb{E}\!\left[f(x,\tilde{\xi})\right].
+F(x)=
+\int f(x,\xi)\,h(\xi)\,d\xi \approx \frac{1}{S}\sum_{s=1}^{S} f(x,\xi_s).
 \]
-Questo valore può essere approssimato tramite un campione casuale di dimensione $N$:
+In alternativa, si può usare un insieme (anche deterministico) di punti con pesi $\{(\pi_s,\xi_s)\}$:
 \[
-F(x) = \int f(x,\xi)\,\phi(\xi)\,d\xi
-\;\approx\;
-\frac{1}{N}\sum_{B=1}^{N} f(x,\xi^{B}),
+F(x)\approx \sum_{s=1}^{S'} \pi_s\, f(x,\xi_s),
+\qquad S'<S,
 \]
-dove $\xi^{B}$ è un’osservazione del campione. In alternativa, si può usare un insieme (anche deterministico) di punti $\xi^{B}$ associati a pesi $p_B$:
-\[
-F(x) \;\approx\; \sum_{B=1}^{N_0} p_B\, f(x,\xi^{B}),
-\qquad N_0 < N.
-\]
-Nel contesto dell’ottimizzazione stocastica, le coppie $(p_B,\xi^{B})$ si interpretano come probabilità e valori di una distribuzione discreta che approssima la distribuzione continua originale. Le formule di quadratura gaussiana forniscono modi per selezionare tale discretizzazione; le sequenze a bassa discrepanza sono usate nella quasi-Monte Carlo per garantire una “buona” copertura del dominio di integrazione.\footnote{Nel testo si cita l’uso di sequenze di Sobol e l’interpretazione come quasi-Monte Carlo.}
+interpretando le coppie $(\pi_s,\xi_s)$ come una \textbf{distribuzione discreta} che approssima quella continua.
 
-\paragraph{Esempio: generazione scenari tramite moment matching (idea)}
-Si consideri un vettore aleatorio con distribuzione normale multivariata $\tilde{\xi}\sim \mathcal{N}(\mu,\Sigma)$. L’approssimazione discreta dovrebbe riprodurre le medie e le covarianze della distribuzione continua. Inoltre, per una normale, la skewness e la kurtosis marginali dovrebbero essere rispettivamente 0 e 3.
+\paragraph{Moment/property matching e alternative}
+Un’idea comune è scegliere scenari e probabilità in modo da riprodurre (approssimativamente) alcune \textbf{proprietà} della distribuzione, ad esempio i \textbf{momenti} (\emph{moment matching}). Questo approccio è stato criticato perché è possibile costruire distribuzioni diverse che condividono i primi momenti. Un’alternativa è utilizzare \textbf{metriche di distanza} tra distribuzioni: fissata una topologia dell’albero, si cercano valori e probabilità che minimizzano una distanza rispetto alla distribuzione “vera”, oppure si parte da un grande insieme di scenari e si applica \textbf{scenario reduction} per ottenere un albero più gestibile. D’altra parte, spesso ciò che conta non è la distanza tra distribuzioni, ma la \textbf{qualità della soluzione} (ad es.\ in un modello mean--variance può essere sufficiente approssimare bene i primi due momenti).
 
-Indicando con $\xi^{B}_{k}$ la realizzazione della componente $k$ nello scenario $B$ (con $k=1,\dots,m$ e $B=1,\dots,N$), condizioni naturali (con probabilità uniformi) sono:
-\[
-\frac{1}{N}\sum_{B=1}^{N} \xi^{B}_{k} \approx \mu_k,
-\qquad \forall k,
-\]
-\[
-\frac{1}{N}\sum_{B=1}^{N} (\xi^{B}_{k}-\mu_k)(\xi^{B}_{h}-\mu_h) \approx \Sigma_{kh},
-\qquad \forall k,h,
-\]
-\[
-\frac{1}{N}\sum_{B=1}^{N} \left(\frac{\xi^{B}_{k}-\mu_k}{\sigma_k}\right)^3 \approx 0,
-\qquad \forall k,
-\]
-\[
-\frac{1}{N}\sum_{B=1}^{N} \left(\frac{\xi^{B}_{k}-\mu_k}{\sigma_k}\right)^4 \approx 3,
-\qquad \forall k.
-\]
-Il \emph{moment matching} approssimato si ottiene minimizzando un errore quadratico complessivo rispetto ai valori $\xi^{B}_{k}$, introducendo quattro pesi (uno per ciascun blocco di condizioni) per regolare le prestazioni. Si osserva che il problema di ottimizzazione degli scenari risultante \textbf{non è necessariamente convesso}; tuttavia, una soluzione con errore basso può essere considerata soddisfacente anche se non garantisce ottimalità globale. L’idea può essere generalizzata a \textbf{property matching}, includendo proprietà non necessariamente riconducibili ai momenti.
-
-\paragraph{Critiche al moment matching e alternative basate su distanze}
-Il moment (o property) matching è stato criticato perché esistono controesempi di distribuzioni che condividono i primi momenti ma risultano molto diverse. Un’idea alternativa consiste nell’usare metriche che catturino completamente la distanza tra distribuzioni: fissata una topologia dell’albero, si cercano valori e probabilità che minimizzano una distanza rispetto alla distribuzione “vera”. In alternativa, si può partire da un grande albero di scenario e ridurlo a dimensioni gestibili tramite \textbf{scenario reduction} ottimale.
-Un contro-argomento alla prospettiva “distanza tra distribuzioni” è che non interessa tanto la distanza tra distribuzione ideale e albero, quanto la \textbf{qualità della soluzione}. Ad esempio, per un problema mean--variance di portafoglio, si può sostenere che basti e avanzi il matching dei primi due momenti.
-
-\paragraph{Linee guida pratiche per la struttura dell’albero}
-Si riportano alcune linee guida utili nel progettare la struttura dell’albero:
+\paragraph{Linee guida pratiche per progettare l’albero}
 \begin{itemize}[label=-]
-    \item Se l’obiettivo è ottenere una decisione robusta di primo stadio, può essere consigliabile usare un branching ricco al primo stadio e più limitato negli stadi successivi (a patto che, in applicazioni finanziarie, l’albero sia arbitrage-free).
-    \item Il numero di stadi può essere limitato usando passi temporali non uniformi (ad esempio, primi due passi di un mese e i successivi di un anno).
-    \item Un modo per limitare il numero di stadi consiste nell’augmentare l’obiettivo con un termine che misura la qualità dello stato terminale: ciò può evitare decisioni miopi e consentire alberi più piccoli (si cita un’applicazione all’ATO).
+    \item Se l’obiettivo è una decisione robusta di primo stadio, conviene spesso usare un branching \textbf{ricco al primo stadio} e più \textbf{limitato negli stadi successivi} (in finanza, imponendo che l’albero sia \textbf{arbitrage-free}).
+    \item Si può ridurre la complessità usando \textbf{passi temporali non uniformi} (più fitti all’inizio, più radi in seguito).
+    \item Si può limitare il numero di stadi \textbf{aumentando l’obiettivo} con un termine che valuta la qualità dello \textbf{terminale}, riducendo decisioni miopi e permettendo alberi più piccoli.
 \end{itemize}
 
-\subsection{In- and out-of-sample stability}
+\subsubsection{In-- and out--of--sample stability}
 
 \paragraph{Perché serve controllare la stabilità}
-Qualunque strategia di generazione scenari venga impiegata, è importante verificare la \textbf{stabilità} della soluzione risultante. Esistono studi sofisticati basati su concetti di spazi metrici; qui si considera un approccio pragmatico.
+Qualunque strategia di generazione scenari venga impiegata, è importante verificare la \textbf{stabilità} della soluzione. In pratica, l’ottimizzazione usa un albero approssimato e quindi occorre capire quanto l’output dipenda da come l’albero è stato generato.
 
 \paragraph{Problema “esatto” e problema approssimato}
-Si denoti in modo compatto il problema stocastico esatto:
+Il problema stocastico “esatto” può essere scritto come
 \[
-\min_{x\in X}\; \mathbb{E}_{P}\!\left[f(x,\tilde{\xi})\right],
+\min_{x\in X}\; \mathbb{E}_{\mathbb{P}}\!\left[f(x,\tilde{\xi})\right],
 \]
-dove l’attesa è calcolata rispetto alla misura vera $P$, cioè la distribuzione “esatta” dei fattori di rischio $\tilde{\xi}$.
-Il problema che si risolve in pratica usa un albero di scenario approssimato $T$:
+dove $P$ è la \textbf{misura vera} dei fattori di rischio. In pratica si risolve un problema basato su un albero di scenario approssimato $T$
 \[
-\min_{x\in X}\; \widehat{F}(x;T),
+\min_{x\in S}\; \widehat{f}(x;T),
 \]
-dove la notazione $\widehat{F}$ enfatizza che si sta stimando il vero valore atteso dell’obiettivo sostituendo $P$ con l’albero $T$.
+dove $\widehat{f}$ rappresenta una stima del valore atteso indotta dall’albero.
 
-\paragraph{Soluzioni indotte da alberi diversi}
-Ogni albero $T$ induce una soluzione ottima del problema approssimato. Se si campionano due alberi $T_1$ e $T_2$, si ottengono soluzioni $x^{*}_{1}$ e $x^{*}_{2}$ e corrispondenti valori obiettivo. Se il meccanismo di generazione è affidabile, si dovrebbe osservare stabilità nell’output. È possibile valutare la stabilità delle soluzioni stesse, ma spesso è più semplice e più rilevante verificare la stabilità del \textbf{valore dell’obiettivo}, perché quando l’obiettivo è relativamente piatto possono esistere soluzioni molto diverse con prestazioni comparabili.
+\paragraph{Stabilità del valore obiettivo}
+Campionando (o costruendo) alberi diversi si ottengono soluzioni ottime diverse e valori obiettivo diversi. Spesso è più informativo controllare la stabilità del \textbf{valore dell’obiettivo} (piuttosto che della soluzione), perché quando l’obiettivo è piatto soluzioni anche molto differenti possono avere prestazioni simili.
 
 \paragraph{In-sample stability}
-La stabilità \emph{in-sample} richiede che, campionando due alberi, i valori obiettivo ottenuti non siano troppo diversi:
-\[
-\widehat{F}(x^{*}_{1};T_{1}) \approx \widehat{F}(x^{*}_{2};T_{2}).
-\tag{45}
-\]
-Questa definizione non si applica direttamente se la generazione dell’albero è deterministica; in tal caso si possono confrontare alberi con strutture di branching leggermente diverse per verificare se la struttura utilizzata sia sufficientemente ricca a garantire stabilità.
+La \textcolor{NavyBlue}{\textbf{stabilità \emph{in-sample}}} richiede che, generando due alberi $T_1$ e $T_2$, i valori obiettivo ottenuti non differiscano troppo:
+\(
+\widehat{f}(x^{*}_{1};T_{1}) \approx \widehat{f}(x^{*}_{2};T_{2}).
+\)
+Se l’albero è generato in modo deterministico, si può comunque confrontare la stabilità variando leggermente la struttura di branching per verificare che sia sufficientemente ricca.
 
 \paragraph{Out-of-sample stability}
-Poiché l’albero è una rappresentazione limitata dell’incertezza, è essenziale valutare la soluzione in un contesto “reale” in cui può realizzarsi uno scenario differente. La stabilità \emph{out-of-sample} confronta la performance attesa reale delle soluzioni:
-\[
-\mathbb{E}_{P}\!\left[f(x^{*}_{1},\tilde{\xi})\right]
+La \textcolor{NavyBlue}{\textbf{stabilità \emph{out-of-sample}}} confronta la performance reale attesa delle soluzioni sotto la distribuzione vera:
+\(
+\mathbb{E}_{\mathbb{P}}\!\left[f(x^{*}_{1},\tilde{\xi})\right]
 \approx
-\mathbb{E}_{P}\!\left[f(x^{*}_{2},\tilde{\xi})\right].
-\tag{46}
-\]
-Se gli alberi sono affidabili, non si dovrebbe osservare una differenza significativa in performance.
+\mathbb{E}_{\mathbb{P}}\!\left[f(x^{*}_{2},\tilde{\xi})\right].
+\)
+Se gli alberi sono affidabili, le prestazioni reali non dovrebbero cambiare in modo significativo.
 
 \paragraph{Valutazione out-of-sample: due stadi vs multistadio}
-Il controllo out-of-sample è relativamente semplice in un modello a due stadi: si inserisce la soluzione di primo stadio in molti problemi di secondo stadio, ciascuno corrispondente a una realizzazione osservata dei fattori di rischio $\tilde{\xi}$. In genere questo non è troppo oneroso (specie se i secondi stadi sono LP): di regola, risolvere un grande LP stocastico richiede più tempo che risolvere molti LP deterministici.
+Nei modelli a \textbf{due stadi} la verifica out-of-sample è relativamente semplice: si fissa la soluzione di primo stadio e si risolvono molti problemi di secondo stadio corrispondenti a diverse realizzazioni di $\tilde{\xi}$. Nei modelli \textbf{multistadio}, invece, una valutazione realistica richiede tipicamente una simulazione \textbf{rolling horizon}, che è computazionalmente costosa.
 
-In un contesto multistadio, invece, la valutazione realistica richiede una costosa simulazione in rolling horizon.
-
-\paragraph{Rolling horizon vs shrinking horizon}
-Si distinguono due alternative:
+\paragraph{Rolling horizon e shrinking horizon}
 \begin{itemize}[label=-]
-    \item \textbf{Sliding/rolling horizon.} Si risolve un problema multistadio con $H$ stadi, si applica la decisione di primo stadio, si osserva una realizzazione out-of-sample dei fattori di rischio nel primo periodo, quindi si risolve di nuovo un problema multistadio con $H$ stadi a partire dal secondo periodo del modello originale.
-    \item \textbf{Shrinking horizon.} Si risolve un problema multistadio con $H$ stadi, si applica la decisione di primo stadio, si osserva una realizzazione out-of-sample, e poi si risolve un problema multistadio con $H-1$ stadi; a ogni passo si riduce il numero di stadi.
+    \item \textcolor{NavyBlue}{\textbf{Sliding/rolling horizon}}: si risolve un problema con $H$ stadi, si applica la prima decisione, si osserva una realizzazione out-of-sample e si risolve di nuovo un problema con $H$ stadi a partire dal periodo successivo.
+    \item \textcolor{NavyBlue}{\textbf{Shrinking horizon}}: si risolve con $H$ stadi, si applica la prima decisione, si osserva una realizzazione e poi si risolve con $H-1$ stadi, riducendo progressivamente l’orizzonte. Lo shrinking horizon è più economico quando l’orizzonte di valutazione è ben definito.
 \end{itemize}
-Il secondo approccio ha senso quando l’orizzonte di valutazione è ben definito ed è computazionalmente più economico del primo. In ogni caso, un rolling horizon è tecnicamente fattibile ma costoso.
 
 \paragraph{Test economico alternativo: scambio degli alberi}
-Un’alternativa più economica consiste nel generare $x^{*}_{1}$ e $x^{*}_{2}$ da alberi $T_{1}$ e $T_{2}$ e poi valutare i valori obiettivo approssimati scambiando gli alberi, verificando ad esempio:
-\[
-\widehat{F}(x^{*}_{1};T_{2}) \approx \widehat{F}(x^{*}_{2};T_{1}).
-\]
+Un controllo più economico consiste nel generare soluzioni da due alberi $T_1$ e $T_2$ e \textbf{valutarle scambiando gli alberi}, verificando se
+\(
+\widehat{f}(x^{*}_{1};T_{2}) \approx \widehat{f}(x^{*}_{2};T_{1}).
+\)
 
-\paragraph{Osservazione finale: limiti operativi dello stochastic programming}
-La necessità di valutazione out-of-sample evidenzia un possibile problema dell’approccio di programmazione stocastica: si ottiene una soluzione di primo stadio \emph{here-and-now}, ma non esiste un modo ovvio per adattare le decisioni ai periodi successivi quando l’incertezza si realizza, perché tutte le decisioni sono generate esplicitamente e associate ai nodi dell’albero. Approcci alternativi, come la \textbf{programmazione dinamica} e le \textbf{decision rules}, forniscono invece decisioni in forma di feedback, risultando particolarmente adatti alla simulazione out-of-sample e alla valutazione delle politiche.
-
+\paragraph{Osservazione finale: limite operativo dello stochastic programming}
+La necessità di valutazione out-of-sample evidenzia che la programmazione stocastica produce decisioni esplicite \textbf{associate ai nodi dell’albero}; non fornisce direttamente una politica generale facilmente applicabile quando l’incertezza si realizza fuori dagli scenari previsti. Approcci come \textbf{programmazione dinamica} e \textbf{decision rules} restituiscono invece decisioni in \textbf{feedback}, più adatte alla simulazione e alla valutazione delle politiche.
 
 \subsection{Convessità nei modelli di programmazione stocastica}
-
 \paragraph{Vincoli probabilistici congiunti}
 Si consideri un vincolo probabilistico congiunto della forma
-\[
-\mathbb{P}\bigl(\{\omega \mid g(x;\xi(\omega)) \le 0\}\bigr) \ge 1 - \alpha,
-\]
-dove $g$ è una funzione vettoriale.  
-Un punto $\hat{x}$ è ammissibile se l’insieme
-\[
-S(\hat{x}) = \{\omega \mid g(\hat{x};\xi(\omega)) \le 0\}
-\]
-ha misura di probabilità almeno pari a $1-\alpha$.
-
-Sia $\mathcal{F}$ il campo di tutti gli eventi e sia $\mathcal{G} \subseteq \mathcal{F}$ la collezione degli eventi con probabilità almeno $1-\alpha$.  
-Allora $\hat{x}$ è ammissibile se esiste almeno un evento $G \in \mathcal{G}$ tale che
-\[
-g(\hat{x};\xi(\omega)) \le 0 \quad \forall \omega \in G,
-\]
+\(
+\mathbb{P}\bigl(\{\omega \mid \mathbf{g}(\mathbf{x};\boldsymbol{\xi}(\omega)) \le \mathbf{0}\}\bigr) \ge 1 - \alpha,
+\)
+dove $\mathbf{g}$ è una funzione vettoriale.
+Un punto $\hat{\mathbf{x}}$ è ammissibile se l’insieme
+\(
+\mathbb{S}(\hat{\mathbf{x}}) = \{\omega \mid \mathbf{g}(\hat{\mathbf{x}};\boldsymbol{\xi}(\omega)) \le \mathbf{0}\}
+\)
+ha misura di probabilità almeno pari a $1-\alpha$.\\
+\hspace*{1.5em} Sia $\mathcal{F}$ il campo di tutti gli eventi e sia $\mathcal{G} \subseteq \mathcal{F}$ la collezione degli eventi con probabilità almeno $1-\alpha$.  
+Allora $\hat{x}$ è \emph{ammissibile} se esiste almeno un evento $G \in \mathcal{G}$ tale che
+\(
+\mathbf{g}(\hat{\mathbf{x}};\boldsymbol{\xi}(\omega)) \le \mathbf{0}
+\quad \forall \,\omega \in G,
+\)
 ossia
 \[
-\hat{x} \in \bigcap_{\omega \in G} \{x \mid g(x;\xi(\omega)) \le 0\}.
+\hat{\mathbf{x}} \in \bigcap_{\omega \in G}
+\left\{\mathbf{x} \mid \mathbf{g}(\mathbf{x};\boldsymbol{\xi}(\omega)) \le \mathbf{0}\right\}.
 \]
 
 \paragraph{Struttura dell’insieme ammissibile}
-L’insieme ammissibile complessivo può quindi essere scritto come
+L'\textcolor{NavyBlue}{\textbf{insieme ammissibile}} complessivo può quindi essere scritto come
 \[
 X =
 \bigcup_{G \in \mathcal{G}}
 \bigcap_{\omega \in G}
-\{x \mid g(x;\xi(\omega)) \le 0\}.
+\left\{\mathbf{x} \mid \mathbf{g}(\mathbf{x};\boldsymbol{\xi}(\omega)) \le \mathbf{0}\right\}.
 \]
-Anche se per ogni $\omega$ l’insieme $\{x \mid g(x;\xi(\omega)) \le 0\}$ è convesso, non ci si può aspettare che l’insieme $X$ sia convesso in generale, poiché l’unione di insiemi convessi non è necessariamente convessa.
-
-La convessità del problema complessivo dipende dal tipo di distribuzione (continua o discreta), dalla sua funzione di distribuzione cumulativa, dalla natura dei vincoli (congiunti o disgiunti) e dalla struttura delle funzioni in $g$ (lineari, convesse/concave o arbitrarie).
+Anche se per ogni $\omega$ l’insieme
+\(
+\{\mathbf{x} \mid \mathbf{g}(\mathbf{x};\boldsymbol{\xi}(\omega)) \le \mathbf{0}\}
+\)
+è convesso, non ci si può aspettare che l’insieme $X$ sia convesso in generale, poiché l’unione di insiemi convessi non è necessariamente convessa.
+La convessità del problema complessivo dipende dal tipo di distribuzione (continua o discreta), dalla sua funzione di distribuzione cumulativa, dalla natura dei vincoli (congiunti o disgiunti) e dalla struttura delle funzioni in $\mathbf{g}$ (lineari, convesse/concave o arbitrarie).
 
 \paragraph{Vincolo probabilistico lineare con distribuzione normale}
 Si consideri un vincolo lineare casuale
+\(
+\mathbf{a}^T \mathbf{x} \le b,
+\)
+dove $\mathbf{a} \sim \mathcal{N}(\boldsymbol{\mu},\boldsymbol{\Sigma})$, e si richieda
+\(
+\mathbb{P}\{\mathbf{a}^T \mathbf{x} \le b\} \ge \eta.
+\)
+Per un dato vettore $\mathbf{x}$, la variabile casuale $\mathbf{a}^T \mathbf{x}$ è distribuita come
+\(
+\mathbf{a}^T \mathbf{x} \sim \mathcal{N}(\nu,\sigma^2),
+\)
+dove $\nu = \boldsymbol{\mu}^T \mathbf{x}$ e $\sigma^2 = \mathbf{x}^T \boldsymbol{\Sigma}\mathbf{x}$.\\
+\hspace*{1.5em} Usando la funzione di distribuzione cumulativa della normale standard $\Phi(\cdot)$, il vincolo può essere riscritto come
 \[
-a^T x \le b,
-\]
-dove $a \sim \mathcal{N}(\mu,\Sigma)$, e si richieda
-\[
-\mathbb{P}\{a^T x \le b\} \ge \eta.
-\]
-Per un dato vettore $x$, la variabile casuale $a^T x$ è distribuita come
-\[
-a^T x \sim \mathcal{N}(\nu,\sigma^2),
-\]
-dove $\nu = \mu^T x$ e $\sigma^2 = x^T \Sigma x$.
-
-Usando la funzione di distribuzione cumulativa della normale standard $\Phi(\cdot)$, il vincolo può essere riscritto come
-\[
-\Phi\!\left(\frac{b-\nu}{\sigma}\right) \ge \eta,
-\]
-ossia
-\[
-\frac{b-\nu}{\sigma} \ge \Phi^{-1}(\eta).
+\mathbb{P}\!\left\{
+\frac{\mathbf{a}^{T}\mathbf{x} - \nu}{\sigma}
+\le
+\frac{b - \nu}{\sigma}
+\right\}
+=
+\Phi\!\left(\frac{b - \nu}{\sigma}\right)
+\ge \eta
+\;\Longleftrightarrow\;
+\frac{b - \nu}{\sigma}
+\ge
+\Phi^{-1}(\eta).
 \]
 Assumendo $\eta > 0.5$, quindi $\Phi^{-1}(\eta) > 0$, il vincolo diventa
 \[
-\mu^T x + \Phi^{-1}(\eta)\,\|\Sigma^{1/2}x\|_2 \le b,
+\boldsymbol{\mu}^T \mathbf{x} + \Phi^{-1}(\eta)\,\|\boldsymbol{\Sigma}^{1/2}\mathbf{x}\|_2 \le b,
 \]
 che è un vincolo conico del secondo ordine.  
-Ne segue che un problema di programmazione lineare con vincoli probabilistici disgiunti di questo tipo è un problema convesso di tipo SOCP.
+Ne segue che un problema di programmazione lineare con vincoli probabilistici disgiunti di questo tipo è un \textcolor{NavyBlue}{\textbf{problema convesso di tipo SOCP}}.
 
 \paragraph{Convessità della funzione di ricorso}
 Si consideri ora la funzione di ricorso
-\[
-Q(x) = \mathbb{E}[Q(x;\xi)]
-\]
+\(
+Q(\mathbf{x}) = \mathbb{E}[Q(\mathbf{x};\boldsymbol{\tilde{\xi}})]
+\)
 nel caso di costo di ricorso deterministico, con
 \[
-Q(x;\xi) = \min_{y}
+Q(\mathbf{x};\boldsymbol{\xi}) = \min_{\mathbf{y}}
 \left\{
-q^T y \mid Wy = h(\xi) - T(\xi)x,\; y \ge 0
+\mathbf{q}^T \mathbf{y} \mid \mathbf{W}\mathbf{y} = \mathbf{h}(\boldsymbol{\xi}) - \mathbf{T}(\boldsymbol{\xi})\mathbf{x},\; \mathbf{y} \ge \mathbf{0}
 \right\}.
 \]
-Il dominio effettivo di $Q(x)$ è costituito dai vettori $x$ ammissibili per i vincoli di primo stadio tali che $Q(x) < +\infty$, ossia per cui il problema di secondo stadio è (quasi sicuramente) ammissibile.
-
-Per dualità della programmazione lineare si ottiene
+Il dominio effettivo di $Q(\mathbf{x})$ è costituito dai vettori $\mathbf{x}$ ammissibili per i vincoli di primo stadio tali che $Q(\mathbf{x}) < +\infty$, ossia per cui il problema di secondo stadio è (quasi sicuramente) ammissibile.
+\\ \hspace*{1.5em} Per \textcolor{NavyBlue}{\textbf{dualità della programmazione lineare}} si ottiene
 \[
-Q(x;\xi) =
-\max_{\pi}
+Q(\mathbf{x};\boldsymbol{\xi}) =
+\max_{\boldsymbol{\pi}}
 \left\{
-[h(\xi)-T(\xi)x]^T \pi \mid W^T \pi \le q
+[\mathbf{h}(\boldsymbol{\xi})-\mathbf{T}(\boldsymbol{\xi})\mathbf{x}]^T \boldsymbol{\pi}
+\mid \mathbf{W}^T \boldsymbol{\pi} \le \mathbf{q}
 \right\}.
 \]
 Si denoti con
-\[
-\mathcal{D} = \{\pi \mid W^T \pi \le q\}
-\]
-l’insieme ammissibile del duale, che è non casuale poiché $q$ è deterministico.
+\(
+\Pi = \{\boldsymbol{\pi} \mid \mathbf{W}^T \boldsymbol{\pi} \le \mathbf{q}\}
+\)
+l’\textbf{insieme ammissibile del duale}, che è non casuale poiché $\mathbf{q}$ è deterministico.
 
 \paragraph{Dimostrazione della convessità}
-Siano $x_1,x_2 \in D$, $\lambda \in [0,1]$, e $x_\lambda = \lambda x_1 + (1-\lambda)x_2$. Allora
+Siano $\mathbf{x}_1,\mathbf{x}_2 \in D$, $\lambda \in [0,1]$, e $\mathbf{x}_\lambda = \lambda \mathbf{x}_1 + (1-\lambda)\mathbf{x}_2$. Allora
+Si considerino $\mathbf{x}^1,\mathbf{x}^2 \in \mathcal{D}$, $\lambda \in [0,1]$, e
+$\mathbf{x}_\lambda = \lambda \mathbf{x}^1 + (1-\lambda)\mathbf{x}^2$.
+
 \[
 \begin{aligned}
-Q(x_\lambda)
-&= \int Q(x_\lambda;\xi)\, dP \\
-&= \int \max_{\pi \in \mathcal{D}}
+Q(\mathbf{x}_\lambda)
+&\overset{\mathrm{def}}{=}
+\int Q(\mathbf{x}_\lambda,\boldsymbol{\xi})\, dP \\[1mm]
+&=
+\int \max_{\boldsymbol{\pi} \in \Pi}
 \left\{
-[h(\xi)-T(\xi)x_\lambda]^T \pi
-\right\} dP \\
-&= \int \max_{\pi \in \mathcal{D}}
+\big[\mathbf{h}(\boldsymbol{\xi}) - \mathbf{T}(\boldsymbol{\xi})\mathbf{x}_\lambda\big]^T
+\boldsymbol{\pi}
+\right\} dP \\[1mm]
+&=
+\int \max_{\boldsymbol{\pi} \in \Pi}
 \left\{
-\lambda [h(\xi)-T(\xi)x_1]^T \pi
-+ (1-\lambda)[h(\xi)-T(\xi)x_2]^T \pi
-\right\} dP \\
-&\le \lambda Q(x_1) + (1-\lambda)Q(x_2).
+\lambda
+\big[\mathbf{h}(\boldsymbol{\xi}) - \mathbf{T}(\boldsymbol{\xi})\mathbf{x}^1\big]^T
+\boldsymbol{\pi}
++
+(1-\lambda)
+\big[\mathbf{h}(\boldsymbol{\xi}) - \mathbf{T}(\boldsymbol{\xi})\mathbf{x}^2\big]^T
+\boldsymbol{\pi}
+\right\} dP \\[1mm]
+&\le
+\lambda
+\int
+\max_{\boldsymbol{\pi} \in \Pi}
+\left\{
+\big[\mathbf{h}(\boldsymbol{\xi}) - \mathbf{T}(\boldsymbol{\xi})\mathbf{x}^1\big]^T
+\boldsymbol{\pi}
+\right\} dP
++
+(1-\lambda)
+\int
+\max_{\boldsymbol{\pi} \in \Pi}
+\left\{
+\big[\mathbf{h}(\boldsymbol{\xi}) - \mathbf{T}(\boldsymbol{\xi})\mathbf{x}^2\big]^T
+\boldsymbol{\pi}
+\right\} dP \\[1mm]
+&=
+\lambda Q(\mathbf{x}^1) + (1-\lambda) Q(\mathbf{x}^2).
 \end{aligned}
 \]
 Pertanto la funzione di ricorso è convessa.
 
 \paragraph{Osservazioni finali}
-La dimostrazione precedente è semplice poiché l’insieme ammissibile del duale è non casuale. In realtà, la convessità della funzione di ricorso può essere dimostrata in un contesto più generale.
+La dimostrazione precedente risulta particolarmente semplice poiché l’\textbf{insieme ammissibile del problema duale è non casuale}. In un contesto più generale, tuttavia, la \textbf{convessità della funzione di ricorso} può essere dimostrata anche senza questa assunzione.
+In particolare, la funzione di ricorso è \textbf{tipicamente continua} quando le variabili aleatorie seguono \textbf{distribuzioni continue}, mentre nel caso di \textbf{distribuzioni discrete} essa assume una struttura \textbf{poliedrica}. In entrambi i casi è possibile applicare il \textbf{metodo dei piani di taglio di Kelley}. Inoltre, grazie alla \textbf{struttura del problema}, tali piani di taglio possono essere generati in modo efficiente tramite \textbf{strategie di decomposizione}.
 
-In sintesi:
-\begin{itemize}[label=-]
-\item la funzione di ricorso è tipicamente continua nel caso di distribuzioni continue;
-\item la funzione di ricorso è poliedrica nel caso di distribuzioni discrete;
-\item in entrambi i casi è possibile applicare il metodo dei piani di taglio di Kelley;
-\item data la struttura del problema, i piani di taglio possono essere generati tramite strategie di decomposizione.
-\end{itemize}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% PDF 2 COMPLESSITA' COMPUTAZIONALE %%%%%%%%%%%%%%%%%%%%%%%%%%%%
