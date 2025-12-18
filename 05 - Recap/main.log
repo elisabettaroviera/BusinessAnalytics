@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.11.21)  18 DEC 2025 14:12
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.11.21)  18 DEC 2025 15:41
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -503,93 +503,93 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 64.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
-{C:/Users/elisa/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] [2] [3] [4] [5] [6] [7] [8] [9] [10] [11]
-Overfull \hbox (16.10872pt too wide) in paragraph at lines 693--694
+{C:/Users/elisa/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] [2] [3] [4] [5] [6] [7] [8] [9] [10]
+Overfull \hbox (16.10872pt too wide) in paragraph at lines 668--669
 [] []\OT1/cmr/bx/n/12 Non-an-tic-i-pa-tivit^^Ra nel tree[] \OT1/cmr/m/n/12 La strut-tura ad al-bero ^^Re fon-da-men-tale per rap-p-re-sentare la non-anticipativit^^Ra:
  []
 
-[12] [13] [14] [15] [16] [17] [18] [19] [20] [21]
-Underfull \hbox (badness 10000) in paragraph at lines 1156--1158
+[11] [12] [13] [14] [15] [16] [17] [18] [19] [20]
+Underfull \hbox (badness 10000) in paragraph at lines 1131--1133
 
  []
 
-[22] [23] [24] [25] [26] [27]
-Overfull \hbox (22.59113pt too wide) in paragraph at lines 1601--1602
+[21] [22] [23] [24] [25] [26]
+Overfull \hbox (22.59113pt too wide) in paragraph at lines 1576--1577
 [] []\OT1/cmr/bx/n/12 Schema do-man-da--of-ferta[] \OT1/cmr/m/n/12 Il mec-ca-n-ismo risul-tante pu^^Ro es-sere in-ter-pre-tato come uno schema di \OT1/cmr/bx/n/12 domanda--
  []
 
-[28] [29]
-Overfull \hbox (3.1121pt too wide) in paragraph at lines 1726--1726
+[27] [28]
+Overfull \hbox (3.1121pt too wide) in paragraph at lines 1701--1701
 |[]\OT1/cmr/bx/n/14.4 Part 2 -- Ben-ders de-com-po-si-tion and L-shaped de-com-po-si-tion for stochas-
  []
 
-[30] [31] [32] [33] [34]
-Overfull \hbox (36.17976pt too wide) in paragraph at lines 2047--2049
+[29] [30] [31] [32] [33]
+Overfull \hbox (36.17976pt too wide) in paragraph at lines 2022--2024
 \OT1/cmr/m/n/12 dove $\OML/cmm/m/it/12 K[] \OMS/cmsy/m/n/12 ^^Z \OML/cmm/m/it/12 K$\OT1/cmr/m/n/12 . Come miglio-rare la soluzione in-tro-ducendo una nuova colonna? :con-tentRe-f-er-ence[oaicite:4]index=4 
  []
 
 
-Overfull \hbox (2.36768pt too wide) in paragraph at lines 2096--2098
+Overfull \hbox (2.36768pt too wide) in paragraph at lines 2071--2073
 \OT1/cmr/m/n/12 Si sep-a-rano i vin-coli in-ter-pre-tando (12) come vin-coli \OT1/cmr/bx/n/12 com-pli-canti\OT1/cmr/m/n/12 , men-tre (13) (in-sieme alla non-negativit^^Ra)
  []
 
-[35] [36] [37] [38]
+[34] [35] [36] [37]
 
 pdfTeX warning: pdflatex (file ./Architettura_MRP.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Architettura_MRP.pdf, id=142, 845.0471pt x 597.50829pt>
+<Architettura_MRP.pdf, id=139, 845.0471pt x 597.50829pt>
 File: Architettura_MRP.pdf Graphic file (type pdf)
 <use Architettura_MRP.pdf>
-Package pdftex.def Info: Architettura_MRP.pdf  used on input line 2309.
+Package pdftex.def Info: Architettura_MRP.pdf  used on input line 2284.
 (pdftex.def)             Requested size: 378.42001pt x 267.57248pt.
-[39 <./Architettura_MRP.pdf>]
-Overfull \hbox (2.17165pt too wide) in paragraph at lines 2335--2336
+[38 <./Architettura_MRP.pdf>]
+Overfull \hbox (2.17165pt too wide) in paragraph at lines 2310--2311
 [] []\OT1/cmr/bx/n/12 Mas-ter Pro-duc-tion Schedul-ing (MPS)[] \OT1/cmr/m/n/12 Il \OT1/cmr/bx/n/12 Mas-ter Pro-duc-tion Sched-ule (MPS) \OT1/cmr/m/n/12 cos-ti-tu-isce l'input
  []
 
-[40] [41] [42]
-Overfull \hbox (2.88684pt too wide) in paragraph at lines 2467--2468
+[39] [40] [41]
+Overfull \hbox (2.88684pt too wide) in paragraph at lines 2442--2443
 []\OT1/cmr/m/n/12 La pro-ce-dura \OT1/cmr/bx/n/12 shift-ing bot-tle-neck \OT1/cmr/m/n/12 de-com-pone $\OML/cmm/m/it/12 J==C[]$ \OT1/cmr/m/n/12 in prob-lemi su macchina sin-gola del tipo $1\OML/cmm/m/it/12 =r[]=L[]$\OT1/cmr/m/n/12 ,
  []
 
-[43] [44] [45] [46] [47] [48] [49] [50] [51] [52] [53] [54] [55] [56] [57]
-Overfull \hbox (10.87543pt too wide) in paragraph at lines 3318--3321
+[42] [43] [44] [45] [46] [47] [48] [49] [50] [51] [52] [53] [54] [55] [56]
+Overfull \hbox (10.87543pt too wide) in paragraph at lines 3293--3296
 [] []\OT1/cmr/bx/n/12 In-ter-pre-tazione eco-nom-ica[] \OT1/cmr/m/n/12 In mi-croe-cono-mia, il con-sumer sur-plus ^^Re una misura ap-prossi-mata dell'utilit^^Ra
  []
 
-[58] [59] [60] [61] [62] [63] [64] [65] [66] [67]
-Overfull \hbox (16.67126pt too wide) in paragraph at lines 3970--3971
+[57] [58] [59] [60] [61] [62] [63] [64] [65] [66]
+Overfull \hbox (16.67126pt too wide) in paragraph at lines 3945--3946
 []\OT1/cmr/m/n/12 se le marche sono omo-ge-nee (lo-cal-iz-zate nello stesso punto), al-lora $\OML/cmm/m/it/12 p[] \OT1/cmr/m/n/12 = \OML/cmm/m/it/12 p[] \OT1/cmr/m/n/12 = 0$ a causa dell'undercutting; 
  []
 
-[68] [69] [70] [71] [72] [73] [74] [75] [76] [77] [78] [79] [80] [81] [82] [83] [84]
-Overfull \hbox (18.24883pt too wide) in paragraph at lines 5078--5079
+[67] [68] [69] [70] [71] [72] [73] [74] [75] [76] [77] [78] [79] [80] [81] [82] [83]
+Overfull \hbox (18.24883pt too wide) in paragraph at lines 5053--5054
 [] []\OT1/cmr/bx/n/12 Prob-lema de-ter-min-is-tico[] \OT1/cmr/m/n/12 In un prob-lema de-ter-min-is-tico, si cerca una se-quenza di vet-tori $(\OML/cmm/m/it/12 x[]; x[]; [] ; x[]\OT1/cmr/m/n/12 )$
  []
 
-[85] [86] [87]
-Overfull \hbox (3.30821pt too wide) in paragraph at lines 5301--5302
+[84] [85] [86]
+Overfull \hbox (3.30821pt too wide) in paragraph at lines 5276--5277
 [] []\OT1/cmr/bx/n/12 Mo-ti-vazione dell'approccio DP[] \OT1/cmr/m/n/12 Il prob-lema pu^^Ro es-sere risolto in modo ef-fi-ciente con al-go-ritmi \OT1/cmr/bx/n/12 branch-
  []
 
-[88]
-Overfull \hbox (27.50768pt too wide) in paragraph at lines 5379--5380
+[87]
+Overfull \hbox (27.50768pt too wide) in paragraph at lines 5354--5355
 [] []\OT1/cmr/bx/n/12 Com-p-lessit^^Ra com-putazionale[] \OT1/cmr/m/n/12 As-sumendo dati in-teri, la com-p-lessit^^Ra ^^Re $\OML/cmm/m/it/12 O\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 nB\OT1/cmr/m/n/12 )$, quindi \OT1/cmr/bx/n/12 pseudo-polinomiale\OT1/cmr/m/n/12 .
  []
 
-[89] [90]
+[88] [89]
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <12> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 5475.
- [91]
-Overfull \hbox (16.52957pt too wide) in paragraph at lines 5544--5546
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 5450.
+ [90]
+Overfull \hbox (16.52957pt too wide) in paragraph at lines 5519--5521
 [] []\OT1/cmr/bx/n/12 Scopo di \OT1/cmtt/m/n/12 MakePolicy[] \OT1/cmr/m/n/12 La fun-zione \OT1/cmtt/m/n/12 MakePolicy \OT1/cmr/m/n/12 serve ad ap-pren-dere le fun-zioni val-ore \OT1/cmr/bx/n/12 a ritroso \OT1/cmr/m/n/12 (\OT1/cmr/bx/n/12 backward\OT1/cmr/m/n/12 )
  []
 
-[92] [93] [94] [95] [96] [97] [98]
-Overfull \hbox (1.13966pt too wide) in paragraph at lines 6056--6057
+[91] [92] [93] [94] [95] [96] [97]
+Overfull \hbox (1.13966pt too wide) in paragraph at lines 6031--6032
 [] []\OT1/cmr/bx/n/12 Ap-procci quan-ti-ty-based e price-based[] \OT1/cmr/m/n/12 Es-istono due ap-procci: \OT1/cmr/bx/n/12 quantity-based \OT1/cmr/m/n/12 (si limita la disponi-
  []
 
-[99] [100] [101] [102] [103] [104] [105] [106] [107] [108] [109] [110] [111] (main.aux)
+[98] [99] [100] [101] [102] [103] [104] [105] [106] [107] [108] [109] [110] (main.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-10-24>
@@ -598,15 +598,15 @@ L3 programming layer <2025-10-24>
 Here is how much of TeX's memory you used:
  16294 strings out of 467871
  318289 string characters out of 5418375
- 727229 words of memory out of 5000000
+ 729229 words of memory out of 5000000
  44871 multiletter control sequences out of 15000+600000
  641700 words of font info for 92 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  84i,14n,104p,1344b,403s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmib10.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/latxfont/lcmss8.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/latxfont/lcmssi8.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (111 pages, 2083985 bytes).
+Output written on main.pdf (110 pages, 2082436 bytes).
 PDF statistics:
- 487 PDF objects out of 1000 (max. 8388607)
+ 484 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  18 words of extra memory for PDF output out of 10000 (max. 10000000)
 

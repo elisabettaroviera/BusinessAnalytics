@@ -104,16 +104,16 @@ In generale, \emph{non esiste una previsione “migliore” in senso assoluto, m
 L’obiettivo non è la previsione di una variabile aleatoria, ma la \textbf{selezione di un vettore di decisioni} $x \in X$ che ottimizzi una funzione economica in presenza di \emph{fattori di rischio}. 
 Se $\xi$ denota un vettore di variabili aleatorie che influenzano il risultato economico, il problema può essere formulato come un \textcolor{NavyBlue}{\textbf{problema di ottimizzazione sotto incertezza}}
 \[
-\min_{x \in S} f(x,\xi)
+\min_{x \in S} f(x,\xi).
 \]
 \hspace*{1.5em} Se non si dispone di informazioni probabilistiche sui fattori di rischio e si conosce solo un insieme di incertezza $U$, 
 e il set di ammissibilità $S$, il problema assume la forma di un \textcolor{NavyBlue}{\textbf{worst-case robust optimization problem}}
 \[
-\min_{x \in S} \; \max_{\xi \in U} f(x,\xi)
+\min_{x \in S} \; \max_{\xi \in U} f(x,\xi).
 \]
 \hspace*{1.5em} Se invece i fattori di rischio sono modellati come variabili casuali con distribuzione nota, si ottiene un \textcolor{NavyBlue}{\textbf{problema di ottimizzazione stocastica}}
 \[
-\min_{x \in S} \; \mathbb{E}_\mathbb{P}\big[f(x,\tilde{\xi})\big]
+\min_{x \in S} \; \mathbb{E}_\mathbb{P}\big[f(x,\tilde{\xi})\big].
 \]
 Questa formulazione mette in evidenza che, in generale,
 \(
@@ -299,63 +299,40 @@ Il concetto di VSS viene ulteriormente chiarito attraverso esempi numerici e rap
 \textcolor{NavyBlue}{\textbf{modelli di ottimizzazione a due stadi e multi-stadio}}, nei quali le decisioni possono 
 essere adattate dopo l’osservazione dell’incertezza.
 
-\subsection{Un'introduzione a un modello a due stadi: Assemble-to-order}
-Si consideri un esempio didattico di \textbf{pianificazione della produzione} in cui i prodotti finiti sono ottenuti assemblando un insieme di componenti. Ogni prodotto finale è caratterizzato da un insieme di caratteristiche, per ciascuna delle quali sono disponibili opzioni alternative che richiedono componenti diversi. Dalla combinazione di un numero limitato di componenti può derivare un numero molto elevato di prodotti finali.
-
-Per questo motivo, non è possibile proteggersi dall’incertezza della domanda mantenendo scorte di prodotti finiti. D’altra parte, una strategia puramente \emph{make-to-order} può risultare poco efficace a causa dei lunghi tempi di approvvigionamento dei componenti. In un ambiente \textbf{Assemble-To-Order (ATO)}, in cui l’assemblaggio è rapido, è invece possibile mantenere a magazzino i componenti e assemblare i prodotti finali solo dopo aver osservato la domanda.
-
-Questo contesto suggerisce naturalmente una \textbf{strategia a due stadi}:
+\subsection{Un'introduzione a un modello a due stadi: Assemble-to-order (ATO)}
+\paragraph{ATO} Si consideri un esempio didattico di \textbf{pianificazione della produzione} in cui i prodotti finiti sono ottenuti assemblando un insieme di componenti. Ogni prodotto finale è caratterizzato da un insieme di caratteristiche, per ciascuna delle quali sono disponibili opzioni alternative che richiedono componenti diversi. Dalla combinazione di un numero limitato di componenti può derivare un numero molto elevato di prodotti finali.\\
+\hspace*{1.5em} Per questo motivo, non è possibile proteggersi dall’incertezza della domanda mantenendo scorte di prodotti
+finiti. D’altra parte, una strategia puramente \textcolor{NavyBlue}{\textbf{make-to-order}} può risultare poco efficace a
+causa dei lunghi tempi di approvvigionamento dei componenti. In un ambiente \textcolor{NavyBlue}{\textbf{assemble-To-Order}}, in cui
+l’assemblaggio è rapido, è invece possibile mantenere a magazzino i componenti e assemblare i prodotti finali solo dopo 
+aver osservato la domanda.\\
+\hspace*{1.5em} Questo contesto suggerisce naturalmente una \textbf{strategia a due stadi}:
 \begin{itemize}[label=-]
-    \item pianificazione della produzione dei componenti \textbf{here-and-now}, sotto incertezza sulla domanda;
-    \item assemblaggio dei prodotti finali in modalità \textbf{wait-and-see}, dopo l’osservazione degli ordini.
+    \item Pianificazione della produzione dei componenti \textcolor{NavyBlue}{\textbf{here-and-now}}, sotto incertezza sulla domanda.
+    \item Assemblaggio dei prodotti finali in modalità \textcolor{NavyBlue}{\textbf{wait-and-see}}, dopo l’osservazione degli ordini.
 \end{itemize}
-
-\paragraph{Struttura del problema}
-Si considerino tre prodotti finali $(\mu_1,\mu_2,\mu_3)$ ottenuti assemblando cinque componenti $(2_1,2_2,2_3,2_4,2_5)$. La distinta base è piatta, con due soli livelli (prodotti finali e componenti), ed è riportata in Tabella~2.  
-Ad esempio, per assemblare una unità del prodotto $\mu_2$ sono necessari un componente $2_1$, uno $2_2$ e uno $2_4$. I componenti $2_1$ e $2_2$ sono comuni a più prodotti finali, mentre gli altri sono specifici.
-
-La produzione dei componenti utilizza tre gruppi di risorse produttive $(r_1,r_2,r_3)$. La Tabella~3 riporta:
-\begin{itemize}[label=-]
-    \item i tempi di lavorazione dei componenti su ciascun gruppo di risorse;
-    \item la capacità disponibile di ciascun gruppo;
-    \item il costo unitario dei componenti.
-\end{itemize}
-
-Si assume che l’assemblaggio non costituisca un collo di bottiglia. Il costo totale dei componenti necessari per ciascun prodotto finale è pari a $20+30+10=60$.
-
-\paragraph{Dati di mercato}
-I dati di domanda e di prezzo sono riportati in Tabella~4. La domanda è modellata tramite tre scenari equiprobabili $(B_1,B_2,B_3)$. Il prezzo di vendita è sempre superiore al costo dei componenti, ma il prodotto $\mu_3$ risulta il più redditizio, mentre $\mu_2$ è il meno profittevole.
 
 \paragraph{Modello deterministico a valore atteso}
-Ignorando l’incertezza della domanda e sostituendola con il valore medio, si introducono le seguenti variabili decisionali:
+\emph{Ignorando l’incertezza della domanda} e \emph{sostituendola con il valore medio}, si introducono le seguenti variabili decisionali
 \begin{itemize}[label=-]
-    \item $G_s \in \mathbb{Z}_+$, $s=1,\dots,5$, numero di componenti prodotti;
-    \item $H_j \in \mathbb{Z}_+$, $j=1,\dots,3$, numero di prodotti finali assemblati.
+    \item $x_i \in \mathbb{Z}_+$, $i=1,\dots,n_i$, numero di componenti prodotti.
+    \item $y_j \in \mathbb{Z}_+$, $j=1,\dots,n_j$, numero di prodotti finali assemblati.
 \end{itemize}
 
-Il problema di massimizzazione del profitto può essere formulato come:
-\[
-\max \; - \sum_{s=1}^{5} c_s G_s + \sum_{j=1}^{3} p_j H_j
-\tag{12}
-\]
-soggetto a:
-\[
-\sum_{s=1}^{5} a_{s\ell} G_s \le C_\ell, \quad \ell = 1,2,3,
-\tag{13}
-\]
-\[
-H_j \le d_j, \quad j=1,2,3,
-\tag{14}
-\]
-\[
-\sum_{j=1}^{3} b_{sj} H_j \le G_s, \quad s=1,\dots,5,
-\tag{15}
-\]
-\[
-G_s, H_j \in \mathbb{Z}_+.
-\]
+Il \textcolor{NavyBlue}{\textbf{problema di massimizzazione del profitto}} può essere formulato così
 
-La soluzione ottima produce principalmente il prodotto più profittevole $\mu_3$, seguita da una quantità limitata di $\mu_1$, mentre $\mu_2$ viene escluso. Il valore ottimo del problema deterministico risulta $5_{EV}=3220$.
+\begin{align*}
+\max \quad & - \sum_{i \in [n_i]} C_i x_i + \sum_{j \in [n_j]} P_j y_j \\[0.3em]
+\text{s.t.} \quad
+& \sum_{i \in [n_i]} T_{im} x_i \le L_m, 
+&& m \in [n_m]  \\[0.3em]
+& y_j \le \bar{d}_j,
+&& j \in [n_j]  \\[0.3em]
+& \sum_{j \in [n_j]} G_{ij} y_j \le x_i,
+&& i \in [n_i]  \\[0.3em]
+& x_i,\, y_j \in \mathbb{Z}_+,
+&& i \in [n_i],\ j \in [n_j]. 
+\end{align*}
 
 \paragraph{Limiti della soluzione deterministica}
 La soluzione ottenuta è facilmente interpretabile ma estremamente \textbf{sbilanciata}. Essa rappresenta una scommessa sulla domanda del prodotto più redditizio e può risultare molto rischiosa se la domanda effettiva si discosta dal valore medio.
@@ -363,165 +340,145 @@ La soluzione ottenuta è facilmente interpretabile ma estremamente \textbf{sbila
 \paragraph{Modello stocastico a due stadi}
 Per tenere conto dell’incertezza, si introducono:
 \begin{itemize}[label=-]
-    \item una domanda scenario-dipendente $d^B_j$ con probabilità $p_B$;
-    \item variabili di secondo stadio $H^B_j \in \mathbb{Z}_+$ per l’assemblaggio adattivo.
+    \item Una domanda scenario-dipendente $d^s_j$ con probabilità $\pi_s$;
+    \item Variabili di secondo stadio $y^s_j \in \mathbb{Z}_+$ per l’assemblaggio adattivo.
 \end{itemize}
-
-Il modello stocastico a due stadi è:
-\[
-\max \; - \sum_{s=1}^{5} c_s G_s
-+ \sum_{B=1}^{3} p_B
-\left(
-\sum_{j=1}^{3} p_j H^B_j
-\right)
-\tag{16}
-\]
-soggetto a:
-\[
-\sum_{s=1}^{5} a_{s\ell} G_s \le C_\ell, \quad \ell = 1,2,3,
-\tag{17}
-\]
-\[
-H^B_j \le d^B_j, \quad j=1,2,3,\; B=1,2,3,
-\tag{18}
-\]
-\[
-\sum_{j=1}^{3} b_{sj} H^B_j \le G_s, \quad s=1,\dots,5,\; B=1,2,3,
-\tag{19}
-\]
-\[
-G_s, H^B_j \in \mathbb{Z}_+.
-\]
-
-\paragraph{Soluzione del modello stocastico}
-La soluzione stocastica produce quantità di componenti meno estreme e decisioni di assemblaggio che variano a seconda dello scenario. Il valore atteso del profitto risulta
-\[
-5^{*} = 2883.33.
-\]
-
+Il \textcolor{NavyBlue}{\textbf{modello stocastico a due stadi}} è
+\begin{align*}
+\max \quad 
+& - \sum_{i \in [n_i]} C_i x_i 
+  + \sum_{s \in [n_s]} \pi^s 
+    \left( \sum_{j \in [n_j]} P_j y_j^s \right) \\[0.3em]
+\text{s.t.} \quad
+& \sum_{i \in [n_i]} T_{im} x_i \le L_m,
+&& m \in [n_m] \\[0.3em]
+& y_j^s \le \bar{d}_j^{\,s},
+&& j \in [n_j],\ s \in [n_s] \\[0.3em]
+& \sum_{j \in [n_j]} G_{ij} y_j^s \le x_i,
+&& i \in [n_i],\ s \in [n_s] \\[0.3em]
+& x_i, y_j^s \in \mathbb{Z}_+,
+&& i \in [n_i] j \in [n_j],\ s \in [n_s].\\[0.3em]
+\end{align*}
+La soluzione stocastica produce quantità di componenti meno estreme e decisioni di assemblaggio che variano a seconda dello scenario. 
 Le variabili di secondo stadio rappresentano piani di contingenza e non costituiscono output operativi immediati.
 
 \paragraph{Confronto corretto tra le soluzioni}
-Il confronto diretto tra $5^{*}$ e $5_{EV}$ non è significativo. Occorre invece fissare le decisioni di primo stadio e risolvere, per ciascuno scenario $B$, il problema di secondo stadio:
+Il confronto diretto tra $f^{*}$ e $f_{EV}$ non è significativo. Occorre fissare le decisioni al primo stadio e risolvere, 
+per ciascuno scenario $S$, il \textcolor{NavyBlue}{\textbf{problema al secondo stadio}}
+\begin{align*}
+R^s(\mathbf{x}^\circ) = \max \quad 
+& \sum_{j \in [n_j]} P_j y_j^s \\[0.3em]
+\text{s.t.} \quad
+& y_j^s \le d_j^{\,s},
+&& j \in [n_j] \\[0.3em]
+& \sum_{j \in [n_j]} G_{ij} y_j^s \le x_i^\circ,
+&& i \in [n_i] \\[0.3em]
+& y_j^s \in \mathbb{Z}_+,
+&& j \in [n_j].
+\end{align*}
+Dove $R^s(\mathbf{x}^\circ)$ è il \textbf{ricavo ottimo} che otteniamo nello scenario $s$,
+dato il vettore di decisione di \textbf{primo stadio} $\mathbf{x}^\circ$, sfruttando in modo
+ottimale i componenti disponibili per soddisfare la domanda. Si noti che, in questo modello, la disponibilità dei componenti $\mathbf{x}^\circ$ è data,
+a seconda dei casi, dal modello \textbf{stocastico} oppure dal modello
+\textbf{deterministico}. In entrambi i casi, il \textbf{ricavo atteso} risultante è dato da
 \[
-\varphi^B(x^\circ) =
-\max \sum_{j=1}^{3} p_j H^B_j
-\]
-soggetto a:
-\[
-H^B_j \le d^B_j,
-\quad
-\sum_{j=1}^{3} b_{sj} H^B_j \le G^\circ_s,
-\quad
-H^B_j \in \mathbb{Z}_+.
+\sum_{s \in S} \pi^s R^s(\mathbf{x}^\circ).
 \]
 
-\paragraph{Valutazione della soluzione deterministica}
-Applicando questa procedura alla soluzione deterministica, si osserva che uno degli scenari conduce a un grave spreco di componenti e a un profitto molto inferiore rispetto a quello previsto. Il valore atteso effettivo risulta:
-\[
-5_{EEV} = 2320,
-\]
-ben al di sotto di $5_{EV}=3220$.
 
-\paragraph{Valore della soluzione stocastica}
-Nel caso in esame:
-\[
-VSS = 5^{*} - 5_{EEV}
-= 2883.33 - 2320
-= 563.33.
-\]
-Questo valore quantifica il beneficio derivante dall’uso di un modello stocastico rispetto a una pianificazione deterministica basata su valori medi.
-
-\subsection{Two-stage models}
+\subsection{Modelli a due stadi}
 
 \paragraph{Dall’ATO ai modelli a due stadi con ricorso}
-Il modello \emph{assemble-to-order} della sezione precedente fornisce una buona introduzione ai \textbf{modelli di programmazione lineare stocastica a due stadi con ricorso} (\emph{recourse}), che rappresentano l’esempio più semplice di modelli di ottimizzazione adattivi.
-
-\paragraph{Decisioni di primo e secondo stadio}
+Il modello \emph{assemble-to-order} fornisce una buona introduzione ai \textbf{modelli di programmazione lineare stocastica a due stadi con ricorso} (\emph{recourse}), che rappresentano l’esempio più semplice di modelli di ottimizzazione adattivi.
 In un modello a due stadi si distinguono due tipi di decisioni:
 \begin{itemize}[label=-]
-    \item decisioni \textbf{here-and-now} (primo stadio) $x$, che devono essere prese sotto incertezza (ad esempio al tempo $t=0$);
-    \item decisioni \textbf{wait-and-see} (secondo stadio) $y(\tilde{\xi})$, che possono essere prese dopo aver osservato la realizzazione dei fattori di rischio $\tilde{\xi}$ (ad esempio al tempo $t=1$).
+    \item Decisioni \textbf{here-and-now} (primo stadio) $x$, che devono essere prese sotto incertezza (ad esempio al tempo $t=0$);
+    \item Decisioni \textbf{wait-and-see} (secondo stadio) $y(\tilde{\xi})$, che possono essere prese dopo aver osservato la realizzazione dei fattori di rischio $\tilde{\xi}$ (ad esempio al tempo $t=1$).
 \end{itemize}
-Le decisioni di secondo stadio sono anche dette \textbf{decisioni di ricorso}. Si osserva immediatamente che tali decisioni sono in realtà \textbf{politiche decisionali}, cioè funzioni che mappano la realizzazione dei fattori di rischio in una decisione ammissibile; pertanto appartengono a uno spazio \textbf{infinito-dimensionale}.
+Le decisioni di secondo stadio sono anche dette \textcolor{NavyBlue}{\textbf{decisioni di ricorso}}. Si osserva immediatamente che tali decisioni sono in realtà \textbf{politiche decisionali}, cioè funzioni che mappano la realizzazione dei fattori di rischio in una decisione ammissibile; pertanto appartengono a uno spazio \textbf{infinito-dimensionale}.
 
 \paragraph{Formulazione annidata del modello}
-Il modello può essere formulato come due problemi di ottimizzazione annidati:
+Il modello può essere formulato come \textcolor{NavyBlue}{\textbf{due problemi di ottimizzazione annidati}}
 \[
-\boxed{
 \begin{aligned}
 \min_{x}\;& c^{T}x + Q(x) \\
 \text{s.t. }\;& Ax=b \\
 & x \ge 0,
-\end{aligned}}
+\end{aligned}
 \]
 dove la \textbf{funzione di ricorso} è definita come
+\(
+Q(x) = \mathbb{E}_{\mathbb{P}}\!\left[Q(x,\tilde{\xi})\right].
+\)
+Il \textcolor{NavyBlue}{\textbf{problema al secondo stadio}} è
 \[
-\boxed{
-Q(x) = \mathbb{E}_{P}\!\left[\varphi(x,\tilde{\xi})\right].
-\tag{22}}
-\]
-Il problema di secondo stadio, dato $x$ e una realizzazione $\xi$ della variabile aleatoria $\tilde{\xi}$, è:
-\[
-\boxed{
 \begin{aligned}
-\varphi(x,\xi) = \min_{y}\;& q(\xi)^{T}y \\
+Q(x,\xi) = \min_{y}\;& q(\xi)^{T}y \\
 \text{s.t. }\;& Wy = h(\xi) - T(\xi)x \\
 & y \ge 0.
-\end{aligned}}
+\end{aligned}
 \]
 
 \paragraph{Ricorso fisso e non-linearità indotta dal ricorso}
-Nel problema di secondo stadio sia la decisione di primo stadio $x$ sia la realizzazione $\xi$ dei fattori di rischio sono dati. Risolvendo il secondo stadio per ogni realizzazione $\xi$, si definisce implicitamente una funzione $y(\tilde{\xi})$, mostrando che le variabili di secondo stadio sono effettivamente funzioni. In questa formulazione la matrice di ricorso $W$ non dipende da variabili aleatorie e si parla di \textbf{ricorso fisso} (\emph{fixed recourse}). La formulazione evidenzia che la programmazione lineare stocastica con ricorso è, in generale, un \textbf{problema di programmazione non lineare} (poiché $Q(x)$ dipende da $x$ tramite un problema di ottimizzazione interno).
-
-\paragraph{Difficoltà computazionali della funzione di ricorso}
-La funzione $Q(x)$ è un valore atteso rispetto alla distribuzione congiunta di $\tilde{\xi}$; se le variabili aleatorie sono continue, essa è un integrale multidimensionale. Inoltre, tale integrale riguarda una funzione che non è nota in forma chiusa, poiché è definita implicitamente dalla soluzione di un problema di ottimizzazione. In molti casi di interesse pratico si possono tuttavia dimostrare proprietà utili della funzione di ricorso, in particolare la \textbf{convessità}.
-
-\paragraph{Discretizzazione tramite scenari}
-Poiché le variabili di secondo stadio sono funzioni in uno spazio infinito-dimensionale, una strategia comune consiste nella discretizzazione tramite campionamento. Si genera un \textbf{albero di scenario} (un \emph{fan}) in cui l’evento $\omega^{B}$ corrisponde alla realizzazione dello scenario $B\in S$, con $S$ insieme degli scenari. Se gli scenari sono campionati via Monte Carlo semplice, le probabilità sono uniformi: $p_{B}=1/|S|$ (sono possibili anche metodi più sofisticati di generazione scenari).
+Nel problema di secondo stadio sia la decisione di primo stadio $x$ sia la realizzazione $\xi$ dei fattori di rischio
+sono dati. Risolvendo il secondo stadio per ogni realizzazione $\xi$, si definisce implicitamente una funzione
+$y(\tilde{\xi})$, mostrando che le variabili di secondo stadio sono effettivamente funzioni. In questa formulazione
+la \textbf{matrice di ricorso} $W$ non dipende da variabili aleatorie e si parla di \textbf{ricorso fisso} 
+(\emph{fixed recourse}). La formulazione evidenzia che \textcolor{NavyBlue}{\textbf{la programmazione lineare stocastica con ricorso è, in generale, 
+un problema di programmazione non lineare}} (poiché $Q(x)$ dipende da $x$ tramite un problema di ottimizzazione 
+interno).\\
+\hspace*{1.5em}
+La funzione $Q(x)$ è un valore atteso rispetto alla distribuzione congiunta di $\tilde{\xi}$; se le variabili aleatorie sono continue, essa è un integrale multidimensionale. Inoltre, tale integrale riguarda una funzione che non è nota in forma chiusa, poiché è definita implicitamente dalla soluzione di un problema di ottimizzazione. In molti casi di interesse pratico si possono tuttavia dimostrare proprietà utili della funzione di ricorso, in particolare la \textbf{convessità}.\\
+\hspace*{1.5em}
+Poiché le variabili di secondo stadio sono funzioni in uno spazio infinito-dimensionale, una strategia comune consiste 
+nella discretizzazione tramite campionamento. Si genera un \textbf{albero di scenario} (\emph{fan}) in cui l’evento
+ $\omega_{s}$ corrisponde alla realizzazione dello scenario $s\in S$, con $S$ insieme degli scenari.
+  Se gli scenari sono \textbf{campionati via Monte Carlo semplice}, le probabilità sono uniformi: $\pi_{s}=1/|S|$ 
+  (sono possibili anche metodi più sofisticati di generazione scenari).
 
 \paragraph{Modello deterministico equivalente (LP a grande scala)}
-La discretizzazione conduce al seguente modello:
+La discretizzazione conduce a
 \[
-\boxed{
 \begin{aligned}
-\min\;& c^{T}x + \sum_{B\in S} p_{B}\, (q^{B})^{T}y^{B}\\
+\min\;& c^{T}x + \sum_{s\in S} \pi_{s}\, (q^{s})^{T}y^{s}\\
 \text{s.t. }\;& Ax=b\\
-& Wy^{B} + T^{B}x = h^{B}, \quad B\in S \\
-& x,\; y^{B}\ge 0.
-\end{aligned}}
+& Wy_s + T_sx = h_s, \quad s\in S \\
+& x,\; y_s\ge 0.
+\end{aligned}
 \]
-Questo è un \textbf{LP} (sebbene potenzialmente di grande dimensione).
 
 \paragraph{Fattibilità del secondo stadio e concetti di ricorso completo}
-Una questione centrale è stabilire se il secondo stadio sia fattibile per ogni scelta delle variabili di primo stadio e per ogni realizzazione delle variabili aleatorie. Occorre restringere l’insieme delle decisioni \emph{here-and-now} al dominio in cui il secondo stadio è fattibile (equivalentemente, la funzione di ricorso è limitata; come usuale, a un problema infeattibile si associa costo infinito).
-
-Riscrivendo i vincoli di collegamento come
+Una questione centrale è stabilire se \textcolor{NavyBlue}{\textbf{il secondo stadio sia fattibile per ogni scelta delle variabili di primo stadio}} e 
+per ogni realizzazione delle variabili aleatorie. Occorre restringere l’insieme delle decisioni \emph{here-and-now} al
+ dominio in cui il secondo stadio è fattibile (equivalentemente, la funzione di ricorso è limitata; come usuale, a un 
+ problema infeattibile si associa costo infinito). Riscrivendo i vincoli di collegamento come
 \[
-Wy^{B}=h^{B}-T^{B}x, \quad B\in S,
+Wy_s=h_s-T_sx, \quad s\in S,
 \]
-il secondo stadio è fattibile quando il termine noto può essere espresso come combinazione conica delle colonne di $W$. In tal caso si parla di \textbf{complete recourse}. Se il ricorso completo non vale per decisioni arbitrarie di primo stadio, ma vale per le decisioni che soddisfano i vincoli del primo stadio, si parla di \textbf{relatively complete recourse}.
+il \textbf{secondo stadio è fattibile quando il termine noto può essere espresso come \textcolor{NavyBlue}{combinazione conica} delle colonne di $W$}. 
+In tal caso si parla di \textcolor{NavyBlue}{\textbf{complete recourse}}. Se il ricorso completo non vale per decisioni
+ arbitrarie di primo stadio, ma vale per le decisioni che soddisfano i vincoli del primo stadio, si parla di
+  \textcolor{NavyBlue}{\textbf{relatively complete recourse}}.\\
+\hspace*{1.5em} Nei problemi di business è spesso possibile introdurre flessibilità tramite penalità, in modo da evitare infeattibilità al secondo stadio. 
 
-\paragraph{Penalità e modelli elastici}
-Nei problemi di business è spesso possibile introdurre flessibilità tramite penalità, in modo da evitare infeattibilità al secondo stadio. Nelle sezioni successive l’idea viene illustrata con esempi concreti.
-
-\subsection{The plant location model}
+\subsubsection{The plant location model}
 
 \paragraph{Descrizione del problema e rete bipartita}
-Il classico \textbf{plant location model} è il più semplice problema di \textbf{network design}. Si considera una rete bipartita con un insieme $P$ di nodi sorgente potenziali e un insieme $D$ di nodi domanda. I nodi sorgente rappresentano impianti produttivi che possono essere aperti oppure no; i nodi domanda possono rappresentare magazzini regionali o centri retail. In ciascun nodo domanda si realizza una domanda aleatoria $\delta_{j}(\omega)$, $j\in D$, che va soddisfatta al costo minimo.
-
-\paragraph{Dati del modello}
-Sono necessari i seguenti dati:
+Il classico \textcolor{NavyBlue}{\textbf{plant location model}} è il più semplice problema di \textbf{network design}. 
+Si considera una rete bipartita con un insieme $P$ di nodi sorgente potenziali e un insieme $\cal{D}$ di nodi domanda. I nodi 
+sorgente rappresentano impianti produttivi che possono essere aperti oppure no; i nodi domanda possono rappresentare 
+magazzini regionali o centri retail. In ciascun nodo domanda si realizza una domanda aleatoria $D_{j}(\omega)$,
+ $j\in \cal{D}$, che va soddisfatta al costo minimo.
+Sono necessari i seguenti dati
 \begin{itemize}[label=-]
-    \item per ogni $i\in P$, un costo fisso di apertura $f_i$ e una capacità $u_i$;
-    \item per ogni $j\in D$ e scenario $B\in S$, una domanda $d^{B}_{j}$ (discretizzazione della domanda aleatoria);
-    \item per ogni arco $(i,j)$, un costo unitario di trasporto $c_{ij}$ (costi variabili lineari).
+    \item Per ogni $i\in P$, un \textbf{costo fisso di apertura} $f_i$ e una \textbf{capacità} $u_i$.
+    \item Per ogni $j\in \cal{D}$ e \textbf{scenario} $s\in S$, una domanda $d^{s}_{j}$ (discretizzazione della domanda aleatoria).
+    \item Per ogni arco $(i,j)$, un \textbf{costo unitario di trasporto} $c_{ij}$ (costi variabili lineari).
 \end{itemize}
-
-\paragraph{Struttura a due stadi e variabili}
-Il problema è naturalmente a due stadi: le decisioni di apertura impianti devono essere prese sotto incertezza, mentre le decisioni di trasporto possono essere rimandate a dopo l’osservazione della domanda. Si introducono le variabili:
+Il \textbf{problema è naturalmente a due stadi}: le \emph{decisioni di apertura impianti} devono essere prese sotto incertezza,
+mentre le \emph{decisioni di trasporto} possono essere rimandate a dopo l’osservazione della domanda. Si introducono le variabili
 \[
-H_i =
+y_i =
 \begin{cases}
 1 & \text{se il nodo sorgente } i\in P \text{ è aperto}\\
 0 & \text{altrimenti}
@@ -529,45 +486,62 @@ H_i =
 \qquad
 \text{e}
 \qquad
-x^{B}_{ij}\ge 0,
+x^{s}_{ij}\ge 0,
 \]
-dove $x^{B}_{ij}$ è il flusso da $i\in P$ a $j\in D$ nello scenario $B\in S$.
-Le variabili di localizzazione $H_i$ sono \textbf{di primo stadio} (design), mentre i flussi $x^{B}_{ij}$ sono \textbf{di secondo stadio} (controllo).
+dove $x^{s}_{ij}$ è il flusso da $i\in P$ a $j\in \cal{D}$ nello scenario $s\in S$.
+Le variabili di localizzazione $y_i$ sono \textbf{di primo stadio} (design), mentre i flussi $x^{s}_{ij}$ sono \textbf{di secondo stadio} (controllo).
+\\ \hspace*{1.5em} Si ottiene il seguente \textcolor{NavyBlue}{\textbf{modello MILP stocastico a due stadi con ricorso}}
+\begin{align*}
+\min \quad 
+& \sum_{i \in \mathcal{P}} f_i y_i 
++ \sum_{s \in S} \pi^s 
+\left(
+\sum_{i \in \mathcal{P}} \sum_{j \in \cal{D}} c_{ij} x_{ij}^s
+\right) \\[0.4em]
+\text{s.t.} \quad
+& \sum_{i \in \mathcal{P}} x_{ij}^s = d_j^s,
+&& \forall s \in S,\ \forall j \in \mathcal{D} \\[0.3em]
+& \sum_{j \in \mathcal{D}} x_{ij}^s \le R_i y_i,
+&& \forall s \in S,\ \forall i \in \mathcal{P} \\[0.3em]
+& x_{ij}^s \ge 0, y_i \in \{0,1\}.
+\end{align*}
 
-\paragraph{Formulazione MILP a due stadi con ricorso}
-Si ottiene il seguente modello MILP stocastico:
-\[
-\boxed{
-\begin{aligned}
-\min\;& \sum_{i\in P} f_i H_i + \sum_{B\in S} p_B \left(\sum_{i\in P}\sum_{j\in D} c_{ij} x^{B}_{ij}\right)\\
-\text{s.t. }\;& \sum_{i\in P} x^{B}_{ij} = d^{B}_{j}, \quad B\in S,\; j\in D\\
-& \sum_{j\in D} x^{B}_{ij} \le u_i H_i, \quad B\in S,\; i\in P\\
-& x^{B}_{ij}\ge 0,\quad H_i\in\{0,1\}.
-\end{aligned}}
-\]
 
 \paragraph{Scenari estremi e necessità di formulazioni elastiche}
-È opportuno chiedersi cosa accade se viene incluso uno scenario estremo con domanda molto elevata. Potrebbe non essere nemmeno possibile soddisfare tale domanda; inoltre, la pianificazione della capacità verrebbe guidata da scenari estremi ma molto improbabili, producendo soluzioni eccessivamente costose. In questi casi conviene ricorrere a formulazioni elastiche, permettendo violazioni penalizzate dei vincoli.
+È opportuno chiedersi \emph{cosa accade se viene incluso uno scenario estremo con domanda molto elevata}.
+Potrebbe non essere nemmeno possibile soddisfare tale domanda; inoltre, la pianificazione della capacità verrebbe guidata da
+ scenari estremi ma molto improbabili, producendo soluzioni eccessivamente costose. 
+ In questi casi conviene ricorrere a formulazioni elastiche, permettendo \textbf{violazioni penalizzate dei vincoli}.
 
 \paragraph{Modello elastico con domanda non soddisfatta penalizzata}
-Sia $s^{B}_{j}\ge 0$ la quantità di domanda non soddisfatta nel nodo $j$ nello scenario $B$. Tali variabili entrano nell’obiettivo moltiplicate per un coefficiente di penalità $\pi_j$. Il modello diventa:
-\[
-\boxed{
-\begin{aligned}
-\min\;& \sum_{i\in P} f_i H_i
-+ \sum_{B\in S} p_B \left(\sum_{i\in P}\sum_{j\in D} c_{ij} x^{B}_{ij}\right)
-+ \sum_{B\in S} p_B \left(\sum_{j\in D} \pi_j s^{B}_{j}\right)\\
-\text{s.t. }\;& \sum_{i\in P} x^{B}_{ij} + s^{B}_{j} = d^{B}_{j}, \quad B\in S,\; j\in D\\
-& \sum_{j\in D} x^{B}_{ij} \le u_i H_i, \quad B\in S,\; i\in P\\
-& x^{B}_{ij}\ge 0,\; s^{B}_{j}\ge 0,\quad H_i\in\{0,1\}.
-\end{aligned}}
-\]
-La quantificazione delle penalità $\pi_j$ dipende dal significato di $s^{B}_{j}$: può rappresentare domanda effettivamente non servita (con penalità differenziate per priorità di mercato) oppure domanda soddisfatta tramite fornitori d’emergenza (con penalità pari al costo effettivo di tale opzione).
+Sia $z^{s}_{j}\ge 0$ la \textbf{quantità di domanda non soddisfatta} nel nodo $j$ nello scenario $S$. 
+Tali variabili entrano nell’obiettivo moltiplicate per un coefficiente di penalità $\beta_j$. Il modello diventa
+\begin{align*}
+\min \quad 
+& \sum_{i \in \mathcal{P}} f_i y_i
++ \sum_{s \in S} \pi^s
+\left(
+\sum_{i \in \mathcal{P}} \sum_{j \in \mathcal{D}} c_{ij} x_{ij}^s
+\right)
++ \sum_{s \in S} \pi^s
+\left(
+\sum_{j \in \mathcal{D}} \beta_j z_j^s
+\right) \\[0.4em]
+\text{s.t.} \quad
+& \sum_{i \in \mathcal{P}} x_{ij}^s + z_j^s = d_j^s,
+&& \forall s \in S,\ \forall j \in \mathcal{D} \\[0.3em]
+& \sum_{j \in \mathcal{D}} x_{ij}^s \le R_i y_i,
+&& \forall s \in S,\ \forall i \in \mathcal{P} \\[0.3em]
+& x_{ij}^s \ge 0,\ z_j^s \ge 0, y_i \in \{0,1\}.
+\end{align*}
+La \textcolor{NavyBlue}{\textbf{quantificazione delle penalità}} $\beta_j$ dipende dal significato di $z^{s}_{j}$: 
+può rappresentare \emph{domanda effettivamente non servita} (con penalità differenziate per priorità di mercato)
+ oppure \emph{domanda soddisfatta tramite fornitori terzi} (con penalità pari al costo effettivo di tale opzione).
 
 \paragraph{Osservazioni di modellazione}
 Il modello considerato è solo un primo passo verso formulazioni più realistiche (costi di trasporto non lineari, più item). Inoltre si trascura la dimensione temporale e l’uso di scorte per gestire variabilità parzialmente prevedibile della domanda, che porterebbero a un modello multistadio più impegnativo. L’output rilevante del modello rimane la \textbf{scelta del network design}.
 
-\subsection{A two-stage newsvendor model}
+\subsubsection{Modello del newsvendor a due stadi}
 
 \paragraph{Motivazione e struttura informativa}
 Si consideri una versione a due stadi e multi-item del \textbf{newsvendor problem}, soggetta a vincoli di capacità. Il modello è motivato da un produttore di sport fashion che deve avviare la produzione in anticipo sotto forte incertezza (per vincoli di capacità), ma può aggiornare previsioni e piani dopo aver osservato una prima parte delle vendite ai retailer. La struttura informativa può essere rappresentata da un albero a tre livelli: al nodo radice si decide il primo lotto; nei nodi intermedi si decide un secondo lotto sotto incertezza ridotta; nei nodi foglia si osservano le vendite effettive e si contabilizzano costi di overage/underage.
