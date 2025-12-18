@@ -544,179 +544,194 @@ Il modello considerato è solo un primo passo verso formulazioni più realistich
 \subsubsection{Modello del newsvendor a due stadi}
 
 \paragraph{Motivazione e struttura informativa}
-Si consideri una versione a due stadi e multi-item del \textbf{newsvendor problem}, soggetta a vincoli di capacità. Il modello è motivato da un produttore di sport fashion che deve avviare la produzione in anticipo sotto forte incertezza (per vincoli di capacità), ma può aggiornare previsioni e piani dopo aver osservato una prima parte delle vendite ai retailer. La struttura informativa può essere rappresentata da un albero a tre livelli: al nodo radice si decide il primo lotto; nei nodi intermedi si decide un secondo lotto sotto incertezza ridotta; nei nodi foglia si osservano le vendite effettive e si contabilizzano costi di overage/underage.
-
-\paragraph{Nodi e predecessori}
-Ogni nodo foglia $\eta\in N_2$ ha esattamente un predecessore (antecedente) $\alpha(\eta)\in N_1$. Il nodo radice $0$ è l’antecedente diretto di ogni nodo in $N_1$. Le decisioni dell’ultimo livello sono in realtà variabili fittizie di contabilizzazione (surplus/shortfall penalizzati), non variabili di controllo o design.
-
-\paragraph{Set e dati}
-Sono necessari i seguenti insiemi e parametri:
+Si consideri una \textcolor{NavyBlue}{\textbf{versione a due stadi e multi-item del newsvendor problem}}, soggetta a vincoli di capacità.
+La struttura informativa può essere rappresentata da un albero a tre livelli: al nodo radice si decide il
+ primo lotto; nei nodi intermedi si decide un secondo lotto sotto incertezza ridotta; nei nodi foglia si osservano
+  le vendite effettive e si contabilizzano costi di overage/underage.
+Ogni nodo foglia $n\in N_2$ ha esattamente un predecessore (antecedente) $\alpha(n)\in N_1$. Il nodo radice $0$ è l’antecedente diretto di ogni nodo in $N_1$. Le decisioni dell’ultimo livello sono in realtà variabili fittizie di contabilizzazione (surplus/shortfall penalizzati), non variabili di controllo o design.
+Sono necessari i seguenti insiemi e parametri
 \begin{itemize}[label=-]
     \item $I$: insieme degli item (SKU).
-    \item $C_1$ e $C_2$: capacità massime (numero massimo di item producibili) nel primo e nel secondo run produttivo.
+    \item $K_1$ e $K_2$: capacità massime (numero massimo di item producibili) nel primo e nel secondo run produttivo.
     \item $L_i$, $i\in I$: lotti minimi. Le variabili di lotto sono semicontinue: si può non produrre un item, ma se lo si produce esiste un minimo economicamente giustificato.
-    \item domanda $d^{\eta}_{i}$ per ciascun $i\in I$ e foglia $\eta\in N_2$, con probabilità associata $p^{\eta}$.
-    \item coefficienti di penalità di overage $c^{+}_{i}$ e underage $c^{-}_{i}$ per ciascun $i\in I$.
+    \item Domanda $d^{n}_{i}$ per ciascun $i\in I$ e foglia $n \in N_2$, con probabilità associata $\pi^{n}$.
+    \item Coefficienti di penalità di overage $c^{o}_{i}$ e underage $c^{u}_{i}$ per ciascun $i\in I$.
 \end{itemize}
-
-\paragraph{Variabili decisionali}
-Si introducono:
+Si introducono le \textbf{variabili decisionali}
 \begin{itemize}[label=-]
-    \item $x^{n}_{i}$: quantità prodotta dell’item $i$ nel nodo $n\in\{0\}\cup N_1$, intera non negativa;
-    \item variabili binarie $z^{n}_{i}\in\{0,1\}$ per rappresentare la semicontinuità;
-    \item variabili di contabilizzazione $u^{\eta}_{i}$ (underage) e $v^{\eta}_{i}$ (overage) ai nodi foglia $\eta\in N_2$.
+    \item $x^{n}_{i}$: quantità prodotta dell’item $i$ nel nodo $n\in\{0\}\cup N_1$, intera non negativa.
+    \item Variabili binarie $z^{n}_{i}\in\{0,1\}$ per rappresentare la semicontinuità.
+    \item Variabili di contabilizzazione $u^{n}_{i}$ (underage) e $v^{n}_{i}$ (overage) ai nodi foglia $n\in N_2$.
 \end{itemize}
+La formulazione \textcolor{NavyBlue}{\textbf{nel MILP stocastico}} è
+\begin{align*}
+\min \quad 
+& \sum_{n \in \mathcal{N}_2} \pi^n
+\left[
+\sum_{i \in \mathcal{I}}
+\left(
+c_i^{o}\, o_i^n + c_i^{u}\, u_i^n
+\right)
+\right] \\[0.4em]
+\text{s.t.} \quad
+& \sum_{i \in \mathcal{I}} x_i^0 \le K_1 \\[0.3em]
+& x_i^0 \ge m_i \delta_i^0, \qquad
+  x_i^0 \le K_1 \delta_i^0
+&& i \in \mathcal{I} \\[0.3em]
+& \sum_{i \in \mathcal{I}} x_i^n \le K_2
+&& n \in \mathcal{N}_1 \\[0.3em]
+& x_i^n \ge m_i \delta_i^n, \qquad
+  x_i^n \le K_2 \delta_i^n
+&& i \in \mathcal{I},\ n \in \mathcal{N}_1 \\[0.3em]
+& x_i^0 + x_i^{a(n)} = d_i^n + o_i^n - u_i^n
+&& i \in \mathcal{I},\ n \in \mathcal{N}_2 \\[0.3em]
+& x_i^n \in \mathbb{Z}_+, \qquad
+  \delta_i^n \in \{0,1\}
+&& i \in \mathcal{I},\ n \in \{0\} \cup \mathcal{N}_1 \\[0.3em]
+& u_i^n,\ o_i^n \ge 0
+&& i \in \mathcal{I},\ n \in \mathcal{N}_2.
+\end{align*}
 
-\paragraph{Formulazione (stochastic MILP)}
-La formulazione è:
-\[
-\boxed{
-\begin{aligned}
-\min\;& \sum_{\eta\in N_2} p^{\eta}\left[\sum_{i\in I}\big(c^{+}_{i} v^{\eta}_{i} + c^{-}_{i} u^{\eta}_{i}\big)\right] \\
-\text{s.t. }\;& \sum_{i\in I} x^{0}_{i} \le C_1 \\
-& x^{0}_{i} \ge L_i z^{0}_{i}, \quad x^{0}_{i} \le C_1 z^{0}_{i}, \quad i\in I \\
-& \sum_{i\in I} x^{n}_{i} \le C_2,\quad n\in N_1 \\
-& x^{n}_{i} \ge L_i z^{n}_{i}, \quad x^{n}_{i} \le C_2 z^{n}_{i}, \quad i\in I,\; n\in N_1 \\
-& x^{0}_{i} + x^{\alpha(\eta)}_{i} = d^{\eta}_{i} + v^{\eta}_{i} - u^{\eta}_{i},
-\quad i\in I,\; \eta\in N_2 \\
-& x^{n}_{i}\in\mathbb{Z}_+,\; z^{n}_{i}\in\{0,1\},\quad i\in I,\; n\in\{0\}\cup N_1\\
-& u^{\eta}_{i}\ge 0,\; v^{\eta}_{i}\ge 0,\quad i\in I,\; \eta\in N_2.
-\end{aligned}}
-\]
-
-\paragraph{Interpretazione dei vincoli}
-La funzione obiettivo (26) è il costo atteso di deviazione. I vincoli (27) e (29) impongono la capacità dei due run produttivi. I vincoli (28) e (30) sono i vincoli \emph{big-M} che collegano variabili continue/intere e binarie: se $z=1$ la produzione è tra lotto minimo e capacità; se $z=0$ la produzione viene forzata a 0. Il vincolo (31) misura la deviazione tra produzione totale e domanda osservata. Non è necessario imporre integrità sulle variabili di deviazione, poiché segue dall’integrità delle variabili di produzione.
-
-\subsection{Multistage stochastic linear programming with recourse}
-
+\subsubsection{Programmazione lineare stocastica multistadio con ricorso}
 \paragraph{Generalizzazione ai modelli multistadio}
-Le formulazioni multistadio sorgono come generalizzazione dei modelli a due stadi. Concettualmente, si annidano funzioni di ricorso corrispondenti ai diversi stadi decisionali. In questo caso, le decisioni future possono dipendere dall’intera storia del processo stocastico dei fattori di rischio. Si introduce la notazione:
+Le \emph{formulazioni multistadio sorgono come generalizzazione dei modelli a due stadi}.
+Concettualmente, \textbf{si annidano funzioni di ricorso corrispondenti ai diversi stadi decisionali}.
+In questo caso, le decisioni future possono dipendere dall’intera storia del processo stocastico dei fattori di rischio.
+Si introduce la notazione
 \[
-\tilde{\xi}^{(t)} = (\tilde{\xi}_1,\tilde{\xi}_2,\dots,\tilde{\xi}_t),
+\tilde{\xi}_{[t]} = (\tilde{\xi}_1,\tilde{\xi}_2,\dots,\tilde{\xi}_t),
 \qquad
-\tilde{\xi}^{(1)}=\tilde{\xi}_1.
+\tilde{\xi}_{[1]}=\tilde{\xi}_1.
 \]
-La decisione \emph{here-and-now} è $x_0\in X_0$ e si risolve:
+La decisione \emph{here-and-now} è $x_0\in X_0$ e si risolve
 \[
-\min_{x_0\in X_0}\left\{ f_0(x_0) + \mathbb{E}\big[\varphi_1(x_0,\tilde{\xi}_1)\big]\right\}.
+\min_{x_0\in X_0}\left\{ f_0(x_0) + \mathbb{E}\big[Q(x_0,\tilde{\xi}_1)\big]\right\}.
 \]
-Il termine $\varphi_1(x_0,\xi_1)$ è definito ricorsivamente come:
+Il termine $Q(x_0,\xi_1)$ è definito ricorsivamente come
 \[
-\varphi_1(x_0,\xi_1)=\min_{x_1\in X_1(x_0,\xi_1)}
-\left\{ f_1(x_1,\xi_1) + \mathbb{E}\!\left[\varphi_2\!\big(x_1,\tilde{\xi}^{(2)}\big)\mid \tilde{\xi}_1=\xi_1\right]\right\}.
+Q(x_0,\xi_1)=\min_{x_1\in X_1(x_0,\xi_1)}
+\left\{ f_1(x_1,\xi_1) + \mathbb{E}\!\left[Q\!\big(x_1,\tilde{\xi}_{[2]}\big)\mid \tilde{\xi}_1=\xi_1\right]\right\}.
 \]
-Per $t=2,\dots,T$:
+Allo stesso modo, per $t = 2, \ldots, T$, si ha
 \[
-\boxed{
+Q_t\!\left(x_{t-1}, \tilde{\xi}_{[t]}\right)
+=
+\min_{x_t \in X_t(x_{t-1}, \tilde{\xi}_{[t]})}
+\left\{
+f_t\!\left(x_t, {\xi}_{[t]}\right)
++
+\mathbb{E}
+\left[
+Q_{t+1}\!\left(x_t, \tilde{\xi}_{[t+1]}\right)
+\;\middle|\;
+\tilde{\xi}_{[t]} = \xi_{[t]}
+\right]
+\right\}.
+\]
+Possiamo definire la funzione di ricorso
+\[
+Q_{t+1}\!\left(x_t, {\xi}_{[t]}\right)
+\;\doteq\;
+\mathbb{E}
+\left[
+Q_{t+1}\!\left(x_t, \tilde{\xi}_{[t+1]}\right)
+\;\middle|\;
+\tilde{\xi}_{[t]} = \xi_{[t]}
+\right],
+\]
+e riscrivere l’equazione precedente come
+\[
+Q_t\!\left(x_{t-1}, {\xi}_{[t]}\right)
+=
+\min_{x_t \in X_t(x_{t-1}, {\xi}_{[t]})}
+\left\{
+f_t\!\left(x_t, {\xi}_{[t]}\right)
++
+Q_{t+1}\!\left(x_t, {\xi}_{[t]}\right)
+\right\}.
+\]
+Nel problema dell’ultimo stadio, per $t = T$, si può semplicemente porre
+\(
+Q_T\!\left(x_T, {\xi}_{[T]}\right) \equiv 0.
+\)\\
+\hspace*{1.5em} Una formulazione alternativa,si ottiene enfatizzando
+che le decisioni di ricorso sono in realtà funzioni (\emph{non anticipative}) del cammino
+campionario osservato fino a quel momento, $x_t(\tilde{\xi}_{[t]})$.
+Questo conduce alla formulazione funzionale
+\[
 \begin{aligned}
-\varphi_t(x_{t-1},\xi^{(t)})=
-\min_{x_t\in X_t(x_{t-1},\xi^{(t)})}
-\Big\{
-f_t(x_t,\xi^{(t)}) \\
-\qquad\qquad\qquad
-+ \mathbb{E}\!\left[\varphi_{t+1}\!\big(x_t,\tilde{\xi}^{(t+1)}\big)\mid \tilde{\xi}^{(t)}=\xi^{(t)}\right]
-\Big\}.
-\end{aligned}}
-\tag{32}
-\]
-All’ultimo stadio, per $t=T$, si può porre $\varphi_{T+1}(\cdot)=0$.
-
-\paragraph{Funzione di ricorso e riscrittura compatta}
-Definendo la funzione di ricorso
-\[
-Q_{t+1}(x_t,\xi^{(t)})=
-\mathbb{E}\!\left[\varphi_{t+1}\!\big(x_t,\tilde{\xi}^{(t+1)}\big)\mid \tilde{\xi}^{(t)}=\xi^{(t)}\right],
-\]
-si può riscrivere (32) come:
-\[
-\boxed{
-\varphi_t(x_{t-1},\xi^{(t)})=
-\min_{x_t\in X_t(x_{t-1},\xi^{(t)})}
-\left\{ f_t(x_t,\xi^{(t)}) + Q_{t+1}(x_t,\xi^{(t)})\right\}.}
-\tag{33}
-\]
-
-\paragraph{Formulazione funzionale e non-anticipatività}
-Un’alternativa è enfatizzare che le decisioni di ricorso sono funzioni non-anticipative del cammino osservato:
-$x_t(\tilde{\xi}^{(t)})$. Si ottiene la formulazione funzionale:
-\[
-\boxed{
-\begin{aligned}
-\min_{x_0,\;x_1(\cdot),\dots,x_T(\cdot)}\;
-\mathbb{E}\Big[
+\min_{x_0,\,x_1(\cdot),\,\ldots,\,x_T(\cdot)}
+\;&
+\mathbb{E}
+\Big[
 f_0(x_0)
-+ f_1\big(x_1(\tilde{\xi}^{(1)}),\tilde{\xi}_1\big)
-+ \cdots \\
-\qquad\qquad\qquad\qquad\qquad
-+ f_T\big(x_T(\tilde{\xi}^{(T)}),\tilde{\xi}_T\big)
-\Big]\\
-\text{s.t. } x_0\in X_0,\\
-x_t(\xi^{(t)})\in X_t\big(x_{t-1}(\xi^{(t-1)}),\xi^{(t)}\big),
-\quad t=1,\dots,T.
-\end{aligned}}
++
+f_1\!\left(x_1(\tilde{\xi}_{[1]}), \tilde{\xi}_1\right)
++
+\cdots
++
+f_T\!\left(x_T(\tilde{\xi}_{[T]}), \tilde{\xi}_T\right)
+\Big] \\[0.6em]
+\text{s.t.}\quad
+& x_0 \in X_0, \\[0.3em]
+& x_t({\xi}_{[t]}),\, {\xi}_t \in
+X_t\!\left(x_{t-1}({\xi}_{[t-1]}), {\xi}_{t-1}\right),
+\qquad
+t = 1, \ldots, T.
+\end{aligned}
 \]
-Questa formulazione appare più chiara, ma la scelta dipende dalla strategia di soluzione: la formulazione annidata si presta a decomposizione ricorsiva, mentre quella funzionale suggerisce la restrizione delle politiche a un sottospazio finito-dimensionale di politiche semplici.
 
-\paragraph{Alberi di scenario multistadio}
-Un approccio semplice è basato su alberi di scenario multistadio, che discretizzano il processo stocastico. Ogni scenario $\omega$ corrisponde a un cammino:
-\[
-\xi^{(T)}(\omega)=\big(\xi_1(\omega),\xi_2(\omega),\dots,\xi_T(\omega)\big).
-\]
-A ciascun nodo $n$ dell’albero (insieme dei nodi $N$) è associato un vettore di variabili $x_n$. Ogni nodo ha un unico antecedente $\alpha(n)$ (eccetto la radice), e un insieme di successori diretti; le probabilità condizionate lungo gli archi rappresentano la struttura informativa.
-
-\paragraph{Non-anticipatività nel tree}
-La struttura ad albero è fondamentale per rappresentare la non-anticipatività: scenari che condividono gli stessi nodi fino a un certo tempo non sono distinguibili in quel periodo, e quindi devono condividere le stesse decisioni nei nodi comuni. Solo quando gli scenari divergono in nodi differenti è possibile adottare decisioni differenti.
-
-\subsection{A multistage financial planning model with proportional transaction costs}
-
+\subsubsection{Un modello di pianificazione finanziaria multistadio con costi di transazione proporzionali} 
 \paragraph{Asset--liability management su albero di scenario}
-Si formula un modello di \textbf{asset--liability management} in cui si scambia un insieme di strumenti finanziari (asset) per far fronte a un flusso di passività (liabilities). L’incertezza è rappresentata mediante un albero di scenario.
+Si formula un modello di \textcolor{NavyBlue}{\textbf{asset--liability management}} in cui si scambia un insieme di
+ strumenti finanziari (asset) per far fronte a un flusso di passività (liabilities). L’incertezza è rappresentata 
+ mediante un albero di scenario.
 \begin{itemize}[label=-]
     \item $L_n$ è la liability da soddisfare nel nodo $n\in N$.
     \item Non si considerano nuovi apporti di cassa lungo il percorso; l’unico modo per generare cassa è vendere asset.
     \item Gli asset sono indicizzati da $i\in I$ e $P^n_i$ è il prezzo dell’asset $i$ nel nodo $n$.
-    \item Si considerano costi di transazione proporzionali (lineari): per acquistare o vendere si paga una percentuale $\tau$ del valore scambiato, sia in acquisto sia in vendita.
+    \item Si considerano costi di transazione proporzionali (lineari): per acquistare o vendere si paga una percentuale $c$ del valore scambiato, sia in acquisto sia in vendita.
 \end{itemize}
-
-La radice è il nodo $0$, in cui si effettua la prima allocazione considerando le dotazioni iniziali $\bar{h}^{0}_i$. L’insieme delle foglie è $S$; i nodi di trading intermedi sono
-\[
-T = N \setminus \big(\{0\}\cup S\big).
-\]
+La radice è il nodo $n_0$, in cui si effettua la prima allocazione considerando le dotazioni iniziali $\bar{h}^{n_0}_i$.
+ L’insieme delle foglie è $S$; i nodi di trading intermedi sono
+\(
+T = N \setminus \big(\{n_0\}\cup S\big).
+\)
 L’obiettivo è massimizzare l’utilità attesa della ricchezza terminale.
-
-\paragraph{Variabili}
-Si introducono:
+Si introducono  le variabili decisionali:
 \begin{itemize}[label=-]
-    \item $b^{n}_i$: quantità di asset $i$ acquistata nel nodo $n$;
-    \item $s^{n}_i$: quantità di asset $i$ venduta nel nodo $n$;
-    \item $h^{n}_i$: quantità detenuta di asset $i$ nel nodo $n$ dopo il ribilanciamento;
-    \item $W^{\ell}$: ricchezza terminale nella foglia $\ell\in S$.
+    \item $z^{n}_i$: quantità di asset $i$ acquistata nel nodo $n$.
+    \item $y^{n}_i$: quantità di asset $i$ venduta nel nodo $n$.
+    \item $x^{n}_i$: quantità detenuta di asset $i$ nel nodo $n$ dopo il ribilanciamento.
+    \item $W^{\ell}$: ricchezza terminale nella foglia $s\in S$.
 \end{itemize}
-Le variabili $b^{n}_i$, $s^{n}_i$, $h^{n}_i$ sono definite per $n\in N\setminus S$ (nessun ribilanciamento alle foglie). Sia $U(\cdot)$ l’utilità non lineare della ricchezza.
+Le variabili $z^{n}_i$, $y^{n}_i$, $x^{n}_i$ sono definite per $n\in N\setminus S$ (nessun ribilanciamento alle foglie). Sia $U(\cdot)$ l’utilità non lineare della ricchezza.
 
-\paragraph{Modello}
-\[
-\boxed{
-\begin{aligned}
-\max\;& \sum_{\ell\in S} p_{\ell}\, U\!\left(W^{\ell}\right) \\
-\text{s.t. }\;& h^{0}_i = \bar{h}^{0}_i + b^{0}_i - s^{0}_i, \quad i\in I \\
-& h^{n}_i = h^{\alpha(n)}_i + b^{n}_i - s^{n}_i, \quad i\in I,\; n\in T \\
-& (1-\tau)\sum_{i\in I} P^{n}_i s^{n}_i - (1+\tau)\sum_{i\in I} P^{n}_i b^{n}_i = L_n,
-\quad n\in N\setminus S \\
-& W^{\ell} = (1-\tau)\sum_{i\in I} P^{\ell}_i\, h^{\alpha(\ell)}_i - L_{\ell},
-\quad \ell\in S\\
-& h^{n}_i,\; b^{n}_i,\; s^{n}_i,\; W^{\ell} \ge 0.
-\end{aligned}}
-\]
-
-\paragraph{Interpretazione dei vincoli}
-L’obiettivo (34) è l’utilità attesa della ricchezza terminale. Il vincolo (35) impone il bilancio iniziale sugli asset, tenendo conto delle posizioni iniziali. Il vincolo (36) descrive l’evoluzione delle detenzioni nei nodi di trading. Il vincolo (37) garantisce che la cassa generata vendendo (al netto dei costi di transazione) e l’eventuale reinvestimento in acquisti (inclusi i costi) consenta di soddisfare la liability del nodo. Il vincolo (38) valuta la ricchezza terminale alle foglie, dopo liquidazione del portafoglio e pagamento dell’ultima liability.
+\begin{align*}
+\max \quad 
+& \sum_{s \in S} \pi^s \, u(W^s) \\[0.4em]
+\text{s.t.} \quad
+& x_i^{n_0} = \bar{h}_i^{n_0} + z_i^{n_0} - y_i^{n_0},
+&& i \in \mathcal{I} \\[0.3em]
+& x_i^{n} = x_i^{a(n)} + z_i^{n} - y_i^{n},
+&& i \in \mathcal{I},\ n \in \mathcal{T} \\[0.3em]
+& (1-c)\sum_{i \in \mathcal{I}} P_i^{n} y_i^{n}
+-
+(1+c)\sum_{i \in \mathcal{I}} P_i^{n} z_i^{n}
+= L^{n},
+&& n \in \mathcal{N} \setminus S \\[0.3em]
+& W^{s} = (1-c)\sum_{i \in \mathcal{I}} P_i^{s} x_i^{a(s)} - L^{s},
+&& s \in S \\[0.3em]
+& x_i^{n},\, z_i^{n},\, y_i^{n},\, W^{s} \ge 0.
+\end{align*}
 
 \paragraph{Osservazioni operative}
-In pratica il modello verrebbe risolto ripetutamente con una logica \emph{rolling horizon}; il ruolo dell’utilità terminale è evitare effetti distorsivi di fine orizzonte, imponendo che il portafoglio sia in una buona posizione alla fine dell’orizzonte di pianificazione. In un modello più realistico si dovrebbero includere eventuali contributi in ingresso e shortfall penalizzati rispetto alle liabilities.
+In pratica il modello verrebbe risolto ripetutamente con una logica \textcolor{NavyBlue}{\emph{rolling horizon}};
+ il ruolo dell’utilità terminale è evitare effetti distorsivi di fine orizzonte, imponendo che 
+ il portafoglio sia in una buona posizione alla fine dell’orizzonte di pianificazione. In un modello più realistico
+  si dovrebbero includere eventuali contributi in ingresso e shortfall penalizzati rispetto alle liabilities.
 
-\subsection{Multiperiod vs. multistage models}
-
+\subsection{Modelli multiperiodali e multistadio}
 \paragraph{Esplosione dell’albero di scenario nei modelli multistadio}
 Un problema chiaro nei modelli di programmazione stocastica \textbf{multistadio} è la possibile \textbf{esplosione dell’albero di scenario}. Il numero di nodi necessario per rappresentare l’incertezza può diventare un fattore fortemente limitante.\footnote{Nel testo si rimanda a rimedi e approcci alla generazione di scenari nella Sezione 8. Si menziona anche che, nei modelli finanziari, un’ulteriore criticità riguarda la generazione di opportunità di arbitraggio spurie.}
 
