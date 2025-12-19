@@ -56,23 +56,15 @@
 \textcolor{NavyBlue}{\section{CAP 1 -- Introduzione alle decisioni in condizioni di incertezza}}
 
 \paragraph{Recap}
-Le decisioni di business si collocano spesso in contesti caratterizzati da \textcolor{NavyBlue}{\textbf{incertezza}}, rendendo insufficiente una semplice previsione puntuale delle variabili rilevanti. Le tre componenti della \textcolor{NavyBlue}{\textbf{Business Analytics}} chiariscono ruoli diversi ma complementari: la descrittiva analizza ciò che è accaduto, la predittiva costruisce modelli per descrivere il futuro, mentre la prescrittiva individua \textbf{azioni ottimali} tenendo conto delle conseguenze economiche.
-
-La qualità di una previsione dipende dalla \textcolor{NavyBlue}{\textbf{funzione di perdita}} associata all’errore. Penalità diverse conducono a previsioni ottimali diverse: il valore atteso è appropriato solo in presenza di costi simmetrici, mentre penalità asimmetriche portano naturalmente a soluzioni basate su \textbf{quantili}. Non esiste quindi una previsione universalmente ottima, ma solo scelte coerenti con il criterio decisionale adottato.
-
-Nei problemi decisionali l’obiettivo diventa la \textcolor{NavyBlue}{\textbf{scelta di un vettore di decisioni}} sotto incertezza. Quando i fattori di rischio non sono probabilisticamente modellabili si adotta un approccio \textcolor{NavyBlue}{\textbf{robusto}}, basato su scenari peggiori; quando invece è disponibile una distribuzione di probabilità si ottiene un \textcolor{NavyBlue}{\textbf{problema di ottimizzazione stocastica}}. In generale, sostituire l’incertezza con valori medi non preserva l’ottimalità della decisione.
-
-Il modello del \textcolor{NavyBlue}{\textbf{newsvendor}} evidenzia come la decisione ottimale derivi dal bilanciamento tra \textbf{costi di underage e overage}, mostrando che la domanda media non è un criterio corretto. Questo esempio chiarisce il legame diretto tra struttura dei costi e decisioni sotto incertezza.
-
-I \textcolor{NavyBlue}{\textbf{vincoli probabilistici}} consentono di imporre il rispetto dei vincoli solo con una certa probabilità, ma possono generare insiemi ammissibili non convessi e problemi difficili da trattare. Gli \textcolor{NavyBlue}{\textbf{alberi decisionali}} permettono invece di rappresentare decisioni \textbf{adattive}, distinguendo tra nodi decisionali e nodi casuali e risolvendo il problema tramite \textcolor{NavyBlue}{\textbf{backward induction}} sulla base del valore atteso.
-
-Il valore dell’informazione viene quantificato attraverso \textcolor{NavyBlue}{\textbf{EVPI}} e \textcolor{NavyBlue}{\textbf{VSS}}, che misurano rispettivamente il beneficio teorico dell’informazione perfetta e il guadagno ottenuto risolvendo il problema stocastico rispetto a una soluzione deterministica a valore atteso.
-
-L’introduzione ai \textcolor{NavyBlue}{\textbf{modelli a due stadi}} chiarisce la distinzione tra decisioni \textcolor{NavyBlue}{\textbf{here-and-now}} e decisioni \textcolor{NavyBlue}{\textbf{wait-and-see}}, mostrando il ruolo delle \textbf{decisioni di ricorso}. Questa struttura si estende ai modelli multistadio, nei quali le decisioni dipendono dall’intera storia delle realizzazioni aleatorie e richiedono il rispetto della \textbf{non-anticipatività}.
-
-Nei modelli multistadio emerge il problema della \textcolor{NavyBlue}{\textbf{generazione degli scenari}} e della crescita dell’albero, che rende necessarie tecniche di campionamento, riduzione e progettazione controllata degli scenari. La qualità di una soluzione va quindi valutata anche in termini di \textcolor{NavyBlue}{\textbf{stabilità in-sample e out-of-sample}}, verificando che le prestazioni non dipendano in modo critico dall’albero utilizzato.
-
-Si analizzano le \textcolor{NavyBlue}{\textbf{proprietà di convessità}} dei modelli stocastici: i vincoli probabilistici non preservano la convessità in generale, mentre nei modelli a due stadi con ricorso lineare la funzione di ricorso risulta convessa, proprietà fondamentale per lo sviluppo di metodi di soluzione basati su decomposizione.
+Le decisioni di business si collocano spesso in contesti caratterizzati da \textcolor{NavyBlue}{\textbf{incertezza}}, rendendo insufficiente una semplice previsione puntuale delle variabili rilevanti. Le tre componenti della \textcolor{NavyBlue}{\textbf{Business Analytics}} chiariscono ruoli diversi ma complementari: la descrittiva analizza ciò che è accaduto, la predittiva costruisce modelli per descrivere il futuro, mentre la prescrittiva individua \textbf{azioni ottimali} tenendo conto delle conseguenze economiche.\\
+\hspace*{1.5em} La qualità di una previsione dipende dalla \textcolor{NavyBlue}{\textbf{funzione di perdita}} associata all’errore. Penalità diverse conducono a previsioni ottimali diverse: il valore atteso è appropriato solo in presenza di costi simmetrici, mentre penalità asimmetriche portano naturalmente a soluzioni basate su \textbf{quantili}. Non esiste quindi una previsione universalmente ottima, ma solo scelte coerenti con il criterio decisionale adottato.\\
+\hspace*{1.5em}Nei problemi decisionali l’obiettivo diventa la \textcolor{NavyBlue}{\textbf{scelta di un vettore di decisioni}} sotto incertezza. Quando i fattori di rischio non sono probabilisticamente modellabili si adotta un approccio \textcolor{NavyBlue}{\textbf{robusto}}, basato su scenari peggiori; quando invece è disponibile una distribuzione di probabilità si ottiene un \textcolor{NavyBlue}{\textbf{problema di ottimizzazione stocastica}}. In generale, sostituire l’incertezza con valori medi non preserva l’ottimalità della decisione.\\
+\hspace*{1.5em}Il modello del \textcolor{NavyBlue}{\textbf{newsvendor}} evidenzia come la decisione ottimale derivi dal bilanciamento tra \textbf{costi di underage e overage}, mostrando che la domanda media non è un criterio corretto. Questo esempio chiarisce il legame diretto tra struttura dei costi e decisioni sotto incertezza.\\
+\hspace*{1.5em}I \textcolor{NavyBlue}{\textbf{vincoli probabilistici}} consentono di imporre il rispetto dei vincoli solo con una certa probabilità, ma possono generare insiemi ammissibili non convessi e problemi difficili da trattare. Gli \textcolor{NavyBlue}{\textbf{alberi decisionali}} permettono invece di rappresentare decisioni \textbf{adattive}, distinguendo tra nodi decisionali e nodi casuali e risolvendo il problema tramite \textcolor{NavyBlue}{\textbf{backward induction}} sulla base del valore atteso.\\
+\hspace*{1.5em}Il valore dell’informazione viene quantificato attraverso \textcolor{NavyBlue}{\textbf{EVPI}} e \textcolor{NavyBlue}{\textbf{VSS}}, che misurano rispettivamente il beneficio teorico dell’informazione perfetta e il guadagno ottenuto risolvendo il problema stocastico rispetto a una soluzione deterministica a valore atteso.\\
+\hspace*{1.5em}L’introduzione ai \textcolor{NavyBlue}{\textbf{modelli a due stadi}} chiarisce la distinzione tra decisioni \textcolor{NavyBlue}{\textbf{here-and-now}} e decisioni \textcolor{NavyBlue}{\textbf{wait-and-see}}, mostrando il ruolo delle \textbf{decisioni di ricorso}. Questa struttura si estende ai modelli multistadio, nei quali le decisioni dipendono dall’intera storia delle realizzazioni aleatorie e richiedono il rispetto della \textbf{non-anticipatività}.\\
+\hspace*{1.5em}Nei modelli multistadio emerge il problema della \textcolor{NavyBlue}{\textbf{generazione degli scenari}} e della crescita dell’albero, che rende necessarie tecniche di campionamento, riduzione e progettazione controllata degli scenari. La qualità di una soluzione va quindi valutata anche in termini di \textcolor{NavyBlue}{\textbf{stabilità in-sample e out-of-sample}}, verificando che le prestazioni non dipendano in modo critico dall’albero utilizzato.\\
+\hspace*{1.5em}Si analizzano le \textcolor{NavyBlue}{\textbf{proprietà di convessità}} dei modelli stocastici: i vincoli probabilistici non preservano la convessità in generale, mentre nei modelli a due stadi con ricorso lineare la funzione di ricorso risulta convessa, proprietà fondamentale per lo sviluppo di metodi di soluzione basati su decomposizione.
 
 \paragraph{Introduzione} Si distinguono tre principali tipologie di \emph{Business Analytics}
 \begin{itemize}[label=-]
@@ -1093,175 +1085,225 @@ In particolare, la funzione di ricorso è \textbf{tipicamente continua} quando l
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% PDF 2 COMPLESSITA' COMPUTAZIONALE %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \vspace{-1cm}
 \textcolor{RoyalBlue}{\section{CAP 2 -- Elementi di complessità computazionale}}
-\paragraph{Recap} La \textbf{complessità computazionale} dipende dalla dimensione dell’istanza e può crescere
-in modo fattoriale, esponenziale o polinomiale. Piccole variazioni nella struttura di un
-problema possono modificare radicalmente la sua complessità, come nel caso dei
-problemi di scheduling $1//L_{\max}$ e $1/r_i/L_{\max}$.
-
-La \textbf{teoria della NP-completezza} introduce le classi $P$, $NP$, $NPH$ e $NPC$ e il
-concetto di riduzione polinomiale per confrontare la difficoltà dei problemi. I
-problemi NP-completi sono equivalenti in termini di complessità e l’esistenza di un
-algoritmo polinomiale per uno di essi implicherebbe $P = NP$.
-
-La riduzione da subset-sum mostra che la versione decisionale di $1/r_i/L_{\max}$ è
-NP-completa e che il corrispondente problema di ottimizzazione è NP-difficile. \textbf{La
-codifica dei dati è cruciale}: l’algoritmo per il knapsack ha complessità
-pseudo-polinomiale, poiché dipende dal valore numerico dei dati e non dalla loro
-lunghezza binaria.
-
+\paragraph{Recap}
+La \textcolor{RoyalBlue}{\textbf{complessità computazionale}} di un problema dipende dalla
+\textbf{dimensione dell’istanza}, intesa come \emph{lunghezza della sua codifica}, e può crescere in
+modo \textbf{fattoriale}, \textbf{esponenziale} o \textbf{polinomiale}. Piccole modifiche nella struttura di un
+problema possono determinare variazioni drastiche della complessità, come accade nei
+problemi di scheduling $1//L_{\max}$ e $1/r_i/L_{\max}$.\\
+\hspace*{1.5em}È fondamentale distinguere tra \textcolor{RoyalBlue}{\textbf{complessità di un algoritmo}} e
+\textcolor{RoyalBlue}{\textbf{complessità intrinseca di un problema}}: la prima riguarda il numero di
+operazioni elementari richieste da una procedura di soluzione, mentre la seconda riguarda
+la difficoltà strutturale del problema stesso, indipendentemente dall’algoritmo utilizzato.\\
+\hspace*{1.5em}La \textcolor{RoyalBlue}{\textbf{teoria della NP-completezza}} fornisce un quadro concettuale per
+classificare i \textbf{problemi di decisione} in base alla loro difficoltà computazionale.
+In particolare
+\begin{itemize}[label=-]
+\item La classe \textcolor{RoyalBlue}{\textbf{$P$}} contiene i problemi di decisione risolvibili in
+\textbf{tempo polinomiale}.
+\item La classe \textcolor{RoyalBlue}{\textbf{$NP$}} contiene i problemi di decisione per cui le istanze
+con risposta positiva sono \textbf{verificabili in tempo polinomiale} su calcolatori non deterministici.
+\item La classe \textcolor{RoyalBlue}{\textbf{$NPH$}} (NP-hard) raccoglie i problemi almeno difficili
+quanto tutti i problemi in $NP$.
+\item La classe \textcolor{RoyalBlue}{\textbf{$NPC$}} (NP-complete) contiene i problemi più difficili in
+$NP$, cioè quelli che sono \emph{sia} in $NP$ \emph{sia} NP-hard.
+\end{itemize}
+\hspace*{1.5em}Il concetto chiave che permette di confrontare la difficoltà dei problemi è quello di
+\textcolor{RoyalBlue}{\textbf{riduzione in tempo polinomiale}}: se un problema $P$ può essere
+trasformato in un problema $Q$ in tempo polinomiale, allora $Q$ non può essere più facile
+di $P$. Tutti i problemi della classe $NPC$ risultano \textbf{equivalenti in termini di complessità}.\\
+\hspace*{1.5em}Il \textcolor{RoyalBlue}{\textbf{teorema di Cook}} individua l’\textbf{innesco della catena delle
+riduzioni}, dimostrando che il \textbf{problema della soddisfacibilità Booleana} è NP-completo.
+A partire da esso, mediante riduzioni polinomiali successive, è possibile costruire un’ampia
+famiglia di problemi NP-completi, tra cui il problema \textbf{subset-sum}.\\
+\hspace*{1.5em}La NP-completezza della versione decisionale di $1/r_i/L_{\max}$ implica che il corrispondente
+\textbf{problema di ottimizzazione} è \textcolor{RoyalBlue}{\textbf{NP-difficile}}. In generale, dimostrare
+che una versione decisionale è NP-completa è sufficiente per concludere che il problema di
+ottimizzazione associato non ammette algoritmi polinomiali, salvo l’ipotesi $P = NP$.\\
+\hspace*{1.5em}Un aspetto cruciale è infine la \textcolor{RoyalBlue}{\textbf{codifica dei dati}}: la complessità va
+valutata rispetto alla rappresentazione binaria delle istanze. L’algoritmo di
+programmazione dinamica per il problema \textbf{knapsack} ha complessità $O(nB)$ ed è quindi
+\textcolor{RoyalBlue}{\textbf{pseudo-polinomiale}}, poiché dipende dal valore numerico dei dati e non
+dalla lunghezza della loro codifica. Questo chiarisce perché il knapsack rimane un problema
+NP-difficile nonostante l’esistenza di algoritmi efficienti in casi particolari.
 
 \paragraph{Complessità di problemi e algoritmi}
-Si vuole caratterizzare la complessità in funzione della dimensione di un problema. Occorre distinguere la complessità degli algoritmi da quella dei problemi.\\
-Nel caso di un algoritmo caratterizzato da un numero finito di passi, possiamo valutare (eventualmente nel caso peggiore) il \textbf{numero di operazioni elementari} in funzione della dimensione $n$ del problema.
+Si vuole caratterizzare la \emph{complessità} in funzione della \emph{dimensione di un problema}. 
+\textcolor{RoyalBlue}{Occorre distinguere la complessità degli algoritmi da quella dei problemi.} 
+Nel caso di un algoritmo caratterizzato da un \textbf{numero finito di passi}, possiamo valutare
+ (eventualmente nel caso peggiore) il \textbf{numero di operazioni elementari} in funzione della dimensione 
+ $n$ del problema.
 \begin{itemize}[label=-]
-\item \textbf{Algoritmi enumerativi}: algoritmi che considerano tutte le \textbf{permutazioni} di $n$ oggetti. La loro complessità è $O(n!)$ ed è certamente non praticabile per valori di $n$ anche moderatamente grandi.
-\item \textbf{Algoritmi di assegnamento esaustivo}: algoritmi che valutano tutti gli \textbf{assegnamenti possibili} di $n$ variabili binarie. In questo caso la complessità cresce in modo esponenziale ed è pari a $O(2^n)$.
-\item \textbf{Algoritmi polinomiali}: un tipico esempio è rappresentato dagli \textbf{algoritmi di ordinamento} di $n$ oggetti. Gli algoritmi più semplici hanno complessità $O(n^2)$, mentre algoritmi più efficienti raggiungono complessità $O(n\log_2 n)$.
+\item \textcolor{RoyalBlue}{\textbf{Algoritmi enumerativi}}: algoritmi che considerano tutte le \textbf{permutazioni} di $n$ oggetti. La loro complessità è $O(n!)$ ed è certamente non praticabile per valori di $n$ anche moderatamente grandi.
+\item \textcolor{RoyalBlue}{\textbf{Algoritmi di assegnamento esaustivo}}: algoritmi che valutano tutti gli \textbf{assegnamenti possibili} di $n$ variabili binarie. In questo caso la complessità cresce in modo esponenziale ed è pari a $O(2^n)$.
+\item \textcolor{RoyalBlue}{\textbf{Algoritmi polinomiali}}: un tipico esempio è rappresentato dagli \textbf{algoritmi di ordinamento} di $n$ oggetti. Gli algoritmi più semplici hanno complessità $O(n^2)$, mentre algoritmi più efficienti raggiungono complessità $O(n\log_2 n)$.
 \end{itemize}
-Nel caso di \textbf{algoritmi iterativi} che generano una sequenza di soluzioni, si può cercare di caratterizzare la velocità di convergenza (es., lineare o quadratica).
+\hspace*{1.5em}Nel caso di \textbf{algoritmi iterativi} che generano una sequenza di soluzioni,
+si può cercare di caratterizzare la \textcolor{RoyalBlue}{\textbf{velocità di convergenza}} (es., lineare o quadratica).
 
 \paragraph{Complessità intrinseca di un problema}
-Una questione più sottile si pone quando si vuole caratterizzare la complessità intrinseca di un problema.\\
-Per comprendere la natura della questione, consideriamo un semplice \textbf{problema di scheduling di $n$ job su macchina singola}. 
-Indichiamo con $p_j$ il tempo necessario per il job $j = 1, \dots, n$, e con $d_j$, $j = 1, \dots, n$ la sua data di consegna (\textbf{due date}).\\
-La soluzione è una sequenza di job, ovvero una permutazione $\sigma$ in cui $\sigma(k)$ è l’indice del job in posizione $k$. I tempi di completamento sono
+Una questione più sottile si pone quando si vuole caratterizzare la \textcolor{RoyalBlue}{\textbf{complessità intrinseca di un problema}}.\\
+\hspace*{1.5em} Per comprendere la natura della questione, consideriamo un semplice \textcolor{RoyalBlue}{\textbf{problema di scheduling di $n$ job su macchina singola}}. 
+Indichiamo con $p_j$ il tempo necessario per il job $j = 1, \dots, n$, e con $d_j$, $j = 1, \dots, n$ la sua data di consegna (\textbf{due date}).
+La soluzione è una \emph{sequenza di job}, ovvero una permutazione $\sigma$ in cui $\sigma(k)$ è 
+l’indice del job in posizione $k$. I \textcolor{RoyalBlue}{\textbf{tempi di completamento}} sono
 \[
 \begin{aligned}
 C_{\sigma(1)} &= p_{\sigma(1)},\\
 C_{\sigma(k)} &= C_{\sigma(k-1)} + p_{\sigma(k)}, \quad k = 2, \dots, n.
 \end{aligned}
 \]
-Si vuole minimizzare la massima lateness,
-\[
+\hspace*{1.5em}Si vuole minimizzare la massima lateness,
+\(
 L_{\max} \dot{=} \max_{j \in [n]} L_j,
-\]
+\)
 dove
 \(
 L_j \dot{=} C_j - d_j.
 \)
-Tale problema viene indicato con la stringa \textbf{$1//L_{\max}$}.
+Tale problema viene indicato con la stringa \textcolor{RoyalBlue}{\textbf{$1//L_{\max}$}}.
 
-\textbf{Teorema (regola EDD -- Earliest Due Date).}
-Per il problema $1//L_{\max}$ esiste una soluzione ottima in cui $d_{\sigma(k)} \le d_{\sigma(k+1)}$.\\
-\textbf{Dimostrazione.}
-Supponiamo che esista una soluzione ottima in cui, per due job consecutivi in sequenza, prima $i = \sigma(k)$ e poi $j = \sigma(k+1)$, si abbia $d_i > d_j$. Indichiamo con $C_i$ e $C_j = C_i + p_j$ i due tempi di completamento nella soluzione corrente, per la quale abbiamo due valori di lateness $L_i = C_i - d_i$ e $L_j = C_j - d_j$.\\
-Se scambiamo i due job, avremo $C'_j < C_j$ e $C'_i = C_j$. Per il job $j$, che anticipiamo, abbiamo $C'_j < C_j$ e $L'_j < L_j$, e quindi la lateness del job $j$ non può che migliorare nella nuova soluzione. Per il job $i$, che viene spostato in avanti nella sequenza, abbiamo
-\[
+\paragraph{Teorema (regola EDD -- Earliest Due Date)}
+Per il problema $1//L_{\max}$ esiste una \textbf{soluzione ottima} in cui 
+\textcolor{RoyalBlue}{$d_{\sigma(k)} \le d_{\sigma(k+1)}$}.\\
+\hspace*{1.5em}\textbf{Dimostrazione}
+Si consideri una soluzione ottima in cui, per due job consecutivi in sequenza, prima
+$i = \sigma(k)$ e poi $j = \sigma(k+1)$, risulti $d_i > d_j$. Si indichino con $C_i$ e
+$C_j = C_i + p_j$ i due tempi di completamento nella soluzione corrente, per la quale
+si hanno due valori di lateness $L_i = C_i - d_i$ e $L_j = C_j - d_j$.\\
+Scambiando i due job, si ottengono $C'_j < C_j$ e $C'_i = C_j$. Per il
+job $j$, che viene anticipato, vale $C'_j < C_j$ e quindi $L'_j < L_j$; di conseguenza,
+la lateness del job $j$ migliora nella nuova soluzione. Per il job $i$, che viene
+spostato in avanti nella sequenza, risulta
+\(
 L'_i = C'_i - d_i = C_j - d_i < C_j - d_j = L_j,
-\]
-quindi il job $i$ peggiora la sua lateness, che però non potrà essere peggio della vecchia lateness del job $j$. La nuova soluzione migliora quella precedente, contraddicendo l’assunzione di ottimalità. \\
+\)
+per cui la lateness del job $i$ peggiora, ma non supera la precedente lateness del job
+$j$. La nuova soluzione risulta quindi migliore della precedente, in contraddizione
+con l’ipotesi di ottimalità.
 
-Abbiamo quindi un algoritmo di complessità polinomiale per il problema.
-\textbf{Ma cosa accade se complichiamo leggermente il problema, introducendo dei tempi di rilascio (release time o ready time) $r_i$, $i \in [n]$, dei job?} Per il problema $1/r_i/L_{\max}$ non sono noti algoritmi di complessità polinomiale, ed è facile costruire controesempi alla regola EDD (da adattare comunque alla disponibilità di job).\\
-Esistono algoritmi \textbf{branch-and-bound} per il problema $1/r_i/L_{\max}$ (quindi complessità esponenziale). Non si conosce un algoritmo di complessità polinomiale per questo problema di ottimizzazione combinatoria (e per molti altri), ma neppure è stato dimostrato che esso non possa esistere.
+\paragraph{Introduzione dei tempi di rilascio}
+Si dispone dunque di un algoritmo di complessità polinomiale per il problema.
+\textcolor{RoyalBlue}{\textbf{Cosa accade se il problema viene leggermente complicato,
+introducendo tempi di rilascio (release time o ready time) $r_i$, $i \in [n]$, per i
+job?}}
+Per il problema $1/r_i/L_{\max}$ non sono noti algoritmi di complessità polinomiale ed è
+semplice costruire controesempi alla regola EDD (da adattare comunque alla
+disponibilità dei job).\\
+\hspace*{1.5em}Per il problema $1/r_i/L_{\max}$ esistono algoritmi
+\textcolor{RoyalBlue}{\textbf{branch-and-bound}} (quindi di complessità esponenziale).
+Non è noto un algoritmo di complessità polinomiale per questo problema di
+ottimizzazione combinatoria (e per molti altri), ma non è nemmeno stato dimostrato
+che tale algoritmo non possa esistere.
 
-\subsection{Caratterizzazione della complessità di problemi: classi P, NPC e NPH}
-Esiste una classe molto ampia di problemi di ottimizzazione per cui non sono disponibili algoritmi
-di complessità polinomiale. Tuttavia, la questione dell’esistenza o meno di un algoritmo di
-complessità polinomiale per essi rimane aperta.\\
-La \textbf{teoria della NP-completezza} ci permette di dare una risposta parziale alla questione,
-mostrando come questi problemi siano equivalenti tra di loro, nel senso che un algoritmo di 
+\subsection{Caratterizzazione della complessità -- classi P, NP, NPC e NPH}
+\paragraph{Teoria della NP-completezza} Esiste una classe molto ampia di problemi di ottimizzazione per
+cui non sono disponibili \emph{algoritmi
+di complessità polinomiale}. Tuttavia, la questione dell’esistenza o meno di un algoritmo di
+complessità polinomiale per essi rimane aperta.
+La \textcolor{RoyalBlue}{\textbf{teoria della NP-completezza}} permette di dare una risposta parziale alla questione,
+mostrando come questi problemi siano \emph{equivalenti tra di loro}, nel senso che \textcolor{RoyalBlue}{un algoritmo di 
 complessità polinomiale per anche uno solo di essi fornirebbe un algoritmo di complessità
-polinomiale per tutti i problemi di una classe molto ampia.\\
+polinomiale per tutti i problemi di una classe molto ampia}.\\
 Il fatto che decenni di ricerca sulla soluzione di tutti questi problemi non abbiano prodotto 
-un algoritmo polinomiale \textbf{suggerisce che esso in effetti non esiste}.\\
-Occorre distinguere \textbf{problemi di decisione} e \textbf{problemi di ottimizzazione}.
-Esempi di problema di decisione sono i seguenti.
+un algoritmo polinomiale \textbf{suggerisce che esso in effetti non esiste}.
 
-\textbf{Problema $K_0$ (subset sum)}
+\paragraph{Problemi di decisione e di ottimizzazione}
+Occorre distinguere \textcolor{RoyalBlue}{\textbf{problemi di decisione}} e \textcolor{RoyalBlue}{\textbf{problemi di ottimizzazione}}.
+Esempi di problema di decisione sono i seguenti.
+\begin{enumerate}
+    \item \textcolor{RoyalBlue}{\textbf{Problema $K_0$ (subset sum)}}
 Dati $n+1$ numeri interi positivi $a_1, a_2, \dots, a_n$ e $b$, esiste un sottoinsieme 
 $J \subseteq [n]$ tale che
 \(
 \sum_{i \in J} a_i = b
 \)?
-
-\textbf{Problema $LS_0$}
-Dato un \textbf{problema di lot sizing multiprodotto}, con tempi e costi di setup, esiste una
+    \item \textcolor{RoyalBlue}{\textbf{Problema $LS_0$}}
+Dato un \textcolor{RoyalBlue}{\textbf{problema di lot sizing multiprodotto}}, con tempi e costi di setup, esiste una
 soluzione ammissibile rispetto al soddisfacimento della domanda e ai vincoli di capacità
-produttiva?\\
-Data una specifica istanza di un problema di decisione, la risposta è sì oppure no.\\
-Dal punto di vista teorico, è più agevole trattare problemi di decisione, \textbf{ma è facile vedere il
-legame tra problemi di ottimizzazione e problemi di decisione}. Dato un problema di ottimizzazione
-\(
+produttiva?
+\end{enumerate}
+\hspace*{1.5em}Data una specifica istanza di un \emph{problema di decisione}, la risposta è \emph{sì} oppure \emph{no}.
+Dal punto di vista teorico, è più agevole trattare problemi di decisione, \textcolor{RoyalBlue}{\textbf{ma è facile vedere il
+legame tra problemi di ottimizzazione e problemi di decisione}}. Dato un problema di ottimizzazione
+\textcolor{RoyalBlue}{\(
 \min_{x \in S} f(x),
-\)
-\textbf{possiamo definirne una versione decisionale}, scegliendo un numero $k$ e chiedendoci se esiste
-$x \in S$ tale che $f(x) \le k$, dove $k$ è un numero intero.
-Indichiamo con $PO$ il problema di ottimizzazione, e con $PD$ il corrispondente problema di decisione.\\
-Se abbiamo a disposizione un algoritmo efficiente per $PO$, allora possiamo risolvere in modo 
-efficiente anche $PD$: basta risolvere il problema di ottimizzazione e verificare se 
-$f(x^*) \le k$. Questo ci permette di scrivere
+\)}
+\textbf{è possibile definirne una versione decisionale}, scegliendo un numero $k$ e chiedendo se esiste
+$x \in S$ tale che \textcolor{RoyalBlue}{$f(x) \le k$}, dove $k$ è un numero intero.
+Si indica con \textcolor{RoyalBlue}{$PO$} il \textbf{problema di ottimizzazione}, e con \textcolor{RoyalBlue}{$PD$}
+il corrispondente \textbf{problema di decisione}.\\
+\hspace*{1.5em}\textcolor{RoyalBlue}{Se si ha a disposizione un algoritmo efficiente per $PO$, allora è possibile risolvere in modo 
+efficiente anche $PD$}: basta risolvere il problema di ottimizzazione e verificare se 
+$f(x^*) \le k$. Questo permette di scrivere
 \textbf{\(
 PD \rightarrow PO,
 \)}
 nel senso che \textbf{il problema di decisione può essere ricondotto al problema di ottimizzazione}.\\
-\textbf{Non è detto che tale trasformazione sia conveniente}, ma possiamo escludere che $PO$ sia facile
+\hspace*{1.5em}\textbf{Non è detto che tale trasformazione sia conveniente}, ma è possibile escludere che $PO$ sia facile
 se $PD$ è difficile, perché un ipotetico algoritmo efficiente per $PO$ risolverebbe anche
-facilmente $PD$.\\
-Quindi, per dimostrare che un problema di ottimizzazione è difficile, può bastare dimostrare che
-è difficile il corrispondente problema di decisione.\\
-D’altro canto, un algoritmo di decisione efficiente potrebbe, in certi casi, essere utilizzato
+facilmente $PD$.
+Quindi, \textcolor{RoyalBlue}{\emph{per dimostrare che un problema di ottimizzazione è difficile, può bastare dimostrare che
+è difficile il corrispondente problema di decisione}}.\\
+\hspace*{1.5em}D’altro canto, un algoritmo di decisione efficiente potrebbe, in certi casi, essere utilizzato
 per risolvere il problema di ottimizzazione. Se la funzione di costo in $PO$ assume valori interi
-non negativi, e abbiamo un upper bound $U$ sul costo ottimo, possiamo applicare una procedura di
-bisezione.\\
-Indichiamo con $P$ la \textbf{classe dei problemi di decisione per cui esiste un algoritmo di complessità
-polinomiale}, in grado di risolvere tutte le possibili istanze del problema.
-Con questo vogliamo dire che il numero di passi, e quindi la complessità temporale dell’algoritmo
-è limitata superiormente da una funzione polinomiale dello spazio di memoria necessario per
-descrivere ogni istanza del problema.
+non negativi, e si ha un upper bound $U$ sul costo ottimo, è possibile applicare una \textcolor{RoyalBlue}{\textbf{procedura di
+bisezione}}.
+
+\paragraph{Classe P} Si indichi con \textcolor{RoyalBlue}{$P$} la \textbf{classe dei problemi di decisione per cui esiste un \textcolor{RoyalBlue}{algoritmo di complessità
+polinomiale}}, in grado di risolvere tutte le possibili istanze del problema.
+Con questo si vuole dire che il \emph{numero di passi}, e quindi la complessità temporale dell’algoritmo,
+\emph{è limitata superiormente da una funzione polinomiale dello spazio di memoria necessario per
+descrivere ogni istanza del problema}.
 Un tale algoritmo è in grado di fare due cose: \textbf{generare una soluzione} e \textbf{verificarne la correttezza}.
 Esistono problemi, come $K_0$, per cui la prima parte del compito è difficile, ma la seconda no.
-Se enumeriamo, mediante un albero di ricerca, tutti i possibili sottoinsiemi $J$, possiamo
+Se si enumerasse, mediante un \emph{albero di ricerca}, tutti i possibili sottoinsiemi $J$, si potrebbe
 verificare se una specifica istanza ha risposta positiva o negativa, ma chiaramente tale
 algoritmo ha \textbf{complessità esponenziale}.\\
-Tuttavia, se disponessimo di un ipotetico \textbf{calcolatore non deterministico}, in grado di eseguire
-un numero infinito di processi di calcolo in parallelo, saremmo in grado di risolvere il 
+\hspace*{1.5em}Tuttavia, se si disponesse di un ipotetico \textcolor{RoyalBlue}{\textbf{calcolatore non deterministico}}, in grado di eseguire
+un numero infinito di processi di calcolo in \emph{parallelo}, si sarebbe in grado di risolvere il 
 problema in tempo polinomiale.
 
 \paragraph{Classe NP}
-Si definisce \textbf{classe $NP$} l’insieme dei problemi di decisione le cui istanze che hanno risposta 
-positiva sono verificabili in tempo polinomiale.\\
-Per definizione, $P \subseteq NP$. Una questione meno ovvia è se valga $P \equiv NP$ o
+Si definisce \textbf{classe $NP$} \textcolor{RoyalBlue}{l’insieme dei \textbf{problemi di decisione} le cui istanze che hanno risposta 
+positiva sono \emph{verificabili} in \textbf{tempo polinomiale}}.\\
+\hspace*{1.5em}Per definizione, $P \subseteq NP$. Una questione meno ovvia è se valga $P \equiv NP$ o
 $P \subset NP$ in senso stretto. È ragionevole, da questo punto di vista, cercare di caratterizzare la sottoclasse dei problemi 
 più difficili in $NP$.
 
 \paragraph{Riduzione in tempo polinomiale}
 Siano $P$ e $Q$ due problemi di decisione, per cui ogni istanza $I_P$ di $P$ può essere
-trasformata in tempo polinomiale in un’istanza $I_Q$ di $Q$ tale che $I_P$ ha risposta positiva
-se e solo se $I_Q$ ha risposta positiva.
-Diremo che $P$ è riducibile in tempo polinomiale a $Q$, e useremo la notazione
-\(
+trasformata in tempo polinomiale in un’istanza $I_Q$ di $Q$ tale che \emph{$I_P$ ha risposta \textbf{positiva}
+se e solo se $I_Q$ ha risposta positiva}.
+Si dice che $P$ è \textcolor{RoyalBlue}{\textbf{riducibile in tempo polinomiale}} a $Q$ (\(
 P \prec Q.
 \))
-La notazione $P \prec Q$ sottolinea che la complessità di $P$ non è maggiore della
-complessità di trasformare $P$ in $Q$ e poi risolvere $Q$,
+La notazione $P \prec Q$ sottolinea che \emph{la complessità di $P$ non è maggiore della
+complessità di trasformare $P$ in $Q$ e poi risolvere $Q$},
 \[
 \text{compl}(P) \le \text{compl}(Q) + \text{compl}(P \to Q).
 \]
-Se la trasformazione ha una complessità trascurabile, la riduzione di $P$ a $Q$ mostra
+\hspace*{1.5em}Se la \textbf{trasformazione ha una complessità trascurabile}, la riduzione di $P$ a $Q$ mostra
 che $Q$ non è più facile di $P$. Se $P$ è difficile e $P \prec Q$, $Q$ non può essere facile.
-Altrimenti, potremmo trasformare un’istanza di $P$ in una di $Q$, e poi applicare
+Altrimenti, si potrebbe trasformare un’istanza di $P$ in una di $Q$, e poi applicare
 l’algoritmo efficiente per $Q$.
 
 \paragraph{Problemi NP-difficili}
-Un problema di decisione $P$ è detto \textbf{NP-difficile} (\emph{NP-hard}) se ogni
-problema nella classe $NP$ è riducibile a $P$.
-Indichiamo con \textbf{$NPH$} la classe dei problemi NP-difficili.
+Un \textbf{problema di decisione} $P$ è detto \textbf{NP-difficile} (\emph{NP-hard}) \emph{se ogni
+problema nella classe $NP$ è riducibile a $P$}.
+Si indichi con \textbf{$NPH$} la \textcolor{RoyalBlue}{\textbf{classe dei problemi NP-difficili}}.
+ (Questa classe è estendibile ai \emph{problemi di ottimizzazione}.)
 
 \paragraph{Problemi NP-completi}
-Un problema di decisione $P$ è detto NP-completo se è in Np ed è NP-hard. Indichiamo con NNPC la classe dei problemi NP-completi.
-Le implicazioni pratiche di tali definizioni sono:
+Un \textbf{problema di decisione} $P$ è detto \textbf{NP-completo} se è in NP ed è NP-hard. 
+Si indichi con NPC la classe dei \textcolor{RoyalBlue}{\textbf{problemi NP-completi}}.
+Le implicazioni di tali definizioni sono
 \begin{enumerate}
     \item Un problema NP-difficile non è più facile di un problema qualsiasi in NP.
     \item La classe NPC è la classe dei problemi più difficili in NP.
 \end{enumerate}
-Per dimostrare che un problema di decisione P è NP-completo, occorre dimostrare:
-\begin{itemize}[label=-]
-    \item Che $P$ è in NP;
-    \item Che un problema NP-completo $Q$ può essere ridotto in tempo polinomiale a P.
-\end{itemize}
-
-Osserviamo che, dato che $Q$ è NP-completo, $P \prec Q$, e se trascuriamo la
+\hspace*{1.5em}Per dimostrare che un problema di decisione P è NP-completo, occorre dimostrare che \emph{$P$ è in NP} e \emph{un problema NP-completo $Q$ può essere ridotto in tempo polinomiale a P}.
+Si osserva che, $Q$ è NP-completo, $P \prec Q$, e trascurando la
 complessità della trasformazione, questo implica
 \(
 \text{compl}(P) \le \text{compl}(Q).
@@ -1272,72 +1314,66 @@ $Q \prec P$, implica anche che
 \text{compl}(Q) \le \text{compl}(P).
 \)
 Le due disuguaglianze, sempre a meno della complessità della trasformazione,
-mostrano che
-\(
+mostrano, quindi, che
+\textcolor{RoyalBlue}{\(
 \text{compl}(Q) = \text{compl}(P).
-\)
-
-In altre parole, \textbf{i problemi della classe NPC sono equivalenti in termini di complessità
+\)}\\
+\hspace*{1.5em}In altre parole, \textcolor{RoyalBlue}{\textbf{i problemi della classe NPC sono equivalenti in termini di complessità
 computazionale, e un algoritmo polinomiale per uno di essi permetterebbe di risolverli
-tutti in tempo polinomiale}. Avremmo quindi $P = NP$, ipotesi non troppo plausibile a
+tutti in tempo polinomiale}}. Si avrebbe quindi \textcolor{RoyalBlue}{$P = NP$}, ipotesi non troppo plausibile a
 causa dell’equivalenza di una vasta classe di problemi per i quali non è noto un
 algoritmo di complessità polinomiale, nonostante essi siano stati oggetto di ampio
 studio nel corso degli anni.\\
-Se accettiamo l’ipotesi $P \neq NP$, possiamo rappresentare le relazioni tra le classi
+\hspace*{1.5em}Se si accettasse l’ipotesi \textcolor{RoyalBlue}{$P \neq NP$}, è possibile rappresentare le relazioni tra le classi
 $P$, $NP$ e $NPC$ come in figura. Essa ipotizza una gerarchia per cui la classe $P$
 sarebbe la classe dei problemi più facili in $NP$, e $NPC$ quella dei problemi più
-difficili.\\
+difficili.
 Tutti i problemi in $NP$ si possono trasformare nel problema $Q \in NPC$. Se
 $P \in NP$, per dimostrare che $P \in NPC$, occorre trasformare $Q$ in $P$.
 
-Se dimostriamo che un problema $P$ è in $NPC$, questo può a sua volta essere
-trasformato in altri problemi, permettendoci di ampliare la classe dei problemi noti in
-$NPC$. Il punto critico, chiaramente, è trovare l’innesco della catena, ovvero il primo
-problema in $NPC$, al quale tutti i problemi in $NP$ possono essere ricondotti.
-
-Il \textbf{teorema di Cook} dimostra che il problema della soddisfacibilità soddisfa i requisiti
-necessari e ci fornisce la soluzione.
-
-\textbf{Teorema di Cook.} Data una formula Booleana in forma canonica disgiuntiva, decidere se esiste
-un assegnamento di valori ai suoi elementi che la rende vera.
-Per esempio, la formula
+\paragraph{L'innesco della catena} Se si dimostrasse che un problema $P$ è in $NPC$, questo può a sua volta essere
+trasformato in altri problemi, permettendo di ampliare la classe dei problemi noti in
+$NPC$. Il punto critico, chiaramente, è trovare l’innesco della catena, ovvero \emph{il primo
+problema in $NPC$, al quale tutti i problemi in $NP$ possono essere ricondotti}.\\
+\hspace*{1.5em}Il \textbf{teorema di Cook} dimostra che il \textcolor{RoyalBlue}{\textbf{problema della soddisfacibilità}} soddisfa i requisiti
+necessari e fornisce la soluzione: \emph{data una \textbf{formula Booleana in forma canonica disgiuntiva}, decidere se esiste
+un assegnamento di valori ai suoi elementi che la rende vera}.
+\emph{Per esempio}, la formula
 \(
 (A \ \text{or} \ B) \ \text{and} \ (\text{not}(A) \ \text{or} \ C);
 \)
 definita rispetto alle variabili Booleane $A$, $B$ e $C$, è soddisfatta se $B$ e $C$
-sono entrambe vere. Al contrario,
+sono entrambe vere. \emph{Al contrario},
 \(
 (A \ \text{or} \ B) \ \text{and} \ (\text{not}(A) \ \text{or} \ B) \ \text{and} \ (\text{not}(B))
 \)
-non può essere soddisfatta da alcun assegnamento di verità alle variabili.
-
-A partire dal problema della soddisfacibilità, si può ricavare per riduzioni polinomiali
+non può essere soddisfatta da alcun assegnamento di verità alle variabili.\\
+\hspace*{1.5em}A partire dal problema della soddisfacibilità, si può ricavare per riduzioni polinomiali
 successive una famiglia crescente di problemi NP-completi, compreso il problema
 $K_0$, che può essere considerato come un cugino in versione decisionale del problema
-knapsack.\\
-Il fatto che tale problema faccia parte della classe $NPC$ ci permette di dimostrare il
-teorema seguente, che risolve la questione da cui siamo partiti.
+knapsack.
 
-\textbf{Teorema.}
-Consideriamo una versione decisionale del problema $1/r_i/L_{\max}$: dati i tempi di
+\paragraph{Teorema} Il fatto che tale problema faccia parte della classe $NPC$ permette di dimostrare il
+teorema seguente, che risolve la questione iniziale.
+Si consideri una \textcolor{RoyalBlue}{versione decisionale del problema $1/r_i/L_{\max}$}: dati i tempi di
 rilascio $r_i$, le date di consegna $d_i$ e i tempi di lavorazione $p_i$, tutti a valori
-interi positivi, per $n$ job $J_i$, $i \in [n]$, esiste una soluzione in cui nessun job è
-completato in ritardo? Tale problema di decisione è NP-completo.\\
-\textbf{Dimostrazione.}
+interi positivi, per $n$ job $J_i$, $i \in [n]$, \emph{\textcolor{RoyalBlue}{esiste una soluzione in cui nessun job è
+completato in ritardo?}} Tale problema di decisione è \textbf{NP-completo}.\\
+\hspace*{1.5em}\textbf{Dimostrazione}
 Il problema è chiaramente in $NP$, poiché per una data sequenza è facile verificare
-se i job vengono completati in tempo rispetto alle due date.\\
-Dati gli interi positivi $a_j$, $j \in [n]$, creiamo $n$ job $J_j$ con parametri
+se i job vengono completati in tempo rispetto alle due date.
+Dati gli interi positivi $a_j$, $j \in [n]$, si creano $n$ job $J_j$ con parametri
 \[
 r_j = 0, \quad p_j = a_j, \quad d_j = 1 + \sum_{k \in [n]} a_k, \qquad j \in [n].
 \]
-Creiamo un ulteriore job $J_0$ con parametri
+Si crei un ulteriore job $J_0$ con parametri
 \(
 r_0 = b, \quad p_0 = 1, \quad d_0 = b + 1.
 \)
 Perché tutti i job rispettino la data di consegna, è necessario che il job $J_0$ inizi la
 lavorazione al tempo $t = b$. Inoltre, dato che la data di consegna degli altri job è
 pari alla somma di tutti i tempi di lavorazione, la soluzione non può presentare periodi
-di tempo in cui la macchina è ferma, prima di avere completato l’intero insieme di job.\\
+di tempo in cui la macchina è ferma, prima di avere completato l’intero insieme di job.
 Questo richiede che sia possibile individuare un sottoinsieme $J$ di job da schedulare
 prima di $J_0$, in modo tale che
 \[
@@ -1346,189 +1382,156 @@ prima di $J_0$, in modo tale che
 Tale insieme risolve il problema \emph{subset-sum}.
 
 \subsection{Dai problemi di decisione ai problemi di ottimizzazione}
-Il teorema dimostra che un problema di decisione legato al problema di ottimizzazione
-$1/r_i/L_{\max}$ è NP-completo, \textbf{ma cosa possiamo dire del problema di ottimizzazione
-stesso?}\\
-Per definizione, la classe $NPC$ contiene solo problemi di decisione. Possiamo però
+\paragraph{Problemi di ottimizzazione} Il teorema dimostra che un problema di decisione legato al problema di ottimizzazione
+$1/r_i/L_{\max}$ è NP-completo, \textbf{ma cosa è possibile dire del problema di ottimizzazione
+stesso?} 
+Per definizione, la classe $NPC$ contiene solo problemi di decisione. É però possibile
 estendere le classi $P$ e $NPH$, includendo in esse anche problemi di ottimizzazione.\\
-I \textbf{problemi di ottimizzazione} per cui è noto un algoritmo di complessità polinomiale
-stanno in $P$. Nella classe $NPH$ possiamo includere problemi di ottimizzazione ai quali possiamo
+\hspace*{1.5em}I \textcolor{RoyalBlue}{\textbf{problemi di ottimizzazione}} per cui è noto un algoritmo di complessità polinomiale
+stanno in $P$. Nella classe $NPH$ è possibile includere problemi di ottimizzazione ai quali si può
 ricondurre un corrispondente problema di decisione.
 \textbf{La versione decisionale di $1/r_i/L_{\max}$ si riduce chiaramente al
 problema di ottimizzazione.}\\
-Inoltre, nella dimostrazione abbiamo assunto che i dati fossero numeri interi. Ma il
+\hspace*{1.5em}Inoltre, nella dimostrazione si è assunto che i dati fossero numeri interi. Ma il
 problema a numeri interi può evidentemente essere ridotto al problema generale.
-Possiamo quindi affermare che il problema di scheduling $1/r_i/L_{\max}$ è
-NP-difficile.
+Quindi \textbf{il problema di scheduling $1/r_i/L_{\max}$ è
+NP-difficile}.
 
 \paragraph{L’impatto della codifica di un problema}
-Nella trattazione ci siamo limitati alle classi fondamentali e siamo stati piuttosto
-informali e imprecisi. Non possiamo però fare a meno di considerare l’impatto del
-modo in cui si codifica un problema.
-Sarebbe infatti errato, per esempio, associare a un problema knapsack una dimensione
+Non è possibile fare a meno di considerare l’\textcolor{RoyalBlue}{\textbf{impatto del
+modo in cui si codifica un problema}}.
+Sarebbe infatti errato, per esempio, associare a un problema \emph{knapsack} una dimensione
 pari al numero di oggetti. La dimensione si riferisce a una codifica binaria che
 comprende tutti i dati del problema.
-Per mostrare la rilevanza di ciò, \textbf{consideriamo un classico algoritmo di
-programmazione dinamica} per la soluzione del problema knapsack:
+Per mostrare la rilevanza di ciò, \textbf{si consideri un classico algoritmo di
+programmazione dinamica} per la soluzione del problema knapsack
 \[
-\boxed{
 \begin{aligned}
 \max \quad & \sum_{k=1}^{n} v_k x_k \\
 \text{s.t.} \quad & \sum_{k=1}^{n} w_k x_k \le B \\
 & x_k \in \{0,1\}, \quad k = 1, \dots, n.
 \end{aligned}
-}
 \]
-Definiamo la funzione valore
+\hspace*{1.5em}Si definisce la \textcolor{RoyalBlue}{\textbf{funzione valore}}
 \[
 V_k(s) := \text{valore del sottoinsieme ottimale tra gli oggetti } \{k, k+1, \dots, n\},
 \]
 quando la capacità residua è $s$.
 In sostanza, la funzione valore assume che siano già state fatte scelte di inserimento
-o meno degli oggetti da $1$ a $k-1$; a valle di tale selezione, abbiamo una capacità
-residua $s$, e ci chiediamo come utilizzarla al meglio per le scelte rimanenti. Se i dati
-$w_k$ e $B$ del problema sono interi, lo sarà anche la capacità residua $s$.\\
-Per risolvere il problema, ovvero trovare il valore di $V_1(B)$, si applica una relazione
-ricorsiva:
+o meno degli oggetti da $1$ a $k-1$; a valle di tale selezione, si ha una capacità
+residua $s$, e ci si chiede come utilizzarla al meglio per le scelte rimanenti. Se i dati
+$w_k$ e $B$ del problema sono interi, lo sarà anche la capacità residua $s$.
+Per \emph{risolvere il problema}, ovvero trovare il valore di $V_1(B)$, si applica una relazione
+ricorsiva
 \[
-\boxed{
 V_k(s) =
 \begin{cases}
 V_{k+1}(s), & 0 \le s < w_k, \\
 \max \{ V_{k+1}(s), \, V_{k+1}(s - w_k) + v_k \}, & w_k \le s \le B.
 \end{cases}
-}
 \]
-Si tratta di una equazione funzionale con condizione terminale:
+Si tratta di una equazione funzionale con condizione terminale
 \[
-\boxed{
 V_n(s) =
 \begin{cases}
 0, & 0 \le s < w_n, \\
 v_n, & w_n \le s \le B.
 \end{cases}
-}
 \]
-Occorre tabulare tutte le funzioni $V_k(s)$, $k = 1, \dots, n$, per valori interi di $s$,
-che assume valori nel range da $0$ a $B$. Pertanto, tale algoritmo ha complessità
-$O(nB)$.\\
-Questo non implica che il problema knapsack abbia complessità polinomiale: per
+\hspace*{1.5em}Occorre tabulare tutte le funzioni $V_k(s)$, $k = 1, \dots, n$, per valori interi di $s$,
+che assume valori nel range da $0$ a $B$. Pertanto, \textbf{tale algoritmo ha complessità
+$O(nB)$}.
+Questo \emph{non implica che il problema knapsack abbia complessità polinomiale}: per
 rappresentare il valore $B$ in aritmetica binaria bastano $\log_2 B$ bit.
 Quindi \textbf{l’algoritmo, rispetto a tale codifica binaria, ha complessità esponenziale}. Se si
-utilizzasse un \textbf{computer con una codifica unaria}, l’algoritmo che abbiamo considerato
+utilizzasse un \textbf{computer con una codifica unaria}, l’algoritmo considerato
 avrebbe \textbf{complessità polinomiale}.
-Si dice infatti che un algoritmo di questo tipo è \emph{pseudo-polinomiale}.
+Si dice infatti che un algoritmo di questo tipo è \textcolor{RoyalBlue}{\textbf{pseudo-polinomiale}}.
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% PDF 3 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{CAP 3 --Metodi di decomposizione in ottimizazione}
-
-\subsection{Motivation}
+\vspace{-1cm}
+\textcolor{CadetBlue}{\section{CAP 3 -- Metodi di decomposizione in ottimizazione}}
+\paragraph{Recap} MANCA!
 
 \paragraph{Ruolo dei metodi di decomposizione}
-I metodi di \textbf{decomposizione} svolgono un ruolo centrale nell’ottimizzazione, poiché consentono:
+I metodi di \textbf{decomposizione} svolgono un ruolo centrale nell’ottimizzazione, poiché consentono di
 \begin{itemize}[label=-]
-\item di sfruttare \textbf{strutture favorevoli} del problema, come:
-\begin{itemize}[label=-]
-\item sottoproblemi di rete;
-\item trasformazioni da problemi \textbf{NP-hard} a problemi risolvibili in \textbf{tempo polinomiale};
+\item Sfruttare \textcolor{CadetBlue}{\textbf{strutture favorevoli}} del problema, come: sottoproblemi di rete e trasformazioni da problemi \textbf{NP-hard} a problemi risolvibili in \textbf{tempo polinomiale}.
+\item \textcolor{CadetBlue}{\textbf{Parallelizzare}} la soluzione di problemi di grande scala.
+\item Affrontare modelli di \textcolor{CadetBlue}{\textbf{ottimizzazione stocastica}} di grandi dimensioni basati su scenari.
+\item Trattare problemi combinatori difficili mediante una \textcolor{CadetBlue}{\textbf{sequenza di sottoproblemi più semplici}}, eventualmente combinando diverse strategie di soluzione.
+\item Evitare difficoltà di modellazione dovute a \textcolor{CadetBlue}{\textbf{vincoli molto complessi}}.
 \end{itemize}
-\item di \textbf{parallelizzare} la soluzione di problemi di grande scala;
-\item di affrontare modelli di \textbf{ottimizzazione stocastica} di grandi dimensioni basati su scenari;
-\item di trattare problemi combinatori difficili mediante una \textbf{sequenza di sottoproblemi più semplici}, eventualmente combinando diverse strategie di soluzione;
-\item di evitare difficoltà di modellazione dovute a \textbf{vincoli molto complessi}.
-\end{itemize}
-
-\subsection{Problemi separabili}
 
 \paragraph{Problema separabile}
 Si consideri il problema di ottimizzazione
 \[
-\operatorname{opt} \sum_{j \in [n]} f_j(x_j)
-\quad \text{s.t. } x_j \in S_j.
+\begin{aligned}
+\operatorname{opt} \quad & \sum_{j \in [n]} f_j(x_j) \\
+\text{s.t.} \quad & x_j \in S_j .
+\end{aligned}
 \]
 In questo caso il problema può essere \textbf{decomposto} in sottoproblemi indipendenti
-\[
+\(
 \operatorname{opt}_{x_j \in S_j} f_j(x_j),
-\]
-poiché i sottovettori $x_j$ sono soggetti a \textbf{vincoli indipendenti}.
-
-\paragraph{Interpretazione nei modelli di programmazione lineare}
-Nel caso di un modello di programmazione lineare
+\)
+poiché i sottovettori $x_j$ sono soggetti a \textbf{vincoli indipendenti}.\\
+\hspace*{1.5em}Nel caso di un \textcolor{CadetBlue}{\textbf{modello di programmazione lineare}}
 \[
-\min c^T x
-\quad \text{s.t. } Ax = b,
-\quad x \ge 0,
+\begin{aligned}
+\min \quad & c^T x \\
+\text{s.t.} \quad & Ax = b, \\
+                  & x \ge 0,
+\end{aligned}
 \]
-la separabilità corrisponde a una struttura \textbf{a blocchi diagonali} della matrice tecnologica:
-\[
-A =
-\begin{bmatrix}
-D_1 \\
-D_2 \\
-D_3 \\
-\vdots \\
-D_n
-\end{bmatrix}.
-\]
-
-\subsection{Fattori complicanti}
-
-\paragraph{Assenza di struttura completamente separabile}
+la separabilità corrisponde a una struttura \textbf{a blocchi diagonali} della matrice $A$. 
 Nella maggior parte dei casi reali, non si dispone di una struttura così favorevole e sono presenti \textbf{fattori complicanti}.
 
 \paragraph{Struttura block-angular}
-Un caso tipico è quello di un problema LP di grande scala con struttura \textbf{block-angular}:
+Un caso tipico è quello di un \textbf{problema LP di grande scala} con struttura \textcolor{CadetBlue}{\textbf{block-angular}} della matrice $A$:
 \[
 A =
 \begin{bmatrix}
 C_1 & C_2 & C_3 & \cdots & C_n \\
-D_1 \\
-D_2 \\
-D_3 \\
-\vdots \\
-D_n
-\end{bmatrix}.
-\]
-In questo caso il fattore complicante è rappresentato da un insieme di \textbf{vincoli di interazione} che accoppiano i sottoproblemi e impediscono la decomposizione basata sulla struttura a blocchi diagonali.
-
-\paragraph{Rilassamento dei vincoli di interazione}
-La decomposizione diventa possibile se i vincoli di interazione vengono \textbf{rilassati} in qualche modo, ad esempio tramite la \textbf{decomposizione lagrangiana duale}.
-
-\paragraph{Variabili di interazione}
-Un secondo caso è quello in cui la matrice ha la forma
-\[
+D_1 &     &     &        &     \\
+    & D_2 &     &        &     \\
+    &     & D_3 &        &     \\
+    &     &     & \ddots &     \\
+    &     &     &        & D_n
+\end{bmatrix}
+\qquad \text{o} \qquad
 A =
 \begin{bmatrix}
-C_1 & D_1 \\
-C_2 & D_2 \\
-C_3 & D_3 \\
-\vdots & \vdots \\
-C_n & D_n
+C_1 & D_1 &        &        &      &   \\
+C_2 &     & D_2    &        &      &   \\
+C_3 &     &        &  D_3   &      &   \\
+\vdots &  &        &        &  \ddots &      \\
+C_n &     &        &        &         &  D_n
 \end{bmatrix}.
 \]
-Qui il fattore complicante è costituito da \textbf{variabili di interazione}, che impediscono la decomposizione.
-
-\paragraph{Fissaggio delle variabili}
-La decomposizione è possibile se si \textbf{fissano} le variabili di interazione, come avviene nella \textbf{decomposizione L-shaped}, che corrisponde alla \textbf{decomposizione di Benders} nella programmazione stocastica.
-
-\subsection{Panoramica dei metodi di decomposizione}
+\hspace*{1.5em}\textcolor{CadetBlue}{\textbf{Nel primo caso}} il fattore complicante è rappresentato da un insieme di \textbf{vincoli di interazione} che accoppiano i sottoproblemi e impediscono la decomposizione basata sulla struttura a blocchi diagonali.
+La decomposizione diventa possibile se i vincoli di interazione vengono \textcolor{CadetBlue}{\textbf{rilassati}}
+in qualche modo, ad esempio tramite la \textbf{decomposizione lagrangiana duale}.\\
+\hspace*{1.5em}\textcolor{CadetBlue}{\textbf{Nel secondo caso}} il fattore complicante è costituito da
+\textbf{variabili di interazione}, che impediscono la decomposizione. La decomposizione è possibile se si
+\textcolor{CadetBlue}{\textbf{fissano}} le variabili di interazione, come avviene nella \textbf{decomposizione L-shaped}, 
+che corrisponde alla \textbf{decomposizione di Benders} nella programmazione stocastica.
 
 \paragraph{Classificazione dei metodi}
-Esiste un ampio insieme di metodi di decomposizione tra loro correlati. Alcuni sono \textbf{esatti}, almeno in linea di principio, mentre altri conducono ad \textbf{algoritmi approssimati}:
-\begin{itemize}[label=-]
-\item rilassamento lagrangiano e decomposizione lagrangiana;
-\item euristiche duali;
-\item decomposizione di Dantzig--Wolfe;
-\item generazione di colonne;
-\item decomposizione gerarchica;
-\item matheuristics (da non confondere con le metaeuristiche);
-\item decomposizione di Benders per MILP con struttura speciale;
-\item decomposizione L-shaped nella programmazione stocastica a due stadi con ricorso;
-\item progressive hedging per la programmazione stocastica multistadio con ricorso;
-\item programmazione dinamica (decomposizione basata sul tempo).
-\end{itemize}
+Esiste un ampio insieme di metodi di decomposizione tra loro correlati. Alcuni sono \textbf{esatti}, almeno in linea di principio, mentre altri conducono ad \textbf{algoritmi approssimati}: 
+\textbf{rilassamento lagrangiano e decomposizione lagrangiana}, 
+\textbf{euristiche duali}, 
+\textbf{decomposizione di Dantzig--Wolfe}, 
+\textbf{generazione di colonne}, 
+\textbf{decomposizione gerarchica}, 
+\textbf{matheuristics} (da non confondere con le metaeuristiche), 
+\textbf{decomposizione di Benders} per MILP con struttura speciale, 
+\textbf{decomposizione L-shaped} nella programmazione stocastica a due stadi con ricorso, 
+\textbf{progressive hedging} per la programmazione stocastica multistadio con ricorso e
+\textbf{programmazione dinamica} (decomposizione basata sul tempo).
+
 
 \subsection{Part 1 -- Dual decomposition and progressive hedging for stochastic programming}
 
