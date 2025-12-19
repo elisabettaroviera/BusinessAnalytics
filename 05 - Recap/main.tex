@@ -1453,7 +1453,17 @@ Si dice infatti che un algoritmo di questo tipo è \textcolor{RoyalBlue}{\textbf
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% PDF 3 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \vspace{-1cm}
 \textcolor{CadetBlue}{\section{CAP 3 -- Metodi di decomposizione in ottimizazione}}
-\paragraph{Recap} MANCA!
+\paragraph{Recap}
+I \textbf{metodi di decomposizione} servono a risolvere problemi \textbf{di grande scala} sfruttando \textcolor{CadetBlue}{\textbf{strutture favorevoli}}: permettono di \textcolor{CadetBlue}{\textbf{parallelizzare}} i calcoli, di gestire modelli di \textcolor{CadetBlue}{\textbf{ottimizzazione stocastica}} basati su scenari e di affrontare problemi combinatori difficili tramite una \textcolor{CadetBlue}{\textbf{sequenza di sottoproblemi più semplici}}.  
+\\\hspace*{1.5em}La decomposizione nasce quando un problema non è pienamente separabile: in presenza di \textcolor{CadetBlue}{\textbf{fattori complicanti}} (vincoli di interazione o variabili di interazione) si ottiene una struttura \textcolor{CadetBlue}{\textbf{block-angular}}. Nel caso di \textcolor{CadetBlue}{\textbf{vincoli di interazione}} si può decomporre \textbf{rilassando} tali vincoli (ad esempio con \textbf{decomposizione lagrangiana/duale}); nel caso di \textcolor{CadetBlue}{\textbf{variabili di interazione}} si può decomporre \textbf{fissando} tali variabili (logica alla base di \textbf{Benders} e della \textbf{L-shaped}).  
+\\\hspace*{1.5em}\textcolor{CadetBlue}{\textbf{Decomposizione duale e progressive hedging.}}
+La \textbf{decomposizione duale} usa la \textcolor{CadetBlue}{\textbf{dualità}} per rendere separabile un problema: si \textbf{dualizza} un vincolo complicante introducendo un \textcolor{CadetBlue}{\textbf{moltiplicatore di Lagrange}} interpretabile come \textcolor{CadetBlue}{\textbf{prezzo ombra}} della risorsa; così il problema si spezza in sottoproblemi indipendenti e il moltiplicatore viene aggiornato in base allo squilibrio tra consumo e disponibilità (meccanismo tipo \textbf{domanda--offerta}). La convergenza può essere lenta e spesso si mira anche a \textcolor{CadetBlue}{\textbf{dual heuristics}}.  
+Nella \textbf{programmazione stocastica multistadio} con formulazione a variabili per scenario, è cruciale imporre i \textcolor{CadetBlue}{\textbf{vincoli di non anticipatività}}: decisioni di scenari indistinguibili fino a un certo tempo devono coincidere. La \textbf{progressive hedging} sfrutta una decomposizione \textcolor{CadetBlue}{\textbf{per scenario}} e migliora la convergenza combinando \textcolor{CadetBlue}{\textbf{moltiplicatori}} e un \textcolor{CadetBlue}{\textbf{termine di penalità quadratica}} (interpretato come \textbf{regolarizzazione}); la scelta del parametro di penalità e dello schema di aggiornamento dei moltiplicatori è \textcolor{CadetBlue}{\textbf{critica}}. Il metodo è particolarmente utile per costruire \textbf{euristiche} in problemi \textbf{misti-interi} multistadio difficili.\\
+\hspace*{1.5em}\textcolor{CadetBlue}{\textbf{Benders/L-shaped}}
+La \textbf{decomposizione L-shaped} (equivalente alla \textbf{decomposizione di Benders} in programmazione stocastica a due stadi) separa il \textbf{primo stadio} dai \textbf{sottoproblemi di scenario} del secondo stadio: si risolve un \textcolor{CadetBlue}{\textbf{master}} che contiene un’approssimazione della funzione di ricorso e la si raffina con \textcolor{CadetBlue}{\textbf{cutting planes}} (tagli di \textbf{optimality} e di \textbf{feasibility}). In parallelo, l’idea dei \textbf{Kelley cutting planes} è costruire progressivamente un \textbf{bound inferiore} tramite iperpiani di supporto e iterare finché il gap tra \textbf{upper bound} e \textbf{lower bound} è sufficientemente piccolo. Varianti come la \textbf{regularized L-shaped decomposition} e generalizzazioni multistadio (\textbf{Nested Benders}, \textbf{Abridged nested Benders}, \textbf{Stochastic Dual Dynamic Programming}) mirano a migliorare \textcolor{CadetBlue}{\textbf{convergenza}} e scalabilità; nei metodi di \textbf{decomposizione stocastica} (\textbf{Higle e Sen}) si combina \textbf{campionamento} e \textbf{ottimizzazione} costruendo \textcolor{CadetBlue}{\textbf{tagli asintoticamente validi}}.  
+\\\hspace*{1.5em}\textcolor{CadetBlue}{\textbf{Dantzig--Wolfe/column generation.}}
+La \textbf{decomposizione di Dantzig--Wolfe} e la \textbf{generazione di colonne} affrontano modelli con moltissime variabili “utili” ma non enumerabili: si lavora con un \textcolor{CadetBlue}{\textbf{restricted master problem}} e si aggiungono nuove colonne risolvendo un \textcolor{CadetBlue}{\textbf{pricing problem}} (scelto per individuare colonne con \textbf{costo ridotto} favorevole). Nel \textbf{cutting stock} la formulazione a \textbf{pattern} elimina la \textcolor{CadetBlue}{\textbf{simmetria}} del modello diretto, ma richiede generazione dinamica dei pattern; lo schema è alla base di approcci \textbf{branch-and-price} e, più in generale, consente di “nascondere” vincoli complessi nel pricing e di risolvere problemi \textcolor{CadetBlue}{\textbf{realmente di grande scala}} quando i metodi standard (simplesso o interior point) non sono più competitivi.
+
 
 \paragraph{Ruolo dei metodi di decomposizione}
 I metodi di \textbf{decomposizione} svolgono un ruolo centrale nell’ottimizzazione, poiché consentono di
@@ -1526,40 +1536,34 @@ Esiste un ampio insieme di metodi di decomposizione tra loro correlati. Alcuni s
 \textbf{decomposizione di Dantzig--Wolfe}, 
 \textbf{generazione di colonne}, 
 \textbf{decomposizione gerarchica}, 
-\textbf{matheuristics} (da non confondere con le metaeuristiche), 
+\textbf{mateuristiche} (da non confondere con le metaeuristiche), 
 \textbf{decomposizione di Benders} per MILP con struttura speciale, 
 \textbf{decomposizione L-shaped} nella programmazione stocastica a due stadi con ricorso, 
 \textbf{progressive hedging} per la programmazione stocastica multistadio con ricorso e
 \textbf{programmazione dinamica} (decomposizione basata sul tempo).
 
 
-\subsection{Part 1 -- Dual decomposition and progressive hedging for stochastic programming}
-
-\subsubsection{Dual decomposition}
+\subsection{Decomposizione duale e progressive hedging per la programmazione stocastica}
+\subsubsection{Decomposizione duale}
 
 \paragraph{Problema di partenza}
-Per comprendere come la dualità possa essere utilizzata in un contesto semplice, si consideri il problema:
+Per comprendere come la dualità possa essere utilizzata in un contesto semplice, si consideri il problema
 \[
-\max \sum_{i=1}^n f_i(x_i)
-\tag{1}
-\]
-\[
-\text{s.t. } \sum_{i=1}^n g_i(x_i) \le b,
-\tag{2}
-\]
-\[
-x_i \in S_i, \quad i = 1, \ldots, n.
-\tag{3}
+\begin{aligned}
+\max \quad & \sum_{i=1}^n f_i(x_i) \\
+\text{s.t.} \quad & \sum_{i=1}^n g_i(x_i) \le b, \\
+                  & x_i \in S_i, \quad i = 1, \ldots, n .
+\end{aligned}
 \]
 Le variabili decisionali $x_i$, $i = 1, \ldots, n$, possono essere interpretate come \textbf{attività} che generano un profitto $f_i(x_i)$ e consumano una quantità di risorsa $g_i(x_i)$.  
-La funzione obiettivo (1) rappresenta il \textbf{profitto totale}, mentre il vincolo (2) è un \textbf{vincolo di budget} sulla risorsa.
-
-\paragraph{Osservazione sulle unità di misura}
+La \textcolor{CadetBlue}{\textbf{funzione obiettivo}} rappresenta il \textbf{profitto totale}, 
+mentre il \textcolor{CadetBlue}{\textbf{vincolo}} è di \textcolor{CadetBlue}{\textbf{budget}} sulla risorsa.
 La funzione obiettivo è misurata in termini monetari, mentre il parametro $b$ è espresso in unità di risorsa.  
 Se fosse possibile eliminare il vincolo di budget, il problema risulterebbe immediatamente \textbf{decomponibile}.
 
 \paragraph{Dualizzazione del vincolo di budget}
-Il vincolo di budget viene dualizzato introducendo un moltiplicatore di Lagrange $\mu \ge 0$ e scrivendo la funzione lagrangiana:
+Il \textcolor{CadetBlue}{\textbf{vincolo di budget}} viene \emph{dualizzato} introducendo un
+\textcolor{CadetBlue}{\textbf{moltiplicatore di Lagrange $\mu \ge 0$}} e scrivendo la \textbf{funzione lagrangiana}:
 \[
 L(x; \mu) =
 \sum_{i=1}^n f_i(x_i)
@@ -1571,9 +1575,8 @@ b - \sum_{i=1}^n g_i(x_i)
 \sum_{i=1}^n \bigl[f_i(x_i) - \mu g_i(x_i)\bigr]
 + \mu b.
 \]
-
-\paragraph{Problemi primali decomposi}
-La funzione lagrangiana deve essere massimizzata rispetto alle variabili primali, ottenendo un insieme di sottoproblemi indipendenti:
+La funzione lagrangiana deve essere \textbf{massimizzata} rispetto alle variabili primali, ottenendo un insieme di
+sottoproblemi indipendenti
 \[
 \max_{x_i \in S_i}
 \bigl[
@@ -1581,29 +1584,22 @@ f_i(x_i) - \mu g_i(x_i)
 \bigr]
 \equiv \pi_i(x_i).
 \]
-Ogni sottoproblema consiste nel massimizzare il contributo di profitto netto, dato dal profitto meno il costo della risorsa.
-
-\paragraph{Interpretazione economica del moltiplicatore}
-Il moltiplicatore $\mu$ rappresenta un \textbf{prezzo ombra} della risorsa, misurato in unità monetarie per unità di risorsa.  
+Ogni sottoproblema consiste nel \emph{massimizzare il contributo di profitto netto}, dato dal profitto meno il costo della risorsa.
+Il \textcolor{CadetBlue}{moltiplicatore} $\mu$ rappresenta un \textcolor{CadetBlue}{\textbf{prezzo ombra}} della risorsa, misurato in unità monetarie per unità di risorsa.  
 In questo caso, il problema duale consiste nel \textbf{minimizzare} la funzione duale rispetto a $\mu$.
-
-\paragraph{Sottogradiente della funzione duale}
-Date le soluzioni rilassate $x_i^\ast$, un sottogradiente della funzione duale è:
+Date le soluzioni rilassate $x_i^\ast$, un sottogradiente della funzione duale è
 \[
 \sum_{i=1}^n g_i(x_i^\ast) - b.
 \]
-Questo valore è positivo quando il budget viene superato; in tal caso il prezzo della risorsa deve essere aumentato.  
-Il prezzo deve invece essere ridotto quando il budget non viene completamente utilizzato.
-
-\paragraph{Schema domanda--offerta}
+Questo valore è \textcolor{CadetBlue}{positivo} quando il \emph{budget viene superato}; in tal caso il prezzo della risorsa deve essere aumentato.  
+Invece, il prezzo deve invece essere ridotto quando il budget non viene completamente utilizzato.
 Il meccanismo risultante può essere interpretato come uno schema di \textbf{domanda--offerta}, in cui il prezzo della risorsa viene aggiornato in funzione dello squilibrio tra consumo e disponibilità.
 
 \paragraph{Osservazioni sulla dual decomposition}
-La decomposizione duale può convergere lentamente nella pratica, ma può risultare efficace per alcuni problemi di grande scala con struttura particolare.  
-Talvolta è sufficiente ottenere una soluzione di buona qualità: se da una decomposizione duale è possibile ricostruire una soluzione primale ammissibile, si ottiene una \textbf{dual heuristic}.
-
-\paragraph{Lagrangiano aumentato}
-I metodi lagrangiani possono essere integrati con metodi a funzione di penalità, ottenendo schemi di \textbf{Lagrangiano aumentato}, ad esempio minimizzando:
+La \textcolor{CadetBlue}{\textbf{decomposizione duale può convergere lentamente}} nella pratica, ma può risultare efficace per alcuni problemi di grande scala con struttura particolare.  
+Talvolta è sufficiente ottenere una soluzione di buona qualità: se da una decomposizione duale è possibile ricostruire una soluzione primale ammissibile, si ottiene una \textbf{dual heuristic}.\\
+\hspace*{1.5em}I metodi lagrangiani possono essere integrati con \textcolor{CadetBlue}{\textbf{metodi a funzione di penalità}},
+ottenendo schemi di \textbf{Lagrangiano aumentato}, ad esempio minimizzando
 \[
 f(x)
 + \sum_{i \in I} \lambda_i h_i(x)
@@ -1611,168 +1607,160 @@ f(x)
 \]
 nel caso di problemi con vincoli di uguaglianza.
 
-\subsubsection{Progressive hedging for multistage stochastic programming}
-
+\subsubsection{Copertura progressiva per la programmazione stocastica multistadio}
 \paragraph{Rappresentazione dell’incertezza}
-Nella programmazione stocastica multistadio, l’incertezza è rappresentata tramite \textbf{alberi di scenario}.  
-In una formulazione compatta del modello, si definiscono variabili decisionali $x_n$ associate ai nodi $n$ dell’albero.
-
-\paragraph{Formulazione split-variable}
-In una formulazione a variabili separate, si introducono variabili $x_t^s$, associate allo scenario $s$ al tempo $t$.
-
-\paragraph{Vincoli di non anticipatività}
-In questo caso è necessario imporre esplicitamente i \textbf{vincoli di non anticipatività}: variabili decisionali corrispondenti a scenari diversi allo stesso tempo $t$ devono assumere lo stesso valore se gli scenari sono indistinguibili a quel tempo.
-
-\paragraph{Esempio di non anticipatività}
-Nel caso illustrato, i nodi attraversati dagli scenari $s = 1,2,3,4$ al tempo $t = 1$ sono indistinguibili; pertanto:
-\[
-x_{1i}^1 = x_{1i}^2 = x_{1i}^3 = x_{1i}^4,
-\quad i = 1, \ldots, I.
-\]
-Analogamente, al tempo $t = 2$ si hanno vincoli come:
-\[
-x_{2i}^5 = x_{2i}^6,
-\quad i = 1, \ldots, I.
-\]
+Nella \textbf{programmazione stocastica multistadio}, l’incertezza è rappresentata tramite \textbf{alberi di scenario}.  
+In una \textcolor{CadetBlue}{\textbf{formulazione compatta del modello}}, si definiscono variabili decisionali $x_n$ 
+associate ai nodi $n$ dell’albero.
+In una \textcolor{CadetBlue}{\textbf{formulazione a variabili separate}}, si introducono variabili $x_t^s$, associate 
+allo scenario $s$ al tempo $t$.
+Nel secondo caso è necessario imporre esplicitamente i \textcolor{CadetBlue}{\textbf{vincoli di non anticipatività}}: 
+variabili decisionali corrispondenti a scenari diversi allo stesso tempo $t$ devono assumere lo stesso valore se gli scenari sono indistinguibili a quel tempo.
 
 \paragraph{Insiemi di scenari indistinguibili}
-Si denoti con $\mathcal{F}_{s}^t$ l’insieme degli scenari indistinguibili da $s$ fino al tempo $t$.  
-Ad esempio:
-\[
-\mathcal{F}_1^0 = \{1,2,3,4,5,6,7,8\},
-\quad
-\mathcal{F}_2^1 = \{1,2,3,4\},
-\quad
-\mathcal{F}_5^2 = \{5,6\}.
-\]
+Si denoti con $\mathcal{F}_{s}^t$ l’insieme degli \textbf{scenari indistinguibili} da $s$ fino al tempo $t$.  
 I vincoli di non anticipatività possono essere scritti come:
-\[
+\(
 x_{it}^s = x_{it}^{s'}, \quad \forall i,t,\; s,s' \in \mathcal{F}_s^t.
-\]
+\)
 
-\paragraph{Formulazione del problema multistadio}
+\paragraph{Formulazione del problema multistadio} La \textbf{copertura progressiva} è una strategia che può essere
+applicata a problemi di programmazione stocastica multistadio, possibilmente non lineari.
 Si consideri un sistema dinamico con stato $z_t$ e equazione di stato:
-\[
+\(
 z_{t+1} = G_t(z_t, x_t, \xi_{t+1}), \quad t = 0,1,\ldots,T,
-\]
-dove $x_t$ è la variabile di controllo e $\xi_{t+1}$ è una variabile aleatoria.
-
-Sia $s = (\xi_1^s, \xi_2^s, \ldots, \xi_{T+1}^s)$ uno scenario con probabilità $\pi_s$.  
-Il problema di scenario individuale è:
+\)
+dove $x_t$ è la \textbf{variabile di controllo} e $\xi_{t+1}$ è una variabile aleatoria.\\
+\hspace*{1.5em}Sia $s = (\xi_1^s, \xi_2^s, \ldots, \xi_{T+1}^s)$ uno \textbf{scenario} con probabilità $\pi_s$.  
+Il \textcolor{CadetBlue}{\textbf{problema di scenario individuale}} è
 \[
-\min \sum_{t=0}^T \gamma^t f_t(z_t, x_t, \xi_{t+1}^s)
-+ \gamma^{T+1} Q(z_{T+1})
+\begin{aligned}
+\min \quad 
+& \sum_{t=0}^T \gamma^t f_t\!\left(z_t, x_t, \xi_{t+1}^s\right)
+  + \gamma^{T+1} Q\!\left(z_{T+1}\right) \\
+\text{s.t.} \quad
+& z_{t+1} = G_t\!\left(z_t, x_t, \xi_{t+1}^s\right),
+  \quad t = 0,1,\ldots,T, \\
+& L_t\!\left(z_t\right) \le x_t \le U_t\!\left(z_t\right),
+  \quad t = 0,1,\ldots,T .
+\end{aligned}
 \]
-soggetto a:
+\hspace*{1.5em}Sia $\left(x_0^s, x_1^s, \ldots, x_T^s\right)$ la soluzione ottima del problema associato allo scenario $s$.
+Ci si potrebbe chiedere se sia possibile aggregare le soluzioni individuali e scegliere
+\(
+\underline{x}_t = \sum_{s \in S} \pi_s x_t^s .
+\)
+Purtroppo, non vi è alcuna ragione per ritenere che tale scelta conduca a una soluzione ottima, o anche solo ammissibile.
+Una \textbf{buona politica decisionale} dovrebbe sfruttare l’informazione disponibile, ma non può essere anticipativa.
+Il problema multistadio può essere formulato all’interno di un framework di modellazione a variabili replicate per scenario (\emph{split-variable}),
+introducendo i vincoli di non anticipatività in una forma opportuna.\\
+\hspace*{1.5em}Sia $\{s\}_t$ l’insieme degli scenari che, fino all’istante di tempo $t$, non sono distinguibili dallo scenario $s$,
+e sia $\mathbb{P}(\{s\}_t)$ la somma delle loro probabilità.
+Il \textcolor{CadetBlue}{\textbf{problema di ottimizzazione stocastica}}complessivo può essere scritto come
 \[
-z_{t+1} = G_t(z_t, x_t, \xi_{t+1}^s),
-\quad t = 0,1,\ldots,T,
-\]
-\[
-L_t(z_t) \le x_t \le U_t(z_t),
-\quad t = 0,1,\ldots,T.
-\]
-
-\paragraph{Problema stocastico con non anticipatività}
-Il problema complessivo può essere scritto come:
-\[
-\min
-\sum_{s \in S} \pi_s
+\begin{aligned}
+\min \quad
+& \sum_{s \in S} \pi_s
 \left(
-\sum_{t=0}^T \gamma^t f_t(z_t^s, x_t^s, \xi_{t+1}^s)
-+ \gamma^{T+1} Q(z_{T+1}^s)
-\right)
+\sum_{t=0}^T \gamma^t f_t\!\left(z_t^s, x_t^s, \xi_{t+1}^s\right)
++ \gamma^{T+1} Q\!\left(z_{T+1}^s\right)
+\right) \\
+\text{s.t.} \quad
+& z_{t+1}^s = G_t\!\left(z_t^s, x_t^s, \xi_{t+1}^s\right),
+  \quad \forall s,\; t = 0,1,\ldots,T, \\
+& L_t\!\left(z_t^s\right) \le x_t^s \le U_t\!\left(z_t^s\right),
+  \quad \forall s,\; t = 0,1,\ldots,T, \\
+& x_t^s =
+\sum_{s' \in \{s\}_t}
+\frac{\pi_{s'}x_t^{s'}}{\mathbb{P}(\{s\}_t)},
+\qquad \forall s \in S,\; t = 0,1,\ldots,T .
+\end{aligned}
 \]
-soggetto a:
+\hspace*{1.5em}In questo caso si utilizza una \emph{singola aspettativa condizionata} per ciascuno scenario e istante temporale,
+anziché imporre uguaglianze a coppie tra le decisioni associate agli insiemi di scenari indistinguibili.
+Introduciamo quindi dei \textbf{moltiplicatori di Lagrange} $w_t^s$ associati ai vincoli di non anticipatività.
+La dualizzazione del problema conduce alla seguente formulazione
 \[
-z_{t+1}^s = G_t(z_t^s, x_t^s, \xi_{t+1}^s),
-\]
-\[
-L_t(z_t^s) \le x_t^s \le U_t(z_t^s),
-\]
-\[
-x_t^s =
-\frac{
-\sum_{s' \in \mathcal{F}_s^t} \pi_{s'} x_t^{s'}
-}{
-P(\mathcal{F}_s^t)
-},
-\quad \forall s,t.
-\tag{4}
-\]
-
-\paragraph{Dualizzazione e regolarizzazione}
-Introducendo moltiplicatori di Lagrange $w_t^s$ per i vincoli di non anticipatività e dualizzando, il problema può essere decomposto per scenario.  
-Per migliorare la convergenza si introduce un termine di penalità quadratico, ottenendo per ogni scenario:
-\[
-\min
+\begin{aligned}
+\min \quad
+& \sum_{s \in S} \pi_s
+\Bigg(
 \sum_{t=0}^T \gamma^t
-\left\{
-f_t(z_t^s, x_t^s, \xi_{t+1}^s)
+\Big[
+f_t\!\left(z_t^s, x_t^s, \xi_{t+1}^s\right)
++ w_t^s \big( x_t^s - \underline{x}(\{s\}_t) \big)
+\Big]
++ \gamma^{T+1} Q\!\left(z_{T+1}^s\right)
+\Bigg),
+\end{aligned}
+\]
+dove l’aspettativa condizionata
+\(
+\underline{x}(\{s\}_t) \;\equiv\;
+\sum_{s' \in \{s\}_t}
+\frac{\pi_{s'}x_t^{s'}}{\mathbb{P}(\{s\}_t)}, 
+\)
+può essere interpretata come una proiezione sull’insieme delle politiche non anticipative.\\
+\hspace*{1.5em}Il problema può essere \textcolor{CadetBlue}{riordinato e decomposto per scenario}.
+Al fine di migliorare la convergenza, è possibile aggiungere un \textcolor{CadetBlue}{\textbf{termine di penalità quadratica}},
+ottenendo un metodo di tipo \emph{Lagrangiano aumentato}.
+Purtroppo, l’introduzione diretta del termine di penalità distruggerebbe la struttura di decomposizione.
+Tuttavia, è possibile utilizzare la soluzione aggregata per scenario $\underline{x}(\{s\}_t)$ ottenuta
+all’iterazione precedente, il che conduce (trascurando i termini costanti) al seguente problema
+per il singolo scenario
+\[
+\begin{aligned}
+\min \quad
+& \sum_{t=0}^T \gamma^t
+\Bigg\{
+f_t\!\left(z_t^s, x_t^s, \xi_{t+1}^s\right)
 + w_t^s x_t^s
 + \frac{\rho}{2}
-\bigl(x_t^s - x(\mathcal{F}_s^t)\bigr)^2
-\right\}
-+ \gamma^{T+1} Q(z_{T+1}^s).
+\big[ x_t^s - \underline{x}(\{s\}_t) \big]^2
+\Bigg\}
++ \gamma^{T+1} Q\!\left(z_{T+1}^s\right).
+\end{aligned}
 \]
+\hspace*{1.5em}Il \textcolor{CadetBlue}{\emph{termine quadratico}} può essere interpretato come un
+\textcolor{CadetBlue}{\textbf{termine di regolarizzazione}}.
+La scelta del \textbf{parametro di penalità $\rho$} e dello schema di aggiornamento dei moltiplicatori
+è critica ai fini della convergenza.
+Ciononostante, il metodo di \emph{progressive hedging} risulta utile per sfruttare la struttura
+del problema ed è stato ampiamente utilizzato per costruire euristiche per problemi stocastici
+multistadio misti-interi di difficile soluzione.
 
-\paragraph{Osservazioni finali}
-Il termine quadratico può essere interpretato come una \textbf{regolarizzazione}.  
-La scelta del parametro $\rho$ e della strategia di aggiornamento dei moltiplicatori è critica per la convergenza.  
-Nonostante ciò, il \textbf{progressive hedging} è uno strumento utile per sfruttare la struttura del problema ed è stato utilizzato per costruire euristiche per problemi stocastici multistadio misti interi difficili.
 
-\subsection{Part 2 -- Benders decomposition and L-shaped decomposition for stochastic programming}
-
-\subsubsection{Background: Kelley's cutting planes}
-
-\paragraph{Problema convesso e iperpiani di supporto}
-Si consideri il problema convesso
-\[
+\subsection{Decomposizione di Benders e decomposizione L-shaped per la programmazione stocastica}
+\paragraph{Kelley's cutting planes}
+Si consideri il \textbf{problema convesso}
+\(
 \min_{x \in S} f(x),
-\]
-e si supponga che, dato un punto $x^k$, sia possibile calcolare non solo il valore della funzione $f(x^k)=\alpha_k$, ma anche un \textbf{subgradiente} $\gamma_k$, che esiste se la funzione è convessa sull’insieme $S$.
-
+\)
+e si supponga che, dato un punto $x^k$, sia possibile calcolare non solo il valore della funzione,
+ma anche un \textbf{subgradiente} $\gamma_k$, che esiste se la funzione è convessa sull’insieme $S$.
 In altre parole, è possibile trovare una funzione affine tale che
 \[
-f(x^k)=\alpha_k+\gamma_k^T x^k
-\tag{5}
+f(x^k)=\alpha_k+\gamma_k^T x^k, \qquad
+f(x)\ge \alpha_k+\gamma_k^T x \;\; \forall x\in S.
 \]
-\[
-f(x)\ge \alpha_k+\gamma_k^T x \quad \forall x\in S.
-\tag{6}
-\]
-
-\paragraph{Approssimazione dal basso}
-La disponibilità di un tale iperpiano di supporto suggerisce la possibilità di approssimare $f$ \textbf{dal basso}, tramite l’\textbf{inviluppo superiore} degli iperpiani di supporto.
-
-\paragraph{Idea dell’algoritmo di Kelley}
-L’algoritmo di \textbf{Kelley cutting planes} sfrutta questa idea costruendo e migliorando una funzione di bound inferiore fino a soddisfare un criterio di convergenza.
+\hspace*{1.5em}La disponibilità di un tale iperpiano di supporto suggerisce la possibilità di approssimare
+$f$ \textbf{dal basso}, tramite l’\textcolor{CadetBlue}{\textbf{inviluppo superiore}} degli iperpiani di supporto.\\
+\hspace*{1.5em}L’algoritmo di \textbf{Kelley cutting planes} sfrutta questa idea costruendo e migliorando una funzione di bound inferiore fino a soddisfare un criterio di convergenza.
 Se $S$ è \textbf{poliedrale}, occorre risolvere una sequenza di \textbf{LP}.
+\begin{algorithm}
+\caption{Metodo dei piani di taglio di Kelley}
+\begin{algorithmic}[1]
+\State Sia $x^1 \in S$ una soluzione ammissibile iniziale; \textbf{inizializzare} il contatore delle iterazioni $k \leftarrow 0$, l’upper bound $u_0 = f(x^1)$, il lower bound $l_0 = -1$ e la funzione di bound inferiore $\beta_0(x) = -\infty$.
+\State \textbf{Incrementare} il contatore $k \leftarrow k+1$. Trovare un subgradiente di $f$ in $x^k$ tale che le condizioni $f(x^k)=\alpha_k+\gamma_k^T x^k, \;\;\;
+f(x)\ge \alpha_k+\gamma_k^T x \;\; \forall x\in S$. siano soddisfatte.
+\State \textbf{Aggiornare} l’upper bound ponendo $u_k = \min\{u_{k-1}, f(x^k)\}$ e aggiornare la funzione di bound inferiore ponendo $\beta_k(x) = \max\{\beta_{k-1}(x), \alpha_k + \gamma_k^T x\}$.
+\State \textbf{Risolvere} il problema $l_k = \min_{x \in S} \beta_k(x)$ e sia $x^{k+1}$ la soluzione ottima ottenuta.
+\State Se $u_k - l_k < \varepsilon$, \textbf{arrestare l’algoritmo}: $x^{k+1}$ è un’approssimazione soddisfacente della soluzione ottima; altrimenti, tornare a \textbf{[2]}.
+\end{algorithmic}
+\end{algorithm}
 
-\subsubsection{Kelley's cutting planes come algoritmo}
-
-\paragraph{Algoritmo (cutting planes di Kelley)}
-\textbf{Step 0.} Sia $x^1\in S$ una soluzione ammissibile iniziale; inizializzare il contatore delle iterazioni $k \leftarrow 0$, l’upper bound $u_0=f(x^1)$, il lower bound $l_0=-1$, e la funzione di bound inferiore $\phi_0(x)=-1$.\\
-\textbf{Step 1.} Incrementare il contatore $k \leftarrow k+1$. Trovare un subgradiente di $f$ in $x^k$ tale che (5) e (6) siano soddisfatte.\\
-\textbf{Step 2.} Aggiornare l’upper bound
-\[
-u_k=\min\{u_{k-1},\, f(x^k)\},
-\]
-e la funzione di bound inferiore
-\[
-\phi_k(x)=\max\bigl\{\phi_{k-1}(x),\, \alpha_k+\gamma_k^T x \bigr\}.
-\]
-\textbf{Step 3.} Risolvere il problema
-\[
-l_k=\min_{x\in S}\phi_k(x),
-\]
-e sia $x^{k+1}$ la soluzione ottima.\\
-\textbf{Step 4.} Se $u_k-l_k<\varepsilon$, arrestare: $x^{k+1}$ è un’approssimazione soddisfacente della soluzione ottima; altrimenti, tornare allo Step 1.
-
-\subsubsection{Convexity properties of stochastic programs}
-
-\paragraph{Due-stadi SLP con ricorso}
-Si consideri il problema SLP a due stadi con ricorso:
+\paragraph{Proprietà di convessità dei programmi stocastici}
+Si consideri il \textcolor{CadetBlue}{\textbf{problema SLP a due stadi con ricorso}}
 \[
 \min \ c^T x + \mathbb{E}_{\xi}\bigl[Q(x;\xi)\bigr]
 \]
@@ -1781,53 +1769,47 @@ Si consideri il problema SLP a due stadi con ricorso:
 \]
 dove
 \[
-Q(x;\xi)\equiv
+Q(x,\xi)\equiv
 \min_y
 \left\{
 q(\xi)^T y \ \big|\ W(\xi)y = h(\xi)-T(\xi)x,\ y\ge 0
 \right\}.
 \]
-Si parla di \textbf{fixed recourse} quando $W$ è deterministica, mentre si parla di \textbf{random recourse} nel caso generale.
-
-\paragraph{Funzione di ricorso con costo deterministico}
-Si consideri la funzione di ricorso $Q(x)\equiv \mathbb{E}[Q(x;\xi)]$ nel caso di costo di ricorso deterministico:
+\hspace*{1.5em}Si parla di \textbf{fixed recourse} quando $W$ è deterministica, mentre si parla di \textbf{random recourse} nel caso generale.
+Si consideri la \textcolor{CadetBlue}{\textbf{funzione di ricorso}} $\mathcal{Q}(x)\equiv \mathbb{E}[Q(x,\xi)]$ nel caso di costo di ricorso deterministico
 \[
-Q(x;\xi)\equiv
+Q(x,\xi)\equiv
 \min_y
 \left\{
 q^T y \ \big|\ Wy = h(\xi)-T(\xi)x,\ y\ge 0
 \right\}.
 \]
-
-\paragraph{Dominio effettivo}
-Il dominio effettivo di $Q(x)$ consiste dei vettori $x$ che sono ammissibili per i vincoli di primo stadio e tali che $Q(x)<+\infty$, cioè per cui il problema di secondo stadio è (quasi sicuramente) ammissibile.
-
-\paragraph{Nota sulle ipotesi}
-Si assume che, esclusa l’inammissibilità del secondo stadio, l’aspettazione sia sempre definita, cioè che le variabili aleatorie non siano heavy-tailed.
-
-\paragraph{Dualità LP e forma duale della funzione di ricorso}
-Per dualità LP,
-\[
-Q(x;\xi)=
+\hspace*{1.5em}Il \textcolor{CadetBlue}{\textbf{dominio effettivo}} di $\mathcal{Q}(x)$ consiste dei vettori $x$ che 
+sono ammissibili per i vincoli di primo stadio e tali che $\mathcal{Q}(x)<+\infty$, cioè per cui il problema al secondo stadio
+è (quasi sicuramente) ammissibile.
+Si assume che, esclusa l’inammissibilità del secondo stadio, l’aspettazione sia sempre definita, cioè che le variabili aleatorie non siano heavy-tailed.\\
+\hspace*{1.5em}Per dualità LP,
+\(
+Q(x,\xi)=
 \max_{\pi}
 \left\{
 \bigl[h(\xi)-T(\xi)x\bigr]^T \pi \ \big|\ W^T \pi \le q
 \right\}.
-\]
-Si denoti l’insieme ammissibile del duale con
-\[
-\Gamma=\{\pi \mid W^T\pi \le q\}.
-\]
+\)
+Si denoti l’\textcolor{CadetBlue}{\textbf{insieme ammissibile del duale}} con
+\(
+\Pi=\{\pi \mid W^T\pi \le q\}.
+\)
 Poiché $q$ è deterministico, tale insieme è \textbf{non aleatorio}.
 
 \paragraph{Dimostrazione di convessità (caso con regione duale non aleatoria)}
-Siano $x_1,x_2\in D$, $\lambda \in [0,1]$ e $x_\lambda=\lambda x_1+(1-\lambda)x_2$. Allora:
+Siano $x_1,x_2\in \mathcal{D}$, $\lambda \in [0,1]$ e $x_\lambda=\lambda x_1+(1-\lambda)x_2$. Allora
 \[
-Q(x_\lambda)=\int_{\Omega}Q(x_\lambda;\xi)\,dP
-=\int_{\Omega}\max_{\pi\in\Gamma}\left\{\bigl[h(\xi)-T(\xi)x_\lambda\bigr]^T\pi\right\}\,dP
+\mathcal{Q}(x_\lambda)=\int_{\Omega}Q(x_\lambda,\xi)\,dP
+=\int_{\Omega}\max_{\pi\in\Pi}\left\{\bigl[h(\xi)-T(\xi)x_\lambda\bigr]^T\pi\right\}\,dP
 \]
 \[
-=\int_{\Omega}\max_{\pi\in\Gamma}
+=\int_{\Omega}\max_{\pi\in\Pi}
 \left\{
 \lambda\bigl[h(\xi)-T(\xi)x_1\bigr]^T\pi
 +(1-\lambda)\bigl[h(\xi)-T(\xi)x_2\bigr]^T\pi
@@ -1835,38 +1817,33 @@ Q(x_\lambda)=\int_{\Omega}Q(x_\lambda;\xi)\,dP
 \]
 \[
 \le
-\lambda\int_{\Omega}\max_{\pi\in\Gamma}\left\{\bigl[h(\xi)-T(\xi)x_1\bigr]^T\pi\right\}\,dP
-+(1-\lambda)\int_{\Omega}\max_{\pi\in\Gamma}\left\{\bigl[h(\xi)-T(\xi)x_2\bigr]^T\pi\right\}\,dP
+\lambda\int_{\Omega}\max_{\pi\in\Pi}\left\{\bigl[h(\xi)-T(\xi)x_1\bigr]^T\pi\right\}\,dP
++(1-\lambda)\int_{\Omega}\max_{\pi\in\Pi}\left\{\bigl[h(\xi)-T(\xi)x_2\bigr]^T\pi\right\}\,dP
 \]
 \[
-=\lambda Q(x_1)+(1-\lambda)Q(x_2).
-\]
+=\lambda \mathcal{Q}(x_1)+(1-\lambda)\mathcal{Q}(x_2).\]
 
-\paragraph{Convexity of the recourse function}
+\paragraph{Convessità della funzione di ricorso}
 La dimostrazione precedente è semplice perché la regione ammissibile duale è non aleatoria. In generale, la convessità della funzione di ricorso può essere mostrata anche in contesti più generali.  
-In sintesi:
+In sintesi
 \begin{itemize}[label=-]
-\item la funzione di ricorso è tipicamente \textbf{differenziabile} per distribuzioni continue;
-\item la funzione di ricorso è \textbf{poliedrale} per distribuzioni discrete.
+\item La funzione di ricorso è tipicamente \textcolor{CadetBlue}{\textbf{differenziabile}} per distribuzioni continue.
+\item La funzione di ricorso è \textcolor{CadetBlue}{\textbf{poliedrale}} per distribuzioni discrete.
 \end{itemize}
 In entrambi i casi, si può fare affidamento sui \textbf{cutting planes di Kelley} per risolvere il problema.
 Dato lo \textbf{schema di decomposizione} del problema, i cutting planes possono essere ottenuti tramite una strategia di decomposizione.
 
-\subsubsection{L-shaped decomposition}
-
-\paragraph{Deterministic equivalent}
-Si consideri l’equivalente deterministico:
+\subsubsection{Decomposizione L-shaped}
+\paragraph{Modello} Si consideri l'equivalente deterministico
 \[
-\min \ c^T x + \sum_{s\in S} p_s q^T y^s
-\]
-\[
-\text{s.t. } Ax=b,
-\]
-\[
-W y^s + T_s x = h_s \quad \forall s\in S,
-\]
-\[
-x,\ y^s \ge 0.
+\begin{aligned}
+\min \quad 
+& c^T x + \sum_{s \in S} p_s \, q^T y^s \\
+\text{s.t.} \quad 
+& A x = b, \\
+& W y^s + T_s x = h_s, \quad \forall s \in S, \\
+& x,\; y^s \ge 0 .
+\end{aligned}
 \]
 La matrice tecnologica del problema complessivo ha una struttura \textbf{dual block-angular}:
 \[
@@ -1878,298 +1855,260 @@ T_2 & 0 & W & \cdots & 0\\
 T_S & 0 & 0 & \cdots & W
 \end{bmatrix}.
 \]
-Dato un primo stadio fissato, si ottengono problemi di secondo stadio \textbf{indipendenti per scenario}.
-
-\paragraph{Riformulazione con variabile ausiliaria}
-Si riscrive il problema a due stadi come:
+\hspace*{1.5em}Dato un primo stadio fissato, si ottengono problemi di secondo stadio \textbf{indipendenti per scenario}.
+Si riscrive il \textcolor{CadetBlue}{\textbf{problema a due stadi LP}} come
 \[
-\min \ c^T x + \theta
+\begin{aligned}
+\min \quad 
+& c^T x + \theta \\
+\text{s.t.} \quad 
+& A x = b, \\
+& \theta \ge \mathcal{Q}(x), \\
+& x \ge 0 .
+\end{aligned}
 \]
-\[
-\text{s.t. } Ax=b,
-\]
-\[
-\theta \ge Q(x)
-\tag{7}
-\]
-\[
-x\ge 0.
-\]
-Si costruisce un \textbf{master problem rilassato} rilassando (7), che viene approssimato tramite cutting planes:
+\hspace*{1.5em}Si costruisce un \textcolor{CadetBlue}{\textbf{master problem rilassato}} rilassando $\theta \ge \mathcal{Q}(x)$,
+che viene approssimato tramite cutting planes:
 \begin{itemize}[label=-]
-\item \textbf{optimality cuts} della forma $\ \theta \ge \alpha^T x + \beta$;
-\item \textbf{feasibility cuts} della forma $\ 0 \ge \alpha^T x + \beta$.
+\item \textcolor{CadetBlue}{\textbf{Optimality cuts}} della forma $\ \theta \ge \alpha^T x + \beta$;
+\item \textcolor{CadetBlue}{\textbf{Feasibility cuts}} della forma $\ 0 \ge \alpha^T x + \beta$.
 \end{itemize}
 I coefficienti di ciascun taglio si ottengono risolvendo i sottoproblemi di scenario per una data decisione di primo stadio.
 
-\paragraph{L-shaped decomposition: optimality cuts}
+\paragraph{Optimality cuts}
 Sia $\hat{x}$ la soluzione ottima del master iniziale e si consideri il duale del problema di secondo stadio per lo scenario $s$:
 \[
 Q_s(\hat{x}) \equiv \max (h_s-T_s\hat{x})^T \pi^s
 \quad \text{s.t. } W^T \pi^s \le q_s.
-\tag{8}
 \]
-Data una soluzione duale ottima $\hat{\pi}^s$, valgono:
+Data una soluzione duale ottima $\hat{\pi}^s$, valgono
 \[
 Q_s(\hat{x})=(h_s-T_s\hat{x})^T \hat{\pi}^s
-\tag{9}
 \]
 \[
 Q_s(x)\ge (h_s-T_s x)^T \hat{\pi}^s \quad \forall x.
-\tag{10}
 \]
-La (10) deriva dal fatto che $\hat{\pi}^s$ è ottima per $\hat{x}$, ma non necessariamente per un generico $x$.
-
-Sommando (10) sugli scenari:
+La prima deriva dal fatto che $\hat{\pi}^s$ è ottima per $\hat{x}$, ma non necessariamente per un generico $x$.
+Sommandola sugli scenari, si ottiene
 \[
-Q(x)=\sum_{s\in S} p_s Q_s(x) \ge \sum_{s\in S} p_s (h_s-T_s x)^T \hat{\pi}^s.
+\mathcal{Q}(x)=\sum_{s\in S} p_s Q_s(x) \ge \sum_{s\in S} p_s (h_s-T_s x)^T \hat{\pi}^s.
 \]
 Quindi si aggiunge al master rilassato il seguente \textbf{optimality cut}:
 \[
 \theta \ge \sum_{s\in S} p_s (h_s-T_s x)^T \hat{\pi}^s.
 \]
 
-\paragraph{L-shaped decomposition: feasibility cuts}
+\paragraph{Feasibility cuts}
 Se il ricorso non è completo, alcuni sottoproblemi di scenario possono essere inammissibili per una decisione di primo stadio $\hat{x}$.  
-Si può allora sfruttare il duale del sottoproblema di scenario per trovare un \textbf{feasibility cut} che elimina $\hat{x}$ da ulteriori considerazioni.
-
-Si osservi che la regione ammissibile del duale non dipende dalle decisioni di primo stadio, poiché $\hat{x}$ non compare nei vincoli (8).  
-Se il duale è inammissibile, allora il problema di secondo stadio dello scenario corrispondente sarebbe inammissibile per qualsiasi decisione di primo stadio; questo caso viene escluso e può indicare un errore di modellazione.
-
-Quando il primale è inammissibile, il duale è illimitato. Esiste dunque un raggio estremo della regione duale lungo il quale la soluzione duale tende a infinito.
+Si può allora sfruttare il duale del sottoproblema di scenario per trovare un \textbf{feasibility cut} che elimina $\hat{x}$ da ulteriori considerazioni.\\
+\hspace*{1.5em}Si osservi che la \emph{regione ammissibile del duale non dipende dalle decisioni di primo stadio}, poiché $\hat{x}$ non compare nei vincoli.  
+\textbf{Se il duale è inammissibile}, allora il problema di secondo stadio dello scenario corrispondente sarebbe
+inammissibile per qualsiasi decisione di primo stadio; questo caso viene escluso e può indicare un errore di modellazione.\\
+\hspace*{1.5em}Quando il \textbf{primale è inammissibile}, il duale è illimitato. Esiste dunque un \textcolor{CadetBlue}{\textbf{raggio estremo}}
+della regione duale lungo il quale la soluzione duale tende a infinito.
 Il duale del secondo stadio è illimitato se esistono variabili duali $\pi^\ast$ tali che
-\[
+\(
 W^T \pi^\ast \le 0,\quad (h_s-T_s\hat{x})^T \pi^\ast > 0.
-\]
+\)
 La fattibilità del primale richiede
 \[
 Wy = h_s - T_s x
 \ \Rightarrow\
-(\pi^\ast)^T Wy = (\pi^\ast)^T(h_s-T_s x),
-\]
-e, usando $W^T\pi^\ast \le 0$ e $y\ge 0$, si ottiene
-\[
-(\pi^\ast)^T(h_s-T_s x)\le 0.
+(\pi^\ast)^T Wy = (\pi^\ast)^T(h_s-T_s x)\le 0.
 \]
 Quindi
-\[
+\(
 (\pi^\ast)^T(h_s-T_s x)\le 0
-\]
-è un taglio valido che viene aggiunto al master rilassato.
+\)
+è un \emph{taglio valido che viene aggiunto al master rilassato}.
 
-\paragraph{Schema iterativo dell’L-shaped decomposition}
-L-shaped decomposition alterna:
+\paragraph{Schema iterativo}
+L-shaped decomposition alterna
 \begin{enumerate}[label=\arabic*.]
-\item la soluzione del master problem rilassato, che produce $\hat{\theta}$ e $\hat{x}$;
-\item la soluzione dei corrispondenti sottoproblemi di scenario.
+\item La soluzione del \textcolor{CadetBlue}{\textbf{master problem rilassato}}, che produce $\hat{\theta}$ e $\hat{x}$.
+\item La soluzione dei corrispondenti \textcolor{CadetBlue}{\textbf{sottoproblemi di scenario}}.
 \end{enumerate}
 A ogni iterazione, vengono aggiunti tagli al master.
-L’algoritmo si ferma quando la soluzione ottima del master soddisfa
-\[
-\hat{\theta} \ge Q(\hat{x}).
-\]
+L’\textbf{algoritmo si ferma} quando la soluzione ottima del master soddisfa
+\(
+\hat{\theta} \ge \mathcal{Q}(\hat{x}).
+\)
 Questa condizione può essere rilassata se è sufficiente una soluzione near-optimal.
 
-\paragraph{L-shaped decomposition: variations on the theme}
-Esistono varianti per gestire i tagli e migliorare la convergenza (ad esempio \textbf{regularized L-shaped decomposition}).  
+\paragraph{Variazioni sul tema}
+Esistono varianti per gestire i tagli e migliorare la convergenza (ad esempio la
+\textbf{regularized L-shaped decomposition}).  
 L’idea può essere generalizzata a problemi multistadio:
-\begin{itemize}[label=-]
-\item nested Benders decomposition;
-\item abridged nested Benders decomposition;
-\item stochastic dual dynamic programming.
-\end{itemize}
-Nei metodi di decomposizione stocastica (Higle e Sen) si ha un’interazione tra campionamento e ottimizzazione: l’idea è costruire tagli asintoticamente validi.  
-Strategie alternative si basano sul vincolare la funzione di ricorso superiormente e inferiormente, partizionando il dominio per ottenere bound stretti.  
-Quando metodi del simplesso o interior point riescono a risolvere un LP stocastico, spesso non c’è vantaggio nell’uso della decomposizione; tuttavia, la decomposizione è necessaria per problemi realmente di grande scala.
+\textbf{Nested Benders decomposition},
+\textbf{Abridged nested Benders decomposition} e
+\textbf{Stochastic Dual Dynamic Programming}.\\
+\hspace*{1.5em}Nei metodi di \textbf{decomposizione stocastica} (\textbf{Higle e Sen})
+si ha un’interazione tra \textbf{campionamento} e \textbf{ottimizzazione}:
+l’\textbf{idea è costruire tagli asintoticamente validi}.\\
+\hspace*{1.5em}Strategie alternative si basano sul vincolare la \textbf{funzione di ricorso}
+superiormente e inferiormente, \textbf{partizionando il dominio} per ottenere
+\textbf{bound stretti}.  
+Quando i \textbf{metodi del simplesso} o gli \textbf{interior point methods}
+riescono a risolvere un \textbf{LP stocastico}, spesso non c’è vantaggio nell’uso
+della decomposizione; tuttavia, la \textbf{decomposizione} è necessaria per problemi
+\textbf{realmente di grande scala}.
 
-\subsection{Part 3 -- Dantzig--Wolfe decomposition and column generation}
-
-\subsubsection{Cutting stock by column generation}
-
+\subsection{Decomposizione Dantzig--Wolfe e generazione di colonne}
 \paragraph{Problema di cutting stock}
 Si devono tagliare rotoli (tutti di larghezza $L$) di un certo materiale in rotoli più corti, in modo da soddisfare una domanda assegnata.
 Si introduca un insieme di $n$ item con domanda $d_i$ e larghezza $w_i \le L$, $i\in[n]$.
-L’obiettivo è impacchettare gli item in modo da utilizzare il \textbf{numero minimo di rotoli}.
-Questo è un esempio stilizzato di una vasta classe di problemi noti come \textbf{cutting-stock problems}. :contentReference[oaicite:1]{index=1}
-
-\paragraph{Modello MILP con variabili per rotolo}
+L’\textbf{obiettivo} è impacchettare gli item in modo da utilizzare il \textbf{numero minimo di rotoli}.
+Questo è un esempio stilizzato di una vasta classe di problemi noti come \textbf{cutting-stock problems}. 
+\paragraph{Modello MILP}
 Siano disponibili $m$ rotoli, indicizzati da $j\in[m]$, e si introducano le variabili decisionali:
 \begin{itemize}[label=-]
-\item $\delta_j \in \{0,1\}$, uguale a $1$ se si usa il rotolo $j$;
+\item $\delta_j \in \{0,1\}$, uguale a $1$ se si usa il rotolo $j$.
 \item $x_{ij}\in \mathbb{Z}_+$, numero di item $i$ tagliati dal rotolo $j$.
 \end{itemize}
-Un possibile modello MILP è:
 \[
-\min \sum_{j\in[m]} \delta_j
+\begin{aligned}
+\min \quad 
+& \sum_{j \in [m]} \delta_j \\
+\text{s.t.} \quad 
+& \sum_{i \in [n]} w_i x_{ij} \le L \delta_j, \quad j \in [m], \\
+& \sum_{j \in [m]} x_{ij} = d_i, \quad i \in [n], \\
+& \delta_j \in \{0,1\}, \quad x_{ij} \in \mathbb{Z}_+, \quad i \in [n],\ j \in [m] .
+\end{aligned}
 \]
-\[
-\text{s.t. } \sum_{i\in[n]} w_i x_{ij} \le L\delta_j, \quad j\in[m]
-\]
-\[
-\sum_{j\in[m]} x_{ij} = d_i, \quad i\in[n]
-\]
-\[
-\delta_j\in\{0,1\},\ x_{ij}\in \mathbb{Z}_+, \quad i\in[n],\ j\in[m].
-\]
-Pur essendo corretto dal punto di vista teorico, il modello soffre di difficoltà legate a vincoli \textbf{big-$M$} e a problemi di \textbf{simmetria} (molte soluzioni ottime equivalenti possono penalizzare i solver commerciali). :contentReference[oaicite:2]{index=2}
+Pur essendo corretto dal punto di vista teorico, il modello soffre di difficoltà legate a vincoli \textbf{big-$M$}
+e a problemi di \textbf{simmetria} (molte soluzioni ottime equivalenti possono penalizzare i solver commerciali). 
 
 \paragraph{Modello a pattern di taglio}
 Si passa a una formulazione basata su un insieme di \textbf{cutting patterns}.
 Ogni pattern, indicizzato da $k$, è associato al numero $a_{ik}$ di item $i$ ottenuti da un rotolo.
-Dato un insieme $K$ di pattern, si introduce il numero intero $\gamma_k$ di rotoli tagliati secondo il pattern $k$:
+Dato un insieme $K$ di pattern, si introduce il numero intero $\gamma_k$ di rotoli tagliati secondo il pattern $k$
 \[
-\min \sum_{k\in K} \gamma_k
+\begin{aligned}
+\min \quad
+& \sum_{k \in K} \gamma_k \\
+\text{s.t.} \quad
+& \sum_{k \in K} a_{ik}\,\gamma_k = d_i, \quad i \in [n], \\
+& \gamma_k \in \mathbb{Z}_+, \quad k \in K .
+\end{aligned}
 \]
-\[
-\text{s.t. } \sum_{k\in K} a_{ik}\gamma_k = d_i,\quad i\in[n]
-\]
-\[
-\gamma_k\in \mathbb{Z}_+,\quad k\in K.
-\]
-Questa formulazione risolve la simmetria, ma la cardinalità di $K$ è enorme: solo pochi pattern sono davvero utili e non è ovvio come restringere $K$ \emph{a priori}.
+\hspace*{1.5em}Questa formulazione \textcolor{CadetBlue}{\textbf{risolve la simmetria}}, ma la cardinalità di $K$ è enorme:
+solo pochi pattern sono davvero utili e non è ovvio come restringere $K$ \emph{a priori}.
 Si parte quindi con un numero limitato di pattern e li si genera dinamicamente tramite \textbf{column generation}. 
 
-\subsubsection{Generating a new column by pricing}
-
-\paragraph{LP-rilassato del modello ristretto}
-Si consideri un LP-rilassato di una versione ristretta del modello:
+\paragraph{Generazione di una nuova colonna (by pricing)}
+Si consideri un \textcolor{CadetBlue}{\textbf{LP-rilassato}} di una versione ristretta del modello
 \[
-\min \sum_{k\in K'} \gamma_k
+\begin{aligned}
+\min \quad
+& \sum_{k \in K'} \gamma_k \\
+\text{s.t.} \quad
+& \sum_{k \in K'} a_{ik}\,\gamma_k = d_i, \quad i \in [n], \\
+& \gamma_k \ge 0, \quad k \in K' .
+\end{aligned}
 \]
-\[
-\text{s.t. } \sum_{k\in K'} a_{ik}\gamma_k = d_i,\quad i\in[n]
-\tag{11}
-\]
-\[
-\gamma_k \ge 0,\quad k\in K',
-\]
-dove $K'\subset K$. Come migliorare la soluzione introducendo una nuova colonna? :contentReference[oaicite:4]{index=4}
-
-\paragraph{Costo ridotto e scelta della colonna entrante}
-Siano $\pi_i$, $i\in[n]$, le variabili duali dei vincoli (11).
+dove $K'\subset K$. Come migliorare la soluzione introducendo una nuova colonna?\\
+\hspace*{1.5em}Siano $\pi_i$, $i\in[n]$, le variabili duali del vincolo $\sum_{k \in K'} a_{ik}\,\gamma_k = d_i$.
 Dalla teoria del simplesso primale, conviene introdurre in base una variabile con \textbf{costo ridotto negativo}.
-Per un pattern alternativo $k$, il costo ridotto è:
+Per un pattern alternativo $k$, il costo ridotto è
 \[
 \hat{c}_k = 1 - \sum_{i\in[n]} \pi_i a_{ik}.
 \]
-Si cerca la colonna $q$ con costo ridotto minimo, $\hat{c}_q = \min_k \hat{c}_k$.
-Se $\hat{c}_q \ge 0$, la base corrente è ottima; altrimenti si introduce la variabile non basica $\gamma_q$ e si itera. :contentReference[oaicite:5]{index=5}
+\hspace*{1.5em} Si cerca la colonna $q$ con costo ridotto minimo, $\hat{c}_q = \min_k \hat{c}_k$.
+Se $\hat{c}_q \ge 0$, la base corrente è ottima; altrimenti si introduce la variabile non basica $\gamma_q$ e si itera. 
 
 \paragraph{Pricing come knapsack}
-La minimizzazione si ottiene risolvendo un problema intero di knapsack:
+La minimizzazione si ottiene risolvendo un \textcolor{CadetBlue}{\textbf{problema intero di knapsack}}
 \[
-\max \sum_{i\in[n]} \pi_i y_i
-\]
-\[
-\text{s.t. } \sum_{i\in[n]} w_i y_i \le L
-\]
-\[
-y_i \in \mathbb{Z}_+.
+\begin{aligned}
+\max \quad
+& \sum_{i \in [n]} \pi_i y_i \\
+\text{s.t.} \quad
+& \sum_{i \in [n]} w_i y_i \le L, \\
+& y_i \in \mathbb{Z}_+ .
+\end{aligned}
 \]
 Questo produce un nuovo pattern, che viene introdotto se il valore ottimo è maggiore di $1$. 
-
-\paragraph{Osservazioni su branch-and-price e complessità}
-Questo fornisce un lower bound per un algoritmo \textbf{branch-and-price}.
-In alternativa, si può generare un insieme di colonne e poi ripristinare l’integralità delle variabili $\gamma_k$ risolvendo un singolo IP (euristica).
+Ciò fornisce un \textcolor{CadetBlue}{\textbf{lower bound}} per un algoritmo \textbf{branch-and-price}.\\
+\hspace*{1.5em}In alternativa, si può generare un insieme di colonne e poi ripristinare l’integralità delle variabili $\gamma_k$ risolvendo un singolo IP (euristica).
 In casi meno stilizzati, la complessità dei vincoli può essere “nascosta” nel sottoproblema di pricing.
 Lo schema di column generation è al cuore della \textbf{decomposizione di Dantzig--Wolfe}. 
 
-\subsubsection{Dantzig--Wolfe decomposition}
-
-\paragraph{Modello LP e separazione dei vincoli}
-Si consideri un modello LP:
+\subsubsection{Decomposizione di Dantzig--Wolfe}
+\paragraph{Modello LP}
+Si consideri un modello LP
 \[
-\min c^T x
+\begin{aligned}
+\min \quad
+& c^T x \\
+\text{s.t.} \quad
+& A x \ge b, \\
+& D x \ge f, \\
+& x \ge 0_n .
+\end{aligned}
 \]
-\[
-\text{s.t. } Ax \ge b
-\tag{12}
-\]
-\[
-Dx \ge f
-\tag{13}
-\]
-\[
-x \ge 0_n.
-\]
-Si separano i vincoli interpretando (12) come vincoli \textbf{complicanti}, mentre (13) (insieme alla non-negatività) come vincoli \textbf{facili}. 
-
-\paragraph{Poliedro facile e Minkowski--Weyl}
-Si definisce il poliedro:
-\[
+Si separano i vincoli interpretando $Ax \ge b$ come vincoli \textbf{complicanti}, mentre $Dx \ge f$ (insieme alla non-negatività) come vincoli \textbf{facili}. \\
+\hspace*{1.5em}Si definisce il \textcolor{CadetBlue}{\textbf{poliedro}}
+\(
 X := \{x\in\mathbb{R}^n \mid Dx \ge f,\ x \ge 0_n\}.
-\]
+\)
 Si assume che minimizzare una funzione lineare su $X$ sia facile (ad esempio perché $D$ è block-diagonal o per struttura favorevole come un network flow).
-Per il teorema di Minkowski--Weyl, $X$ si può rappresentare come somma di un politopo e di un cono:
-\[
+Per il teorema di \textbf{Minkowski--Weyl}, $X$ si può rappresentare come somma di un politopo e di un cono:
+\(
 X = \operatorname{conv}\{V\} + \operatorname{cone}\{D\},
-\]
+\)
 dove $V=\{v^1,\ldots,v^Q\}$ è l’insieme dei punti estremi e $D=\{d^1,\ldots,d^R\}$ l’insieme delle direzioni estreme. 
 
 \paragraph{Rappresentazione mediante combinazioni convesse e coniche}
-Il vincolo $x\in X$ si esprime come:
+Il vincolo $x\in X$ si esprime come
 \[
-x = \sum_{q\in V} \lambda_q v^q + \sum_{r\in D} \mu_r d^r
-\tag{14}
+\begin{aligned}
+& x = \sum_{q \in V} \lambda_q v^q + \sum_{r \in D} \mu_r d^r \\
+& \sum_{q \in V} \lambda_q = 1, \\
+& \lambda_q \ge 0, \quad q \in V; \qquad \mu_r \ge 0, \quad r \in D .
+\end{aligned}
 \]
-\[
-\sum_{q\in V} \lambda_q = 1
-\tag{15}
-\]
-\[
-\lambda_q \ge 0,\ q\in V;\quad \mu_r \ge 0,\ r\in D.
-\tag{16}
-\]
-dove (15) è il \textbf{vincolo di convessità}.
-Sostituendo (14) nel modello originale si ottiene un problema in $\lambda_q$ e $\mu_r$. 
-
-\paragraph{Master Problem (MP)}
-Definendo gli scalari e vettori:
-\[
-c_q := c^T v^q,\quad a_q := Av^q,\quad q\in V,
-\]
-\[
+dove il secondo vincolo è \textbf{di convessità}.
+Sostituendo il valore della $x$ nel modello originale si ottiene un problema in $\lambda_q$ e $\mu_r$. \\
+\hspace*{1.5em}Definendo gli scalari e vettori
+\(
+c_q := c^T v^q,\quad a_q := Av^q,\quad q\in V, \qquad
 c_r := c^T d^r,\quad a_r := Ad^r,\quad r\in D,
-\]
-si ottiene il \textbf{master problem} (MP):
+\)
+si ottiene il \textcolor{CadetBlue}{\textbf{master problem} (MP)}
 \[
-(\text{MP})\ \min \sum_{q\in V} c_q \lambda_q + \sum_{r\in D} c_r \mu_r
+\begin{aligned}
+\min \quad
+& \sum_{q \in V} c_q \lambda_q + \sum_{r \in D} c_r \mu_r \\
+\text{s.t.} \quad
+& \sum_{q \in V} a_q \lambda_q + \sum_{r \in D} a_r \mu_r \ge b, \\
+& \sum_{q \in V} \lambda_q = 1, \\
+& \lambda_q \ge 0, \quad q \in V; \qquad \mu_r \ge 0, \quad r \in D .
+\end{aligned}
 \]
-\[
-\text{s.t. } \sum_{q\in V} a_q \lambda_q + \sum_{r\in D} a_r \mu_r \ge b
-\]
-\[
-\sum_{q\in V} \lambda_q = 1
-\]
-\[
-\lambda_q \ge 0,\ q\in V;\quad \mu_r \ge 0,\ r\in D.
-\]
-Il problema è che MP può coinvolgere un numero enorme di variabili e non è in generale possibile enumerare tutti i punti/direzioni estremi di $X$ a partire dalla descrizione per disuguaglianze. 
+Il problema è che \emph{MP può coinvolgere un numero enorme di variabili} e non è in generale possibile enumerare tutti
+i punti/direzioni estremi di $X$ a partire dalla descrizione per disuguaglianze. 
 
 \paragraph{Restricted Master Problem (RMP)}
 La strategia si basa su \textbf{column generation}.
-Si inizializza un Restricted Master Problem con un sottoinsieme $V'\subset V$ di punti estremi e $D'\subset D$ di direzioni estreme:
+Si inizializza un \textcolor{CadetBlue}{\textbf{Restricted Master Problem}} con un sottoinsieme $V'\subset V$
+di punti estremi e $D'\subset D$ di direzioni estreme:
 \[
-(\text{RMP})\ \min \sum_{q\in V'} c_q \lambda_q + \sum_{r\in D'} c_r \mu_r
+\begin{aligned}
+\min \quad
+& \sum_{q \in V'} c_q \lambda_q + \sum_{r \in D'} c_r \mu_r \\
+\text{s.t.} \quad
+& \sum_{q \in V'} a_q \lambda_q + \sum_{r \in D'} a_r \mu_r \ge b, \\
+& \sum_{q \in V'} \lambda_q = 1, \\
+& \lambda_q \ge 0, \quad q \in V'; \qquad \mu_r \ge 0, \quad r \in D' .
+\end{aligned}
 \]
-\[
-\text{s.t. } \sum_{q\in V'} a_q \lambda_q + \sum_{r\in D'} a_r \mu_r \ge b
-\tag{17}
-\]
-\[
-\sum_{q\in V'} \lambda_q = 1
-\tag{18}
-\]
-\[
-\lambda_q \ge 0,\ q\in V';\quad \mu_r \ge 0,\ r\in D'.
-\]
-Siano $\pi$ e $\pi^0$ le variabili duali associate rispettivamente ai vincoli (17) e (18). 
+Siano $\pi$ e $\pi^0$ le variabili duali associate rispettivamente ai vincoli. 
 
 \paragraph{Costo ridotto per punti estremi e direzioni estreme}
 Nel simplesso standard, una colonna entra in base se il costo ridotto è negativo.
-Per i punti estremi, si verifica se esiste $q\in V$ tale che:
+Per i punti estremi, si verifica se esiste $q\in V$ tale che
 \[
-c_q = c_q -
+\bar{c_q} = c_q -
 \begin{bmatrix}
 \pi^T & \pi^0
 \end{bmatrix}
@@ -2182,7 +2121,7 @@ a_q\\
 \]
 Per le direzioni estreme:
 \[
-c_r = c_r -
+\bar{c_r} = c_r -
 \begin{bmatrix}
 \pi^T & \pi^0
 \end{bmatrix}
@@ -2193,57 +2132,51 @@ a_r\\
 = c_r - \pi^T a_r
 = c_r - \pi^T A d^r < 0.
 \]
-
-
-\paragraph{Auxiliary problem e pricing problem (PP)}
-In linea di principio si dovrebbe risolvere:
+\hspace*{1.5em}In linea di principio si dovrebbe risolvere il \textcolor{CadetBlue}{\textbf{problema ausiliario}}
 \[
 \min\left\{
-\min_{q\in V} c_q,\ \min_{r\in D} c_r
+\min_{q\in V} \bar{c_q},\ \min_{r\in D} \bar{c_r}
 \right\},
 \]
 ma non è affrontabile per enumerazione completa.
-Si riconduce allora a un \textbf{pricing problem}:
+Si riconduce allora a un \textbf{pricing problem}
 \[
-(\text{PP})\ \min \ (c^T - \pi^T A)x
+\begin{aligned}
+\min \quad
+& (c^T - \pi^T A)\, x \\
+\text{s.t.} \quad
+& D x \ge d, \\
+& x \ge 0_n .
+\end{aligned}
 \]
-\[
-\text{s.t. } Dx \ge f
-\]
-\[
-x \ge 0_n.
-\]
-Si trascura il termine costante $\pi^0$ e si usa lo stesso PP per trovare un vettore $x\in\mathbb{R}^n$ che giochi il ruolo di punto estremo o direzione estrema.
-Sia $z^\ast_{PP}$ il valore ottimo di PP. 
-
-\paragraph{Casi per l'aggiunta di colonne}
+Si trascura il termine costante $\pi^0$ e si usa lo stesso problema per trovare un vettore $x\in\mathbb{R}^n$ che giochi il ruolo di punto estremo o direzione estrema.
+Sia $z^\ast_{PP}$ il valore ottimo del problema di pricing
 \begin{itemize}[label=-]
-\item Se $z^\ast_{PP}=-\infty$ (PP illimitato inferiormente), si è trovata una \textbf{direzione estrema} $x^\ast$ con costo ridotto negativo; si aggiunge a RMP una nuova variabile $\mu_r$ associata alla colonna
+\item Se \textcolor{CadetBlue}{$z^\ast_{PP}=-\infty$} (PP illimitato inferiormente), si è trovata una \textbf{direzione estrema} $x^\ast$ con costo ridotto negativo; si aggiunge a RMP una nuova variabile $\mu_r$ associata alla colonna
 \[
 \begin{bmatrix}
 Ax^\ast\\
 0
 \end{bmatrix}.
 \]
-\item Se $-\infty < z^\ast_{PP} < \pi^0$ (PP limitato e valore inferiore alla variabile duale del vincolo di convessità), si è trovato un \textbf{nuovo punto estremo} $x^\ast$ con costo ridotto negativo; si aggiunge a RMP una nuova variabile $\lambda_q$ associata alla colonna
+\item Se \textcolor{CadetBlue}{$-\infty < z^\ast_{PP} < \pi^0$} (PP limitato e valore inferiore alla variabile duale del vincolo di convessità), si è trovato un \textbf{nuovo punto estremo} $x^\ast$ con costo ridotto negativo; si aggiunge a RMP una nuova variabile $\lambda_q$ associata alla colonna
 \[
 \begin{bmatrix}
 Ax^\ast\\
 1
 \end{bmatrix}.
 \]
-\item Se $z^\ast_{PP} \ge \pi^0$, non esiste alcun punto/direzione utile da aggiungere e ci si può fermare.
+\item Se \textcolor{CadetBlue}{$z^\ast_{PP} \ge \pi^0$}, non esiste alcun punto/direzione utile da aggiungere e ci si può fermare.
 \end{itemize}
-
-
-\paragraph{Interpretazione intuitiva}
-In termini intuitivi, le variabili duali ottime ottenute risolvendo RMP suggeriscono una direzione
-\[
+\hspace*{1.5em}In termini intuitivi, le variabili duali ottime ottenute risolvendo RMP suggeriscono una direzione
+\(
 (c - A^T \pi)
-\]
+\)
 lungo la quale si “sonda” il poliedro $X$.
-Se $X$ è un politopo si può trovare solo un punto estremo; se $X$ è illimitato si può trovare una direzione estrema.
-Non serve trovare tutti i punti e tutte le direzioni: interessano solo quelli con costo ridotto negativo, perché possono migliorare il valore ottenuto risolvendo RMP. 
+Se $X$ è un \textcolor{CadetBlue}{politopo} si può trovare solo un \textcolor{CadetBlue}{\textbf{punto estremo}};
+se $X$ è \textcolor{CadetBlue}{illimitato} si può trovare una \textcolor{CadetBlue}{\textbf{direzione estrema}}.
+Non serve trovare tutti i punti e tutte le direzioni: interessano solo quelli con costo ridotto negativo, perché
+possono migliorare il valore ottenuto risolvendo RMP. 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% PDF 4 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -6818,6 +6751,7 @@ Scrivere un paragrafo per fare recap dei problemi affrontati di simulazione.
 
 \begin{itemize}[label=-]
 \item Cap 1 pag 4/48 simulazione M/M/1
+\item Cap 3 pag 12/46 politica s periodic review
 \end{itemize}
 
 \end{document}
