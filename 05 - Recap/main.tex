@@ -2181,121 +2181,176 @@ possono migliorare il valore ottenuto risolvendo RMP.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% PDF 4 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \vspace{-1cm}
-\textcolor{ForestGreen}{\section{CAP 4 -- Sistemi MRP/ERP e approccio JIT}}
+\textcolor{DarkGreen}{\section{CAP 4 -- Sistemi MRP/ERP e approccio JIT}}
 \paragraph{Recap}
-I metodi classici di gestione delle scorte risultano inadeguati in presenza di strutture di prodotto complesse, vincoli di capacità e ambienti non make-to-stock, pp oiché la propagazione dei fabbisogni lungo la distinta base può generare \textbf{amplificazione della variabilità}. In questo contesto si colloca l’evoluzione dalla logica MRP ai sistemi MRPII ed ERP, come risposta al problema del lot-sizing multilivello.
-
-La logica \textbf{MRP} si fonda su un’ipotesi di capacità infinita, in cui il vincolo di capacità è surrogato tramite un \textbf{lead time fissato a priori}, e su una procedura ricorsiva di esplosione dei fabbisogni a partire dall’MPS. Gli ordini pianificati non sono esecutivi e il processo è soggetto al fenomeno del \textbf{nervosismo}, per cui piccole variazioni dell’MPS possono produrre grandi variazioni negli ordini, anche per effetto di bordo dovuto alla ripianificazione rolling horizon.
-
-A livello di shop floor, la \textbf{Factory Physics} mette in relazione throughput, flow time e WIP tramite la \textbf{legge di Little} e mostra come la variabilità e l’elevata utilizzazione aumentino i tempi di attraversamento. L’approccio \textbf{Just-In-Time (Toyota)} mira a ridurre la variabilità alla fonte mediante produzione livellata, controllo \textbf{pull} del WIP e riduzione dei tempi di setup, evidenziando il legame strutturale tra variabilità, livelli di magazzino e prestazioni del sistema produttivo.
+I metodi classici di gestione delle scorte risultano inadeguati in presenza di strutture di prodotto
+complesse, vincoli di capacità e contesti non \emph{make-to-stock}, poiché la propagazione dei fabbisogni
+lungo la distinta base può generare una marcata \textbf{amplificazione della variabilità}. In tale contesto
+si colloca l’evoluzione dalla \textbf{logica MRP} ai sistemi \textbf{MRPII} ed \textbf{ERP}, come risposta
+operativa al problema del \emph{lot-sizing multilivello}.\\
+\hspace*{1.5em}La \textcolor{DarkGreen}{\textbf{logica MRP}} si fonda sull’assunzione di
+\textbf{capacità infinita}, in cui il vincolo di capacità è surrogato tramite un \textbf{lead time fissato a priori},
+e su una procedura ricorsiva di esplosione dei fabbisogni a partire dal \textbf{Master Production Schedule}.
+Gli ordini pianificati non sono esecutivi e il processo è intrinsecamente soggetto al fenomeno del
+\textcolor{DarkGreen}{\textbf{nervosismo}}, per cui piccole variazioni dell’MPS possono produrre grandi variazioni negli ordini,
+anche per effetto di bordo legato alla ripianificazione a \emph{rolling horizon}.\\
+\hspace*{1.5em}A livello di \emph{shop floor}, la \textbf{Factory Physics} fornisce una chiave di lettura
+fondamentale delle prestazioni dei sistemi produttivi, mettendo in relazione \textbf{throughput},
+\textbf{flow time} e \textbf{work in process} attraverso la \textcolor{DarkGreen}{\textbf{legge di Little}}. Tale relazione evidenzia
+come, a parità di throughput, la riduzione del WIP sia l’unico modo strutturale per ridurre i tempi di
+attraversamento, e come un’elevata utilizzazione del sistema, in presenza di variabilità, conduca a
+un’esplosione dei tempi di attesa e del WIP. La variabilità, sia prevedibile sia imprevedibile, rappresenta
+quindi un fattore chiave nel deterioramento delle prestazioni operative e spiega il ricorso sistematico,
+nei sistemi tradizionali, a buffer sotto forma di scorte, capacità in eccesso o lead time gonfiati.\\
+\hspace*{1.5em}In contrapposizione alla logica \textbf{push} tipica dell’MRP, l’approccio
+\textcolor{DarkGreen}{\textbf{Just-In-Time (Toyota)}} affronta il problema alla radice, mirando a \textbf{ridurre la variabilità alla
+fonte} piuttosto che ad assorbirla a valle. Ciò avviene attraverso la \textbf{produzione livellata}
+(\emph{production smoothing}), la riduzione sistematica dei \textbf{tempi di setup}, il controllo \textbf{pull}
+del WIP e l’adozione di flussi regolari e ripetitivi. Strumenti come il \textbf{sistema kanban} e il
+\textbf{goal chasing} consentono di sincronizzare il consumo dei componenti con l’avanzamento della linea
+di assemblaggio, rendendo possibile il controllo delle linee a monte tramite segnali fisici di prelievo.
+L’approccio Toyota mette così in luce il legame strutturale tra variabilità, livelli di magazzino e
+prestazioni del sistema produttivo, mostrando come la riduzione del WIP e dei lead time sia
+inseparabile da una gestione coerente della variabilità e dell’utilizzazione del sistema.
 
 
 \subsection{Limiti degli approcci classici di gestione delle scorte}
 
 \paragraph{Inadeguatezza dei modelli tradizionali}
-I classici approcci di controllo delle scorte presentano \textbf{limiti severi} nei seguenti contesti:
+I classici approcci di controllo delle scorte presentano \textbf{limiti severi} nei seguenti contesti
 \begin{itemize}[label=-]
-\item Ambienti \emph{non make-to-stock}, come \emph{make-to-order} e \emph{assemble-to-order}, in cui viene ignorata la variabilità prevedibile;
-\item Presenza di \textbf{vincoli di capacità produttiva}, per cui tali modelli risultano più adatti a problemi retail;
+\item Ambienti \emph{non make-to-stock}, come \emph{make-to-order} e \emph{assemble-to-order}, in cui viene ignorata
+la variabilità prevedibile.
+\item Presenza di \textbf{vincoli di capacità produttiva}, per cui tali modelli risultano più adatti a problemi retail.
 \item Strutture di prodotto \textbf{complesse}, rappresentate mediante distinte base multilivello.
 \end{itemize}
 
 \paragraph{Effetto di amplificazione della variabilità}
-Anche in presenza di una domanda regolare per il prodotto finito, la propagazione dei fabbisogni lungo la distinta base può indurre un’\textbf{amplificazione della variabilità} sui componenti a valle.
+Anche in presenza di una domanda regolare per il prodotto finito, la propagazione dei fabbisogni lungo la distinta base
+può indurre un’\textcolor{DarkGreen}{\textbf{amplificazione della variabilità}} sui componenti a valle.
 
 \subsection{Evoluzione dai modelli MRP ai sistemi ERP}
 
 \paragraph{Lot-sizing multilivello e difficoltà computazionali}
-In linea di principio è possibile costruire un modello MILP per il problema di \textbf{lot-sizing multilivello}, collegando domanda indipendente e domanda dipendente.  
+In linea di principio è possibile costruire un \emph{modello MILP} per il problema di \textbf{lot-sizing multilivello},
+collegando domanda indipendente e domanda dipendente.  
 Tali modelli risultano tuttavia difficili da risolvere, e erano computazionalmente impraticabili fino agli anni Settanta.\\
-Negli anni Settanta sono stati introdotti i sistemi \textbf{MRP (Material Requirements Planning)}, basati su una \textbf{logica a capacità infinita}.  
-Il vincolo di capacità produttiva viene rilassato, consentendo un \textbf{disaccoppiamento parziale tra item}, ma non tra domanda indipendente e dipendente.\\
+\hspace*{1.5em}Negli anni Settanta sono stati introdotti i sistemi \textcolor{DarkGreen}{\textbf{MRP (Material Requirements
+Planning)}}, basati su una \textbf{logica a capacità infinita}.  
+Il vincolo di capacità produttiva viene rilassato, consentendo un \textbf{disaccoppiamento parziale tra item}, ma non tra
+domanda indipendente e dipendente.
 L’interazione tra item viene anticipata e surrogata mediante un \textbf{lead time fissato a priori}.
 
 \paragraph{Evoluzione verso MRPII ed ERP}
-L’evoluzione successiva ha portato ai sistemi \textbf{MRPII (Manufacturing Resource Planning)}, che includono strumenti di verifica della capacità:
-\begin{itemize}[label=-]
-\item \textbf{RCCP} (Rough Cut Capacity Planning).
-\item \textbf{CRP} (Capacity Requirement Planning): per verificare il soddisfacimento dei vincoli di capacità.
-\end{itemize}
-L’ulteriore evoluzione è rappresentata dai sistemi \textbf{ERP (Enterprise Resource Planning)}, caratterizzati dall’integrazione con le funzioni commerciali e finanziarie.
+L’evoluzione successiva ha portato ai sistemi \textcolor{DarkGreen}{\textbf{MRPII (Manufacturing Resource Planning)}},
+che includono strumenti di verifica della capacità come \textcolor{DarkGreen}{\textbf{RCCP}} (\emph{Rough Cut Capacity Planning}) e 
+\textcolor{DarkGreen}{\textbf{CRP}} (\emph{Capacity Requirement Planning}): per verificare il soddisfacimento dei vincoli di capacità.
+L’ulteriore evoluzione è rappresentata dai sistemi \textcolor{DarkGreen}{\textbf{ERP (Enterprise Resource Planning)}}, caratterizzati
+dall’integrazione con le funzioni commerciali e finanziarie.
 
 \subsection{Logica MRP}
 \paragraph{Assunzione di capacità infinita}
-La logica MRP assume \textbf{capacità infinita}: il vincolo di capacità produttiva non viene considerato esplicitamente, ma è rappresentato indirettamente dal lead time.\\
-Il lead time impone di lanciare gli ordini di produzione o di acquisto con sufficiente anticipo rispetto alla domanda.  
+La logica MRP assume \textbf{capacità infinita}: il vincolo di capacità produttiva non viene considerato esplicitamente,
+ma è rappresentato indirettamente dal lead time.\\
+\hspace*{1.5em}Il \textbf{lead time} impone di lanciare gli ordini di produzione o di acquisto con sufficiente anticipo
+rispetto alla domanda.  
 Il meccanismo di \textbf{lead time offsetting} consente di anticipare gli ordini pianificati rispetto ai fabbisogni.
 
 \paragraph{Record MRP}
-Ogni codice è descritto mediante un record MRP articolato per periodo, contenente: fabbisogni lordi, consegne attese, magazzino disponibile, fabbisogni netti e ordini pianificati.\\
-Prima del lead time offsetting è necessario calcolare i \textbf{fabbisogni netti}, ottenuti nettificando i fabbisogni lordi tenendo conto di:
-giacenze disponibili (\emph{on-hand}) e ordini già emessi (\emph{on-order}).
+Ogni codice è descritto mediante un record MRP articolato per periodo, contenente: fabbisogni lordi, consegne attese,
+magazzino disponibile, fabbisogni netti e ordini pianificati.\\
+\hspace*{1.5em}Prima del lead time offsetting è necessario calcolare i \textbf{fabbisogni netti}, ottenuti nettificando i fabbisogni
+lordi tenendo conto di:
+giacenze disponibili (\textcolor{DarkGreen}{\emph{on-hand}}) e ordini già emessi (\textcolor{DarkGreen}{\emph{on-order}}).
 
 \subsection{Esplosione dei fabbisogni e struttura del processo MRP}
 \paragraph{Domanda indipendente e MPS}
-Per i prodotti finiti (\emph{end item}), che costituiscono la radice della distinta base, i fabbisogni lordi sono definiti dal \textbf{Master Production Schedule (MPS)}.
-La logica MRP procede in modo \textbf{ricorsivo} a partire dagli end item, scendendo lungo le distinte base ed esplodendo i fabbisogni di ciascun codice fornendo i tempi di lancio degli ordini a tutti i livelli.
-
-\begin{figure}[t]
-    \centering
-    \includegraphics[width=0.7\textwidth]{Architettura_MRP.pdf}
-\end{figure}
+Per i prodotti finiti (\emph{end item}), che costituiscono la radice della distinta base, i fabbisogni lordi sono definiti
+dal \textcolor{DarkGreen}{\textbf{Master Production Schedule (MPS)}}.
+La logica MRP procede in modo \textbf{ricorsivo} a partire dagli end item, scendendo lungo le distinte base ed esplodendo
+i fabbisogni di ciascun codice fornendo i tempi di lancio degli ordini a tutti i livelli.
 
 \paragraph{Ordini pianificati, rilascio e regole di lot-sizing}
-I lotti corrispondono ai fabbisogni netti secondo la regola \textbf{lot-for-lot}. È importante comprendere la dinamica di
- un sistema MRP: gli ordini pianificati \textbf{non sono ordini esecutivi}; gli ordini pianificati dell’\emph{action bucket},
-  una volta rilasciati, vengono trasformati in consegne attese. Un’ulteriore differenza tra ordini pianificati e ordini 
-  operativi è che, quando un ordine di produzione viene rilasciato, vengono modificati i record relativi alle giacenze di
-   magazzino dei componenti; una parte della giacenza viene allocata per l’ordine ed è da considerarsi non disponibile 
-   nel calcolo dei fabbisogni netti. I pacchetti MRP permettono di specificare un orizzonte temporale di release; solo gli 
-   ordini che ricadono all’interno di tale orizzonte dovrebbero essere rilasciati, in quanto gli altri sono soggetti a 
-   incertezze eccessive. Nel calcolo dei fabbisogni è possibile tenere conto di scorte di sicurezza; in questo caso, i 
-   fabbisogni netti vengono generati non quando il magazzino disponibile va sotto zero, ma quando va sotto un certo livello 
-   di soglia. Esiste una gamma di regole di lot-sizing, a quantità fissa o variabile, oppure euristiche per la 
-   minimizzazione dei costi totali di giacenza e di ordinazione.
+I \emph{lotti} corrispondono ai fabbisogni netti secondo la regola \textcolor{DarkGreen}{\textbf{lot-for-lot}}.
+È importante comprendere la dinamica di
+un sistema MRP: gli ordini pianificati \textbf{non sono ordini esecutivi}; gli ordini pianificati dell’\emph{action bucket},
+una volta rilasciati, vengono trasformati in consegne attese. Un’ulteriore differenza tra \textcolor{DarkGreen}{ordini pianificati} e \textcolor{DarkGreen}{ordini 
+operativi} è che, quando un ordine di produzione viene rilasciato, vengono modificati i record relativi alle giacenze di
+magazzino dei componenti; una parte della giacenza viene allocata per l’ordine ed è da considerarsi non disponibile 
+nel calcolo dei fabbisogni netti.\\
+\hspace*{1.5em}I \textbf{pacchetti MRP} permettono di specificare un orizzonte temporale di \emph{release}; solo gli 
+ordini che ricadono all’interno di tale orizzonte dovrebbero essere rilasciati, in quanto gli altri sono soggetti a 
+incertezze eccessive. Nel calcolo dei fabbisogni è possibile tenere conto di scorte di sicurezza; in questo caso, i 
+fabbisogni netti vengono generati non quando il magazzino disponibile va sotto zero, ma \emph{quando va sotto un certo livello 
+di soglia}. Esiste una gamma di regole di lot-sizing, a quantità fissa o variabile, oppure euristiche per la 
+minimizzazione dei costi totali di giacenza e di ordinazione.
 
 \subsection{Il problema del nervosismo}
-Il dimensionamento dei lotti a partire dai livelli alti della distinta base può generare effetti non intuitivi in presenza di variazioni del MPS.  
-Le regole a quantità variabile sono soggette al fenomeno del \textbf{nervosismo} (\emph{nervousness}).\\
-Il nervosismo si manifesta quando \textbf{piccole variazioni nei fabbisogni} producono \textbf{grandi variazioni negli ordini pianificati}, anche a livelli inferiori della distinta base. Il fenomeno può portare a: ordini urgenti, instabilità del piano e risultati anti-intuitivi.
+\paragraph{Nervosismo}Il dimensionamento dei lotti a partire dai livelli alti della distinta base può generare effetti
+non intuitivi in presenza di variazioni del MPS.  
+Le regole a quantità variabile sono soggette al fenomeno del \textcolor{DarkGreen}{\textbf{nervosismo}} (\emph{nervousness}).\\
+\hspace*{1.5em}Il nervosismo si manifesta quando \textbf{piccole variazioni nei fabbisogni} producono
+\textbf{grandi variazioni negli ordini pianificati}, anche a livelli inferiori della distinta base. Il fenomeno può portare
+a: ordini urgenti, instabilità del piano e risultati anti-intuitivi.
 
 \paragraph{Effetto di bordo, nervosismo e strategie di mitigazione}
-Un altro punto da considerare è l’\textbf{effetto di bordo} dovuto alla ripianificazione \emph{rolling horizon}, in cui si aggiunge un \emph{time bucket} all’orizzonte di pianificazione. L’aggiunta del fabbisogno relativo a tale time bucket può alterare l’accorpamento dei fabbisogni, con esiti imprevedibili. Esistono diversi modi per evitare il fenomeno del nervosismo. L’adozione di regole a quantità fissa permette di filtrare naturalmente variazioni di piccola entità, al costo di un aumento nel livello delle scorte. È anche possibile adottare strategie di gestione differenziata dell’orizzonte temporale di pianificazione, dette strategie di \textbf{time fencing}. Nell’immediato non è possibile cambiare nulla nell’MPS; in un periodo intermedio è possibile alterare l’MPS solo dopo specifica analisi e autorizzazione; è invece possibile cambiare l’MPS a piacere nei periodi più lontani. Infine, uno strumento utile per evitare il nervosismo e per risolvere situazioni anomale è l’uso dei \textbf{firm planned orders}; si tratta di ordini che non possono essere modificati dall’MRP quando le condizioni cambiano, ma soltanto dietro istruzione del pianificatore.
+Un altro punto da considerare è l’\textcolor{DarkGreen}{\textbf{effetto di bordo}} dovuto alla ripianificazione
+\emph{rolling horizon}, in cui si aggiunge un \emph{time bucket} all’orizzonte di pianificazione. L’aggiunta del
+fabbisogno relativo a tale time bucket può alterare l’accorpamento dei fabbisogni, con esiti imprevedibili.\\
+\hspace*{1.5em}Esistono diversi
+modi per evitare il fenomeno del nervosismo. L’adozione di regole a quantità fissa permette di filtrare naturalmente
+variazioni di piccola entità, al costo di un aumento nel livello delle scorte. È anche possibile adottare strategie di
+gestione differenziata dell’orizzonte temporale di pianificazione, dette strategie di \textcolor{DarkGreen}{\textbf{time fencing}}.
+Nell’immediato non è possibile cambiare nulla nell’MPS; in un periodo intermedio è possibile alterare l’MPS solo dopo
+specifica analisi e autorizzazione; è invece possibile cambiare l’MPS a piacere nei periodi più lontani.\\
+\hspace*{1.5em}Inoltre, uno
+strumento utile per evitare il nervosismo e per risolvere situazioni anomale è l’uso dei \textcolor{DarkGreen}{\textbf{firm planned orders}};
+si tratta di ordini che non possono essere modificati dall’MRP quando le condizioni cambiano, ma soltanto dietro istruzione
+del pianificatore.
 
-\subsection{Master Production Scheduling e pianificazione della capacità}
+\subsection{Master Production Scheduling e Legge di Little}
 \paragraph{Master Production Scheduling (MPS)}
-Il \textbf{Master Production Schedule (MPS)} costituisce l’input primario per la logica MRP ed è basato in parte su ordini cliente e in parte su attività di \emph{forecasting} (demand planning). Nella logica MRP tradizionale, l’MPS può essere validato mediante moduli \textbf{RCCP (Rough Cut Capacity Planning)}. Non è detto che l’MPS venga costruito esclusivamente per i codici alla radice delle distinte base: può esistere domanda indipendente per parti di ricambio e, in contesti \emph{assemble-to-order} (ATO), può essere preferibile adottare una struttura a due livelli, con un MPS a livello di moduli e un \emph{Final Assembly Scheduling} a livello superiore.
+Il \textcolor{DarkGreen}{\textbf{Master Production Schedule (MPS)}} costituisce l’input primario per la logica MRP ed è
+basato in parte su ordini cliente e in parte su attività di \emph{forecasting} (demand planning). Nella logica MRP
+tradizionale, l’MPS può essere validato mediante moduli \textbf{RCCP (Rough Cut Capacity Planning)}. Non è detto che l’MPS
+venga costruito esclusivamente per i codici alla radice delle distinte base: può esistere domanda indipendente per parti di
+ricambio e, in contesti \textcolor{DarkGreen}{\emph{assemble-to-order} (ATO)}, può essere preferibile adottare una struttura a due livelli, con un
+MPS a livello di moduli e un \emph{Final Assembly Scheduling} a livello superiore.
 
 \paragraph{Capacity Requirements Planning (CRP)}
 La logica MRP è basata su un’assunzione di \textbf{capacità infinita}. È tuttavia possibile effettuare una verifica a posteriori del carico di lavoro rispetto alla capacità effettivamente disponibile tramite moduli di \textbf{Capacity Requirements Planning (CRP)}. La risoluzione manuale di eventuali situazioni di non ammissibilità risulta complessa, a meno di ricorrere a modelli di ottimizzazione o a procedure euristiche a capacità finita. Inoltre, per evitare ritardi, si tende spesso a gonfiare il lead time presunto, generando work in process che a sua volta allunga ulteriormente i lead time, dando luogo a un potenziale \textbf{circolo vizioso}.
 
-\subsection{Factory Physics e legge di Little}
-A livello di \emph{shop floor}, le misure di prestazione fondamentali sono il \textbf{throughput}, il \textbf{flow time} (strettamente legato al lead time e comprensivo di tempi di attesa, lavorazione e movimentazione) e il \textbf{work in process (WIP)}, associato ai materiali in coda. Idealmente, si desidererebbe un throughput elevato con flow time e WIP contenuti; tuttavia, il raggiungimento simultaneo di tali obiettivi è fortemente influenzato dalla variabilità, sia prevedibile sia imprevedibile.
+\paragraph{Factory Physics}
+A livello di \emph{shop floor}, le misure di prestazione fondamentali sono il \textbf{throughput},
+il \textbf{flow time} (strettamente legato al lead time e comprensivo di tempi di attesa, lavorazione e movimentazione) e
+il \textbf{work in process (WIP)}, associato ai materiali in coda. Idealmente, si desidererebbe un throughput elevato con
+flow time e WIP contenuti; tuttavia, il raggiungimento simultaneo di tali obiettivi è fortemente influenzato dalla
+variabilità, sia prevedibile sia imprevedibile.
 
 \paragraph{Legge di Little}
-Un risultato fondamentale della teoria delle code è la \textbf{legge di Little}, che esprime la relazione tra WIP, throughput e flow time:
+Un risultato fondamentale della teoria delle code è la \textcolor{DarkGreen}{\textbf{legge di Little}}, che esprime la
+relazione tra WIP, throughput e flow time
 \[
-\boxed{
-\text{WIP} = \text{throughput} \times \text{flow time}
-}
+\text{WIP} = \text{throughput} \times \text{flow time}.
 \]
-La legge mette in evidenza il legame strutturale tra il livello di materiali in lavorazione e il tempo di attraversamento del sistema.
-
-\subsection{Ruolo della variabilità nel flusso dei materiali}
+\hspace*{1.5em}La legge mette in evidenza il legame strutturale tra il livello di materiali in lavorazione e il
+tempo di attraversamento del sistema.
 
 \paragraph{Modello di una singola macchina}
-Si consideri una singola macchina dotata di un buffer per il WIP. Si introducono le seguenti grandezze: il tempo medio di attesa in coda \( W_q \), il tempo medio di lavorazione \( t_s \), il tasso medio di servizio \( \mu = 1/t_s \), il tasso medio di arrivo \( \lambda \), che in condizioni di equilibrio coincide con il throughput, e la lunghezza media della coda \( L \), che rappresenta il WIP. In tale contesto, la legge di Little può essere riscritta come:
+Si consideri una singola macchina dotata di un buffer per il WIP. Si introducono le seguenti grandezze: il
+tempo medio di attesa in coda \( W_q \), il tempo medio di lavorazione \( t_s \), il tasso medio di
+servizio \( \mu = 1/t_s \), il tasso medio di arrivo \( \lambda \), che in condizioni di equilibrio coincide con
+il throughput, e la lunghezza media della coda \( L \), che rappresenta il WIP. In tale contesto, la legge di Little
+può essere riscritta come
 \[
-\boxed{
-L = \lambda \,(W_q + t_s)
-}
+L = \lambda \,(W_q + t_s).
 \]
-L’utilizzazione del sistema è definita come \( u = \lambda / \mu \), ed è compresa tra 0 e 1.
+L’\textbf{utilizzazione del sistema} è definita come \( u = \lambda / \mu \), ed è compresa tra 0 e 1.
 
 \paragraph{Effetto della variabilità}
-Una coda del tipo \( G/G/1 \) non è trattabile analiticamente in forma chiusa; tuttavia, una formula approssimata, esatta nel caso \( M/M/1 \), fornisce una stima del tempo medio di attesa in coda:
+Una \textbf{coda} del tipo \textbf{\( G/G/1 \)} non è trattabile analiticamente in forma chiusa; tuttavia, una formula
+approssimata, esatta nel caso \( M/M/1 \), fornisce una stima del \textcolor{DarkGreen}{tempo medio di attesa in coda}
 \[
-\boxed{
 W_q \approx 
 \left(
 \frac{C_a^2 + C_s^2}{2}
@@ -2303,92 +2358,106 @@ W_q \approx
 \left(
 \frac{u}{1-u}
 \right)
-t_s
-}
+t_s,
 \]
-dove \( C_a \) e \( C_s \) sono i coefficienti di variazione dei tempi di interarrivo e di servizio, rispettivamente. La relazione mostra come l’attesa in coda cresca rapidamente all’aumentare dell’utilizzazione e della variabilità.
-
-\subsection{Buffering Law e produzione livellata}
+dove \( C_a \) e \( C_s \) sono i \textcolor{DarkGreen}{\textbf{coefficienti di variazione dei tempi di interarrivo e di servizio}},
+rispettivamente. La relazione mostra come l’attesa in coda cresca rapidamente all’aumentare dell’utilizzazione e della variabilità.
 
 \paragraph{Buffering Law}
-Per ovviare agli effetti della variabilità è necessario introdurre dei \textbf{buffer}, che possono assumere la forma di magazzino o WIP, capacità in eccesso oppure tempo, sotto forma di lead time gonfiato. In assenza di una riduzione della variabilità, il sistema paga un prezzo in termini di WIP elevato, capacità sottoutilizzata e peggioramento del livello di servizio al cliente, manifestato da vendite perse, lead time lunghi e consegne in ritardo.
+Per ovviare agli effetti della variabilità è necessario introdurre dei \textbf{buffer}, che possono assumere la forma di
+magazzino o WIP, capacità in eccesso oppure tempo, sotto forma di lead time gonfiato. In assenza di una riduzione della
+variabilità, il sistema paga un prezzo in termini di WIP elevato, capacità sottoutilizzata e peggioramento del livello di
+servizio al cliente, manifestato da vendite perse, lead time lunghi e consegne in ritardo.
 
 \paragraph{Produzione livellata e fonti di variabilità}
-Uno dei fondamenti dell’approccio Toyota tradizionale è la \textbf{produzione livellata} (\emph{production smoothing}). La variabilità non è legata esclusivamente a eventi casuali, come i guasti alle macchine, ma può derivare anche da batching dovuto ai tempi di setup, batching nella movimentazione (\emph{wait to move}), scarso coordinamento nell’assemblaggio (\emph{wait to match}) e variabilità della domanda riflessa nell’MPS.
+Uno dei fondamenti dell’approccio \emph{Toyota} tradizionale è la \textcolor{DarkGreen}{\textbf{produzione livellata}} (\emph{production smoothing}).
+La variabilità non è legata esclusivamente a eventi casuali, come i guasti alle macchine, ma può derivare anche da
+batching dovuto ai tempi di setup, batching nella movimentazione (\emph{wait to move}), scarso coordinamento
+nell’assemblaggio (\emph{wait to match}) e variabilità della domanda riflessa nell’MPS.
 
 %%%%%%%%%%%%%%%%
 \subsection{Approccio Just-In-Time (Toyota)}
 
 \paragraph{Principi dell’approccio Just-In-Time}
-L’approccio \textbf{Just-In-Time (JIT)}, sviluppato nell’ambito del sistema Toyota, si basa sull’idea di ridurre la variabilità mediante la ripetizione di un \textbf{mix di produzione ripetitivo} (\emph{mixed-model}), realizzando una produzione livellata (\emph{production smoothing}). Il presupposto fondamentale è la riduzione o l’annullamento dei tempi di setup, che consente di produrre lotti piccoli e frequenti. Il controllo del \textbf{work in process} avviene tramite un approccio \textbf{pull}, basato sul prelievo fisico dei materiali, in contrapposizione alla logica \emph{push}, basata sul rilascio di ordini pianificati a partire da previsioni di fabbisogno. Lo strumento chiave del controllo pull è il \textbf{sistema kanban}, con possibile alternativa nel sistema \emph{CONWIP}.
-
-\subsection{Toyota Goal Chasing}
+L’approccio \textcolor{DarkGreen}{\textbf{Just-In-Time (JIT)}}, sviluppato nell’ambito del sistema Toyota, si
+basa sull’idea di ridurre la variabilità mediante la ripetizione di un \textbf{mix di produzione ripetitivo}
+(\emph{mixed-model}), realizzando una produzione livellata (\emph{production smoothing}).\\
+\hspace*{1.5em}Il presupposto
+fondamentale è la \emph{riduzione o l’annullamento dei tempi di setup}, che consente di produrre lotti piccoli e frequenti.
+Il controllo del \textbf{work in process} avviene tramite un approccio \textcolor{DarkGreen}{\textbf{pull}}, basato sul prelievo fisico
+dei materiali, in contrapposizione alla logica \textcolor{DarkGreen}{\textbf{push}}, basata sul rilascio di ordini pianificati a partire
+da previsioni di fabbisogno. Lo strumento chiave del controllo pull è il \textcolor{DarkGreen}{\textbf{sistema kanban}}, con possibile
+alternativa nel sistema \textcolor{DarkGreen}{\textbf{CONWIP}}.
 
 \paragraph{Sequenziamento e regolarità dei flussi}
-A parità di mix produttivo, esistono diverse sequenze di assemblaggio che realizzano lo stesso numero di prodotti finiti. Il problema del \textbf{Toyota Goal Chasing} consiste nello scegliere una sequenza che renda il più possibile \textbf{regolare il fabbisogno di componenti} sulle linee laterali che alimentano la linea principale di assemblaggio. L’obiettivo è consentire il controllo delle linee a monte mediante un sistema pull, che richiede flussi regolari e prevedibili.
+A parità di mix produttivo, esistono diverse sequenze di assemblaggio che realizzano lo stesso numero di prodotti finiti.
+Il problema del \textcolor{DarkGreen}{\textbf{Toyota Goal Chasing}} consiste nello scegliere una sequenza che renda il più possibile
+\textbf{regolare il fabbisogno di componenti} sulle linee laterali che alimentano la linea principale di assemblaggio.
+\emph{L’obiettivo è consentire il \textcolor{DarkGreen}{controllo delle linee a monte mediante un sistema pull}, che richiede flussi regolari
+e prevedibili}.
 
 \paragraph{Formalizzazione del problema}
-Si consideri una linea di assemblaggio che realizza \( N \) prodotti finiti sulla base di \( M \) moduli prodotti su linee laterali, con una distinta base piatta. Sia \( b_{ij} \) il numero di componenti di tipo \( j \) richiesti per assemblare un’unità del prodotto finito \( i \), e sia \( Q_i \) il numero di finiti di tipo \( i \) previsti nel mix ripetitivo. Il fabbisogno per ciclo dei componenti di tipo \( j \) è dato da:
+Si consideri una linea di assemblaggio che realizza \( N \) prodotti finiti sulla base di \( M \) moduli prodotti su linee
+laterali, con una distinta base piatta. Sia \( b_{ij} \) il numero di componenti di tipo \( j \) richiesti per assemblare
+un’unità del prodotto finito \( i \), e sia \( Q_i \) il numero di finiti di tipo \( i \) previsti nel mix ripetitivo.
+Il \textcolor{DarkGreen}{fabbisogno per ciclo dei componenti} di tipo \( j \) è dato da
 \[
-\boxed{
-N_j = \sum_{i=1}^{N} b_{ij} Q_i
-}
+N_j = \sum_{i=1}^{N} b_{ij} Q_i.
 \]
-Indicando con \( Q = \sum_{i=1}^{N} Q_i \) il numero totale di assemblaggi per ciclo, il consumo cumulato ideale dei componenti di tipo \( j \) al passo \( k \) dovrebbe essere pari a:
-\[
-\boxed{
+\hspace*{1.5em}Indicando con \( Q = \sum_{i=1}^{N} Q_i \) il numero totale di assemblaggi per ciclo, il \textcolor{DarkGreen}{\textbf{consumo cumulato ideale}}
+dei componenti di tipo \( j \) al passo \( k \) dovrebbe essere pari a
+\(
 \frac{k N_j}{Q}
-}
-\]
+\).
 
 \paragraph{Funzione obiettivo del goal chasing}
-Sia \( X_{jk} \) il consumo cumulato effettivo del componente \( j \) al passo \( k \). L’obiettivo del problema di goal chasing è minimizzare la distanza tra consumo ideale e consumo reale, misurata tramite la funzione:
+Sia \( X_{jk} \) il \emph{consumo cumulato effettivo} del componente \( j \) al passo \( k \).
+L’obiettivo del problema di goal chasing è \textbf{minimizzare la distanza tra consumo ideale e consumo reale},
+misurata tramite la funzione
 \[
-\boxed{
 \sum_{k=1}^{Q} \sum_{j=1}^{M}
 \left(
 \frac{k N_j}{Q} - X_{jk}
-\right)^2
-}
+\right)^2.
 \]
 
 \paragraph{Ruolo dei tempi di setup nel JIT}
 Nel JIT viene posta forte enfasi sulla riduzione dei \textbf{tempi di setup}, poiché essa consente di ridurre la dimensione dei lotti e, di conseguenza, il livello medio delle giacenze. Tuttavia, l’impatto dei tempi di setup deve essere analizzato congiuntamente agli altri fattori del sistema produttivo. In particolare, la riduzione dei livelli di magazzino non dipende esclusivamente dalla diminuzione dei setup, ma anche dal tasso di produzione e dal grado di saturazione del sistema.
 
-\subsection{Modello di rotazione ciclica dei prodotti}
+\subsubsection{Modello di rotazione ciclica dei prodotti}
 
 \paragraph{Impostazione del modello}
-Si consideri una linea su cui ruotano ciclicamente \( N \) prodotti. Per ciascun prodotto \( i \) si introducono il tasso di produzione \( p_i \) (pezzi per unità di tempo), il tasso di domanda \( d_i < p_i \), assunto costante, e il tempo di setup \( s_i \), assunto indipendente dalla sequenza. Il periodo di rotazione \( T_c \) deve essere ridotto al fine di contenere il livello medio di giacenza.\\
-Indicando con \( T_i \) la durata del lotto del prodotto \( i \) in ciascuna rotazione, in condizioni di equilibrio deve valere:
+Si consideri una linea su cui ruotano ciclicamente \( N \) prodotti. Per ciascun prodotto \( i \) si introducono il
+tasso di produzione \( p_i \) (pezzi per unità di tempo), il tasso di domanda \( d_i < p_i \), assunto costante, e
+il tempo di setup \( s_i \), assunto indipendente dalla sequenza. Il periodo di rotazione \( T_c \) deve essere
+ridotto al fine di contenere il livello medio di giacenza.\\
+\hspace*{1.5em}Indicando con \( T_i \) la durata del lotto del prodotto \( i \) in ciascuna rotazione, in \textcolor{DarkGreen}{condizioni di equilibrio}
+deve valere
 \[
-\boxed{
 p_i T_i = d_i T_c
 \qquad \Rightarrow \qquad
-T_i = \frac{d_i}{p_i} T_c
-}
+T_i = \frac{d_i}{p_i} T_c.
 \]
-Inoltre, il periodo di rotazione deve soddisfare il vincolo:
+\hspace*{1.5em}Inoltre, il \textcolor{DarkGreen}{\textbf{periodo di rotazione}} deve soddisfare il vincolo
 \[
-\boxed{
-T_c \geq \sum_{i=1}^{N} s_i + \sum_{i=1}^{N} T_i
-}
+T_c \geq \sum_{i=1}^{N} s_i + \sum_{i=1}^{N} T_i.
 \]
 L’eventuale \emph{slack} è utile per assorbire guasti, ritardi ed effettuare attività di manutenzione.
 
 \paragraph{Limite inferiore del periodo di rotazione}
-Sostituendo l’espressione di \( T_i \) nel vincolo precedente, si ottiene il limite inferiore:
+Sostituendo l’espressione di \( T_i \) nel vincolo precedente, si ottiene il \textcolor{DarkGreen}{\textbf{limite inferiore}}
 \[
-\boxed{
 T_c \geq 
 \frac{\sum_{i=1}^{N} s_i}
-{1 - \sum_{i=1}^{N} \frac{d_i}{p_i}}
-}
+{1 - \sum_{i=1}^{N} \frac{d_i}{p_i}}.
 \]
-Il risultato mostra che, oltre ai tempi di setup, il periodo di rotazione è fortemente influenzato dal rapporto tra tassi di domanda e tassi di produzione, evidenziando un legame diretto con i fenomeni di congestione già osservati nei modelli di coda.
+\hspace*{1.5em}Il risultato mostra che, oltre ai tempi di setup, il \textcolor{DarkGreen}{periodo di rotazione} è fortemente influenzato dal \emph{rapporto
+tra tassi di domanda e tassi di produzione}, evidenziando un legame diretto con i fenomeni di congestione già
+osservati nei modelli di coda.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% PDF 5 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \vspace{-1cm}
-\textcolor{Teal}{\section{CAP 5 -- Schedulazione nella produzione e nei servizi}}
+\textcolor{ForestGreen}{\section{CAP 5 -- Schedulazione nella produzione e nei servizi}}
 \paragraph{Recap}
 La \textbf{schedulazione} consiste nell’assegnare \textbf{risorse} a \textbf{job} nel tempo, rispettando \textbf{vincoli tecnologici} e di \textbf{capacità} e ottimizzando una \textbf{misura di prestazione}; rispetto alla \textbf{pianificazione della produzione} (es., \textbf{MRP}) opera a un livello di dettaglio superiore.  
 I job sono descritti da \textbf{operazioni} con \textbf{precedenze}, \textbf{tempi di processo}, \textbf{tempi di rilascio} e \textbf{due date}; tipicamente si assume lavorazione su \textbf{una macchina per volta}, \textbf{una sola operazione per macchina} e \textbf{assenza di interruzioni}, pur con possibili violazioni (lot streaming, batch, pre-emption).  
