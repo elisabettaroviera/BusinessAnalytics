@@ -2459,63 +2459,107 @@ osservati nei modelli di coda.
 \vspace{-1cm}
 \textcolor{ForestGreen}{\section{CAP 5 -- Schedulazione nella produzione e nei servizi}}
 \paragraph{Recap}
-La \textbf{schedulazione} consiste nell’assegnare \textbf{risorse} a \textbf{job} nel tempo, rispettando \textbf{vincoli tecnologici} e di \textbf{capacità} e ottimizzando una \textbf{misura di prestazione}; rispetto alla \textbf{pianificazione della produzione} (es., \textbf{MRP}) opera a un livello di dettaglio superiore.  
-I job sono descritti da \textbf{operazioni} con \textbf{precedenze}, \textbf{tempi di processo}, \textbf{tempi di rilascio} e \textbf{due date}; tipicamente si assume lavorazione su \textbf{una macchina per volta}, \textbf{una sola operazione per macchina} e \textbf{assenza di interruzioni}, pur con possibili violazioni (lot streaming, batch, pre-emption).  
-
-Le strutture di problema derivano da diverse \textbf{precedenze} e layout di macchine (\textbf{macchina singola}, \textbf{parallele} $P/Q/R$, \textbf{flow shop}, \textbf{job shop}, \textbf{open shop}), e le prestazioni si misurano tramite funzioni di penalità sui tempi di completamento (\textbf{$C_i$}, \textbf{$F_i$}, \textbf{$L_i$}, \textbf{$T_i$}, \textbf{$E_i$}, \textbf{$U_i$}), anche in forma \textbf{aggregata} (min-sum o min-max, con \textbf{pesi} $w_i$). Alcune misure risultano \textbf{equivalenti} fino a costanti (lateness totale e flow time totale) e $L_{\max}$ implica ottimalità anche per $T_{\max}$, con $T_{\max}=\max\{L_{\max},0\}$. Le misure \textbf{regolari} (non decrescenti in $C_i$) permettono di ricavare il \textbf{timing} dal \textbf{sequenziamento} tramite \textbf{soluzioni attive}; con misure \textbf{non regolari} (es., somma pesata di earliness e tardiness) sequencing e timing non coincidono e la soluzione ottima non è necessariamente attiva o semiattiva.  
-
-La notazione di \textbf{Graham} \textbf{$\alpha|\beta|\gamma$} classifica i problemi tramite layout, vincoli aggiuntivi e misura obiettivo. Esistono casi risolvibili in modo \textbf{polinomiale} (regole \textbf{EDD}, \textbf{WSPT}, algoritmo di \textbf{Johnson}), ma in generale i problemi sono \textbf{NP-hard} e si ricorre a \textbf{euristiche} e \textbf{metaeuristiche}, includendo regole avanzate come \textbf{ATC}. La formulazione tramite \textbf{grafo disgiuntivo} rappresenta precedenze (archi congiuntivi) e vincoli di capacità (archi disgiuntivi), e il \textbf{cammino critico} determina il \textbf{makespan}; da tale grafo si può derivare un \textbf{MILP} per $J//C_{\max}$, utile come base per strategie \emph{destroy and repair} pur non essendo trattabile in pratica. Nella ricerca locale, perturbare archi disgiuntivi sul \textbf{cammino critico} evita cicli ed è l’unica perturbazione utile per $J//C_{\max}$.  
-
-La procedura \textbf{shifting bottleneck} decompone $J//C_{\max}$ in problemi su macchina singola del tipo \textbf{$1/r_i/L_{\max}$}, usando \textbf{teste} $h_{ib}$ (rilasci $r_{ib}$) e \textbf{code} $t_{ib}$ per costruire \textbf{due date locali} $d_{ib}=K-t_{ib}$; il collo di bottiglia è la macchina con \textbf{$L_{\max}$} peggiore e viene congelata iterativamente fino a schedulare tutte le macchine, con possibili raffinamenti ed estensioni a \textbf{$J/r_i/L_{\max}$}.
+La \textbf{schedulazione} affronta l’assegnazione di \textbf{risorse} a \textbf{job} nel tempo,
+rispettando \textbf{vincoli tecnologici} e di \textbf{capacità} e ottimizzando una
+\textbf{misura di prestazione}.  
+Rispetto alla \textbf{pianificazione della produzione} (ad esempio a livello \textbf{MRP}),
+la schedulazione opera a un livello di \textbf{dettaglio superiore}, assumendo come dati
+tempi di lavorazione, precedenze e vincoli operativi.\\
+\hspace*{1.5em}I job sono descritti come sequenze di \textbf{operazioni} soggette a \textbf{precedenze},
+\textbf{tempi di processo}, \textbf{date di rilascio} e \textbf{due date}.  
+Le assunzioni classiche prevedono lavorazione su \textbf{una macchina per volta},
+\textbf{una sola operazione per macchina} e \textbf{assenza di interruzioni}, pur ammettendo
+varianti come \textbf{pre-emption}, \textbf{batch} e \textbf{lot streaming}.
+Le diverse strutture di flusso (\textbf{macchina singola}, \textbf{parallele},
+\textbf{flow shop}, \textbf{job shop}, \textbf{open shop}) determinano la complessità del problema.
+Le prestazioni sono valutate tramite \textbf{funzioni di penalità} dei tempi di completamento,
+come \textbf{$C_i$}, \textbf{$F_i$}, \textbf{$L_i$}, \textbf{$T_i$}, \textbf{$E_i$} e \textbf{$U_i$},
+eventualmente aggregate in forma \textbf{min-sum} o \textbf{min-max} e pesate tramite
+\textbf{priorità $w_i$}.  
+Alcune misure risultano \textbf{equivalenti} fino a costanti, mentre
+$\textbf{L}_{\max}$ implica l’ottimalità anche per $\textbf{T}_{\max}$.\\
+\hspace*{1.5em}Nel caso di \textcolor{ForestGreen}{\textbf{misure di prestazione regolari}}, ossia
+\textbf{non decrescenti} nei tempi di completamento, il \textbf{timing} può essere ricavato
+direttamente dal \textbf{sequencing} e la ricerca può essere limitata a
+\textbf{soluzioni attive}.  
+Per \textcolor{ForestGreen}{\textbf{misure non regolari}} (come earliness–tardiness),
+sequencing e timing non coincidono e la soluzione ottima non è necessariamente
+\textbf{attiva né semiattiva}, rendendo il problema più complesso.\\
+\hspace*{1.5em}La \textcolor{ForestGreen}{\textbf{notazione di Graham}} $\alpha|\beta|\gamma$ fornisce una
+classificazione compatta dei problemi di schedulazione in base al layout delle macchine,
+ai vincoli aggiuntivi e alla misura obiettivo.  
+Alcuni casi ammettono soluzioni \textbf{polinomiali} (regole \textbf{EDD}, \textbf{WSPT},
+algoritmo di \textbf{Johnson}), ma nella maggior parte dei casi i problemi sono
+\textbf{NP-hard} e richiedono \textbf{euristiche} e \textbf{metaeuristiche}.
+La modellazione tramite \textcolor{ForestGreen}{\textbf{grafo disgiuntivo}} rappresenta
+vincoli tecnologici e di capacità, e il \textbf{cammino critico} determina il \textbf{makespan}.
+Da tale rappresentazione deriva un modello \textbf{MILP} per $J//C_{\max}$, utile come base
+concettuale per strategie di ricerca locale.  
+In questo contesto, solo perturbazioni degli archi disgiuntivi sul
+\textbf{cammino critico} sono efficaci.\\
+\hspace*{1.5em}La procedura \textcolor{ForestGreen}{\textbf{shifting bottleneck}} decompone il problema
+$J//C_{\max}$ in una sequenza di problemi su macchina singola del tipo
+\textbf{$1/r_i/L_{\max}$}, utilizzando \textbf{teste} e \textbf{code} per costruire
+\textbf{due date locali}.  
+Il collo di bottiglia viene identificato iterativamente come la macchina con
+\textbf{$L_{\max}$} peggiore e congelato fino alla completa schedulazione del sistema.
 
 \subsection{Modelli classici di machine scheduling}
 
-Risolvere un problema di \textbf{schedulazione} richiede di assegnare \textbf{risorse} a \textbf{job} da eseguire nel tempo, rispettando \textbf{vincoli tecnologici} e di \textbf{capacità}, in modo da ottimizzare una \textbf{misura di prestazione}.  \\
-Un problema di scheduling si pone a un livello di dettaglio superiore rispetto a un problema di \textbf{pianificazione della produzione} (ad esempio a livello \textbf{MRP}). Esiste una grande varietà di problemi di scheduling, ma si inizia con la definizione di un \textbf{problema minimale}.
+\paragraph{Scheduling} Risolvere un problema di \textbf{schedulazione} richiede di assegnare \textbf{risorse} a
+\textbf{job} da eseguire nel tempo, rispettando \textbf{vincoli tecnologici} e di \textbf{capacità}, in modo da
+ottimizzare una \textbf{misura di prestazione}.  
+Un \textcolor{ForestGreen}{\textbf{problema di scheduling}} si pone a un livello di dettaglio
+superiore rispetto a un problema di \textbf{pianificazione della produzione} (ad esempio a livello \textbf{MRP}).
+Esiste una grande varietà di problemi di scheduling, ma si inizia con la definizione di un \textbf{problema minimale}.
 
 \paragraph{Caratteristiche dei job}
-I job sono caratterizzati da:
+I job sono caratterizzati da
 \begin{itemize}[label=-]
-    \item Un \textbf{set di operazioni} da eseguire, legate da \textbf{vincoli di precedenza};
-    \item \textbf{Tempi di lavorazione} per l’esecuzione su ogni macchina;
+    \item Un \textbf{set di operazioni} da eseguire, legate da \textbf{vincoli di precedenza}.
+    \item \textbf{Tempi di lavorazione} per l’esecuzione su ogni macchina.
     \item \textbf{Date di rilascio} e \textbf{date di consegna}.
 \end{itemize}
-Assunzioni comuni sono che un job possa essere in lavorazione su \textbf{al più una macchina per volta}, che ogni macchina possa lavorare \textbf{un job per volta}, e che le lavorazioni \textbf{non possano essere interrotte}. Ognuna di tali assunzioni può essere violata (\textbf{lot streaming}, \textbf{processori batch}, \textbf{pre-emption}).
+\hspace*{1.5em}Assunzioni comuni sono che un job possa essere in lavorazione su \textbf{al più una macchina per volta},
+che ogni macchina possa lavorare \textbf{un job per volta}, e che le lavorazioni \textbf{non possano essere interrotte}.
+Ognuna di tali assunzioni può essere violata (\textbf{lot streaming}, \textbf{processori batch}, \textbf{pre-emption}).
 
 \paragraph{Soluzioni e diagrammi di Gantt}
-Una soluzione di un problema di scheduling è caratterizzata dalle \textbf{sequenze di lavorazione} sulle macchine.   Una soluzione può essere visualizzata mediante un \textbf{diagramma di Gantt}, che rappresenta graficamente l’allocazione temporale dei job sulle macchine. \\
-Dall’esempio si ricava che una stessa istanza può ammettere più soluzioni ammissibili, caratterizzate da diverse sequenze sulle macchine.
+Una soluzione di un problema di scheduling è caratterizzata dalle \textbf{sequenze di lavorazione} sulle macchine.
+Una soluzione può essere visualizzata mediante un \textcolor{ForestGreen}{\textbf{diagramma di Gantt}}, che rappresenta graficamente l’allocazione
+temporale dei job sulle macchine. 
 
 \subsection{Tipi di flusso}
-
 \paragraph{Strutture di precedenza}
-Esistono diverse \textbf{strutture di precedenza} tra le operazioni dei job, che caratterizzano la \textbf{tecnologia del ciclo di lavorazione}.  
+Esistono diverse \textbf{strutture di precedenza} tra le operazioni dei job, che caratterizzano la
+\textbf{tecnologia del ciclo di lavorazione}.  
 Sono possibili \textbf{strutture lineari}, oppure \textbf{strutture arbitrarie} rappresentabili mediante \textbf{grafi}.
 Le precedenze si traducono in \textbf{vincoli} di un problema di ottimizzazione.
-\\
-Il \textbf{flusso dei materiali} caratterizza diverse strutture in termini di macchine:
+Il \textcolor{ForestGreen}{\textbf{flusso dei materiali}} caratterizza diverse strutture in termini di macchine
 \begin{itemize}[label=-]
-    \item \textbf{macchina singola};
-    \item \textbf{macchine parallele} (identiche: $p_{im}=p_i$, correlate: $p_{im}=p_{ism}$, scorrelate);
-    \item \textbf{flow shop};
-    \item \textbf{job shop};
-    \item \textbf{open shop}.
+    \item \textbf{Macchina singola}.
+    \item \textbf{Macchine parallele} (identiche: $p_{im}=p_i$, correlate: $p_{im}=p_{ism}$, scorrelate).
+    \item \textbf{Flow shop}.
+    \item \textbf{Job shop}.
+    \item \textbf{Open shop}.
 \end{itemize}
-Oltre a tali strutture prototipali, si osservano varianti sul tema, e sono possibili \textbf{strutture ibride} (ad esempio \textbf{flexible flow shop}).
+\hspace*{1.5em}Oltre a tali strutture prototipali, si osservano varianti sul tema, e sono possibili \textbf{strutture ibride}
+(ad esempio \textbf{flexible flow shop}).
 
 \subsection{Misure di prestazione}
-Si indica con \textbf{$C_i$} il \textbf{tempo di completamento} del job $i\in[n]$, ovvero il tempo di completamento della sua \textbf{ultima operazione}.
 
-\paragraph{Funzioni di penalità}
-Un tipico modo per costruire misure di prestazione è associare ad ogni job $J_i$ un \textbf{termine di penalità} $\gamma_i(C_i)$.
-I termini tipicamente utilizzati sono:
+\paragraph{Funzioni di penalità} Si indica con \textbf{$C_i$} il \textbf{tempo di completamento} del job $i\in[n]$,
+ovvero il tempo di completamento della sua \textbf{ultima operazione}.
+Un tipico modo per costruire misure di prestazione è associare ad ogni job $J_i$ un \textbf{termine di penalità}
+$\gamma_i(C_i)$.
+I termini tipicamente utilizzati sono
 \begin{itemize}[label=-]
-    \item \textbf{tempo di completamento}: $\gamma_i(C_i)=C_i$;
-    \item \textbf{flow time}: $\gamma_i(C_i)=F_i=C_i-r_i$;
-    \item \textbf{lateness}: $\gamma_i(C_i)=L_i=C_i-d_i$;
-    \item \textbf{tardiness}: $\gamma_i(C_i)=T_i=\max\{C_i-d_i,0\}$;
-    \item \textbf{earliness}: $\gamma_i(C_i)=E_i=\max\{d_i-C_i,0\}$;
-    \item \textbf{indicatore di ritardo}:
+    \item \textbf{Tempo di completamento}: $\gamma_i(C_i)=C_i$.
+    \item \textbf{Flow time}: $\gamma_i(C_i)=F_i=C_i-r_i$.
+    \item \textbf{Lateness}: $\gamma_i(C_i)=L_i=C_i-d_i$.
+    \item \textbf{Tardiness}: $\gamma_i(C_i)=T_i=\max\{C_i-d_i,0\}$.
+    \item \textbf{Earliness}: $\gamma_i(C_i)=E_i=\max\{d_i-C_i,0\}$.
+    \item \textbf{Indicatore di ritardo}:
     \(
     \gamma_i(C_i)=U_i=
     \begin{cases}
@@ -2528,27 +2572,29 @@ I termini tipicamente utilizzati sono:
 \paragraph{Pesi e priorità dei job}
 È possibile associare \textbf{pesi $w_i$} ai job, allo scopo di esprimere una \textbf{priorità}.  
 Si può per esempio valutare per ogni job $J_i$ la \textbf{tardiness pesata} $w_iT_i$.
-\\ Sulla base di questi ``\textbf{mattoncini}'' si possono costruire misure di prestazione \textbf{aggregate}, ottenendo funzioni del tipo:
-\[
+\\ \hspace*{1.5em}Sulla base di questi ``\textbf{mattoncini}'' si possono costruire misure di prestazione \textbf{aggregate},
+ottenendo funzioni del tipo:
+\(
 \min\sum_{i=1}^n\gamma_i(C_i),
 \qquad
 \min\max_{i=1,\dots,n}\gamma_i(C_i).
-\]
+\)
 
 \paragraph{Principali misure di prestazione aggregate}
-Le principali misure di prestazione aggregate sono:
+Le \textcolor{ForestGreen}{principali misure di prestazione aggregate} sono
 \begin{itemize}[label=-]
-    \item \textbf{flow time totale}: $\sum_i F_i$;
-    \item \textbf{flow time totale pesato}: $\sum_i w_iF_i$;
-    \item \textbf{massima lateness}: $L_{\max}=\max_i L_i$;
-    \item \textbf{tardiness totale pesata}: $\sum_i w_iT_i$;
-    \item \textbf{makespan}: $C_{\max}=\max_i C_i$;
-    \item \textbf{numero di job in ritardo}: $\sum_i U_i$.
+    \item \textbf{Flow time totale}: $\sum_i F_i$.
+    \item \textbf{Flow time totale pesato}: $\sum_i w_iF_i$.
+    \item \textbf{Massima lateness}: $L_{\max}=\max_i L_i$.
+    \item \textbf{Tardiness totale pesata}: $\sum_i w_iT_i$.
+    \item \textbf{Makespan}: $C_{\max}=\max_i C_i$.
+    \item \textbf{Numero di job in ritardo}: $\sum_i U_i$.
 \end{itemize}
 
 \paragraph{Equivalenza tra misure di prestazione}
-Alcune misure sono tra di loro \textbf{equivalenti}, nel senso che una soluzione ottima rispetto a una di esse è ottima anche per l’altra.
-Ad esempio, la \textbf{lateness totale} è equivalente al \textbf{flow time totale}:
+Alcune misure sono tra di loro \textbf{equivalenti}, nel senso che una soluzione ottima rispetto a una di esse è ottima
+anche per l’altra.
+Ad esempio, \emph{la \textbf{lateness totale} è equivalente al \textbf{flow time totale}}
 \[
 \sum_{i=1}^n L_i
 =
@@ -2556,58 +2602,63 @@ Ad esempio, la \textbf{lateness totale} è equivalente al \textbf{flow time tota
 =
 \sum_{i=1}^n F_i+\sum_{i=1}^n(r_i-d_i).
 \]
-
-Le due misure differiscono per una \textbf{costante}. Inoltre, una soluzione ottima rispetto a \textbf{$L_{\max}$} è ottima anche rispetto a \textbf{$T_{\max}$} (ma non è assicurato il viceversa):
+\hspace*{1.5em}Le due misure differiscono per una \textbf{costante}. Inoltre, \textcolor{ForestGreen}{una soluzione ottima
+rispetto a \textbf{$L_{\max}$} è ottima anche rispetto a \textbf{$T_{\max}$}} (ma non è assicurato il viceversa):
 \(
 T_{\max}=\max\{L_{\max},0\}.
 \)
 
 \paragraph{Misure di prestazione regolari}
-Le misure di prestazione finora elencate sono \textbf{funzioni non decrescenti} dei tempi di completamento; si parla in questo caso di \textbf{misure di prestazione regolari}.
-Nel caso di misure regolari, le informazioni di \textbf{tempistica} possono essere ricavate dal \textbf{sequenziamento}, in quanto ogni operazione è eseguita \textbf{al più presto} (\textbf{soluzioni attive}).
+Le misure di prestazione finora elencate sono \textbf{funzioni non decrescenti} dei tempi di completamento;
+si parla in questo caso di \textcolor{ForestGreen}{\textbf{misure di prestazione regolari}}.
+Nel caso di misure regolari, le informazioni di \textbf{tempistica} possono essere ricavate dal
+\textbf{sequenziamento}, in quanto ogni operazione è eseguita \textbf{al più presto} (\textbf{soluzioni attive}).
 
 \paragraph{Misure di prestazione non regolari}
-Nel caso di \textbf{misure non regolari}, ciò non è più vero e il problema risulta \textbf{più complesso}.
-Tali misure sono utili per tenere conto dell’\textbf{inopportunità di completare un job prima della due date}, ad esempio adottando come misura:
+Nel caso di \textcolor{ForestGreen}{\textbf{misure non regolari}}, ciò non è più vero e il problema risulta
+\textbf{più complesso}.
+Tali misure sono utili per tenere conto dell’\textbf{inopportunità di completare un job prima della due date},
+ad esempio adottando come misura
 \[
 \sum_{i=1}^n\bigl(w_i^T T_i + w_i^T E_i\bigr).
 \]
+\hspace*{1.5em}In questo caso esiste una regione in cui la funzione \textbf{decresce} al crescere del tempo di
+completamento, e \textbf{sequencing e timing non coincidono} e la soluzione ottima non è necessariamente
+\textcolor{ForestGreen}{\textbf{attiva o semiattiva}}. Una schedulazione si dice \textbf{semiattiva} se, fissato
+il sequencing, ogni operazione è eseguita il più presto possibile senza violare l’ordine dei job su alcuna macchina.
+Mentre, una schedulazione è \textbf{attiva} se non esiste alcuna operazione che possa essere anticipata senza ritardarne almeno un’altra; ogni soluzione attiva è anche semiattiva, ma non viceversa.
 
-In questo caso esiste una regione in cui la funzione \textbf{decresce} al crescere del tempo di completamento, e \textbf{sequencing e timing non coincidono} e la soluzione ottima non è necessariamente attiva o semiattiva.
 
-\subsection{Notazione di Graham}
-
-Per classificare i problemi di schedulazione si utilizza la codifica a tre campi \textbf{$\alpha|\beta|\gamma$} dovuta a \textbf{Graham}.
-
-\paragraph{Campo $\alpha$: layout delle macchine}
-Il campo $\alpha$ descrive il \textbf{layout delle macchine}:
+\paragraph{Notazione di Graham}
+Per classificare i problemi di schedulazione si utilizza la codifica a tre campi \textcolor{ForestGreen}{\textbf{$\alpha|\beta|\gamma$}}
+dovuta a \textcolor{ForestGreen}{\textbf{Graham}}.\\
+\hspace*{1em}\textbf{Campo $\alpha$: layout delle macchine}
+Il campo \textcolor{ForestGreen}{$\alpha$} descrive il \textbf{layout delle macchine}
 \begin{itemize}[label=-]
-    \item \textbf{$1$}: macchina singola;
-    \item \textbf{$P,Q,R$}: macchine parallele identiche, correlate e scorrelate;
-    \item \textbf{$F$}: flow shop (ad esempio $F2$);
+    \item \textbf{$1$}: macchina singola.
+    \item \textbf{$P,Q,R$}: macchine parallele identiche, correlate e scorrelate.
+    \item \textbf{$F$}: flow shop (ad esempio $F2$).
     \item \textbf{$J$}: job shop.
 \end{itemize}
-
-\paragraph{Campo $\beta$: vincoli aggiuntivi}
-Il campo $\beta$ descrive la presenza di eventuali \textbf{vincoli aggiuntivi}:
+\hspace*{1em}\textbf{Campo $\beta$: vincoli aggiuntivi}
+Il campo \textcolor{ForestGreen}{$\beta$} descrive la presenza di eventuali \textbf{vincoli aggiuntivi}
 \begin{itemize}[label=-]
-    \item \textbf{res}: risorse aggiuntive;
-    \item \textbf{prec}: vincoli di precedenza tra job;
-    \item \textbf{$r_i$}: tempi di rilascio non nulli;
-    \item \textbf{$\bar d_i$}: deadline hard;
-    \item \textbf{$s_{ij}$}: setup dipendenti dalla sequenza;
-    \item \textbf{perm}: flow shop a permutazione, la frequenza di job si mantiene su tutte le macchine;
+    \item \textbf{res}: risorse aggiuntive.
+    \item \textbf{prec}: vincoli di precedenza tra job.
+    \item \textbf{$r_i$}: tempi di rilascio non nulli.
+    \item \textbf{$\bar d_i$}: deadline hard.
+    \item \textbf{$s_{ij}$}: setup dipendenti dalla sequenza.
+    \item \textbf{perm}: flow shop a permutazione, la frequenza di job si mantiene su tutte le macchine.
     \item \textbf{no-wait}: assenza di buffer tra operazioni: ragioni tecnologiche impongono che le operazioni vengano eseguite consecutivamente senza interruzioni.
 \end{itemize}
-
-\paragraph{Campo $\gamma$: misura di prestazione}
-Il campo $\gamma$ descrive la \textbf{misura di prestazione} da ottimizzare.
+\hspace*{1em}\textbf{Campo $\gamma$: misura di prestazione}
+Il campo \textcolor{ForestGreen}{$\gamma$} descrive la \textbf{misura di prestazione} da ottimizzare.
 
 \subsection{Algoritmi di soluzione}
-Esistono alcuni casi semplici risolvibili mediante \textbf{algoritmi polinomiali}:
+\paragraph{Algoritmi polinomiali}Esistono alcuni casi semplici risolvibili mediante \textcolor{ForestGreen}{\textbf{algoritmi polinomiali}}
 \begin{itemize}[label=-]
-    \item \textbf{$1//L_{\max}$}: regola \textbf{EDD} che ordina i job in ordine di \textbf{due date} crescente;
-    \item \textbf{$1//\sum_i w_i c_i$}: regola \textbf{WSPT} (weigthed shortest processing time) che ordina i job in ordine decrescente del rapporto $w_i/p_i$;
+    \item \textbf{$1//L_{\max}$}: regola \textbf{EDD} che ordina i job in ordine di \textbf{due date} crescente.
+    \item \textbf{$1//\sum_i w_i c_i$}: regola \textbf{WSPT} (weigthed shortest processing time) che ordina i job in ordine decrescente del rapporto $w_i/p_i$.
     \item \textbf{$F2//C_{\max}$}: algoritmo di \textbf{Johnson} (in questo caso la soluzione ottima applica la stessa sequenza sulle due macchine).
 \end{itemize}
 
@@ -2616,9 +2667,10 @@ In generale, i problemi di schedulazione sono \textbf{NP-hard} e vengono affront
 mediante \textbf{euristiche}, sia costruttive sia iterative (\textbf{metaeuristiche} basate su ricerca locale).
 Le \textbf{regole di priorità} costituiscono una strategia costruttiva di base.
 
-\paragraph{Regola ATC (Apparent Tardiness Cost)} Esistono anche regole non banali, come la \textbf{regola ATC (Apparent Tardiness Cost)},
+\paragraph{Regola ATC (Apparent Tardiness Cost)} Esistono anche regole non banali, come la
+\textcolor{ForestGreen}{\textbf{regola ATC (Apparent Tardiness Cost)}},
 proposta per problemi \textbf{$J//\sum_i w_i T_i$}.
-L’espressione della priorità del job $J_i$ sulla macchina $M_j$ al tempo $t$ è:
+L’espressione della priorità del job $J_i$ sulla macchina $M_j$ al tempo $t$ è
 \[
 \frac{w_i}{p_{ij}}
 \exp\!\left(
@@ -2630,56 +2682,55 @@ L’espressione della priorità del job $J_i$ sulla macchina $M_j$ al tempo $t$ 
 \right),
 \]
 dove $w_i$ è il peso del job $J_i$ e $p_{ij}$ è il suo tempo di processo sulla macchina
-$M_j$; la notazione $[x]^+$ è equivalente a $\max\{0,x\}$; $W_{iq}$ è una stima del tempo
+$M_j$; $W_{iq}$ è una stima del tempo
 di attesa di $J_i$ sulla macchina $M_q$; $m_i$ è il numero di macchine che il job deve
-ancora visitare; $k$ è un parametro da selezionare; $\bar{p}$ è il tempo di processo
+ancora visitare; $k$ è un parametro da selezionare e $\bar{p}$ è il tempo di processo
 medio dei job in coda.
 
 \paragraph{Interpretazione del termine di slack}
 L’espressione
 \[
 t^* = d_i - p_{ij} -
-\sum_{q=j+1}^{m_i}(W_{iq}+p_{iq})
+\sum_{q=j+1}^{m_i}(W_{iq}+p_{iq}),
 \]
-può essere interpretata come il massimo tempo di inizio di $J_i$ su $M_j$, ottenuto
+può essere interpretata come il \textcolor{ForestGreen}{\emph{massimo tempo di inizio}} di $J_i$ su $M_j$, ottenuto
 sottraendo un lead time stimato dalla due date $d_i$.
-Se $t \le t^*$ si può ritenere di essere in tempo, altrimenti si corre il rischio di
+Se $t \le t^*$ si può ritenere di essere \textbf{in tempo}, altrimenti si corre il rischio di
 arrivare in ritardo.
-Se si è in tempo, il termine tra parentesi quadre è positivo, e la priorità cresce
+\textbf{Se si è in tempo}, il termine tra parentesi quadre è \emph{positivo}, e la priorità cresce
 esponenzialmente al crescere di $t$. \\
-Quando si è in ritardo, il termine tra parentesi quadre è negativo, per cui
+\hspace*{1.5em}\textbf{Quando si è in ritardo}, il termine tra parentesi quadre è \emph{negativo}, per cui
 l’argomento dell’esponenziale è zero. La priorità è quindi $w_i/p_{ij}$, che coincide
 con la regola WSPT.
 
 \paragraph{Relazione con la tardiness totale pesata}
-Se molti job sono in ritardo, la tardiness totale pesata diventa una funzione obiettivo
-quasi equivalente al tempo di completamento totale pesato:
+\emph{Se molti job sono in ritardo, la tardiness totale pesata diventa una funzione obiettivo
+quasi equivalente al tempo di completamento totale pesato}
 \[
 \sum_i w_i T_i =
 \sum_i w_i \max\{C_i-d_i,0\}
 \approx
 \sum_i w_i C_i - \sum_i w_i d_i .
 \]
-
-Il problema di minimizzazione di $\sum_i w_i C_i$ è risolto, su macchina singola,
-dalla regola WSPT.
+\hspace*{1.5em}Il problema di minimizzazione di $\sum_i w_i C_i$ è risolto, su macchina singola,
+dalla \textbf{regola WSPT}.
 
 \paragraph{Lookahead e ricerca locale}
-La miopia delle regole di priorità può essere ridotta introducendo un certo grado di
-lookahead, ad esempio mediante strategie di \emph{beam search}.
+La \textbf{miopia} delle regole di priorità può essere ridotta introducendo un certo grado di
+\textcolor{ForestGreen}{\textbf{lookahead}}, ad esempio mediante strategie di \emph{beam search}.
 Una vasta classe di algoritmi iterativi si basa su perturbazioni locali della soluzione
 corrente, che definiscono una struttura di vicinato.\\
-I principali problemi sono:
+I principali problemi sono
 \begin{itemize}[label=-]
-    \item sfuggire a minimi locali (tabu search, algoritmi genetici, questi richiedono attenta codifica e decodifica delle soluzioni);
-    \item esplorare grandi vicinati in maniera efficiente (LNS, Large Neighborhood
-    Search, utile anche per misure non regolari);
-    \item evitare la creazione di cicli.
+    \item Sfuggire a \textbf{minimi locali} (tabu search, algoritmi genetici, questi richiedono attenta codifica e decodifica delle soluzioni).
+    \item Esplorare \textbf{grandi vicinati} in maniera efficiente (LNS, Large Neighborhood
+    Search, utile anche per misure non regolari).
+    \item Evitare la \textbf{creazione di cicli}.
 \end{itemize}
-Molte di tali questioni richiedono una formulazione mediante un grafo disgiuntivo.
+Molte di tali questioni richiedono una formulazione mediante un \textbf{grafo disgiuntivo}.
 
-\subsection{Grafi disgiuntivi}
-In un \textbf{grafo disgiuntivo}, i nodi rappresentano le operazioni, con l’aggiunta di nodi
+\paragraph{Grafi disgiuntivi}
+In un \textcolor{ForestGreen}{\textbf{grafo disgiuntivo}}, i nodi rappresentano le operazioni, con l’aggiunta di nodi
 dummy iniziali e finali.
 Gli \textbf{archi congiuntivi} rappresentano vincoli di precedenza tecnologici, associati ai
 cicli di ciascun job.
@@ -2690,39 +2741,36 @@ finale, fornisce il makespan.
 
 \subsection{Modello MILP per $J//C_{max}$}
 
-\paragraph{Formulazione} Sulla base del grafo disgiuntivo possiamo costruire un modello MILP per il problema $J//C_{max}$.
+\paragraph{Formulazione} Sulla base del grafo disgiuntivo possiamo costruire un \textcolor{ForestGreen}{modello MILP} per il problema $J//C_{max}$.
 Sia $N=\{0,1,\dots,N-1,N\}$ l’insieme dei nodi, dove $0$ e $N$ sono nodi dummy.
 Sia $P$ l’insieme degli archi congiuntivi e $D$ l’insieme degli archi disgiuntivi.
 La variabile binaria $x_{ij}$, se posta pari a $1$, indica che l’operazione $i$ precede
 l’operazione $j$.
-
 \begin{align*}
 \min \quad & C_N \\
 \text{s.t.}\quad
-& C_j \ge C_i + p_j && \forall (i,j)\in P \\
-& C_j \ge C_i + p_j - M(1-x_{ij}) && \forall (i,j)\in D \\
-& C_i \ge C_j + p_i - M x_{ij} && \forall (i,j)\in D \\
-& x_{ij}\in\{0,1\} && \forall (i,j)\in D \\
-& C_i \ge p_i && \forall i\in N .
+& C_j \ge C_i + p_j, && \forall (i,j)\in P, \\
+& C_j \ge C_i + p_j - M(1-x_{ij}), && \forall (i,j)\in D, \\
+& C_i \ge C_j + p_i - M x_{ij}, && \forall (i,j)\in D, \\
+& x_{ij}\in\{0,1\}, && \forall (i,j)\in D, \\
+& C_i \ge p_i, && \forall i\in N .
 \end{align*}
-
-Il modello può essere adattato ad altre misure di prestazione, ma non è trattabile in
+\hspace*{1.5em}Il modello può essere adattato ad altre misure di prestazione, ma non è trattabile in
 pratica a causa di bound deboli. Tuttavia costituisce una base utile per
 metaeuristiche e approcci LNS (\emph{destroy and repair}).
 
 \paragraph{Il ruolo del cammino critico}
 In una strategia di ricerca locale, perturbazioni arbitrarie delle sequenze possono
-creare cicli. Nel problema $J//C_{\max}$, se si perturbano archi disgiuntivi appartenenti al
-cammino critico, non si possono creare cicli, e tali perturbazioni sono le sole utili.
+creare cicli. Nel problema $J//C_{\max}$, \emph{se si perturbano archi disgiuntivi appartenenti al
+cammino critico, non si possono creare cicli, e tali perturbazioni sono le sole utili}.
 
 \subsection{Procedura Shifting Bottleneck}
-
 \paragraph{Idea generale}
-La procedura \emph{shifting bottleneck}, originariamente pensata per il problema
-$J//C_{\max}$, sfrutta il grafo disgiuntivo per decomporre il problema in una
-sequenza di problemi del tipo $1/r_i/L_{\max}$, per i quali sono disponibili algoritmi branch-and-bound efficienti.
-Se una macchina $M_b$ è il collo di bottiglia, le altre macchine possono essere
-trattate come risorse a capacità infinita, eliminando i relativi archi disgiuntivi corrispondenti alle altre macchine
+La procedura \textcolor{ForestGreen}{\textbf{shifting bottleneck}}, originariamente pensata per il problema
+$J//C_{\max}$, sfrutta il grafo disgiuntivo per \emph{decomporre il problema} in una
+sequenza di problemi del tipo $1/r_i/L_{\max}$, per i quali sono disponibili algoritmi \emph{branch-and-bound} efficienti.
+Se una macchina $M_b$ è il \textbf{collo di bottiglia}, le altre macchine possono essere
+trattate come \emph{risorse a capacità infinita}, eliminando i relativi archi disgiuntivi corrispondenti alle altre macchine
 e mantenere solo quelle corrispondenti alle altre macchine.
 
 \paragraph{Teste e code nel grafo disgiuntivo}
@@ -2743,7 +2791,7 @@ approssimando il makespan come
 C_{\max} = \max_i \{C_i\} \;\approx\; \max_i \{C_{ib} + t_{ib}\}.
 \)
 Se si sottrae una costante arbitraria $K$ dalla misura di prestazione, la soluzione
-ottima del problema non cambia, ottenendo il problema equivalente:
+ottima del problema non cambia, ottenendo il problema equivalente
 \[
 \max_i \{C_{ib} + t_{ib}\} - K
 = \max_i \{C_{ib} - (K - t_{ib})\}
@@ -2775,355 +2823,286 @@ corrispondenti a $M_b$ e rischedulare le altre macchine.
 In pratica, si risolvono i problemi su macchina singola per le rimanenti $M-1$
 macchine, aggiornando teste e code. Il procedimento prosegue fino ad avere
 schedulato tutte le macchine, congelandole una per volta.
-Sono possibili raffinamenti iterativi, e la strategia si estende facilmente al problema
+Sono possibili \emph{raffinamenti iterativi}, e la strategia si estende facilmente al problema
 $J/r_i/L_{max}$; sono state proposte anche ulteriori estensioni.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% PDF 6 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{CAP 6 -- Fondamenti microeconomici del pricing e modelli di scelta discreta}
-
-\subsection{Driver del profitto}
-
-\paragraph{Modello base del profitto}
+\vspace{-1cm}
+\textcolor{BurntOrange}{\section{CAP 6 -- Fondamenti microeconomici del pricing e modelli di scelta discreta}}
+\paragraph{Driver del profitto}
 Il profitto è determinato da quattro fattori fondamentali ed è descritto dal seguente modello semplice:
-\[
+\textcolor{BurntOrange}{\(
 \text{Profitto} = (\text{Prezzo} - \text{Costo variabile}) \cdot \text{Volume} - \text{Costo fisso}.
-\]
+\)}
 
-\paragraph{Caso base}
-Si consideri il seguente caso:
-\begin{itemize}[label=-]
-    \item Prezzo: 100 euro per unità;
-    \item Volume: 1 milione di unità;
-    \item Costo variabile: 60 euro per unità;
-    \item Costo fisso: 30 milioni di euro.
-\end{itemize}
-Il profitto risulta:
-\[
-(100 - 60)\cdot 10^6 - 30 \cdot 10^6 = 10 \text{ milioni di euro}.
-\]
-
-\paragraph{Sensibilità del profitto ai fattori}
+\paragraph{Sensibilità del profitto ai fattori} \emph{Quale sarebbe l'impatto di una variazione di ciascun fattore, supponendo che gli altri
+rimangano invariati?}
 Si considerano variazioni percentuali dei fattori nell’intervallo da $-10\%$ a $+10\%$ e il loro impatto percentuale sul profitto.
 Un aumento del prezzo del $10\%$ comporta un raddoppio del profitto. Al contrario, una riduzione del costo variabile del $10\%$ implica un aumento del profitto pari al $50\%$. Gli altri due fattori hanno un impatto minore.
 Il grafico risulta simmetrico rispetto alle variazioni positive e negative.
 
 \paragraph{Osservazioni}
-È importante notare che la modifica del prezzo è essenzialmente istantanea e priva di costo, a differenza degli investimenti in pubblicità o riduzione dei costi.
-Tuttavia, il modello è poco realistico poiché il prezzo influisce sul volume e il costo non è necessariamente una funzione affine del volume. È quindi necessario considerare le interazioni tra i fattori, pur utilizzando questo modello grezzo per sviluppare intuizioni.
-
-\subsection{Prezzo e volume}
-
-\paragraph{Riduzione del prezzo}
-Si assuma una riduzione del prezzo del $20\%$ rispetto al caso base. Per mantenere il profitto invariato, si deve risolvere:
-\[
-10 = (80 - 60)V_{\text{new}} - 30 \quad \Rightarrow \quad V_{\text{new}} = 20 \text{ milioni}.
-\]
-È quindi necessario un aumento del volume del $100\%$.
-
-\paragraph{Aumento del prezzo}
-Viceversa, se il prezzo aumenta del $20\%$, si ottiene:
-\[
-10 = (120 - 60)V_{\text{new}} - 30 \quad \Rightarrow \quad V_{\text{new}} = \frac{2}{3} \cdot 20 \text{ milioni}.
-\]
-È quindi possibile perdere un terzo del volume.
+\emph{È importante notare che la modifica del prezzo è essenzialmente istantanea e priva di costo, a differenza degli investimenti in pubblicità o riduzione dei costi}.
+Tuttavia, il \textbf{modello è poco realistico} poiché il prezzo influisce sul volume e il costo non è necessariamente
+una funzione affine del volume. È quindi necessario considerare le \textcolor{BurntOrange}{interazioni tra i fattori},
+pur utilizzando questo modello grezzo per sviluppare intuizioni.
 
 \paragraph{Catene causali}
-È necessario modellare il legame tra prezzo e volume (domanda) ed essere consapevoli delle possibili catene causali:
+È necessario \textbf{modellare il legame tra prezzo e volume} (domanda) ed essere consapevoli delle possibili catene causali
 \begin{itemize}[label=-]
-    \item Prezzo $\rightarrow$ Volume $\rightarrow$ Ricavi $\rightarrow$ Profitto;
-    \item Prezzo $\rightarrow$ Volume $\rightarrow$ Costi $\rightarrow$ Profitto;
-    \item Prezzo $\rightarrow$ Prezzi dei concorrenti $\rightarrow$ Quota di mercato $\rightarrow$ Volume $\rightarrow$ Ricavi $\rightarrow$ Profitto;
+    \item Prezzo $\rightarrow$ Volume $\rightarrow$ Ricavi $\rightarrow$ Profitto.
+    \item Prezzo $\rightarrow$ Volume $\rightarrow$ Costi $\rightarrow$ Profitto.
+    \item Prezzo $\rightarrow$ Prezzi dei concorrenti $\rightarrow$ Quota di mercato $\rightarrow$ Volume $\rightarrow$ Ricavi $\rightarrow$ Profitto.
     \item Prezzo del produttore $\rightarrow$ Prezzo del rivenditore $\rightarrow$ Volume $\rightarrow$ Ricavi $\rightarrow$ Profitto.
 \end{itemize}
 
-\subsection{Pricing e revenue management}
-
-\paragraph{Profitto e costi}
-L’obiettivo di un’impresa viene comunemente identificato nella massimizzazione del profitto. Tuttavia, l’analisi precedente mostra che ciò non si riduce alla sola minimizzazione dei costi.
-
-\paragraph{Revenue management}
-Se il profitto è ricavo meno costo, si aprono ulteriori possibilità. Le strategie di revenue e yield management sono diventate comuni a partire dall’industria aerea.
+\paragraph{Pricing e revenue management}
+L’\textbf{obiettivo} di un’impresa viene comunemente identificato nella \textcolor{BurntOrange}{\textbf{massimizzazione del profitto}}.
+Tuttavia, l’analisi precedente mostra che ciò non si riduce alla sola minimizzazione dei costi.
+\\ \hspace*{1.5em}Se il profitto è ricavo meno costo, si aprono ulteriori possibilità. Le strategie di \emph{revenue e yield management}
+sono diventate comuni a partire dall’industria aerea.
 
 \paragraph{Strategie di pricing}
-Le principali strategie di pricing includono:
+Le \textcolor{BurntOrange}{\textbf{principali strategie di pricing}} includono
 \begin{itemize}[label=-]
-    \item \textbf{Pricing basato sui costi}: valutazione del costo del prodotto e applicazione di un markup, ignorando le reazioni di consumatori e concorrenti;
-    \item \textbf{Pricing basato sulla domanda}: il prezzo emerge dall’equilibrio tra domanda e offerta, modellabile in modo semplice in condizioni di monopolio;
-    \item \textbf{Competizione}: modellata tramite la teoria dei giochi, sia tra imprese sia nell’interazione impresa–cliente.
+\item La strategia di pricing apparentemente più ovvia è quella \textbf{basata sui costi}: si valuta il \textbf{costo} di un prodotto e si applica un \textbf{mark-up}. Questo approccio semplice \textbf{non tiene conto} della reazione dei \textbf{consumatori} e dei \textbf{competitor}.
+\item Un’altra idea, piuttosto comune in \textbf{economia}, è che il \textbf{prezzo} derivi dall’\textbf{equilibrio tra domanda e offerta}. Questo porta al concetto di \textbf{pricing basato sulla domanda}, che può essere affrontato tramite \textbf{modelli semplici} nel caso di \textbf{monopolio}.
+\item Un ulteriore elemento è il \textbf{ruolo della concorrenza}. Nella letteratura classica di \textbf{microeconomia}, questo aspetto può essere analizzato tramite \textbf{modelli di teoria dei giochi}. Tali modelli possono essere utilizzati anche per descrivere l’\textbf{interazione tra impresa e consumatore}, e non solo tra imprese.
 \end{itemize}
-
-\subsection{Forme di competizione}
 
 \paragraph{Tipologie di interazione}
-Le forme di competizione e interazione sono molteplici:
+Le \textbf{forme di competizione e interazione} sono molteplici
 \begin{itemize}[label=-]
-    \item competizione tra imprese (oligopolio vs. monopolio);
-    \item interazioni lungo la supply chain (produttori e rivenditori);
-    \item comportamento strategico dei clienti.
+    \item Competizione tra imprese (oligopolio vs. monopolio).
+    \item Interazioni lungo la supply chain (produttori e rivenditori).
+    \item Comportamento strategico dei clienti.
 \end{itemize}
 
-\paragraph{Esempio: trasporto aereo}
-Un vettore aereo affronta:
-\begin{itemize}[label=-]
-    \item competizione diretta con altre compagnie;
-    \item competizione con altri mezzi di trasporto (aereo vs. treno);
-    \item competizione indiretta (viaggiare vs. meeting online).
-\end{itemize}
-
-\subsection{Pricing nella pratica}
-
-\paragraph{Cambio di paradigma}
+\paragraph{Pricing nella pratica}
 È necessario un cambio di paradigma:
-\[
-\text{Design--Build--Price} \;\longrightarrow\; \text{Price--Design--Build}.
-\]
-
-\paragraph{Posizionamento di prezzo}
-Occorre selezionare una strategia di posizionamento coerente:
+\textcolor{BurntOrange}{\(
+\text{Design--Build--Price} \rightarrow \text{Price--Design--Build}.
+\)}
+\\ \hspace*{1.5em}Occorre selezionare una strategia di posizionamento coerente:
 luxury, premium, medium, low, ultra-low.
-
-\paragraph{Attributi del prodotto}
 La strategia di pricing dipende dagli attributi chiave del prodotto o servizio:
 funzionali, emotivi, simbolici, etici.
 
 \paragraph{Scelta del modello}
-È necessario scegliere il modello appropriato in funzione del contesto:
+È necessario scegliere il modello appropriato in funzione del contesto
 \begin{itemize}[label=-]
-    \item acquisti ripetuti vs. acquisti singoli;
-    \item beni di prima necessità vs. beni voluttuari;
-    \item business-to-business (B2B) vs. business-to-consumer (B2C).
+    \item Acquisti ripetuti vs. acquisti singoli.
+    \item Beni di prima necessità vs. beni voluttuari.
+    \item Business-to-business (B2B) vs. business-to-consumer (B2C).
 \end{itemize}
 
-\subsection{Meccanismi alternativi}
-
-\paragraph{Oltre il prezzo}
+\paragraph{Meccanismi alternativi}
 Il prezzo non è l’unico strumento per migliorare profitto e ricavi. Esistono diversi meccanismi alternativi:
 \begin{itemize}[label=-]
-    \item bundling e tying, sconti di quantità, pacchetti e servizi ancillari; talvolta unbundling;
-    \item utilizzo di coupon;
-    \item abbonamenti personalizzati;
-    \item gestione della disponibilità di classi differenti;
-    \item overbooking per gestire no-show e capacità non stoccabile;
-    \item condivisione del rischio e progettazione di contratti e incentivi.
+    \item \textbf{Bundling e tying}, sconti di quantità, pacchetti e servizi ancillari; talvolta unbundling.
+    \item Utilizzo di \textbf{coupon}.
+    \item \textbf{Abbonamenti} personalizzati.
+    \item Gestione della disponibilità di \textbf{classi differenti}.
+    \item \textbf{Overbooking} per gestire no-show e capacità non stoccabile.
+    \item \textbf{Condivisione del rischio} e progettazione di contratti e incentivi.
 \end{itemize}
 
-\subsection{Parte 1 -- Pricing e funzioni di domanda}
+\subsection{Pricing e funzioni di domanda}
 
 \paragraph{Un modello introduttivo: relazione lineare tra domanda e prezzo}
 La domanda è una variabile casuale, influenzata da una molteplicità di fattori, incluso (ma non solo) il prezzo.
-Come punto di partenza si introduce un modello semplice basato su una funzione di domanda lineare che lega prezzo e domanda:
+Come punto di partenza si introduce un \textbf{modello semplice} basato su una \textcolor{BurntOrange}{\textbf{funzione di domanda lineare}}
+ che lega prezzo e domanda
 \[
-d(p) = \alpha - \beta p. \tag{1}
+d(p) = \alpha - \beta p.
 \]
 
 \paragraph{Interpretazione dei parametri}
-Un’ipotesi apparentemente ovvia è $\beta > 0$, ma esistono controesempi forniti dai beni di lusso e dai casi in cui il prezzo funge da segnale di qualità.
-L’intercetta $\alpha$ rappresenta la domanda quando $p = 0$, un livello di prezzo per il quale il modello ha poco senso. In altri modelli, la domanda tende all’infinito per $p \to 0$, ma se la popolazione dei consumatori è finita, $\alpha$ può essere interpretato come la dimensione della popolazione.
+Un’ipotesi apparentemente ovvia è $\textcolor{BurntOrange}{\beta} > 0$, ma esistono controesempi forniti dai beni di lusso e dai casi in
+cui il \textbf{prezzo} \emph{funge da segnale di qualità}.
+L’intercetta \textcolor{BurntOrange}{$\alpha$} rappresenta la \textbf{domanda} quando $p = 0$, un livello di
+prezzo per il quale il modello ha poco senso.
+In altri modelli, la domanda tende all’infinito per $p \to 0$, ma se la popolazione dei consumatori è finita,
+$\alpha$ può essere interpretato come la dimensione della popolazione.
 
 \paragraph{Dominio di validità}
 Poiché la domanda non può essere negativa, il modello ha senso nell’intervallo di prezzo
-\[
+\(
 p \in [0, p_{\text{lim}}],
-\]
+\)
 dove si definisce il prezzo limite
-\[
-p_{\text{lim}} := \frac{\alpha}{\beta}
-\]
+\(
+p_{\text{lim}} = \frac{\alpha}{\beta}
+\)
 come il prezzo massimo per il quale la domanda è positiva.
 
 \paragraph{Forma troncata della funzione di domanda}
 Il modello può essere riscritto in una forma potenzialmente migliore come
 \[
-d(p) = (\alpha - \beta p)^+,
+d(p) = (\alpha - \beta p)^+.
 \]
-dove $(x)^+ \equiv \max\{0, x\}$.
 
 \paragraph{Funzione di domanda inversa}
-In microeconomia è comune invertire la funzione di domanda per ottenere il prezzo di mercato quando una quantità $q$ viene prodotta e offerta sul mercato. Invertendo l’equazione (1), si ottiene la funzione di domanda inversa:
+In microeconomia è comune \textbf{invertire la funzione di domanda} per ottenere il prezzo di mercato quando
+una quantità $q$ viene prodotta e offerta sul mercato. Invertendo l’equazione $d(p)=\alpha-\beta p$,
+si ottiene la \textcolor{BurntOrange}{\textbf{funzione di
+domanda inversa}}
 \[
 p(q) = a - bq,
 \]
 dove $a = \alpha / \beta$ e $b = 1 / \beta$.
-Questa forma è utile nello studio della competizione basata sulle quantità nella microeconomia elementare, ma risulta meno naturale nel contesto di una modellazione statistica appropriata per il pricing management.
-Tuttavia, esistono mercati in cui il prezzo emerge da meccanismi complessi (ad esempio aste) che dipendono dalla disponibilità totale.
+Questa forma è utile nello studio della \emph{competizione basata sulle quantità nella microeconomia elementare},
+ma risulta meno naturale nel contesto di una modellazione statistica appropriata per il pricing management.
+Tuttavia, esistono mercati in cui il prezzo emerge da meccanismi complessi (ad esempio aste) che dipendono dalla
+disponibilità totale.
 
-\subsection{Massimizzazione dei ricavi e del profitto}
-
-\paragraph{Profitto come funzione della quantità}
-Un obiettivo naturale è la massimizzazione del profitto. Nella sua forma più semplice, il profitto è dato da ricavi meno costi, e può essere espresso come funzione del prezzo o della quantità.
-La seconda scelta è più naturale per esprimere i costi:
+\paragraph{Massimizzazione dei ricavi e del profitto}
+Un \textbf{obiettivo} naturale è la \textcolor{BurntOrange}{\textbf{massimizzazione del profitto}}.
+Nella sua forma più semplice, il \emph{profitto} è dato da \emph{ricavi meno costi}, e può essere espresso come
+funzione del prezzo o della quantità.
+La seconda scelta è più naturale per esprimere i costi
 \[
 \pi(q) = p(q)\cdot q - c(q) = r(q) - c(q),
 \]
-dove la funzione di costo $c(q)$ è una funzione generica della quantità e può tenere conto di costi fissi, economie o diseconomie di scala. Si introduce inoltre la funzione di ricavo
-\[
+dove la funzione di costo $c(q)$ è una funzione generica della quantità e può tenere conto di costi fissi,
+economie o diseconomie di scala. Si introduce inoltre la \textcolor{BurntOrange}{\textbf{funzione di ricavo}}
+\(
 r(q) := p(q)\cdot q.
-\]
+\)
 
 \paragraph{Condizione di ottimalità}
-Assumendo che tutte le funzioni siano differenziabili e che la funzione di profitto complessiva sia concava, si applica la condizione di ottimalità del primo ordine:
+Assumendo che tutte le funzioni siano differenziabili e che la funzione di profitto complessiva sia \emph{concava},
+si applica la \textbf{condizione di ottimalità del primo ordine}
 \[
 \pi'(q^*) = r'(q^*) - c'(q^*) = 0 \;\;\Rightarrow\;\; r'(q^*) = c'(q^*).
 \]
-La quantità ottimale è tale per cui il ricavo marginale e il costo marginale coincidono.
+\hspace*{1.5em}La \textbf{quantità ottimale} è tale per cui il \textcolor{BurntOrange}{ricavo marginale} e il \textcolor{BurntOrange}{costo marginale} coincidono.
 Se il ricavo marginale è maggiore del costo marginale, il beneficio in termini di ricavi derivante da un aumento della produzione supera l’aumento dei costi, e conviene aumentare $q$. Se il costo marginale è maggiore del ricavo marginale, conviene ridurre $q$.
-
-\paragraph{Caso lineare con costo variabile costante}
-Nel caso di funzione di domanda inversa lineare e costo variabile costante, il profitto è una funzione quadratica concava:
+\\ \hspace*{1.5em}Nel caso di \textbf{funzione di domanda inversa} lineare e costo variabile costante,
+il \emph{profitto è una funzione quadratica \textcolor{BurntOrange}{concava}}
 \[
-\pi(q) = (a - bq)\cdot q - cq = (a - c)\cdot q - bq^2.
+\pi(q) = (a - bq)\cdot q - cq = (a - c)\cdot q - bq^2,
 \]
-La condizione di ottimalità del primo ordine è:
-\[
+e la \emph{condizione di ottimalità del primo ordine} è:
+\(
 \pi'(q) = (a - c) - 2bq,
-\]
-da cui si ottiene:
+\)
+da cui si ottiene
 \[
 q^* = \frac{a - c}{2b}.
 \]
 
 \paragraph{Osservazioni}
-La massimizzazione del profitto non è equivalente alla minimizzazione dei costi.
-La minimizzazione dei costi è appropriata quando una certa domanda deve comunque essere soddisfatta e occorre scegliere tra diverse tecnologie produttive o piani di produzione nel tempo.
-In alcuni settori il costo marginale di un’unità aggiuntiva è trascurabile (industria aerea, servizi web) o il costo di produzione è un costo sommerso (markdown management). In questi casi può essere sensata la massimizzazione dei ricavi, naturalmente espressa come funzione del prezzo:
+\textcolor{BurntOrange}{La massimizzazione del profitto non è equivalente alla minimizzazione dei costi.}
+La minimizzazione dei costi è appropriata quando una certa domanda deve comunque essere soddisfatta e occorre scegliere
+tra diverse tecnologie produttive o piani di produzione nel tempo.
+In alcuni settori il costo marginale di un’unità aggiuntiva è trascurabile (industria aerea, servizi web) o il costo di
+produzione è un costo sommerso (markdown management). In questi casi può essere sensata la massimizzazione dei ricavi,
+naturalmente espressa come funzione del prezzo
 \[
 \max r(p) = p\cdot d(p) = p\cdot(\alpha - \beta p) = \alpha p - \beta p^2.
 \]
-
-\paragraph{Soluzione ottima per la massimizzazione dei ricavi}
-La soluzione ottima è:
+\hspace*{1.5em}La \textbf{soluzione ottima per la massimizzazione dei ricavi} è
 \[
 p^* = \frac{\alpha}{2\beta}
 \quad\Rightarrow\quad
-d^* = \frac{\alpha}{2}
-\quad\Rightarrow\quad
+d^* = \frac{\alpha}{2}, \;
 r^* = \frac{\alpha^2}{4\beta}.
 \]
 
 \paragraph{Interpretazione geometrica}
-La soluzione può essere interpretata geometricamente: il prezzo ottimale è il punto medio dell’intervallo dei prezzi e massimizza l’area del rettangolo associato ai ricavi.
+La soluzione può essere \textbf{interpretata geometricamente}: il prezzo ottimale è il 
+\emph{punto medio} dell’intervallo dei prezzi e massimizza l’area del rettangolo associato ai ricavi.
 
-\subsection{Stima del modello}
-
-\paragraph{Problema della stima}
-Nella microeconomia elementare si utilizzano modelli deterministici, ma anche un modello di domanda lineare apparentemente banale come
-\[
+\paragraph{Stima del modello}
+Nella \textcolor{BurntOrange}{microeconomia elementare} si utilizzano \textbf{modelli deterministici},
+ma anche un modello di domanda lineare apparentemente banale come
+\(
 d(p) = \alpha - \beta p
-\]
+\)
 contiene parametri ignoti che devono essere stimati.
 
 \paragraph{Apprendimento e sperimentazione}
 Anche assumendo che il modello lineare sia corretto, esiste un problema rilevante: il costo della procedura di stima.
-È necessario apprendere online piuttosto che offline, e la pianificazione degli esperimenti è cruciale.
-Quali prezzi utilizzare per apprendere efficacemente i parametri?
+\emph{È necessario apprendere online piuttosto che offline, e la pianificazione degli esperimenti è cruciale.
+Quali prezzi utilizzare per apprendere efficacemente i parametri?}
 L’attenzione dovrebbe concentrarsi sulla pendenza $\beta$, poiché l’intercetta $\alpha$ è principalmente un costrutto matematico.
-
-\paragraph{Errore di stima}
-L’errore standard della stima della pendenza è dato da:
+\\ \hspace*{1.5em}L’\textcolor{BurntOrange}{\textbf{errore standard della stima}} della pendenza è dato da
 \[
 SE_\beta =
-\sqrt{
-\frac{\sigma_\varepsilon^2}
-{\sum_{k=1}^n (p_k - \bar{p})^2}
-},
+\frac{\sigma_\varepsilon}{\sqrt{\sum_{k=1}^n (p_k - \bar{p})^2}},
 \]
+
 dove $\sigma_\varepsilon$ è la deviazione standard (ignota) degli errori.
-Questo mostra che maggiore è la dispersione dei prezzi sperimentati, migliore è l’apprendimento. Tuttavia, prezzi molto bassi o molto elevati possono danneggiare i ricavi, generando un trade-off tra apprendimento e costo dell’apprendimento.
+\emph{Questo mostra che maggiore è la dispersione dei prezzi sperimentati, migliore è l’apprendimento}.
+Tuttavia, prezzi molto bassi o molto elevati possono danneggiare i ricavi, generando un trade-off tra
+apprendimento e costo dell’apprendimento.
 
 \paragraph{Problemi pratici aggiuntivi}
-Nella pratica emergono ulteriori difficoltà:
-\begin{itemize}[label=-]
-    \item prezzi commerciali: non tutti i prezzi sono applicabili;
-    \item grandi variazioni di prezzo enfatizzano la non linearità;
-    \item ruolo del tempo: nei beni di moda il tempo è essenziale e il periodo di apprendimento è limitato;
-    \item fattori confondenti: una variazione della domanda può dipendere da elementi diversi dal prezzo;
-    \item problemi operativi ed esecutivi, ad esempio la modifica dei cartellini in un negozio fisico;
-    \item sperimentazione eccessiva può generare insoddisfazione nei consumatori e indurre comportamenti strategici.
-\end{itemize}
+Nella pratica emergono ulteriori difficoltà. In primo luogo, non tutti i \textbf{prezzi commerciali} sono effettivamente applicabili. Inoltre, \textbf{grandi variazioni di prezzo} tendono a enfatizzare la \textbf{non linearità} del comportamento della domanda. Un altro aspetto rilevante è il \textbf{ruolo del tempo}: nei \textbf{beni di moda} il tempo è un fattore essenziale e il \textbf{periodo di apprendimento} risulta spesso limitato.  
+Si aggiungono poi i \textbf{fattori confondenti}, poiché una variazione della domanda può dipendere da elementi diversi dal prezzo stesso. Vi sono anche \textbf{problemi operativi ed esecutivi}, come ad esempio la necessità di modificare i cartellini dei prezzi in un negozio fisico. Infine, una \textbf{sperimentazione eccessiva} sui prezzi può generare \textbf{insoddisfazione nei consumatori} e indurre \textbf{comportamenti strategici}.
 
-\subsection{Parte 1 -- Limiti dei modelli di domanda lineare}
-
-\paragraph{Criticità del modello lineare}
-Il modello di domanda lineare presenta diversi limiti:
-\begin{itemize}[label=-]
-    \item l’ipotesi di pendenza costante (sensibilità al prezzo) non è realistica;
-    \item si basa su un’ipotesi irrealistica sulla willingness-to-pay;
-    \item si assume che la pendenza sia negativa; tuttavia, nel caso di beni di lusso e quando il prezzo funge da segnale di qualità, si possono osservare comportamenti localmente differenti;
-    \item è un modello statico: l’introduzione del tempo è essenziale nelle strategie dinamiche di markdown;
-    \item non si considera il ruolo della capacità (si veda, ad esempio, il peak-load pricing);
-    \item si considera la vendita di un singolo bene o servizio (si veda tying, bundling e assortment management);
-    \item non si considera la scelta del consumatore tra alternative che possono differire non solo per il prezzo;
-    \item non si considerano aspetti comportamentali e asimmetrie informative; la psicologia del pricing può essere rilevante.
-\end{itemize}
-
-\subsection{La funzione di costo}
-
-\paragraph{Costo fisso e costo variabile}
-È comune considerare una componente di costo fisso e una variabile; la forma più semplice di costo variabile è lineare:
+\paragraph{La funzione di costo}
+È comune considerare una componente di costo fisso e una variabile; la forma più semplice di \textcolor{BurntOrange}{costo variabile è \textbf{lineare}}
 \[
 c(q) = F + cq.
 \]
-
-\paragraph{Costo fisso vs. costo con carica fissa}
-Una funzione di costo alternativa è:
-\[
+\hspace*{1.5em}Una \textbf{funzione di costo alternativa} è
+\(
 c(q) =
 \begin{cases}
 F + cq & \text{se } q > 0, \\
-0 & \text{se } q = 0.
+0 & \text{se } q = 0,
 \end{cases}
-\]
+\)
 che può essere scritta come
 \[
 c(q) = F \cdot \delta(q) + cq,
 \]
 dove $\delta(q) = 1$ se $q > 0$ e $\delta(q) = 0$ altrimenti.
-Per evitare ambiguità, si parla di \textbf{costo fisso} nel primo caso e di \textbf{carica fissa} nel secondo.
-Si noti che questa distinzione può dipendere dalla scala temporale e dal livello decisionale gerarchico: alla scala temporale appropriata, tutti i costi sono variabili (si veda il concetto di costi semivariabili).
+Per evitare ambiguità, si parla di \textcolor{BurntOrange}{\textbf{costo fisso}} nel primo caso e di \textcolor{BurntOrange}{\textbf{carica fissa}} nel secondo.
+Si noti che questa distinzione può dipendere dalla scala temporale e dal livello decisionale gerarchico: alla scala temporale appropriata, tutti i costi sono variabili.
 
 \paragraph{Costo marginale e costo medio}
-Data una funzione di costo, si definiscono i seguenti concetti:
-\begin{itemize}[label=-]
-    \item costo marginale $c'(q)$;
-    \item costo medio $\dfrac{c(q)}{q}$.
-\end{itemize}
+Data una funzione di costo, si definiscono il \textbf{costo marginale} $c'(q)$ e il \textbf{costo medio} $\dfrac{c(q)}{q}$.
+
 
 \paragraph{Regolarità della funzione di costo}
-Per definire il costo marginale è necessario assumere la differenziabilità.
+Per definire il costo marginale è necessario assumere la \emph{differenziabilità}.
 Oltre alle cariche fisse, discontinuità possono essere introdotte da sconti di quantità all-units, mentre sconti incrementali introducono punti angolosi.
 Quando la produzione è discreta e $q$ assume valori interi, il costo marginale può essere approssimato come
-\[
+\(
 c(q+1) - c(q).
-\]
+\)
 
 \paragraph{Economie e diseconomie di scala}
-Il costo marginale può essere crescente o decrescente.
-Quando il costo marginale è decrescente, assumendo la differenziabilità, si ha $c''(q) < 0$, e quindi la funzione di costo è concava. Questo modella un’economia di scala, ossia un aumento dell’efficienza all’aumentare della produzione.
-Al contrario, una funzione di costo convessa, caratterizzata da un costo marginale crescente, modella una diseconomia di scala.
+Il \textbf{costo marginale} può essere crescente o decrescente.
+Quando il costo marginale è \textcolor{BurntOrange}{decrescente}, assumendo la differenziabilità, si ha $c''(q) < 0$,
+e quindi la funzione di costo è concava. Questo modella un’\textcolor{BurntOrange}{\textbf{economia di scala}},
+ossia un aumento dell’efficienza all’aumentare della produzione.
+Al contrario, una funzione di costo convessa, caratterizzata da un costo marginale \textcolor{BurntOrange}{crescente},
+modella una \textcolor{BurntOrange}{\textbf{diseconomia di scala}}.
 
-\subsection{Funzioni di domanda}
-
-\paragraph{Classi di modelli di domanda}
-Esiste una grande varietà di modelli di domanda:
+\paragraph{Funzioni di domanda}
+Esiste una grande varietà di modelli di domanda
 \begin{itemize}[label=-]
-    \item si può modellare la domanda aggregata dell’intero mercato, di un canale selezionato o di una parte del mercato, oppure la domanda di un singolo individuo;
-    \item si possono considerare acquisti ripetuti oppure no, a seconda della natura del bene o servizio (beni stock vs. beni flusso) e dell’orizzonte temporale;
-    \item si può considerare o meno l’incertezza.
+    \item Si può \textbf{modellare} la domanda aggregata dell’intero mercato, di un canale selezionato o di una parte del mercato, oppure la domanda di un singolo individuo.
+    \item Si possono considerare acquisti ripetuti oppure no, a seconda della natura del bene o servizio (beni stock vs. beni flusso) e dell’orizzonte temporale.
+    \item Si può considerare o meno l’\textbf{incertezza}.
+\end{itemize}
+\hspace{1.5em}
+I \textbf{fattori di input} possono includere tempo, vendite passate, prezzi dei concorrenti o di beni alternativi.
+L’\textbf{output} del modello può essere una variabile
+\begin{itemize}[label=-]
+    \item \textbf{Reale} (domanda aggregata, eventualmente approssimante un valore intero elevato).
+    \item \textbf{Intera} (quantità acquistata da un singolo consumatore).
+    \item \textbf{Binaria} (acquisto o non acquisto).
+    \item \textbf{Categorica} o un vettore (bundle o portafoglio di beni acquistati).
 \end{itemize}
 
-\paragraph{Input e output dei modelli}
-I fattori di input possono includere tempo, vendite passate, prezzi dei concorrenti o di beni alternativi.
-L’output del modello può essere:
-\begin{itemize}[label=-]
-    \item una variabile reale (domanda aggregata, eventualmente approssimante un valore intero elevato);
-    \item una variabile intera (quantità acquistata da un singolo consumatore);
-    \item una variabile binaria (acquisto o non acquisto);
-    \item una variabile categoriale o un vettore (bundle o portafoglio di beni acquistati).
-\end{itemize}
+\textcolor{Red}{\section{ARRIVATA QUA!!!!!!!!!!!!!!!!!!!!!!!!!!!!}}
 
-\subsection{La funzione di domanda lineare}
-
-\paragraph{Forma del modello}
+\paragraph{La funzione di domanda lineare}
 Per scopi principalmente illustrativi, si è già considerata la funzione di domanda lineare:
 \[
 d(p) = (\alpha - \beta p)^+.
@@ -4531,7 +4510,8 @@ Se $F\in MDA(H)$ per una $H$ non degenere, allora $H$ deve essere una distribuzi
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% PDF 7 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{CAP 7 -- Il principio della programmazione dinamica}
+\vspace{-1cm}
+\textcolor{DarkRed}{\section{CAP 7 -- Il principio della programmazione dinamica}}
 
 \subsection{Che cos'è la programmazione dinamica}
 
@@ -5268,9 +5248,10 @@ Ora la funzione valore è definita come \textbf{punto fisso} di un operatore pot
 È necessario un metodo iterativo per risolvere (25).
 
 
-
-
-\section{CAP 8 -- Implementazione della programmazione dinamica}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PDF 8 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{-1cm}
+\textcolor{DarkGoldenrod}{
+\section{CAP 8 -- Implementazione della programmazione dinamica}}
 
 \subsection{Allocazione discreta di risorse: il problema dello zaino}
 
@@ -5748,8 +5729,9 @@ Se i fattori di rischio \(\xi_t\) sono continui, l’aspettativa richiede integr
 Il sistema può essere troppo complesso per avere un modello esplicito delle transizioni di stato. In DP il problema è più complicato perché le transizioni sono almeno in parte influenzate dalle decisioni di controllo.
 
 
-\section{CAP 9 -- Modelli della programmazione dinamica}
-\section{CAP 9 -- Modeling for Dynamic Programming}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PDF 9 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{-1cm}
+\textcolor{DeepPink}{\section{CAP 9 -- Modelli della programmazione dinamica}}
 
 \subsection{Frontespizio e riferimenti}
 
@@ -6247,7 +6229,9 @@ V_t(s)
 \paragraph{Osservazione conclusiva}
 La forma della ricorsione riflette la \textbf{struttura informativa}: qui la massimizzazione è sull’\textbf{aspettazione} perché la decisione precede la scelta del cliente.
 
-\section{CAP 10 -- Programmazione dinamica numerica per stati discreti}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PDF 10 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{-1cm}
+\textcolor{MediumVioletRed}{\section{CAP 10 -- Programmazione dinamica numerica per stati discreti}}
 \subsection{Catene di Markov a tempo discreto}
 
 \paragraph{Definizione di catena di Markov a tempo discreto}
@@ -6542,7 +6526,9 @@ I corrispettivi RL della policy iteration sono \textbf{on-policy}; un approccio 
 \paragraph{Osservazione operativa in RL}
 In RL non è in generale possibile valutare esattamente il valore di una politica se ciò richiede simulazioni Monte Carlo costose o esperimenti online; è quindi necessario effettuare un passo di miglioramento prima o poi, generando diverse varianti di strategie.
 
-\section{CAP 11 -- Programmazione dinamica approssimativa e apprendimento per rinforzo per stati discreti}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PDF 11 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{-1cm}
+\textcolor{DarkViolet}{\section{CAP 11 -- Programmazione dinamica approssimativa e apprendimento per rinforzo per stati discreti}}
 
 
 \subsection{Approximate Dynamic Programming e DP model-free}
@@ -6815,9 +6801,9 @@ La differenza si coglie confrontando le correzioni:
 \item \textbf{Q-learning} è \textbf{off-policy} e la politica cambia mentre si aggiornano i Q-factors.
 \end{itemize}
 
-
-
-\section{CAP 12 -- Simulazione}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PDF 12 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{-1cm}
+\textcolor{Indigo}{\section{CAP 12 -- Simulazione}}
 Scrivere un paragrafo per fare recap dei problemi affrontati di simulazione.
 
 \begin{itemize}[label=-]

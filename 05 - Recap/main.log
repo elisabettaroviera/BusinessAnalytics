@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.11.21)  20 DEC 2025 12:15
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.11.21)  20 DEC 2025 18:47
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -513,50 +513,55 @@ Overfull \hbox (2.17165pt too wide) in paragraph at lines 2313--2319
 [] []\OT1/cmr/bx/n/12 Mas-ter Pro-duc-tion Schedul-ing (MPS)[] \OT1/cmr/m/n/12 Il []\OT1/cmr/bx/n/12 Mas-ter Pro-duc-tion Sched-ule (MPS)[] \OT1/cmr/m/n/12 cos-ti-tu-isce l'input
  []
 
-[36] [37] [38]
-Overfull \hbox (2.88684pt too wide) in paragraph at lines 2469--2470
-[]\OT1/cmr/m/n/12 La pro-ce-dura \OT1/cmr/bx/n/12 shift-ing bot-tle-neck \OT1/cmr/m/n/12 de-com-pone $\OML/cmm/m/it/12 J==C[]$ \OT1/cmr/m/n/12 in prob-lemi su macchina sin-gola del tipo $1\OML/cmm/m/it/12 =r[]=L[]$\OT1/cmr/m/n/12 ,
+[36] [37] [38] [39] [40] [41]
+Overfull \hbox (4.00243pt too wide) in paragraph at lines 2695--2705
+| \OT1/cmr/bx/n/12 Quando si ^^Re in ri-tardo\OT1/cmr/m/n/12 , il ter-mine tra par-entesi quadre ^^Re \OT1/cmr/m/it/12 neg-a-tivo\OT1/cmr/m/n/12 , per cui l'argomento dell'esponenziale
  []
 
-[39] [40] [41] [42] [43] [44] [45] [46] [47] [48] [49] [50] [51] [52]
-Overfull \hbox (10.87543pt too wide) in paragraph at lines 3320--3323
+[42] [43] [44]
+Overfull \hbox (4.45457pt too wide) in paragraph at lines 2882--2890
+[] []\OT1/cmr/bx/n/12 Pric-ing nella prat-ica[] []\OT1/cmr/m/n/12 E nec-es-sario un cam-bio di paradigma: []$[] \OMS/cmsy/m/n/12 ! []\OML/cmm/m/it/12 :$[] 
+ []
+
+[45] [46] [47] [48] [49] [50]
+Overfull \hbox (10.87543pt too wide) in paragraph at lines 3299--3302
 [] []\OT1/cmr/bx/n/12 In-ter-pre-tazione eco-nom-ica[] \OT1/cmr/m/n/12 In mi-croe-cono-mia, il con-sumer sur-plus ^^Re una misura ap-prossi-mata dell'utilit^^Ra
  []
 
-[53] [54] [55] [56] [57] [58] [59] [60] [61] [62] [63]
-Overfull \hbox (16.67126pt too wide) in paragraph at lines 3972--3973
+[51] [52] [53] [54] [55] [56] [57] [58] [59] [60] [61]
+Overfull \hbox (16.67126pt too wide) in paragraph at lines 3951--3952
 []\OT1/cmr/m/n/12 se le marche sono omo-ge-nee (lo-cal-iz-zate nello stesso punto), al-lora $\OML/cmm/m/it/12 p[] \OT1/cmr/m/n/12 = \OML/cmm/m/it/12 p[] \OT1/cmr/m/n/12 = 0$ a causa dell'undercutting; 
  []
 
-[64] [65] [66] [67] [68] [69] [70] [71] [72] [73] [74] [75] [76] [77] [78] [79] [80]
-Overfull \hbox (18.24883pt too wide) in paragraph at lines 5080--5081
+[62] [63] [64] [65] [66] [67] [68] [69] [70] [71] [72] [73] [74] [75] [76] [77] [78]
+Overfull \hbox (18.24883pt too wide) in paragraph at lines 5060--5061
 [] []\OT1/cmr/bx/n/12 Prob-lema de-ter-min-is-tico[] \OT1/cmr/m/n/12 In un prob-lema de-ter-min-is-tico, si cerca una se-quenza di vet-tori $(\OML/cmm/m/it/12 x[]; x[]; [] ; x[]\OT1/cmr/m/n/12 )$
  []
 
-[81] [82] [83]
-Overfull \hbox (3.30821pt too wide) in paragraph at lines 5303--5304
+[79] [80] [81]
+Overfull \hbox (3.30821pt too wide) in paragraph at lines 5284--5285
 [] []\OT1/cmr/bx/n/12 Mo-ti-vazione dell'approccio DP[] \OT1/cmr/m/n/12 Il prob-lema pu^^Ro es-sere risolto in modo ef-fi-ciente con al-go-ritmi \OT1/cmr/bx/n/12 branch-
  []
 
-[84]
-Overfull \hbox (27.50768pt too wide) in paragraph at lines 5381--5382
+[82]
+Overfull \hbox (27.50768pt too wide) in paragraph at lines 5362--5363
 [] []\OT1/cmr/bx/n/12 Com-p-lessit^^Ra com-putazionale[] \OT1/cmr/m/n/12 As-sumendo dati in-teri, la com-p-lessit^^Ra ^^Re $\OML/cmm/m/it/12 O\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 nB\OT1/cmr/m/n/12 )$, quindi \OT1/cmr/bx/n/12 pseudo-polinomiale\OT1/cmr/m/n/12 .
  []
 
-[85] [86]
+[83] [84]
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <12> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 5477.
- [87]
-Overfull \hbox (16.52957pt too wide) in paragraph at lines 5546--5548
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 5458.
+ [85]
+Overfull \hbox (16.52957pt too wide) in paragraph at lines 5527--5529
 [] []\OT1/cmr/bx/n/12 Scopo di \OT1/cmtt/m/n/12 MakePolicy[] \OT1/cmr/m/n/12 La fun-zione \OT1/cmtt/m/n/12 MakePolicy \OT1/cmr/m/n/12 serve ad ap-pren-dere le fun-zioni val-ore \OT1/cmr/bx/n/12 a ritroso \OT1/cmr/m/n/12 (\OT1/cmr/bx/n/12 backward\OT1/cmr/m/n/12 )
  []
 
-[88] [89] [90] [91] [92] [93] [94]
-Overfull \hbox (1.13966pt too wide) in paragraph at lines 6058--6059
+[86] [87] [88] [89] [90] [91] [92]
+Overfull \hbox (1.13966pt too wide) in paragraph at lines 6040--6041
 [] []\OT1/cmr/bx/n/12 Ap-procci quan-ti-ty-based e price-based[] \OT1/cmr/m/n/12 Es-istono due ap-procci: \OT1/cmr/bx/n/12 quantity-based \OT1/cmr/m/n/12 (si limita la disponi-
  []
 
-[95] [96] [97] [98] [99] [100] [101] [102] [103] [104] [105] [106] [107] (main.aux)
+[93] [94] [95] [96] [97] [98] [99] [100] [101] [102] [103] [104] (main.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-10-24>
@@ -569,11 +574,11 @@ Here is how much of TeX's memory you used:
  44858 multiletter control sequences out of 15000+600000
  640746 words of font info for 88 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,12n,104p,1332b,397s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 84i,12n,104p,1332b,399s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx8.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmib10.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cmextra/cmmib8.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (107 pages, 674973 bytes).
+Output written on main.pdf (104 pages, 672937 bytes).
 PDF statistics:
- 448 PDF objects out of 1000 (max. 8388607)
+ 439 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
