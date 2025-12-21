@@ -3100,614 +3100,349 @@ L’\textbf{output} del modello può essere una variabile
     \item \textbf{Categorica} o un vettore (bundle o portafoglio di beni acquistati).
 \end{itemize}
 
-\textcolor{Red}{\section{ARRIVATA QUA!!!!!!!!!!!!!!!!!!!!!!!!!!!!}}
-
 \paragraph{La funzione di domanda lineare}
 Per scopi principalmente illustrativi, si è già considerata la funzione di domanda lineare:
-\[
+\(
 d(p) = (\alpha - \beta p)^+.
-\]
-
-\paragraph{Questioni aperte}
-È naturale interrogarsi sulla validità di un modello così semplice:
+\)\\ \hspace*{1.5em} 
+È naturale interrogarsi sulla \textbf{validità di un modello così semplice}
 \begin{itemize}[label=-]
-    \item come può essere giustificato dal punto di vista economico? È necessario indagare una fondazione microeconomica;
-    \item è un modello validato empiricamente o è contraddetto dal buon senso e dal comportamento reale dei consumatori?
+    \item Come può essere giustificato dal punto di vista economico? È necessario indagare una fondazione microeconomica per il modello di domanda.
+    \item È un modello validato empiricamente o è contraddetto dal buon senso e dal comportamento reale dei consumatori?
 \end{itemize}
+\hspace*{1.5em}Assumendo la \emph{differenziabilità}, una caratteristica fondamentale di ogni funzione di domanda è 
+la sua \textbf{pendenza} $d'(p)$, che per buon senso dovrebbe essere \emph{negativa}, come nel modello lineare.
+In effetti è solitamente negativa, ma esistono eccezioni: segnale di qualità e beni di lusso e consumo vistoso.\\
+\hspace*{1.5em}Possono quindi esistere intervalli di prezzo per i quali la pendenza è \emph{positiva}, un fatto
+confermato da evidenze empiriche.
 
-\paragraph{Pendenza della domanda}
-Assumendo la differenziabilità, una caratteristica fondamentale di ogni funzione di domanda è la sua pendenza $d'(p)$, che per buon senso dovrebbe essere negativa, come nel modello lineare.
-In effetti è solitamente negativa, ma esistono eccezioni:
-\begin{itemize}[label=-]
-    \item segnale di qualità;
-    \item beni di lusso e consumo vistoso.
-\end{itemize}
-Possono quindi esistere intervalli di prezzo per i quali la pendenza è positiva, un fatto confermato da evidenze empiriche (si vedano esempi in Simon, 2015).
-
-\subsection{Funzioni di domanda: elasticità puntuale}
-
-\paragraph{Elasticità di prezzo della domanda}
-Poiché il valore della pendenza dipende dalla scala, ovvero dalle unità di misura della domanda, una misura più appropriata è l’elasticità di prezzo della domanda:
+\paragraph{Funzioni di domanda: elasticità puntuale}
+Poiché il valore della pendenza dipende dalla scala, ovvero dalle unità di misura della domanda, una misura
+più appropriata è l’\textcolor{BurntOrange}{\textbf{elasticità di prezzo della domanda}}
 \[
-\frac{\Delta d / d}{\Delta p / p}
+\frac{\delta d / d}{\delta p / p}
 =
-\frac{\Delta d}{\Delta p} \cdot \frac{p}{d}.
+\frac{\delta d}{\delta p} \cdot \frac{p}{d},
 \]
-Facendo tendere $\Delta p \to 0$, si ottiene l’elasticità puntuale:
+facendo tendere $\delta p \to 0$, si ottiene l’\textcolor{BurntOrange}{\textbf{elasticità puntuale}}
 \[
-\varepsilon(p) = -\frac{d'(p)p}{d(p)}, \tag{2}
+\varepsilon(p) = -\frac{d'(p)p}{d(p)}, 
 \]
-dove il segno meno è introdotto per comodità, poiché la pendenza è tipicamente negativa.
-
-\paragraph{Classificazione della domanda}
-Le funzioni di domanda possono essere classificate come:
+dove il segno \emph{meno} è introdotto per comodità, poiché la pendenza è tipicamente negativa.\\ \hspace*{1.5em}
+Le \emph{funzioni di domanda} possono essere classificate come
 \begin{itemize}[label=-]
-    \item elastiche, quando $\varepsilon(p) > 1$ (perfettamente elastiche se pari a 1);
-    \item a elasticità unitaria, quando $\varepsilon(p) = 1$;
-    \item anelastiche, quando $\varepsilon(p) < 1$ (perfettamente anelastiche se pari a 0).
+    \item \textbf{Elastiche}, quando $\varepsilon(p) > 1$ (perfettamente elastiche se pari a $\infty$).
+    \item A \textbf{elasticità unitaria}, quando $\varepsilon(p) = 1$.
+    \item \textbf{Anelastiche}, quando $\varepsilon(p) < 1$ (perfettamente anelastiche se pari a 0).
 \end{itemize}
-La natura della domanda può dipendere dal punto specifico considerato.
+\emph{La natura della domanda può dipendere dal punto specifico considerato.}
 
-\subsection{Esempio: funzione di domanda lineare}
-
-\paragraph{Elasticità vs. pendenza}
-L’elasticità non deve essere confusa con la pendenza, come mostra il seguente esempio.
-Il modello di domanda lineare presenta una pendenza costante, ma ciò non implica un’elasticità puntuale costante.
-
-\paragraph{Elasticità nel caso lineare}
-Per una funzione di domanda lineare, l’elasticità è:
-\[
+\paragraph{Esempio: funzione di domanda lineare}
+\textcolor{BurntOrange}{\emph{L’elasticità non deve essere confusa con la pendenza.}}
+Il modello di domanda lineare presenta una pendenza costante, ma ciò non implica un’elasticità puntuale costante.\\ \hspace*{1.5em}
+Per una funzione di domanda lineare, l’\textbf{elasticità} è
+\(
 \varepsilon(p) =
 \frac{\beta p}{\alpha - \beta p}.
-\]
-Essa cresce da zero a $+1$ nell’intervallo $[0, p_{\text{lim}}]$.
+\)
+Essa cresce da zero a $+\infty$ nell’intervallo $[0, p_{\text{lim}}]$.
 L’elasticità è pari a 1 per
 \[
 p = \frac{\alpha}{2\beta} = p^*,
 \]
-ossia nel punto medio dell’intervallo dei prezzi.
-La domanda è anelastica per $p < p^*$ ed elastica per $p > p^*$.
-Nel limite, quando $p \to p_{\text{lim}} = \alpha/\beta$, diventa perfettamente elastica: una piccola riduzione di prezzo fa passare la domanda da $d = 0$ a $d > 0$.
-L’elasticità non è costante per una funzione di domanda lineare.
+ossia nel \emph{punto medio dell’intervallo dei prezzi}.
+La domanda è \textbf{anelastica} per \textcolor{BurntOrange}{$p < p^*$} ed \textbf{elastica} per \textcolor{BurntOrange}{$p > p^*$}.
+Nel limite, quando \textcolor{BurntOrange}{$p \to p_{\text{lim}} = \alpha/\beta$}, diventa \textbf{perfettamente elastica}:
+una piccola riduzione di prezzo fa passare la domanda da $d = 0$ a $d > 0$.
+\textcolor{BurntOrange}{\emph{L’elasticità non è costante per una funzione di domanda lineare.}}
 
-\paragraph{Domanda a elasticità costante}
-È naturale chiedersi se esista una funzione di domanda con elasticità costante.
+\paragraph{Esempio: funzione di domanda a elasticità costante}
+È naturale chiedersi \emph{se esista una funzione di domanda con elasticità costante}.
 Imponendo
-\[
+\(
 \frac{d'(p)p}{d(p)} = -\varepsilon,
-\]
-si ottiene l’equazione differenziale ordinaria:
-\[
+\)
+si ottiene l’equazione differenziale ordinaria
+\(
 d'(p) = -\varepsilon \cdot \frac{d(p)}{p},
-\]
-che ammette come soluzione:
-\[
+\)
+che ammette come soluzione
+\(
 d(p) = c \cdot p^{-\varepsilon},
-\]
+\)
 dove $c = d(1)$.
 
-\paragraph{Nota tecnica}
-Per risolvere l’equazione differenziale precedente, si procede per separazione delle variabili:
-\[
-\frac{dy}{y} + \varepsilon \frac{dx}{x} = 0,
-\]
-dove $y \equiv d(p)$ e $x \equiv p$.
-Integrando si ottiene:
-\[
-\int \frac{dz}{z} + \varepsilon \int \frac{dz}{z} = 0
-\Rightarrow \log y + \varepsilon \log x = K,
-\]
-dove $K$ è una costante di integrazione, da cui:
-\[
-\log(y \cdot x^{\varepsilon}) = K
-\Rightarrow y = c x^{-\varepsilon},
-\]
-ponendo $c = e^K$.
-Imponendo $p = 1$, si ottiene:
-\[
-d(1) = c.
-\]
-
 \paragraph{Stima tramite trasformazione logaritmica}
-È possibile derivare un legame tra domanda a elasticità costante e domanda lineare mediante una trasformazione dei dati basata sui logaritmi:
+È possibile derivare un \emph{legame tra domanda a elasticità costante e domanda lineare} mediante una
+trasformazione dei dati basata sui logaritmi
 \[
 d = c p^{-\varepsilon}
 \;\Rightarrow\;
 \log d = \log c - \varepsilon \log p.
 \]
-In questo modo, gli strumenti standard di regressione lineare possono essere utilizzati per stimare il modello.
-L’uso dei logaritmi è utile per semplificare modelli basati su effetti moltiplicativi anziché additivi.
-
-\paragraph{Elasticità come derivata logaritmica}
-In termini di incrementi, per $x > 0$ vale:
+\hspace*{1.5em}In questo modo, gli strumenti standard di \textcolor{BurntOrange}{regressione lineare} possono essere
+utilizzati per stimare il modello.
+\textcolor{BurntOrange}{\emph{L’uso dei logaritmi è utile per semplificare modelli basati su effetti moltiplicativi anziché additivi.}}
+\hspace*{1.5em}In termini di incrementi, per $x > 0$ vale
 \[
 \frac{d \log x}{dx} = \frac{1}{x}
 \quad\Rightarrow\quad
-\Delta \log x \approx \frac{\Delta x}{x}.
+\delta \log x \approx \frac{\delta x}{x}.
 \]
-Di conseguenza, l’elasticità può essere riscritta come:
+Di conseguenza, l’\textbf{elasticità} può essere riscritta come
 \[
-\frac{\Delta d / d}{\Delta p / p}
+\frac{\delta d / d}{\delta p / p}
 \approx
 \frac{d \log d(p)}{d \log p}.
 \]
-
-\paragraph{Ricavi con domanda a elasticità costante}
-Nel caso di domanda a elasticità costante, il ricavo è:
-\[
+\hspace*{1.5em}
+Nel caso di \textbf{domanda a elasticità costante}, il \textcolor{BurntOrange}{\textbf{ricavo}} è
+\(
 R(p) = p \cdot c p^{-\varepsilon} = c p^{1-\varepsilon}.
-\]
+\)
 Il ricavo è costante nel caso di elasticità unitaria, crescente nel caso di domanda anelastica e decrescente nel caso di domanda elastica.
-Pertanto, una riduzione di prezzo aumenta i ricavi solo se la domanda è elastica.
+\textcolor{BurntOrange}{\emph{Pertanto, una riduzione di prezzo aumenta i ricavi solo se la domanda è elastica.}}
 
-\subsection{Parte 1 -- Interpretare i modelli di domanda: willingness-to-pay}
-
-\paragraph{Confronto tra modelli e razionale economico}
+\paragraph{Interpretare i modelli di domanda: willingness-to-pay}
 Come si possono confrontare diversi modelli di domanda? La funzione di domanda lineare è un modello sensato?
-Un modello lineare può essere (nel migliore dei casi) un’approssimazione locale, ma è necessario comprendere più a fondo la razionalità economica alla base di tale modello.
+Un \textbf{modello lineare} può essere (nel migliore dei casi) un’\textcolor{BurntOrange}{\textbf{approssimazione locale}}, ma è necessario comprendere più a
+fondo la razionalità economica alla base di tale modello.
 Ciò significa che occorre capire che cosa determina realmente la domanda.
+\\ \hspace*{1.5em}
+Un meccanismo di base dietro i modelli di domanda è il concetto di \textcolor{BurntOrange}{\textbf{prezzo di riserva o
+willingness-to-pay}}: ogni consumatore è caratterizzato dal prezzo massimo al quale è disposto ad acquistare un bene.
+In generale, si può produrre una \emph{funzione di domanda a tratti costante}.
+\\ \hspace*{1.5em}L’intuizione suggerisce che, nel limite continuo, assumendo una willingness-to-pay uniformemente
+distribuita, si ottenga una funzione di domanda lineare.
+Funzioni di domanda alternative possono essere definite assumendo \emph{distribuzioni differenti} del prezzo di
+riserva e studiando la sensibilità della domanda rispetto al prezzo.
 
-\paragraph{Reserve price e willingness-to-pay}
-Un meccanismo di base dietro i modelli di domanda è il concetto di prezzo di riserva o willingness-to-pay: ogni consumatore è caratterizzato dal prezzo massimo al quale è disposto ad acquistare un bene.
-
-\paragraph{Esempio con segmentazione: studenti e non studenti}
-Come esempio semplice, si consideri la seguente tabella:
-\[
-\begin{array}{c|cc}
- & \text{Studenti} & \text{Non studenti} \\
-\hline
-\text{Willingness-to-pay} & \text{e }5 & \text{e }10 \\
-\text{Dimensione del mercato} & 200 & 300
-\end{array}
-\]
-Questo esempio ipotetico descrive la willingness-to-pay per un certo tipo di spettacolo, se la popolazione può essere segmentata in due gruppi, studenti e non studenti, con diversa willingness-to-pay.
-
-\paragraph{Domanda a tratti}
-Questo produce una funzione di domanda a tratti costante, come indicato in figura.
-
-\paragraph{Popolazione differenziata e funzione a gradini}
-Si immagini ora una popolazione più differenziata di $N$ consumatori potenziali, indicizzati da $k = 1,\dots,N$, ognuno con una willingness-to-pay unica:
-\[
-p_k = p_{\max}\,\frac{k}{N}.
-\]
-L’indice $k=1$ corrisponde al consumatore meno disposto a pagare, tale che tutti acquistano e la domanda è $N$. Per $k=N$, soltanto un consumatore acquista.
-La domanda è legata a $k$ da:
-\[
-d(p_k) = N - k + 1,\qquad k = 1,\dots,N,
-\]
-da cui risulta una funzione decrescente a gradini.
-L’intuizione suggerisce che, nel limite continuo, assumendo una willingness-to-pay uniformemente distribuita, si ottenga una funzione di domanda lineare.
-Funzioni di domanda alternative possono essere definite assumendo distribuzioni differenti del prezzo di riserva e studiando la sensibilità della domanda rispetto al prezzo.
-
-\subsection{Surplus del consumatore e discriminazione di prezzo}
-
-\paragraph{Definizione di consumer surplus}
-Si consideri un consumatore disposto a pagare e100 per un bene. Se il prezzo è e70, si dice che il consumer surplus è la differenza tra willingness-to-pay e prezzo pagato, in questo caso e30.
+\paragraph{Surplus del consumatore e discriminazione di prezzo}
+Si consideri un consumatore disposto a pagare 100 per un bene. Se il prezzo è 70, si dice che il \textbf{consumer surplus}
+è la differenza tra willingness-to-pay e prezzo pagato.
 Quando viene applicato un prezzo unico, una parte di consumer surplus è ottenuta dall’insieme dei consumatori che acquistano.
-
-\paragraph{Consumer surplus in forma geometrica}
-Geometricamente, ciò è visualizzabile come il triangolo $CS$ in figura, con area:
+\\ \hspace*{1.5em}\textcolor{BurntOrange}{\textbf{Geometricamente}}, ciò è visualizzabile come il triangolo
+$CS$, con area
 \[
 CS = \frac{1}{2}\left(\frac{\alpha}{\beta} - p_0\right)\,(\alpha - \beta p_0)
 = \frac{1}{2\beta}\,(\alpha - \beta p_0)^2,
 \]
-dove $p_0$ è il prezzo scelto.
+dove $p_0$ è il \textbf{prezzo scelto}.
 Si noti che il consumer surplus è nullo quando $p_0 = p_{\lim} = \alpha/\beta$, ed è pari a $\alpha^2/(2\beta)$, ossia l’area totale del triangolo, quando $p_0 = 0$.
-In figura, il ricavo raccolto è rappresentato dall’area rettangolare $REV$.
-
-\paragraph{Interpretazione economica}
-In microeconomia, il consumer surplus è una misura approssimata dell’utilità del consumatore derivante dallo scambio.
+Il \textbf{ricavo raccolto} è rappresentato dall’area rettangolare $REV$.
+\\ \hspace*{1.5em}
+In \emph{microeconomia}, il consumer surplus è una misura approssimata dell’utilità del consumatore derivante dallo scambio.
 Guardando dalla prospettiva opposta, il consumer surplus è, in un certo senso, ricavo perso per l’impresa.
-Lo stesso vale per il triangolo $LR$, che rappresenta ricavo perso dovuto ai consumatori che non acquistano perché $p_0$ eccede la loro willingness-to-pay.
-
-\paragraph{Prezzo unico e perdite di ricavo}
-Considerando solo i ricavi, l’obbligo di scegliere un solo prezzo genera perdite su entrambi i lati: consumer surplus (opportunità mancata di profitto maggiore) e vendite perse.
+Lo stesso vale per il triangolo $LR$, che rappresenta \textbf{ricavo perso} dovuto ai consumatori che non acquistano perché
+$p_0$ eccede la loro willingness-to-pay.
+\\ \hspace*{1.5em}Considerando solo i ricavi, \emph{l’obbligo di scegliere un solo prezzo genera perdite su entrambi i lati}:
+consumer surplus (opportunità mancata di profitto maggiore) e vendite perse.
 Idealmente, l’impresa vorrebbe applicare un prezzo diverso a ciascun individuo, pari alla sua willingness-to-pay (assumendo costo marginale nullo).
-
-\paragraph{Discriminazione di prezzo}
+\\ \hspace*{1.5em}
 Naturalmente, fissare un prezzo individuale non è pratico, per non dire apertamente illegale.
 Come può un’impresa estrarre almeno parzialmente consumer surplus?
-La chiave è la discriminazione di prezzo basata sulla segmentazione dei consumatori, illustrata da un esempio semplice (tratto da Shy, 2008, p. 6).
+\textcolor{BurntOrange}{La chiave è la discriminazione di prezzo basata sulla segmentazione dei consumatori.}
 
-\subsection{Esempio di discriminazione di prezzo}
-
-\paragraph{Caso senza discriminazione}
-Si consideri nuovamente la willingness-to-pay della tabella precedente.
-Se non è possibile discriminare, cioè si deve applicare lo stesso prezzo a tutta la popolazione, ci sono due scelte:
+\paragraph{Esempio di discriminazione di prezzo}
+Applicando discriminazione di prezzo, l’impresa riesce a estrarre consumer surplus.
+D’altra parte, una sottopopolazione che sarebbe esclusa dallo scambio può partecipare.
+In generale, \emph{non è detto che si ottenga una soluzione win--win}.
+Inoltre, \emph{potrebbe non essere possibile discriminare in modo netto}.
+Esistono \textbf{diversi tipi di discriminazione}
 \begin{itemize}[label=-]
-    \item Opzione 1: vendere a e10, con ricavo
-    \[
-    10 \cdot 300 = \text{e3000}.
-    \]
-    \item Opzione 2: vendere a e5, con ricavo
-    \[
-    5 \cdot (200+300) = \text{e2500}.
-    \]
+    \item \textbf{Discriminazione completa}: ogni consumatore paga un prezzo specifico.
+    \item \textbf{Segmentazione diretta}: segmenti identificabili pagano prezzi diversi.
+    \item \textbf{Segmentazione indiretta}: si offrono varianti di prodotto/servizio e i consumatori scelgono; ciò funziona anche con caratteristiche non identificabili.
 \end{itemize}
-È quindi preferibile chiedere il prezzo più alto, escludendo gli studenti dall’acquisto del biglietto.
 
-\paragraph{Caso con discriminazione}
-Se si può discriminare e applicare prezzi diversi, il profitto aumenta:
-\[
-5 \cdot 200 + 10 \cdot 300 = \text{e4000}.
-\]
-Una tale politica è praticabile se si possono identificare gli studenti, ad esempio richiedendo un tesserino, e prevenire l’arbitraggio (uno studente che compra a e5 e rivende a un non studente a e10), che avrebbe un effetto di diluizione sul ricavo.
-
-\paragraph{Tipi di discriminazione}
-Applicando discriminazione di prezzo, l’impresa riesce a estrarre consumer surplus. D’altra parte, una sottopopolazione che sarebbe esclusa dallo scambio può partecipare.
-In generale, non è detto che si ottenga una soluzione win--win.
-Inoltre, potrebbe non essere possibile discriminare in modo netto.
-Esistono diversi tipi di discriminazione:
-\begin{itemize}[label=-]
-    \item discriminazione completa: ogni consumatore paga un prezzo specifico;
-    \item segmentazione diretta: segmenti identificabili pagano prezzi diversi;
-    \item segmentazione indiretta: si offrono varianti di prodotto/servizio e i consumatori scelgono; ciò funziona anche con caratteristiche non identificabili.
-\end{itemize}
-Esempi: acquisto anticipato e prenotazione; coupon di sconto.
-
-\subsection{Formalizzare willingness-to-pay e consumer surplus}
-
-\paragraph{Distribuzione della willingness-to-pay}
+\paragraph{Formalizzare willingness-to-pay e consumer surplus}
 Dopo un’introduzione informale, si passa a un quadro più formale.
-La willingness-to-pay è il prezzo massimo (prezzo di riserva) che un consumatore è disposto a pagare per un bene.
-La distribuzione della willingness-to-pay nella popolazione determina la forma della funzione di domanda.
-
-\paragraph{Modello continuo e funzione $w(x)$}
-Si consideri un modello continuo e si definisca $w(x)$ come distribuzione della willingness-to-pay.
+La \textcolor{BurntOrange}{\textbf{willingness-to-pay}} \textbf{è il prezzo massimo (prezzo di riserva) che un consumatore è disposto a pagare per un bene}.
+La distribuzione della willingness-to-pay nella popolazione determina la forma della \emph{funzione di domanda}.
+\\ \hspace*{1.5em}Si consideri un modello continuo e si definisca $w(x)$ come densità della willingness-to-pay.
 Essa svolge un ruolo simile alla densità di una variabile casuale, nel senso che
 \[
 \int_{p_1}^{p_2} w(x)\,dx
 \]
 è la frazione di popolazione con willingness-to-pay tra $p_1$ e $p_2$.
-Quindi:
+Quindi
 \[
 d(p) = D_{\max}\int_{p}^{+\infty} w(x)\,dx,
 \]
-dove $D_{\max}=d(0)$ è la domanda massima ottenibile (assumendo una popolazione finita).
+dove $D_{\max}=d(0)$ è la \textbf{domanda massima ottenibile} (assumendo una popolazione finita).
 Poiché
-\[
+\(
 d'(p) = -D_{\max}\,w(p),
-\]
-si può legare domanda e willingness-to-pay tramite:
+\)
+si può legare domanda e willingness-to-pay tramite
 \[
-w(p) = -\frac{d'(p)}{D_{\max}}. \tag{3}
+w(p) = -\frac{d'(p)}{D_{\max}}.
 \]
 
 \paragraph{Surplus del consumatore aggregato}
 Se un consumatore disposto a pagare $p_1$ paga invece $p_0<p_1$, gode di un consumer surplus $p_1-p_0$.
-Dato $w(x)$, si integra il surplus al prezzo $p_0$ sulla popolazione che acquista e si definisce il consumer surplus totale (netto):
+Dato $w(x)$, si integra il surplus al prezzo $p_0$ sulla popolazione che acquista e si definisce il 
+\textbf{consumer surplus totale (netto)}
 \[
-S(p_0)=D_{\max}\int_{p_0}^{+\infty} w(x)\,(x-p_0)\,dx.
-\]
-Usando (3) e integrando per parti:
-\[
-S(p_0)= -\int_{p_0}^{+\infty} d'(x)\,(x-p_0)\,dx
+S(p_0)=D_{\max}\int_{p_0}^{+\infty} w(x)\,(x-p_0)\,dx -\int_{p_0}^{+\infty} d'(x)\,(x-p_0)\,dx
 = -\int_{p_0}^{+\infty} d'(x)x\,dx + p_0\int_{p_0}^{+\infty} d'(x)\,dx
 \]
 \[
 = -\left[\left.d(x)\,x\right|_{p_0}^{+\infty}-\int_{p_0}^{+\infty} d(x)\,dx\right]-p_0d(p_0)
 = \int_{p_0}^{+\infty} d(x)\,dx.
 \]
-Quindi, il consumer surplus è l’area sotto la curva di domanda, a destra del prezzo applicato $p_0$.
-
-\subsection{Esempio: consumer surplus con domanda lineare e costo}
-
-\paragraph{Dati e prezzo limite}
-Si consideri un articolo con costo unitario di produzione e3 e funzione di domanda aggregata:
-\[
-d(p)=(1000-100p)^+.
-\]
-Il prezzo limite che comporta domanda nulla è:
-\[
-p_{\lim}=\frac{1000}{100}=\text{e10}.
-\]
-
-\paragraph{Prezzo ottimo, domanda, profitto e surplus}
-Il prezzo ottimo è:
-\[
-p^*=\frac{1000+100\cdot 3}{2\cdot 100}=6.5,
-\]
-con domanda, profitto e consumer surplus dati rispettivamente da:
-\[
-d(p^*)=1000-100\cdot 6.5=350,
-\]
-\[
-\pi^*=350\cdot(6.5-3)=\text{e1225},
-\]
-\[
-S(p^*)=\frac{(10-6.5)\cdot 350}{2}=612.5.
-\]
-Il consumer surplus è l’area ombreggiata ed è interpretabile come la perdita di opportunità per l’impresa dovuta all’impossibilità di chiedere il prezzo di riserva a ciascun consumatore.
+Quindi, il \textcolor{BurntOrange}{\textbf{consumer surplus}} è \emph{l’area sotto la curva di domanda},
+a destra del prezzo applicato $p_0$.
 
 \paragraph{Obiettivo di estrarre consumer surplus}
-Un obiettivo naturale per l’impresa è ``estrarre'' consumer surplus almeno parzialmente tramite una forma di discriminazione di prezzo.
-Se l’impresa è in grado di discriminare, migliorerà il proprio profitto.
+Un \textbf{obiettivo naturale} per l’impresa è \textbf{``estrarre'' consumer surplus} almeno parzialmente tramite una
+forma di discriminazione di prezzo.
+\emph{Se l’impresa è in grado di discriminare, migliorerà il proprio profitto}.
 L’intuizione suggerisce che ciò avvenga necessariamente a spese dei consumatori.
-L’esempio seguente mostra che non è necessariamente così, se consumatori con willingness-to-pay minore possono acquistare a un prezzo minore.
+L’esempio seguente mostra che non è necessariamente così, se consumatori con willingness-to-pay minore possono
+acquistare a un prezzo minore.
 
-\subsection{Esempio: consumer surplus e discriminazione di prezzo}
-
-\paragraph{Domanda aggregata come somma di due popolazioni}
-Si consideri la stessa funzione di domanda dell’esempio precedente, ma si immagini che derivi dall’aggregazione di due popolazioni con funzioni di domanda:
-\[
-d_1(p)=\min\left\{500,\,(1000-100p)^+\right\},
-\qquad
-d_2(p)=(500-100p)^+.
-\]
-Ciò implica che la popolazione 1 include consumatori con willingness-to-pay maggiore di e5, mentre la popolazione 2 include consumatori con willingness-to-pay minore di e5.
-
-\paragraph{Prezzo ottimo per la popolazione 1}
-Se l’impresa può discriminare senza arbitraggio o diluizione, il prezzo ottimo per la popolazione 1 resta lo stesso di prima, così come domanda e profitto:
-\[
-p_1^*=\text{e6.5},\qquad d_1(p_1^*)=350,\qquad \pi_1^*=\text{e1225}.
-\]
-
-\paragraph{Prezzo ottimo per la popolazione 2}
-L’impresa può vendere anche alla popolazione 2, con prezzo ottimo, domanda e profitto:
-\[
-p_2^*=\frac{500+100\cdot 3}{2\cdot 100}=\text{e4},
-\]
-\[
-d_2(p_2^*)=500-100\cdot 4=100,
-\]
-\[
-\pi_2^*=100\cdot(4-3)=\text{e100}.
-\]
-
-\paragraph{Profitto totale e surplus addizionale}
-Poiché è possibile vendere sopra costo alla popolazione 2 senza ridurre il ricavo dalla popolazione 1, l’impresa ottiene un profitto addizionale e il profitto totale è:
-\[
-\pi^*=\pi_1^*+\pi_2^*=\text{e1325}.
-\]
-L’impresa beneficia della segmentazione, ma anche i consumatori.
-Esiste un consumer surplus addizionale, poiché 100 consumatori possono acquistare a un prezzo inferiore al proprio prezzo di riserva:
-\[
-S_2(p_2^*)=\frac{100\cdot(5-4)}{2}=50.
-\]
-Il surplus totale è composto dai due triangoli ombreggiati.
-
-\subsection{La funzione logit}
-
-\paragraph{Da willingness-to-pay a domanda}
-Integrare la densità di willingness-to-pay, analogamente a quanto si fa con una PDF per ottenere una CDF, fornisce una funzione di domanda.
-Un modello di domanda lineare non deriva da una distribuzione sensata della willingness-to-pay; è ragionevole ipotizzare una funzione ``a campana'' con un massimo (moda) concentrato attorno al prezzo di riserva più tipico.
-
-\paragraph{Probit e logit}
-Nella letteratura di statistica e marketing si utilizzano due funzioni per questo e altri scopi, che portano a modelli probit e logit.
-I modelli probit derivano dalla CDF di una normale standard, mentre i modelli logit si basano sulla funzione logistica (sigmoide).
+\paragraph{La funzione logit}
+\textbf{Integrare la densità di willingness-to-pay}, analogamente a quanto si fa con una PDF per ottenere una CDF,
+\textbf{fornisce una funzione di domanda}.
+Un modello di domanda lineare non deriva da una distribuzione sensata della willingness-to-pay;
+è ragionevole ipotizzare una funzione ``a campana'' con un massimo (\emph{moda}) concentrato attorno al prezzo di
+riserva più tipico.
+\\ \hspace*{1.5em}
+Nella letteratura di statistica e marketing si utilizzano due funzioni per questo e altri scopi,
+che portano a modelli probit e logit.
+I modelli \textcolor{BurntOrange}{\textbf{probit}} derivano dalla CDF di una normale standard, mentre i modelli \textcolor{BurntOrange}{\textbf{logit}} si basano sulla funzione
+logistica (sigmoide).
 
 \paragraph{Definizione della funzione logistica}
-La funzione logistica è definita come:
+La \textcolor{BurntOrange}{\textbf{funzione logistica}} è definita come
 \[
 L(x)=\frac{1}{1+e^{-x}}=\frac{e^x}{1+e^x},
 \]
 e presenta la classica forma a S.
-Si osservi che $L(0)=0.5$ e che la funzione logit ha la proprietà di simmetria:
-\[
+Si osservi che $L(0)=0.5$ e che la funzione logit ha la \emph{proprietà di simmetria}:
+\(
 L(-x)=1-L(x).
-\]
-
-\paragraph{Derivata della funzione logistica}
-In figura si mostra anche la derivata:
+\)
+\\ \hspace*{1.5em}La \textbf{derivata} è
 \[
 L'(x)=\frac{e^x}{(1+e^x)^2}=L(x)\,(1-L(x)).
 \]
-La derivata ha la proprietà di simmetria $L'(x)=L'(-x)$ e il suo massimo si ha in $x=0$.
-
-\paragraph{Funzione di domanda logit decrescente}
-Poiché le funzioni di domanda devono essere decrescenti, si deve ribaltare l’asse $x$ da sinistra a destra e introdurre fattori di scala e traslazione sensati nella funzione logit, ottenendo la seguente funzione di domanda logit (decrescente):
+La derivata ha la \emph{proprietà di simmetria} $L'(x)=L'(-x)$ e il suo massimo si ha in $x=0$.
+\\ \hspace*{1.5em}Poiché le funzioni di domanda devono essere \emph{decrescenti}, si deve
+ribaltare l’asse $x$ da sinistra a destra e introdurre \emph{fattori di scala} e traslazione sensati nella funzione logit,
+ottenendo la seguente funzione di domanda logit (decrescente)
 \[
 d(p)=\frac{c\,e^{-(\alpha+\beta p)}}{1+e^{-(\alpha+\beta p)}},
 \]
 dove $\beta,\,c>0$.
-Più grande è $\beta$, maggiore è la sensibilità al prezzo, e la funzione è più ripida per
-\[
+\textcolor{BurntOrange}{Più grande è $\beta$, maggiore è la sensibilità al prezzo} e la funzione è più ripida per
+\(
 \alpha+\beta p^*=0 \;\Rightarrow\; p^*=-\frac{\alpha}{\beta},
-\]
+\)
 il che suggerisce $\alpha<0$.
-Questo è il valore per cui la densità di willingness-to-pay è massima e può essere considerato un ``prezzo di mercato''.
-
-\paragraph{Willingness-to-pay corrispondente}
-La willingness-to-pay corrispondente è:
+Questo è il valore per cui la densità di willingness-to-pay è massima e può essere considerato un ``\textcolor{BurntOrange}{\textbf{prezzo di mercato}}''.
+\\ \hspace*{1.5em}
+La \textbf{willingness-to-pay} corrispondente è
 \[
 w(x)=-\frac{d'(p)}{d(0)}
 =\frac{K\,e^{-(\alpha+\beta x)}}{\left(1+e^{-(\alpha+\beta x)}\right)^2},
 \]
 dove $K=\beta c/d(0)$.
 
-\paragraph{Esempio numerico}
-Si consideri il caso $c=1000$, $p^*=20$ e $\beta=0.5$.
-In tal caso,
-\[
-\alpha=-p^*\beta=-20\cdot 0.5=-10,
-\]
-e la domanda per $p=0$ è:
-\[
-d(0)=\frac{1000\cdot e^{-\alpha}}{1+e^{-\alpha}}
-=
-\frac{1000\cdot e^{10}}{1+e^{10}}
-=999.9546 \approx c.
-\]
-
-\subsection{Parte 1 -- Un modello ibrido}
-
-\paragraph{Prezzi e quantità come variabili decisionali}
-Modelli diversi, come si vedrà, possono essere costruiti basandosi su quantità o prezzi.
-Qui si considera un esempio numerico istruttivo (Kuyumcu e Popescu, 2006) che mostra che prezzi e quantità non devono necessariamente essere variabili decisionali mutuamente esclusive.
-
-\paragraph{Domanda lineare per due beni complementari}
-Si considerino due articoli che seguono un modello di domanda lineare:
-\[
-d_1 = 500 - p_1 - 5p_2,
-\qquad
-d_2 = 10 - 0.01p_1 - 0.05p_2.
-\]
-L’ispezione dei segni mostra che i due beni sono \textbf{complementi}, e non sostituti (ridurre $p_2$ aumenta $d_1$).
-Nel lavoro originale, i due beni sono camere standard e sale riunioni in un hotel, che chiaramente non sono sostituti. Questo aiuta a comprendere i valori numerici dei parametri.
-
-\paragraph{Vincoli di capacità}
-In pratica possono esistere limitazioni di capacità. In questo caso, la disponibilità è limitata a 250 e 6, rispettivamente.
-È quindi necessario modellare esplicitamente la domanda.
-
-\subsection{Ottimizzazione dei prezzi con domanda legata alle vendite}
-
-\paragraph{Prima formulazione (non sensata)}
-Per trovare i prezzi ottimi si potrebbe considerare il seguente modello:
-\[
-\max \; p_1 d_1 + p_2 d_2
-\]
-soggetto a
-\[
-d_1 = 500 - p_1 - 5p_2,
-\]
-\[
-d_2 = 10 - 0.01p_1 - 0.05p_2,
-\]
-\[
-p_1,\; p_2,\; d_1,\; d_2 \ge 0,
-\]
-\[
-d_1 \le 250,\qquad d_2 \le 6.
-\]
-Tuttavia, questo non è un modello particolarmente sensato.
-
-\paragraph{Soluzione della prima formulazione}
-La soluzione, in termini di prezzi ottimi, è:
-\[
-p_1^* = 400,\qquad p_2^* = 0.
-\]
-Questi prezzi implicano le domande:
-\[
-d_1^* = 100,\qquad d_2^* = 6.
-\]
-Si osserva che le sale riunioni sono offerte gratuitamente, cosa che può essere sensata per stimolare le vendite del bene complementare.
-
-\paragraph{Prezzi nulli o negativi per beni complementari}
+\paragraph{Esempio: un modello ibrido}
 In alcuni casi estremi, il prezzo di un bene potrebbe anche essere negativo per incrementare le vendite del bene complementare.
 Questo può sembrare strano ma, in realtà, alcuni beni possono essere venduti sotto costo per ottenere ricavi dai beni complementari.
 Ad esempio, una stampante laser permette di vendere cartucce toner, e un rasoio permette di vendere lame.
-
-\paragraph{Effetti su capacità e ricavi}
-Il prezzo per le camere standard è piuttosto elevato e alcune camere restano inutilizzate, mentre la capacità è vincolante per le sale riunioni.
-Il ricavo complessivo è 40{,}000.
-
-\subsection{Che cosa non funziona nel primo modello?}
-
-\paragraph{Collegamento rigido tra domanda e vendite}
-Il prezzo delle camere standard è elevato ed è tale che la domanda di sale riunioni è esattamente pari alla disponibilità.
-
-\paragraph{Inventory rationing}
-Una pratica comune nel revenue management è l’\textbf{inventory rationing}, ossia la restrizione delle vendite.
+\\ \hspace*{1.5em}Una pratica comune nel revenue management è l’\textcolor{BurntOrange}{\textbf{inventory rationing}}, ossia la restrizione delle vendite.
 Questo è lo strumento principale nel revenue management basato sulle quantità, come si vedrà.
+Il \emph{disaccoppiamento} tramite razionamento fornisce gradi di libertà aggiuntivi.
+\\ \hspace*{1.5em}L’idea del \textcolor{BurntOrange}{\textbf{modello ibrido}} è che prezzo e quantità non siano necessariamente variabili decisionali alternative.
+Nella \textbf{prima formulazione}, si assume implicitamente che la domanda coincida con le vendite: fissati i prezzi, le quantità vendute sono determinate in modo automatico dalla funzione di domanda.
+Questo porta però a soluzioni che, pur essendo ottimali dal punto di vista dei prezzi, possono risultare \textbf{non realistiche} in presenza di \textbf{vincoli di capacità}, perché la domanda generata potrebbe non essere fisicamente realizzabile.
+\\ \hspace*{1.5em}Nella \textbf{seconda formulazione}, invece, si introduce un \textbf{disaccoppiamento tra domanda e vendite}.
+La funzione di domanda non determina più direttamente le quantità vendute, ma fornisce un \textbf{vincolo superiore} sulle quantità offerte.
+Questo consente di applicare il \textbf{razionamento delle scorte}, limitando le vendite anche quando la domanda sarebbe più elevata.
+In questo modo, il modello acquisisce \textbf{gradi di libertà aggiuntivi}, permettendo di combinare decisioni di prezzo e di quantità in modo più coerente con i vincoli operativi.
 
-\subsection{Formulazione alternativa: disaccoppiare vendite e domanda}
-
-\paragraph{Seconda formulazione (con razionamento)}
-Si può disaccoppiare la vendita dalla domanda risolvendo la seguente formulazione alternativa:
-\[
-\max \; p_1 q_1 + p_2 q_2
-\]
-soggetto a
-\[
-q_1 \le 500 - p_1 - 5p_2,
-\]
-\[
-q_2 \le 10 - 0.01p_1 - 0.05p_2,
-\]
-\[
-p_1,\; p_2,\; q_1,\; q_2 \ge 0,
-\]
-\[
-q_1 \le 250,\qquad q_2 \le 6.
-\]
-Qui, la funzione di domanda lineare fornisce un limite superiore alla quantità offerta.
-
-\paragraph{Soluzione della seconda formulazione}
-La soluzione ottima è:
-\[
-p_1^* = 250,\qquad p_2^* = 0,\qquad q_1^* = 250,\qquad q_2^* = 6,
-\]
-con ricavo pari a 62{,}500.
-
-\paragraph{Interpretazione della differenza tra le due formulazioni}
-Il problema della prima formulazione è che questa soluzione produrrebbe una domanda pari a 7.5 per il secondo bene, che non è realizzabile se la domanda è rigidamente legata alle vendite.
-Il disaccoppiamento tramite razionamento fornisce gradi di libertà aggiuntivi.
-
-\subsection{Parte 2 -- Modelli di teoria dei giochi}
-
+\subsection{Modelli di teoria dei giochi}
 \paragraph{Problemi decisionali con più decisori}
 Talvolta le decisioni di pricing non possono essere prese ignorando il contesto complessivo.
-In un contesto B2C, i consumatori strategici sono un problema. Le interazioni strategiche sono ancora più rilevanti in un contesto B2B, dove i produttori possono essere collegati da una supply chain in cui beni intermedi vengono scambiati e trasformati, oppure dove produttori e retailer che distribuiscono beni finali interagiscono.
+In un contesto \textcolor{BurntOrange}{B2C}, i consumatori strategici sono un problema.
+Le interazioni strategiche sono ancora più rilevanti in un contesto \textcolor{BurntOrange}{B2B}, dove i produttori possono essere collegati
+da una supply chain in cui beni intermedi vengono scambiati e trasformati, oppure dove produttori e retailer che
+distribuiscono beni finali interagiscono.
 In tale contesto, i prezzi possono svolgere un ruolo importante come strumento per coordinare azioni e condividere rischi.
-Infine, che dire della competizione tra imprese? Occorre distinguere tra competizione in termini di prezzi o di quantità, e tra beni/servizi identici o differenziati.
-Questi problemi possono essere (almeno parzialmente) affrontati con modelli di teoria dei giochi.
+Infine, che dire della competizione tra imprese? Occorre distinguere tra competizione in termini di prezzi o di quantità,
+e tra beni/servizi identici o differenziati.
+Questi problemi possono essere (almeno parzialmente) affrontati con \textcolor{BurntOrange}{\textbf{modelli di teoria dei giochi}}.
 
 \paragraph{Ipotesi semplificative}
-Per semplicità, si considerano giochi stilizzati:
+Per semplicità, si considerano \emph{giochi stilizzati}
 \begin{itemize}[label=-]
-    \item ci sono solo due decisori (giocatori); ciascun giocatore ha un obiettivo (payoff) che vuole massimizzare e non esiste cooperazione;
-    \item ciascun giocatore prende una sola decisione; quindi non si considerano giochi sequenziali con decisioni multiple nel tempo;
-    \item si assume informazione completa e common knowledge: non c’è incertezza sui dati del problema né sui meccanismi che mappano decisioni in payoff; i due giocatori condividono la stessa visione del mondo e le regole del gioco, conoscono gli incentivi della controparte e ciascuno sa che l’altro possiede tutte le informazioni rilevanti.
+    \item Ci sono solo due decisori (giocatori); ciascun giocatore ha un \textbf{obiettivo} (payoff) che vuole massimizzare e non esiste cooperazione.
+    \item Ciascun giocatore prende \textbf{una sola decisione}; quindi non si considerano giochi sequenziali con decisioni multiple nel tempo.
+    \item Si assume \textbf{informazione completa} e common knowledge: non c’è incertezza sui dati del problema né sui meccanismi che mappano decisioni in payoff; i due giocatori condividono la stessa visione del mondo e le regole del gioco, conoscono gli incentivi della controparte e ciascuno sa che l’altro possiede tutte le informazioni rilevanti.
 \end{itemize}
+\hspace*{1.5em}Per avvicinarsi a una formalizzazione, si consideri il problema 
+\[
+\begin{aligned}
+\max \ & \pi_1(x_1,x_2) + \pi_2(x_1,x_2) \\
+\text{s.t.}\ & x_1 \in S_1, \quad
+              x_2 \in S_2.
+\end{aligned}
+\]
+La funzione obiettivo può essere interpretata come un \emph{profitto dipendente da due variabili decisionali},
+$x_1$ e $x_2$, che devono appartenere ai rispettivi insiemi ammissibili $S_1$ e $S_2$.
+\\ \hspace*{1.5em}
+Anche se i vincoli su $x_1$ e $x_2$ sono separabili, \textbf{non è possibile decomporre il problema complessivo},
+poiché le due decisioni interagiscono tramite le funzioni di profitto $\pi_1(x_1;x_2)$ e $\pi_2(x_1;x_2)$.
+Risolvendo il problema si ottengono decisioni ottime $x_1^*$ e $x_2^*$ e il profitto totale ottimo
+\(
+\pi_{1+2}^*=\pi_1(x_1^*,x_2^*)+\pi_2(x_1^*,x_2^*).
+\)
+Così facendo si assume un \textbf{decisore unico} che prende entrambe le decisioni, oppure una coppia di decisori cooperativi che scelgono $x_1$ e $x_2$ condividendo l’obiettivo di massimizzare la somma dei profitti.
 
-\paragraph{Problema centralizzato e interazione tra decisioni}
-Per avvicinarsi a una formalizzazione, si consideri il problema:
+\paragraph{Caso non cooperativo} 
+Nel caso realistico di \textbf{due decisori non cooperativi} con profitti $\pi_1(x_1,x_2)$ e $\pi_2(x_1,x_2)$,
 \[
-\max\ \pi_1(x_1;x_2) + \pi_2(x_1;x_2) \tag{4}
+\begin{aligned}
+\text{Decisore 1:}\quad
+\begin{aligned}
+\max \ & \pi_1(x_1,x_2) \\
+\text{s.t.}\ & x_1 \in S_1
+\end{aligned}
+\qquad\qquad
+\text{Decisore 2:}\quad
+\begin{aligned}
+\max \ & \pi_2(x_1,x_2) \\
+\text{s.t.}\ & x_2 \in S_2
+\end{aligned}
+\end{aligned}
 \]
-soggetto a
-\[
-x_1 \in S_1,\qquad x_2 \in S_2.
-\]
-La funzione obiettivo (4) può essere interpretata come un profitto dipendente da due variabili decisionali, $x_1$ e $x_2$, che devono appartenere ai rispettivi insiemi ammissibili $S_1$ e $S_2$.
-
-\paragraph{Perché non si può decomporre}
-Anche se i vincoli su $x_1$ e $x_2$ sono separabili, non è possibile decomporre il problema complessivo, poiché le due decisioni interagiscono tramite le funzioni di profitto $\pi_1(x_1;x_2)$ e $\pi_2(x_1;x_2)$.
-Risolvendo (4) si ottengono decisioni ottime $x_1^*$ e $x_2^*$ e il profitto totale ottimo:
-\[
-\pi_{1+2}^*=\pi_1(x_1^*;x_2^*)+\pi_2(x_1^*;x_2^*).
-\]
-Così facendo si assume un decisore unico che prende entrambe le decisioni, oppure una coppia di decisori cooperativi che scelgono $x_1$ e $x_2$ condividendo l’obiettivo di massimizzare la somma dei profitti.
-
-\paragraph{Caso non cooperativo}
-Nel caso realistico di due decisori non cooperativi con profitti $\pi_1(x_1;x_2)$ e $\pi_2(x_1;x_2)$, il decisore 1 vorrebbe risolvere:
-\[
-\max\ \pi_1(x_1;x_2) \tag{5}
-\]
-soggetto a
-\[
-x_1 \in S_1,
-\]
-mentre il decisore 2 vorrebbe risolvere:
-\[
-\max\ \pi_2(x_1;x_2) \tag{6}
-\]
-soggetto a
-\[
-x_2 \in S_2.
-\]
-Questi due problemi, scritti così, non hanno senso: quale valore di $x_2$ usare nel problema (5)? Quale valore di $x_1$ usare nel problema (6)? È necessario chiarire come i due decisori muovono.
-
-\paragraph{Sequenziale vs. simultaneo}
+Questi due problemi, scritti così, non hanno senso: quale valore di $x_2$ usare nell'altro problema? E viceversa.
+È necessario chiarire come i due decisori muovono.
 \begin{enumerate}[label=\arabic*.]
-    \item Una possibilità è che i decisori agiscano in modo sequenziale. Ad esempio, il decisore 1 sceglie $x_1 \in S_1$ prima che il decisore 2 scelga $x_2 \in S_2$. In tal caso, il decisore 1 è il leader e il decisore 2 è il follower. Nel prendere la decisione, il decisore 1 può cercare di anticipare la reazione del decisore 2 a ciascun valore possibile di $x_1$.
-    \item Un’altra possibilità è che le due decisioni siano prese simultaneamente. In tal caso, servono strumenti concettuali per capire quali decisioni aspettarsi.
+    \item Una possibilità è che i decisori agiscano in \textcolor{BurntOrange}{\textbf{modo sequenziale}}. Ad esempio, il decisore 1 sceglie $x_1 \in S_1$ prima che il decisore 2 scelga $x_2 \in S_2$. In tal caso, il decisore 1 è il leader e il decisore 2 è il follower. Nel prendere la decisione, il decisore 1 può cercare di anticipare la reazione del decisore 2 a ciascun valore possibile di $x_1$.
+    \item Un’altra possibilità è che le due decisioni siano prese \textcolor{BurntOrange}{\textbf{simultaneamente}}. In tal caso, servono strumenti concettuali per capire quali decisioni aspettarsi.
 \end{enumerate}
 
 \paragraph{Equilibrio e perdita di performance}
-La teoria dei giochi mira a fornire una previsione sensata di una soluzione di equilibrio $(x_1^e;x_2^e)$, che dipende dalle ipotesi sulla struttura del gioco.
-Qualunque equilibrio si ottenga, esso non può produrre un profitto totale maggiore di $\pi_{1+2}^*$, poiché necessariamente vale:
+La teoria dei giochi mira a fornire una previsione sensata di una \textbf{soluzione di equilibrio} $(x_1^e,x_2^e)$,
+che dipende dalle ipotesi sulla struttura del gioco.
+Qualunque equilibrio si ottenga, esso non può produrre un profitto totale maggiore di $\pi_{1+2}^*$, poiché
+necessariamente vale
 \[
-\pi_{1+2}^e=\pi_1(x_1^e;x_2^e)+\pi_2(x_1^e;x_2^e)
+\pi_{1+2}^e=\pi_1(x_1^e,x_2^e)+\pi_2(x_1^e,x_2^e)
 \le
-\pi_1(x_1^*;x_2^*)+\pi_2(x_1^*;x_2^*)=\pi_{1+2}^*.
+\pi_1(x_1^*,x_2^*)+\pi_2(x_1^*,x_2^*)=\pi_{1+2}^*.
 \]
-Se questa disuguaglianza fosse violata, $(x_1^*;x_2^*)$ non sarebbe soluzione ottima di (4).
-Questo significa che, decentralizzando le decisioni, il sistema complessivo è verosimilmente incapace di raggiungere la performance ottima globale.
+Se questa disuguaglianza fosse violata, $(x_1^*,x_2^*)$ non sarebbe soluzione ottima del problema iniziale.
+Questo significa che, \textbf{decentralizzando le decisioni, il sistema complessivo è verosimilmente incapace di raggiungere la performance ottima globale}.
 
-\subsection{Giochi con decisioni continue}
+\textcolor{Red}{\section{FINIRE CAP 6 -- SLIDE 54/90}}
 
-\paragraph{Equilibrio di Nash con azioni continue}
+\paragraph{Giochi con decisioni continue}
 Nel seguito si considera l’equilibrio di Nash nel caso in cui ogni giocatore disponga di un continuo di azioni possibili.
 Si analizza prima il comportamento di due imprese che competono in termini di quantità. Entrambe massimizzano il profitto, ma influenzano reciprocamente il prezzo di mercato tramite la quantità totale prodotta. Il prezzo è comune a entrambe, poiché si assume un prodotto perfettamente identico.
 Questa competizione si chiama competizione di Cournot; il caso in cui le imprese competono sui prezzi si chiama competizione di Bertrand.
