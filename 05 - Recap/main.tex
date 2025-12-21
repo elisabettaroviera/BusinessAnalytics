@@ -4285,23 +4285,25 @@ Se $F\in MDA(H)$ per una $H$ non degenere, allora $H$ deve essere una distribuzi
 \vspace{-1cm}
 \textcolor{DarkRed}{\section{CAP 7 -- Il principio della programmazione dinamica}}
 
-\subsection{Che cos'è la programmazione dinamica}
-
-\paragraph{Definizione di programmazione dinamica}
-La \textbf{programmazione dinamica (Dynamic Programming, DP)} non è un algoritmo come l’algoritmo del simplesso per la programmazione lineare. È piuttosto un \textbf{principio notevolmente generale e flessibile} che può essere utilizzato per progettare una vasta gamma di algoritmi di ottimizzazione.
-
-\paragraph{Idea centrale}
-L’idea centrale si basa sulla \textbf{decomposizione di un problema decisionale dinamico multistadio} in una \textbf{sequenza di problemi più semplici a singolo stadio}.
+\paragraph{Che cos'è la programmazione dinamica?}
+La \textcolor{DarkRed}{\textbf{programmazione dinamica (Dynamic Programming, DP)}} non è un algoritmo come l’algoritmo del simplesso per la programmazione lineare. È piuttosto un \textbf{principio notevolmente generale e flessibile} che può essere utilizzato per progettare una vasta gamma di algoritmi di ottimizzazione.
+\\ \hspace*{1.5em}
+L’\textbf{idea centrale} si basa sulla \textbf{decomposizione di un problema decisionale dinamico multistadio} in una \textbf{sequenza di problemi più semplici a singolo stadio}.
 
 \paragraph{Problemi multistadio e multiperiodo}
-Un problema decisionale multistadio non deve essere confuso con un problema multiperiodo. Si consideri un problema a orizzonte finito in cui si devono selezionare $T$ decisioni $x_t$, applicate in una sequenza di istanti temporali $t = 0,1,2,\ldots,T-1$. La domanda fondamentale è: \emph{quando vengono prese queste decisioni}?
+Un problema decisionale multistadio non deve essere confuso con un problema \emph{multiperiodo}. Si consideri
+un problema a orizzonte finito in cui si devono selezionare $T$ decisioni $x_t$, applicate in una sequenza di
+istanti temporali $t = 0,1,2,\ldots,T-1$. La domanda fondamentale è: \emph{quando vengono prese queste decisioni}?
+\\ \hspace*{1.5em}
+In un \textcolor{DarkRed}{problema statico multiperiodo}, tutte le decisioni vengono prese al tempo $t=0$,
+come è naturale in un problema deterministico (\textcolor{DarkRed}{\textbf{approccio open-loop}}). In un \textcolor{DarkRed}{problema stocastico},
+invece, si osserva nel tempo una traiettoria campionaria dei fattori di rischio rilevanti e si adattano le decisioni
+lungo il percorso.
+\\ \hspace*{1.5em}
+Ciò che serve è una \textbf{strategia}, ovvero una \textbf{regola per prendere decisioni dopo aver osservato le
+realizzazioni casuali} (\textbf{\textcolor{DarkRed}{approccio closed-loop}}).
 
-\paragraph{Approccio open-loop e closed-loop}
-In un problema statico multiperiodo, tutte le decisioni vengono prese al tempo $t=0$, come è naturale in un problema deterministico (\textbf{approccio open-loop}). In un problema stocastico, invece, si osserva nel tempo una traiettoria campionaria dei fattori di rischio rilevanti e si adattano le decisioni lungo il percorso.
-
-\paragraph{Strategia decisionale}
-Ciò che serve è una \textbf{strategia}, ovvero una \textbf{regola per prendere decisioni dopo aver osservato le realizzazioni casuali} (\textbf{approccio closed-loop}).
-
+\textcolor{DarkRed}{\textbf{RIPARTI DA QUA SLIDE 4}}
 \subsection{Ambito di applicazione della programmazione dinamica}
 
 \paragraph{Limiti della programmazione dinamica}
