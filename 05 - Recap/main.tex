@@ -6576,7 +6576,7 @@ La differenza si coglie confrontando le correzioni:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PDF 12 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \vspace{-1cm}
 \textcolor{Indigo}{\section{CAP 12 -- Simulazione}}
-\subsection{Simulazione coda M/M/1 e intervalli di confidenza}
+\subsection{Simulazione coda M/M/1 e intervalli di confidenza (code 1)}
 \paragraph{Contesto del problema}
 Lo script simula una \textbf{coda M/M/1} (arrivi Poisson con tasso $\lambda$, tempi di servizio esponenziali con tasso $\mu$, un solo server) per valutare la bontà degli \textbf{intervalli di confidenza} costruiti sui tempi di attesa tramite \texttt{normfit}.\\
 \hspace*{1.5em}Il sistema è \textbf{stabile} quando $\rho=\lambda/\mu<1$. Nel codice si imposta $\lambda=1$ e $\mu=1.1$, e si stampa il \textcolor{Indigo}{\textbf{valore teorico}} del tempo di attesa atteso, da usare come riferimento per confrontare gli intervalli ottenuti in simulazione.\\
@@ -6646,7 +6646,7 @@ plot(t, cumsum(ww(t))./t)
 \end{lstlisting}
 
 \paragraph{Conclusioni}
-Dalla simulazione emergono tre criticità legate all’uso diretto di \texttt{normfit(ww)} sui tempi di attesa, e i tre plot allegati le rendono \textcolor{Indigo}{\textbf{molto evidenti}}.\\
+Dalla simulazione emergono tre criticità legate all’uso diretto di \texttt{normfit(ww)} sui tempi di attesa, e i tre plot le rendono \textcolor{Indigo}{\textbf{molto evidenti}}.\\
 \hspace*{1.5em}\textcolor{Indigo}{\textbf{(i) Dipendenza seriale.}} Il grafico di autocorrelazione mostra una \textbf{correlazione molto alta} anche a lag elevati: i tempi di attesa non sono i.i.d., perché derivano dalla ricorsione di Lindley. Questo significa che \texttt{normfit} lavora con un’ipotesi strutturalmente sbagliata e tende a produrre intervalli \textbf{troppo ottimisti} (varianza sottostimata rispetto alla varianza “effettiva” con correlazione).\\
 \hspace*{1.5em}\textcolor{Indigo}{\textbf{(ii) Ipotesi di normalità non adeguata.}} L’istogramma dei tempi di attesa è fortemente asimmetrico (massa concentrata su valori piccoli e \textbf{coda lunga}): è difficile giustificare un fit normale per la distribuzione di \texttt{ww}. Di conseguenza, anche quando gli intervalli numericamente sembrano ragionevoli, l’inferenza “tipo normale” può risultare fuorviante.\\
 \hspace*{1.5em}\textcolor{Indigo}{\textbf{(iii) Effetti di transitorio.}} La media cumulata cresce rapidamente all’inizio e poi si assesta lentamente verso un valore stabile: questo indica un \textbf{warm-up non trascurabile}. Se non si gestisce il transitorio (ad es.\ eliminando i primi campioni), la stima della media e gli intervalli risultano influenzati dalla fase iniziale e possono non riflettere correttamente il regime stazionario.\\
@@ -6675,11 +6675,11 @@ Dalla simulazione emergono tre criticità legate all’uso diretto di \texttt{no
 \label{fig:mm1_diagnostics}
 \end{figure}
 
-\subsection{Simulazione (s,S) con revisione periodica: script \emph{extremely naive}}
+\subsection{Simulazione (s,S) con revisione periodica: script \emph{extremely naive} (code 2)}
 
 \paragraph{Contesto del problema}
 Lo script implementa una simulazione \textbf{molto semplificata} di una politica di controllo scorte \textbf{(s,S) a revisione periodica}.\\
-\hspace*{1.5em}L’obiettivo è capire se la politica sia \textcolor{Indigo}{\textbf{“buona”}} oppure no; tuttavia, in un problema di inventory, il concetto di bontà non è automatico: serve scegliere un criterio di valutazione (ad esempio livello di servizio, vendite perse, costo di mantenimento, costo totale, ecc.).\\
+\hspace*{1.5em}L’obiettivo è capire se la politica sia \textcolor{Indigo}{\textbf{“buona”}} oppure no; tuttavia, in un problema di inventory, il concetto di bontà non è automatico: serve scegliere un \emph{criterio di valutazione} (ad esempio livello di servizio, vendite perse, costo di mantenimento, costo totale, ecc.).\\
 \hspace*{1.5em}Nel modello si osserva il sistema su un orizzonte discreto $T$ e, a ogni periodo, si aggiorna il livello di scorta disponibile, si soddisfa (se possibile) la domanda e si decide se emettere un ordine: se la scorta finale scende sotto la soglia $s$, si ordina quanto basta per riportarsi a $S$.
 
 \begin{lstlisting}[style=matlabStyle]
@@ -6752,11 +6752,10 @@ end
 Lo script produce una \textbf{traiettoria campionaria completa} del sistema di inventario sotto una politica \textbf{(s,S) a revisione periodica}, ma il suo output rimane \textcolor{Indigo}{\textbf{puramente descrittivo}} e non immediatamente interpretabile in termini di performance.\\
 \hspace*{1.5em}\textcolor{Indigo}{\textbf{(i) Esistenza di un output, ma non di una valutazione.}} La simulazione genera diverse serie temporali di interesse: livello di scorta disponibile (\texttt{onHand}), scorta media per periodo (\texttt{aveOnHand}), vendite perse (\texttt{lostSales}), indicatori di stockout (\texttt{stockOut}) e quantità ordinate (\texttt{ordered}). Tuttavia, nessuna di queste variabili viene aggregata in un indicatore sintetico che permetta di giudicare la bontà della policy.\\
 \hspace*{1.5em}\textcolor{Indigo}{\textbf{(ii) Interpretazione dei risultati con domanda costante.}} Nel caso mostrato (\texttt{demand = 10}), la domanda è molto inferiore al livello target $S=100$, per cui il sistema tende rapidamente a stabilizzarsi: non si osservano stockout e le vendite perse sono nulle. Questo comportamento è coerente, ma poco informativo, perché non mette sotto stress la politica (s,S).\\
-\hspace*{1.5em}\textcolor{Indigo}{\textbf{(iii) Ruolo dei grafici diagnostici.}} Tracciando le variabili nel tempo (ad esempio \texttt{onHand}, \texttt{ordered} o \texttt{lostSales}) si ottiene una comprensione qualitativa della dinamica del sistema: oscillazioni della scorta, frequenza dei riordini e presenza (o assenza) di stockout. Tuttavia, tali grafici servono solo come \textbf{strumenti esplorativi} e non sostituiscono una vera analisi delle prestazioni.\\
 \hspace*{1.5em}In sintesi, lo script ha valore didattico perché chiarisce la \textbf{meccanica della politica (s,S)} e la sua implementazione in tempo discreto, ma per diventare uno strumento decisionale deve essere esteso introducendo una \textcolor{Indigo}{\textbf{funzione obiettivo}} (ad esempio costo totale o livello di servizio medio) e scenari di domanda più realistici.
 
 
-\subsection{Politica (s,S) a revisione periodica: simulazione su scenari e ottimizzazione dei parametri (3a--3c)}
+\subsection{Politica (s,S) a revisione periodica: simulazione su scenari e ottimizzazione dei parametri (code 3a, 3b, 3c)}
 
 \paragraph{Contesto del problema}
 Questa parte unifica tre blocchi coerenti: \textbf{(3a)} una funzione che simula una politica \textbf{(s,S)} su uno o più scenari di domanda, \textbf{(3b)} uno script di \textcolor{Indigo}{\textbf{ottimizzazione}} dei parametri $(s,S)$ minimizzando il \textbf{costo medio} stimato via simulazione, e \textbf{(3c)} un test su domanda costante per confrontare i risultati con un riferimento tipo \textbf{EOQ}.\\
@@ -6924,13 +6923,13 @@ Il blocco (3a--3c) realizza un flusso completo di \textcolor{Indigo}{\textbf{sim
 
 \begin{figure}[H]
 \centering
-\includegraphics[height=2.8cm]{Figures/4.pdf}
+\includegraphics[height=4.5cm]{Figures/4.pdf}
 \caption{Andamento del \emph{best function value} durante l’ottimizzazione dei parametri $(s,S)$ tramite \texttt{patternsearch} nello scenario stocastico in-sample.}
 \label{fig:ss_3b}
 \end{figure}
 
 
-\subsection{Coda M/M/1 con balking (FIFO): simulazione percentuale di clienti che rinunciano (4a--4b)}
+\subsection{Coda M/M/1 con balking (FIFO): simulazione percentuale di clienti che rinunciano (code 4a, 4b)}
 
 \paragraph{Contesto del problema}
 Si considera una \textbf{coda M/M/1} (interarrivi e tempi di servizio esponenziali, tassi assegnati) con disciplina \textbf{FIFO} e un meccanismo di \textbf{balking}: quando un cliente arriva, decide se entrare o rinunciare in funzione della lunghezza della coda.\\
@@ -6970,7 +6969,7 @@ while count <= toServe
         count = count + 1;            % ho completato un servizio
 
         if numInQueue == 0
-            % nessuno in coda: il server diventa idle
+            % nessuno in coda: il server diventa idle == il server è libero, non sta servendo nessuno
             nextCompletion = inf;
         else
             % qualcuno in coda: parte subito il servizio del prossimo cliente
@@ -7092,11 +7091,11 @@ end
 \paragraph{Conclusioni}
 Il codice implementa correttamente una simulazione a \textbf{eventi discreti} con due soli eventi possibili (arrivo/completamento), includendo una regola di balking dipendente dalla lunghezza della coda.\\
 \hspace*{1.5em}\textcolor{Indigo}{\textbf{(i) Output di interesse.}} La quantità \texttt{lost} rappresenta il numero di clienti che rinunciano; per ottenere la \textbf{percentuale} richiesta basta normalizzare rispetto agli arrivi totali simulati (oppure rispetto a \texttt{lost + served}, a seconda della definizione adottata).\\
-\hspace*{1.5em}\textcolor{Indigo}{\textbf{(ii) Struttura a eventi e stato.}} La versione funzione (4b) è più pulita perché incapsula lo stato e separa la logica dei due eventi, rendendo più facile estendere il modello (ad esempio aggiungendo nuove regole o nuove metriche).\\
+\hspace*{1.5em}\textcolor{Indigo}{\textbf{(ii) Struttura a eventi e stato.}} La versione (4b) è più pulita perché incapsula lo stato e separa la logica dei due eventi, rendendo più facile estendere il modello (ad esempio aggiungendo nuove regole o nuove metriche).\\
 \hspace*{1.5em}\textcolor{Indigo}{\textbf{(iii) Interpretazione del parametro di soglia.}} Le soglie 10 e 15 regolano direttamente il trade-off tra congestione e perdita di domanda: soglie più basse riducono la congestione ma aumentano i clienti persi, soglie più alte fanno l’opposto.\\
 \hspace*{1.5em}In sintesi, la versione (4b) è preferibile per riuso e manutenzione, mentre la versione (4a) è utile come implementazione immediata e trasparente della logica di simulazione.
 
-\subsection{Two-stage ATP/ATO: modello ai valori attesi vs modello stocastico (5a--5b)}
+\subsection{Two-stage ATP/ATO: modello ai valori attesi vs modello stocastico (code 5a,5b)}
 
 \paragraph{Contesto del problema}
 Questi script confrontano due approcci per un problema di pianificazione in presenza di domanda incerta, formulato come \textbf{problema a due stadi}.\\
@@ -7292,20 +7291,20 @@ I blocchi (5a--5b) mostrano chiaramente la differenza tra un modello ai \textbf{
 \hspace*{1.5em}\textcolor{Indigo}{\textbf{(i) Soluzione EV (domanda media).}} Nel caso EV, il solver trova una soluzione ottima con profitto pari a \textbf{3220}. La decisione di primo stadio risulta \texttt{x} = (116,116,26,0,90) e la decisione di vendita sulla domanda media è \texttt{y} = (26,0,90). Questo conferma che il modello EV ottimizza rispetto a una domanda “aggregata”, ignorando esplicitamente la variabilità tra scenari.\\
 \hspace*{1.5em}\textcolor{Indigo}{\textbf{(ii) Soluzione stocastica RP.}} Nel modello a due stadi (RP), la soluzione ottima produce un profitto atteso pari a \textbf{2883.33}, con decisione di primo stadio \texttt{x} = (115,115,55,0,65). Al secondo stadio, le vendite \texttt{y} dipendono dallo scenario e si adattano ai diversi vincoli di domanda: questo è esattamente l’effetto del \textbf{ricorso} (si decide cosa vendere dopo aver osservato lo scenario).\\
 \hspace*{1.5em}\textcolor{Indigo}{\textbf{(iii) Valutazione della soluzione EV nel modello stocastico e VSS.}} Fissando nel problema stocastico la decisione di primo stadio uguale a quella EV (\texttt{x == solEV.x}), il profitto ottenuto scende a \textbf{2320}. La differenza tra la soluzione pienamente stocastica e la soluzione EV “trapiantata” nel modello a scenari è la \textcolor{Indigo}{\textbf{VSS}}, che nei risultati vale:
-\[
+\(
 \text{VSS} = 2883.33 - 2320 = \textbf{563.33}.
-\]
+\)
 Questo valore misura il guadagno ottenibile scegliendo \textbf{direttamente} una soluzione ottimizzata per scenari, anziché ottimizzare su domanda media e poi subire le conseguenze della variabilità.\\
 \hspace*{1.5em}In sintesi, anche se il profitto EV (\textbf{3220}) è più alto nel suo modello deterministico “ideale”, quando si passa a valutare su scenari la soluzione EV perde robustezza (profitto \textbf{2320}), mentre la soluzione RP è costruita per gestire l’incertezza e garantisce un profitto atteso maggiore in quel contesto (\textbf{2883.33}), con un vantaggio quantificato da \textbf{VSS = 563.33}.
 
 
-\subsection{Capacity control e tariffe aeree: protezione della classe alta e simulazione degli arrivi (6)}
+\subsection{Capacity control e tariffe aeree: protezione della classe alta e simulazione degli arrivi (code 6)}
 
 \paragraph{Contesto del problema}
-Lo script modella un problema di \textbf{revenue management} per un volo con capacità limitata: esistono due classi tariffarie con prezzi diversi (classe 1 più costosa, classe 2 più economica) e le richieste arrivano nel tempo secondo processi di Poisson.\\
+Lo script modella un problema di \textcolor{Indigo}{\textbf{revenue management}} per un volo con capacità limitata: esistono due classi tariffarie con prezzi diversi (classe 1 più costosa, classe 2 più economica) e le richieste arrivano nel tempo secondo processi di Poisson.\\
 \hspace*{1.5em}L’obiettivo è applicare una regola semplice di \textcolor{Indigo}{\textbf{protezione}} (booking limit): si riserva un certo numero di posti alla classe più remunerativa, rifiutando parte delle richieste della classe 2 quando il livello di protezione è stato raggiunto.\\
 \hspace*{1.5em}Il punto chiave è che la decisione viene presa usando tassi di arrivo \textbf{stimati} ($\hat{\lambda}_1,\hat{\lambda}_2$), mentre la simulazione degli arrivi avviene usando i tassi \textbf{veri} ($\lambda_1,\lambda_2$): in questo modo si evidenzia l’impatto dell’errore di stima sul profitto.\\
-\hspace*{1.5em}Il livello di protezione viene calcolato tramite un quantile Poisson: si usa \texttt{poissinv} sul numero atteso di arrivi della classe 1 nell’intero orizzonte $T$.
+\hspace*{1.5em}Il \textbf{livello di protezione} viene calcolato tramite un quantile Poisson: si usa \texttt{poissinv} sul numero atteso di arrivi della classe 1 nell’intero orizzonte $T$.
 
 \begin{lstlisting}[style=matlabStyle]
 %% 6 - Aircraft capacity and tariffs
@@ -7401,7 +7400,7 @@ Lo script implementa una regola di controllo capacità basata su un \textbf{live
 \hspace*{1.5em}In sintesi, il codice è un primo prototipo utile per studiare l’effetto del booking limit sul profitto, ma per un’analisi affidabile servono più repliche, confronto con benchmark (statico/dinamico) e una riflessione sulla scelta del quantile usato per la protezione.
 
 
-\subsection{Roll queue: simulazione a eventi discreti con buffer e domanda batch (7)}
+\subsection{Roll queue: simulazione a eventi discreti con buffer e domanda batch (code 7)}
 
 \paragraph{Contesto del problema}
 Lo script simula un sistema di tipo \textbf{queueing/inventory} in cui si preparano “roll” (panini) uno alla volta e i clienti arrivano nel tempo richiedendo un numero intero di roll.\\
@@ -7526,7 +7525,7 @@ Lo script costruisce un simulatore a \textbf{eventi discreti} con due processi c
 \hspace*{1.5em}\textcolor{Indigo}{\textbf{(iii) Misura di performance.}} Il tempo medio di attesa viene stimato tramite la somma dei tempi in coda (\texttt{clock - joinTime}) per i clienti che attendono. I clienti serviti immediatamente contribuiscono con attesa nulla.\\
 \hspace*{1.5em}In sintesi, il modello è utile per studiare l’effetto combinato di \textbf{capacità del buffer}, \textbf{variabilità di produzione} e \textbf{domanda batch} sul congestionamento e sui tempi di attesa medi.
 
-\subsection{Cutting stock: formulazione simmetrica e generazione di colonne (8a--8c)}
+\subsection{Cutting stock: formulazione simmetrica e generazione di colonne (code 8a, 8b, 8c)}
 
 \paragraph{Contesto del problema}
 Il \textbf{cutting stock problem} consiste nel tagliare rotoli (o tronchi) di lunghezza fissa
@@ -7535,7 +7534,7 @@ il numero di rotoli utilizzati (o, in modo equivalente, lo spreco totale).\\
 \hspace*{1.5em}Il problema è noto per la sua elevata complessità combinatoria e per la presenza
 di numerose simmetrie, che rendono rapidamente impraticabili formulazioni dirette
 quando la dimensione dell’istanza cresce.\\
-\hspace*{1.5em}In questa sezione vengono confrontati tre approcci:
+\hspace*{1.5em}Vengono confrontati tre approcci:
 \textbf{(8a)} una formulazione compatta e simmetrica di tipo Kantorovich,
 \textbf{(8b)} una risoluzione tramite \textcolor{Indigo}{\textbf{column generation}}
 con approccio \emph{problem-based},
@@ -7650,42 +7649,61 @@ fprintf('Optimal solution uses %g logs\n',sum(values.x));
 \begin{lstlisting}[style=matlabStyle]
 %% 8c - Cutting stock: column generation (solver-based)
 
+% Dati del problema: tronchi/rotoli tutti della stessa lunghezza
 logLength  = 40;
-lengthlist = [8; 12; 16; 20];
-quantity   = [90; 111; 55; 30];
+lengthlist = [8; 12; 16; 20];     % lunghezze dei pezzi richiesti
+quantity   = [90; 111; 55; 30];   % domanda per ciascuna lunghezza
 nLengths   = length(lengthlist);
 
+% Pattern iniziali "banali": per ogni lunghezza taglio il massimo numero possibile
+% (matrice diagonale: ogni colonna = un pattern diverso)
 patterns  = diag(floor(logLength ./ lengthlist));
 nPatterns = size(patterns,2);
 
+% Sottoproblema (pricing): genera un nuovo pattern risolvendo un ILP
+% variabili = numero di pezzi di ciascuna lunghezza nel nuovo pattern
 lb2 = zeros(nLengths,1);
-A2  = lengthlist';
+A2  = lengthlist';  % vincolo di capacità: somma(length_i * cuts_i) <= logLength
 b2  = logLength;
 
+% Opzioni solver (silenzia output)
 lpopts = optimoptions('linprog','Display','off');
 ipopts = optimoptions('intlinprog',lpopts);
 
+% Inizializzazione criterio di arresto della column generation
 reducedCost = -Inf;
-reducedCostTolerance = -0.0001;
+reducedCostTolerance = -0.0001; % aggiungo una colonna solo se costo ridotto < 0 (con tolleranza)
 exitflag = 1;
 
+% Column generation: alterno
+% (1) master LP (con pattern correnti) e (2) pricing ILP (nuovo pattern)
 while reducedCost < reducedCostTolerance && exitflag > 0
+
+    % Master LP: min sum(x) s.t. patterns*x >= quantity, x >= 0
     lb = zeros(nPatterns,1);
-    f  = lb + 1;
-    A  = -patterns;
+    f  = lb + 1;          % costo unitario di ogni pattern: 1 (minimizza numero di tronchi)
+    A  = -patterns;       % trasformo >= in <= per linprog
     b  = -quantity;
 
     [values,nLogs,exitflag,~,lambda] = linprog(f,A,b,[],[],lb,[],lpopts);
 
     if exitflag > 0
         fprintf('Using %g logs\n',nLogs);
-        f2 = -lambda.ineqlin;
-        [values,reducedCost,pexitflag] = intlinprog(f2,1:nLengths,A2,b2,[],[],lb2,[],ipopts);
-        reducedCost = 1 + reducedCost;
-        newpattern = round(values);
 
+        % Pricing problem: cerco un pattern con costo ridotto negativo
+        % Nel solver-based uso direttamente i moltiplicatori duali del master LP:
+        % f2 = -lambda, così il sottoproblema cerca di minimizzare il costo ridotto
+        f2 = -lambda.ineqlin;
+
+        [values,reducedCost,pexitflag] = intlinprog(f2,1:nLengths,A2,b2,[],[],lb2,[],ipopts);
+
+        % Il costo ridotto effettivo è: 1 + reducedCost (perché nel master ogni colonna ha costo 1)
+        reducedCost = 1 + reducedCost;
+        newpattern = round(values); % pattern trovato (intero)
+
+        % Se esiste un pattern migliorativo (costo ridotto < 0), lo aggiungo come nuova colonna
         if pexitflag > 0 && reducedCost < reducedCostTolerance
-            patterns = [patterns newpattern];
+            patterns  = [patterns newpattern];
             nPatterns = nPatterns + 1;
         end
     end
