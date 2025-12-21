@@ -11,6 +11,43 @@
 \usepackage{fancyhdr}
 \usepackage{amsmath,amssymb}
 \usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subcaption}
+
+
+% --- LISTINGS (MATLAB look) ---
+\usepackage[T1]{fontenc}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{listings}
+
+% Colori simili a MATLAB editor
+\definecolor{MatlabBlue}{RGB}{0,0,255}
+\definecolor{MatlabGreen}{RGB}{0,153,0}
+\definecolor{MatlabPurple}{RGB}{153,0,153}
+\definecolor{MatlabGray}{RGB}{120,120,120}
+
+\lstdefinestyle{matlabStyle}{
+  language=Matlab,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{MatlabBlue},
+  commentstyle=\color{MatlabGreen},
+  stringstyle=\color{MatlabPurple},
+  numbers=none,              % come MATLAB: niente numeri
+  showstringspaces=false,
+  breaklines=true,
+  frame=single,              % riquadro
+  rulecolor=\color{MatlabGray},
+  tabsize=4,
+  columns=fullflexible,
+  keepspaces=true,
+  % --- accenti robusti dentro lstlisting ---
+  literate=
+    {à}{{\`a}}1 {è}{{\`e}}1 {é}{{\'e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+    {À}{{\`A}}1 {È}{{\`E}}1 {É}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+}
+
+
+
 
 % Operatore "opt" (max o min a seconda del contesto)
 \DeclareMathOperator*{\opt}{opt}
@@ -6539,11 +6576,1141 @@ La differenza si coglie confrontando le correzioni:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PDF 12 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \vspace{-1cm}
 \textcolor{Indigo}{\section{CAP 12 -- Simulazione}}
-Scrivere un paragrafo per fare recap dei problemi affrontati di simulazione.
+\subsection{Simulazione coda M/M/1 e intervalli di confidenza}
+\paragraph{Contesto del problema}
+Lo script simula una \textbf{coda M/M/1} (arrivi Poisson con tasso $\lambda$, tempi di servizio esponenziali con tasso $\mu$, un solo server) per valutare la bontà degli \textbf{intervalli di confidenza} costruiti sui tempi di attesa tramite \texttt{normfit}.\\
+\hspace*{1.5em}Il sistema è \textbf{stabile} quando $\rho=\lambda/\mu<1$. Nel codice si imposta $\lambda=1$ e $\mu=1.1$, e si stampa il \textcolor{Indigo}{\textbf{valore teorico}} del tempo di attesa atteso, da usare come riferimento per confrontare gli intervalli ottenuti in simulazione.\\
+\hspace*{1.5em}L’esperimento viene ripetuto \textbf{10 volte} per osservare la variabilità degli intervalli e verificare se risultano \textcolor{Indigo}{\textbf{coerenti}} tra loro (intervalli che si sovrappongono) e se includono il \textcolor{Indigo}{\textbf{vero valore}}.
 
-\begin{itemize}[label=-]
-\item Cap 1 pag 4/48 simulazione M/M/1
-\item Cap 3 pag 12/46 politica s periodic review
-\end{itemize}
+\begin{lstlisting}[style=matlabStyle]
+%% 1 - SIMULAZIONE CODA M/M/1
+% Scopo: verificare la qualità degli intervalli di confidenza stimati via simulazione
+% per il tempo di attesa medio in una coda M/M/1, usando normfit sui tempi di attesa.
+
+rng 'default' % Inizializza il generatore di numeri casuali (riproducibilità)
+
+inRate = 1;       % Tasso di arrivo: lambda
+servRate = 1.1;   % Tasso di servizio: mu (stabilità se lambda/mu < 1)
+                  % Nota: aumentando mu (es. 2.1) il sistema ha meno "memoria",
+                  % la correlazione si riduce e gli intervalli risultano più affidabili.
+
+% Valore teorico del tempo di attesa atteso (da confrontare con la simulazione)
+fprintf(1,"Tempo di attesa atteso (teorico): %.4f\n\n",(inRate/servRate)/(servRate-inRate));
+
+sampleSize = 600000; % Numero di clienti simulati per ciascuna replica
+
+fprintf(1,"Intervalli di confidenza stimati:\n");
+for k = 1:10 % Ripeto l'esperimento 10 volte per ottenere 10 intervalli di confidenza
+    ww = MM1_Queue(inRate, servRate, sampleSize); % Tempi di attesa simulati (per tutti i clienti)
+
+    % Stima di media e intervallo di confidenza assumendo (implicitamente) normalità e i.i.d.
+    [~,~,ci] = normfit(ww);
+    fprintf(1,"(%.4f, %.4f)\n",ci(1),ci(2));
+end
+
+% Funzione (annidata) per simulare la sequenza dei tempi di attesa in una M/M/1
+function [waitTimes] = MM1_Queue(lambda, mu, howmany)
+waitTimes = zeros(howmany,1); % Per convenzione, il primo cliente ha tempo di attesa 0
+
+for j = 2:howmany
+    % Tempi tra arrivi e tempi di servizio esponenziali
+    intTime  = exprnd(1/lambda); % Inter-arrival time
+    servTime = exprnd(1/mu);     % Service time
+
+    % Ricorsione di Lindley:
+    % il tempo di attesa del cliente j dipende dal tempo di attesa del cliente j-1
+    waitTimes(j) = max(0, waitTimes(j-1) + servTime - intTime);
+end
+end
+
+% Analisi diagnostiche sulla decima replica (ww dell'ultimo ciclo)
+
+% Autocorrelazione: evidenzia dipendenza seriale nei tempi di attesa
+figure;
+autocorr(ww)
+
+% Istogramma: controlla se la distribuzione empirica è compatibile con una normale
+figure;
+hist(ww)
+
+% Media cumulata: verifica se/quanto la simulazione ha raggiunto il regime stazionario
+figure;
+t = (1:sampleSize)';
+plot(t, cumsum(ww(t))./t)
+
+% Osservazione: se gli intervalli non si sovrappongono, l'inferenza è instabile.
+% Possibili cause principali:
+% 1) I tempi di attesa non sono indipendenti: la correlazione porta a sottostimare la varianza.
+% 2) La normalità non è una buona approssimazione per ww.
+% 3) La stima può essere influenzata dal transitorio (warm-up) e non riflettere pienamente il regime.
+\end{lstlisting}
+
+\paragraph{Conclusioni}
+Dalla simulazione emergono tre criticità legate all’uso diretto di \texttt{normfit(ww)} sui tempi di attesa, e i tre plot allegati le rendono \textcolor{Indigo}{\textbf{molto evidenti}}.\\
+\hspace*{1.5em}\textcolor{Indigo}{\textbf{(i) Dipendenza seriale.}} Il grafico di autocorrelazione mostra una \textbf{correlazione molto alta} anche a lag elevati: i tempi di attesa non sono i.i.d., perché derivano dalla ricorsione di Lindley. Questo significa che \texttt{normfit} lavora con un’ipotesi strutturalmente sbagliata e tende a produrre intervalli \textbf{troppo ottimisti} (varianza sottostimata rispetto alla varianza “effettiva” con correlazione).\\
+\hspace*{1.5em}\textcolor{Indigo}{\textbf{(ii) Ipotesi di normalità non adeguata.}} L’istogramma dei tempi di attesa è fortemente asimmetrico (massa concentrata su valori piccoli e \textbf{coda lunga}): è difficile giustificare un fit normale per la distribuzione di \texttt{ww}. Di conseguenza, anche quando gli intervalli numericamente sembrano ragionevoli, l’inferenza “tipo normale” può risultare fuorviante.\\
+\hspace*{1.5em}\textcolor{Indigo}{\textbf{(iii) Effetti di transitorio.}} La media cumulata cresce rapidamente all’inizio e poi si assesta lentamente verso un valore stabile: questo indica un \textbf{warm-up non trascurabile}. Se non si gestisce il transitorio (ad es.\ eliminando i primi campioni), la stima della media e gli intervalli risultano influenzati dalla fase iniziale e possono non riflettere correttamente il regime stazionario.\\
+\hspace*{1.5em}In sintesi, i plot mostrano che \textcolor{Indigo}{\textbf{correlazione elevata}}, \textcolor{Indigo}{\textbf{non-normalità}} e \textcolor{Indigo}{\textbf{transitorio}} sono presenti contemporaneamente: per questo gli intervalli prodotti da \texttt{normfit(ww)} non sono un indicatore affidabile della precisione della stima, anche quando il valore teorico appare “vicino” ai risultati osservati.
+
+% Tre plot in una riga (sostituisci i nomi file con i tuoi)
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.32\textwidth}
+    \centering
+    \includegraphics[height=2.8cm]{Figures/1.pdf}
+    \caption{Istogramma dei tempi di attesa}
+\end{subfigure}\hfill
+\begin{subfigure}[t]{0.32\textwidth}
+    \centering
+    \includegraphics[height=2.8cm]{Figures/2.pdf}
+    \caption{Autocorrelazione dei tempi di attesa}
+\end{subfigure}\hfill
+\begin{subfigure}[t]{0.32\textwidth}
+    \centering
+    \includegraphics[height=2.8cm]{Figures/3.pdf}
+    \caption{Media cumulata dei tempi di attesa}
+\end{subfigure}
+
+\caption{Diagnostiche sulla simulazione della coda M/M/1: distribuzione empirica, dipendenza seriale e convergenza al regime stazionario.}
+\label{fig:mm1_diagnostics}
+\end{figure}
+
+\subsection{Simulazione (s,S) con revisione periodica: script \emph{extremely naive}}
+
+\paragraph{Contesto del problema}
+Lo script implementa una simulazione \textbf{molto semplificata} di una politica di controllo scorte \textbf{(s,S) a revisione periodica}.\\
+\hspace*{1.5em}L’obiettivo è capire se la politica sia \textcolor{Indigo}{\textbf{“buona”}} oppure no; tuttavia, in un problema di inventory, il concetto di bontà non è automatico: serve scegliere un criterio di valutazione (ad esempio livello di servizio, vendite perse, costo di mantenimento, costo totale, ecc.).\\
+\hspace*{1.5em}Nel modello si osserva il sistema su un orizzonte discreto $T$ e, a ogni periodo, si aggiorna il livello di scorta disponibile, si soddisfa (se possibile) la domanda e si decide se emettere un ordine: se la scorta finale scende sotto la soglia $s$, si ordina quanto basta per riportarsi a $S$.
+
+\begin{lstlisting}[style=matlabStyle]
+%% 2 - EXTREMELY NAIVE: simulazione politica (s,S) a revisione periodica
+% Scopo: simulare una politica (s,S) e valutare (in modo qualitativo) se la scelta
+% dei parametri è soddisfacente. Per giudicare "buona/cattiva" una policy serve però
+% fissare una metrica (es. vendite perse, stockout, livello di servizio, costi).
+
+% Parametri della policy (s,S)
+smallS = 50;   % soglia di riordino: se l'inventario finale <= s allora riordino
+bigS   = 100;  % livello target: dopo il riordino voglio tornare a S
+
+% Parametri della domanda (assunzione: domanda ~ Normale)
+mu    = 60;
+sigma = 10;
+
+% Orizzonte di simulazione e vettori di output
+T = 50;                  % orizzonte temporale discreto
+onHand    = zeros(T,1);  % scorta disponibile a inizio periodo (dopo arrivi)
+aveOnHand = zeros(T,1);  % scorta media nel periodo (proxy per holding cost)
+lostSales = zeros(T,1);  % vendite perse (assunzione: no backorder)
+stockOut  = NaN(T,1);    % indicatore stockout (true/false)
+ordered   = zeros(T,1);  % quantità ordinata a fine periodo
+
+% Scenario di domanda (caso semplice per debug)
+demand = repmat(10,T,1); % domanda costante = 10 per tutti i periodi
+
+% Alternativa: domanda casuale normale (attenzione a domande negative se sigma è grande)
+% demand = normrnd(mu,sigma,T,1);
+
+% Stato iniziale del sistema
+endInv  = bigS;  % inventario finale del periodo precedente (inizializzato a S)
+onOrder = 0;     % ordine in arrivo dal periodo precedente (lead time = 1 periodo)
+
+% Simulazione a tempo discreto (revisione periodica)
+for t = 1:T
+    % Arrivo dell'ordine emesso nel periodo precedente
+    onHand(t) = endInv + onOrder;
+
+    % Soddisfazione della domanda nel periodo t
+    if demand(t) <= onHand(t)
+        % nessuno stockout: domanda interamente soddisfatta
+        stockOut(t)  = false;
+        lostSales(t) = 0;
+        endInv       = onHand(t) - demand(t);
+    else
+        % stockout: non posso soddisfare tutta la domanda
+        stockOut(t)  = true;
+        lostSales(t) = demand(t) - onHand(t);
+        endInv       = 0;
+    end
+
+    % Scorta media nel periodo (utile per stimare un costo di holding)
+    aveOnHand(t) = (onHand(t) + endInv) / 2;
+
+    % Decisione di riordino a fine periodo secondo politica (s,S)
+    if endInv <= smallS
+        % sottosoglia: ordino per riportarmi a S
+        onOrder    = bigS - endInv;
+        ordered(t) = onOrder;
+    else
+        % sopra soglia: non ordino
+        onOrder    = 0;
+        ordered(t) = 0;
+    end
+end
+\end{lstlisting}
+
+\paragraph{Conclusioni}
+Lo script produce una \textbf{traiettoria campionaria completa} del sistema di inventario sotto una politica \textbf{(s,S) a revisione periodica}, ma il suo output rimane \textcolor{Indigo}{\textbf{puramente descrittivo}} e non immediatamente interpretabile in termini di performance.\\
+\hspace*{1.5em}\textcolor{Indigo}{\textbf{(i) Esistenza di un output, ma non di una valutazione.}} La simulazione genera diverse serie temporali di interesse: livello di scorta disponibile (\texttt{onHand}), scorta media per periodo (\texttt{aveOnHand}), vendite perse (\texttt{lostSales}), indicatori di stockout (\texttt{stockOut}) e quantità ordinate (\texttt{ordered}). Tuttavia, nessuna di queste variabili viene aggregata in un indicatore sintetico che permetta di giudicare la bontà della policy.\\
+\hspace*{1.5em}\textcolor{Indigo}{\textbf{(ii) Interpretazione dei risultati con domanda costante.}} Nel caso mostrato (\texttt{demand = 10}), la domanda è molto inferiore al livello target $S=100$, per cui il sistema tende rapidamente a stabilizzarsi: non si osservano stockout e le vendite perse sono nulle. Questo comportamento è coerente, ma poco informativo, perché non mette sotto stress la politica (s,S).\\
+\hspace*{1.5em}\textcolor{Indigo}{\textbf{(iii) Ruolo dei grafici diagnostici.}} Tracciando le variabili nel tempo (ad esempio \texttt{onHand}, \texttt{ordered} o \texttt{lostSales}) si ottiene una comprensione qualitativa della dinamica del sistema: oscillazioni della scorta, frequenza dei riordini e presenza (o assenza) di stockout. Tuttavia, tali grafici servono solo come \textbf{strumenti esplorativi} e non sostituiscono una vera analisi delle prestazioni.\\
+\hspace*{1.5em}In sintesi, lo script ha valore didattico perché chiarisce la \textbf{meccanica della politica (s,S)} e la sua implementazione in tempo discreto, ma per diventare uno strumento decisionale deve essere esteso introducendo una \textcolor{Indigo}{\textbf{funzione obiettivo}} (ad esempio costo totale o livello di servizio medio) e scenari di domanda più realistici.
+
+
+\subsection{Politica (s,S) a revisione periodica: simulazione su scenari e ottimizzazione dei parametri (3a--3c)}
+
+\paragraph{Contesto del problema}
+Questa parte unifica tre blocchi coerenti: \textbf{(3a)} una funzione che simula una politica \textbf{(s,S)} su uno o più scenari di domanda, \textbf{(3b)} uno script di \textcolor{Indigo}{\textbf{ottimizzazione}} dei parametri $(s,S)$ minimizzando il \textbf{costo medio} stimato via simulazione, e \textbf{(3c)} un test su domanda costante per confrontare i risultati con un riferimento tipo \textbf{EOQ}.\\
+\hspace*{1.5em}L’impostazione è quella tipica della \textcolor{Indigo}{\textbf{simulation--optimization}}: la funzione obiettivo non è disponibile in forma chiusa, ma viene \textbf{stimata} (costo totale) tramite simulazione; in seguito, la stima viene minimizzata con algoritmi di ricerca che non richiedono derivate (qui \texttt{patternsearch} e \texttt{surrogateopt}).\\
+\hspace*{1.5em}Gli scenari di domanda vengono generati \textbf{all’esterno} della funzione per garantire modularità e confronti ripetibili tra soluzioni. Inoltre si distingue tra \textbf{in-sample} (usato per ottimizzare) e \textbf{out-of-sample} (utile per controllare la robustezza, anche se qui non impiegato direttamente).\\
+\hspace*{1.5em}\textcolor{Indigo}{\textbf{Nota operativa.}} \texttt{SS\_Simulation} è una \textbf{funzione}: se viene eseguita direttamente dal Command Window senza argomenti (es.\ \texttt{>> SS\_Simulation}), MATLAB genera l’errore \emph{Not enough input arguments}. La funzione è pensata per essere chiamata da (3b--3c) tramite \texttt{objfun}, passando esplicitamente tutti gli input.
+
+\begin{lstlisting}[style=matlabStyle]
+%% 3a - Simulation of (s,S) periodic review policy (funzione)
+% Scopo: simulare una policy (s,S) su più scenari di domanda, calcolando:
+% - totalCost(k): costo totale della replica k (da usare in ottimizzazione)
+% - freqStockout(k): frequenza di periodi con vendite perse (proxy servizio)
+
+function [totalCost, freqStockout] = SS_Simulation(smallS, bigS, demandScenarios, ...
+    initialStock, onHandCost, lostPenalty, unitCost, fixedCharge)
+
+% Parametri della policy
+% smallS, bigS    : soglia s e livello target S (con S >= s)
+% demandScenarios : matrice scenari (righe = repliche, colonne = periodi)
+% initialStock    : scorta iniziale (può influenzare il transitorio)
+
+% Parametri economici
+% onHandCost   : costo di giacenza per unità media in stock
+% lostPenalty  : penalità per unità di domanda persa (vendite perse)
+% unitCost     : costo unitario per unità ordinata
+% fixedCharge  : costo fisso ogni volta che si effettua un ordine (setup)
+
+% Nota: ogni riga di demandScenarios è una replica di durata T
+[numScenarios, T] = size(demandScenarios);
+
+% Output: un valore per ciascuno scenario
+totalCost    = zeros(numScenarios,1);
+freqStockout = zeros(numScenarios,1);
+
+% Vettori di monitoraggio per una singola replica
+onHand    = zeros(T,1);    % scorta disponibile a inizio periodo
+aveOnHand = zeros(T,1);    % scorta media nel periodo
+lostSales = zeros(T,1);    % vendite perse
+stockOut  = NaN(T,1);      % true/false stockout
+ordered   = zeros(T,1);    % quantità ordinata a fine periodo
+
+% Ciclo sulle repliche (scenari)
+for k = 1:numScenarios
+
+    % Stato iniziale della replica k
+    endInv  = initialStock;  % scorta finale iniziale
+    onOrder = 0;             % nulla in transito (lead time = 1 periodo)
+    demand  = demandScenarios(k,:);
+
+    % Evoluzione temporale (revisione periodica)
+    for t = 1:T
+        % Arrivo dell'ordine emesso nel periodo precedente
+        onHand(t) = endInv + onOrder;
+
+        % Soddisfazione domanda (assunzione: vendite perse, no backorder)
+        if demand(t) <= onHand(t)
+            stockOut(t)  = false;
+            lostSales(t) = 0;
+            endInv       = onHand(t) - demand(t);
+        else
+            stockOut(t)  = true;
+            lostSales(t) = demand(t) - onHand(t);
+            endInv       = 0;
+        end
+
+        % Scorta media del periodo (per holding cost)
+        aveOnHand(t) = (onHand(t) + endInv)/2;
+
+        % Decisione di riordino secondo (s,S)
+        if endInv <= smallS
+            onOrder    = bigS - endInv;  % riordino per tornare a S
+            ordered(t) = onOrder;
+        else
+            onOrder    = 0;
+            ordered(t) = 0;
+        end
+    end
+
+    % Costo totale della replica k
+    totalCost(k) = onHandCost*sum(aveOnHand) + lostPenalty*sum(lostSales) + ...
+        unitCost*sum(ordered) + fixedCharge*sum(ordered>0);
+
+    % Frequenza stockout: frazione di periodi con lostSales > 0
+    freqStockout(k) = sum(lostSales>0)/T;
+end
+\end{lstlisting}
+
+\begin{lstlisting}[style=matlabStyle]
+%% 3b - Optimization: Script to optimize (s,S) parameters
+
+% Economics
+unitCost = 10;
+onHandCost = 0.1*unitCost;
+lostPenalty = 2*unitCost; % penalità elevata per vendite perse
+fixedCharge = 1000;
+
+% Demand distribution (oggetto distribuzione)
+pd = makedist('NegativeBinomial','R',20,'P',.3);
+
+% Make inSample scenario
+rng default
+horizonInSample = 30000; % una replica molto lunga
+inSampleDemand = random(pd,1,horizonInSample);
+
+% Initial stock (scelta per ridurre l'effetto del transitorio)
+initialStock = mean(pd)+2*std(pd);
+
+% Objective function (minimizza costo medio simulato)
+% Parametrizzazione: x(1)=s, x(2)=S-s così impongo S>=s
+objfun = @(x) mean(SS_Simulation(x(1), x(1)+x(2), inSampleDemand, ...
+    initialStock, onHandCost, lostPenalty, unitCost, fixedCharge));
+
+upperBounds = [mean(pd)+10*std(pd);50*mean(pd)];
+
+% Use pattern search
+xStar = patternsearch(objfun,[2*mean(pd);5*mean(pd)],[],[],[],[],zeros(2,1),upperBounds);
+smallS_Pattern = xStar(1);
+bigS_Pattern = xStar(1)+xStar(2);
+fprintf(1,'Pattern Search: smallS = %.2f, bigS = %.2f\n', smallS_Pattern, bigS_Pattern);
+
+% Use surrogate opt
+xStar = surrogateopt(objfun,zeros(2,1),upperBounds);
+smallS_Surrogate = xStar(1);
+bigS_Surrogate = xStar(1)+xStar(2);
+fprintf(1,'Surrogate Opt: smallS = %.2f, bigS = %.2f\n', smallS_Surrogate, bigS_Surrogate);
+\end{lstlisting}
+
+\begin{lstlisting}[style=matlabStyle]
+%% 3c - Test EOQ Script to optimize (s,S) parameters (domanda costante)
+
+% Economics
+unitCost = 10;
+onHandCost = 0.1*unitCost;
+lostPenalty = 2*unitCost;
+fixedCharge = 10000;
+
+% Make inSample scenario
+rng default
+horizonInSample = 80000;
+D = 5; % domanda costante
+inSampleDemand = D*ones(1,horizonInSample);
+
+EOQ = sqrt(2*D*fixedCharge/onHandCost)
+initialStock = EOQ;
+
+% Create objfun
+objfun = @(x) mean(SS_Simulation(x(1), x(1)+x(2), inSampleDemand, ...
+    initialStock, onHandCost, lostPenalty, unitCost, fixedCharge));
+upperBounds = [100*initialStock;100*initialStock];
+
+% Use pattern search
+xStar = patternsearch(objfun,upperBounds,[],[],[],[],zeros(2,1),upperBounds);
+
+smallS_Pattern = xStar(1);
+bigS_Pattern = xStar(1)+xStar(2);
+fprintf(1,'Pattern Search: smallS = %.2f, bigS = %.2f\n', smallS_Pattern, bigS_Pattern);
+\end{lstlisting}
+
+\paragraph{Conclusioni}
+Il blocco (3a--3c) realizza un flusso completo di \textcolor{Indigo}{\textbf{simulation--optimization}} per una policy (s,S).\\
+\hspace*{1.5em}\textcolor{Indigo}{\textbf{(i) Output della simulazione.}} La funzione \texttt{SS\_Simulation} produce due output utili: \textbf{costo totale} (vettore per replica) e \textbf{frequenza di stockout}. In (3b--3c) viene ottimizzata la \textbf{media} del costo totale, quindi l’output è direttamente trasformato in una funzione obiettivo minimizzabile.\\
+\hspace*{1.5em}\textcolor{Indigo}{\textbf{(ii) Interpretazione della figura di (3b).}} Il grafico di \texttt{patternsearch} mostra la riduzione del \textbf{best function value} lungo le iterazioni fino a stabilizzarsi: è l’evidenza che l’algoritmo sta esplorando lo spazio dei parametri e convergendo verso un valore di costo più basso. Coerentemente, nel Command Window vengono stampate le coppie $(s,S)$ trovate (Pattern Search e Surrogate Opt).\\
+\hspace*{1.5em}\textcolor{Indigo}{\textbf{(iii) Interpretazione del test (3c).}} Nel caso a domanda costante, \texttt{EOQ} fornisce una scala di riferimento per l’ordine “ragionevole”. L’ottimizzazione via \texttt{patternsearch} porta infatti a un $S$ dell’ordine di grandezza dell’EOQ (come si vede dall’output stampato), mentre $s$ può risultare molto piccolo: con domanda deterministica e costo fisso elevato, la logica è \textbf{riordinare raramente} ma in lotti grandi, riducendo il numero di ordini.\\
+\hspace*{1.5em}In sintesi, (3a) definisce una metrica quantitativa, (3b) la minimizza su uno scenario stocastico in-sample e (3c) controlla che la soluzione sia coerente in un caso deterministico benchmark.
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=2.8cm]{Figures/4.pdf}
+\caption{Andamento del \emph{best function value} durante l’ottimizzazione dei parametri $(s,S)$ tramite \texttt{patternsearch} nello scenario stocastico in-sample.}
+\label{fig:ss_3b}
+\end{figure}
+
+
+\subsection{Coda M/M/1 con balking (FIFO): simulazione percentuale di clienti che rinunciano (4a--4b)}
+
+\paragraph{Contesto del problema}
+Si considera una \textbf{coda M/M/1} (interarrivi e tempi di servizio esponenziali, tassi assegnati) con disciplina \textbf{FIFO} e un meccanismo di \textbf{balking}: quando un cliente arriva, decide se entrare o rinunciare in funzione della lunghezza della coda.\\
+\hspace*{1.5em}La regola di balking è la seguente: il cliente \textcolor{Indigo}{\textbf{entra sicuramente}} se la coda è lunga meno di 10 clienti, entra con \textcolor{Indigo}{\textbf{probabilità 50\%}} se la lunghezza è tra 10 e 15 (estremi inclusi), e \textcolor{Indigo}{\textbf{rinuncia sicuramente}} se la coda è maggiore di 15.\\
+\hspace*{1.5em}L’obiettivo della simulazione è stimare, su un numero fissato di clienti serviti, la \textcolor{Indigo}{\textbf{percentuale di clienti che rinunciano}} (ossia che non si mettono in coda).\\
+\hspace*{1.5em}Il codice propone due implementazioni: \textbf{(4a)} una versione script “diretta” basata sulla simulazione a eventi discreti (arrivo/completamento), e \textbf{(4b)} una versione più pulita in forma di funzione, che incapsula lo \textcolor{Indigo}{\textbf{stato del sistema}} e separa la logica degli eventi tramite funzioni annidate.
+
+\begin{lstlisting}[style=matlabStyle]
+%% 4a - ESAME BA 03/07/2024
+% Coda M/M/1 FIFO con balking: stimo quanti clienti rinunciano a entrare.
+% Regola di balking:
+% - se la lunghezza della coda e' < 10: il cliente entra sempre
+% - se la lunghezza e' tra 10 e 15 (inclusi): entra con probabilita' 50%
+% - se la lunghezza e' > 15: rinuncia sicuramente
+
+%% VERSIONE 1 - Script M/M/1 con balking
+
+% Tassi
+arrivalRate = 1;
+serviceRate = 1.4;
+
+% Stato del sistema
+numInQueue = 0; % numero nel sistema (incluso l'eventuale cliente in servizio)
+count = 0;      % numero di completamenti di servizio
+lost  = 0;      % numero di clienti persi per balking
+
+% Tempi del prossimo evento (simulazione a eventi discreti)
+nextCompletion = inf;                 % sistema inizialmente vuoto
+nextArrival    = exprnd(1/arrivalRate);
+toServe = 10000;                      % voglio servire questo numero di clienti
+
+while count <= toServe
+
+    % Evento di completamento: avviene se e' il prossimo tra i due eventi
+    if nextCompletion <= nextArrival
+        clock = nextCompletion;       % avanzo l'orologio
+        count = count + 1;            % ho completato un servizio
+
+        if numInQueue == 0
+            % nessuno in coda: il server diventa idle
+            nextCompletion = inf;
+        else
+            % qualcuno in coda: parte subito il servizio del prossimo cliente
+            numInQueue = numInQueue - 1;
+            nextCompletion = clock + exprnd(1/serviceRate);
+        end
+
+    % Evento di arrivo
+    else
+        clock = nextArrival;          % avanzo l'orologio
+
+        if numInQueue == 0
+            % server idle: il cliente entra e inizia subito il servizio
+            numInQueue = 1;
+            nextCompletion = clock + exprnd(1/serviceRate);
+
+        elseif numInQueue < 10
+            % entra sicuramente
+            numInQueue = numInQueue + 1;
+
+        elseif numInQueue <= 15
+            % entra con probabilita' 50% (altrimenti balking)
+            if rand > 0.5
+                lost = lost + 1;
+            else
+                numInQueue = numInQueue + 1;
+            end
+
+        else
+            % coda troppo lunga: balking certo
+            lost = lost + 1;
+        end
+
+        % Pianifico il prossimo arrivo
+        nextArrival = clock + exprnd(1/arrivalRate);
+    end
+end
+
+fprintf(1,'%d customers balked\n', lost);
+\end{lstlisting}
+
+\begin{lstlisting}[style=matlabStyle]
+%% 4b - VERSIONE 2: funzione M/M/1 con balking (piu' modulare)
+% Idea: incapsulo lo stato in una struct e separo la logica dei due eventi
+% (completamento e arrivo) tramite funzioni annidate.
+
+function lost = MM1_Balking(arrivalRate,serviceRate,toServe)
+
+% Stato del sistema (incapsulato)
+state.numInQueue = 0;   % numero nel sistema (include il cliente in servizio)
+state.count      = 0;   % numero di completamenti
+state.lost       = 0;   % clienti persi per balking
+state.clock      = 0;   % tempo corrente
+
+% Tempi del prossimo evento
+state.nextCompletion = inf;
+state.nextArrival    = exprnd(1/arrivalRate);
+
+% Simulazione a eventi: ad ogni passo scelgo l'evento piu' vicino
+while state.count <= toServe
+    if state.nextCompletion <= state.nextArrival
+        state.clock = state.nextCompletion;
+        state = manageService(state);
+    else
+        state.clock = state.nextArrival;
+        state = manageArrival(state);
+    end
+end
+
+lost = state.lost;
+
+% --- Funzioni annidate: aggiornano lo stato dato un evento ---
+
+    function state = manageService(state)
+        % Gestione completamento di servizio
+        state.count = state.count + 1;
+
+        if state.numInQueue == 0
+            % nessuno in coda: server idle
+            state.nextCompletion = inf;
+        else
+            % prendo il prossimo cliente in coda e schedulo il completamento
+            state.numInQueue = state.numInQueue - 1;
+            state.nextCompletion = state.clock + exprnd(1/serviceRate);
+        end
+    end
+
+    function state = manageArrival(state)
+        % Gestione arrivo con regola di balking
+        if state.numInQueue == 0
+            % server idle: servizio immediato
+            state.numInQueue = 1;
+            state.nextCompletion = state.clock + exprnd(1/serviceRate);
+
+        elseif state.numInQueue < 10
+            % entra sicuramente
+            state.numInQueue = state.numInQueue + 1;
+
+        elseif state.numInQueue <= 15
+            % entra con probabilita' 50%
+            if rand > 0.5
+                state.lost = state.lost + 1;
+            else
+                state.numInQueue = state.numInQueue + 1;
+            end
+
+        else
+            % balking certo
+            state.lost = state.lost + 1;
+        end
+
+        % Pianifico il prossimo arrivo
+        state.nextArrival = state.clock + exprnd(1/arrivalRate);
+    end
+
+end
+\end{lstlisting}
+
+\paragraph{Conclusioni}
+Il codice implementa correttamente una simulazione a \textbf{eventi discreti} con due soli eventi possibili (arrivo/completamento), includendo una regola di balking dipendente dalla lunghezza della coda.\\
+\hspace*{1.5em}\textcolor{Indigo}{\textbf{(i) Output di interesse.}} La quantità \texttt{lost} rappresenta il numero di clienti che rinunciano; per ottenere la \textbf{percentuale} richiesta basta normalizzare rispetto agli arrivi totali simulati (oppure rispetto a \texttt{lost + served}, a seconda della definizione adottata).\\
+\hspace*{1.5em}\textcolor{Indigo}{\textbf{(ii) Struttura a eventi e stato.}} La versione funzione (4b) è più pulita perché incapsula lo stato e separa la logica dei due eventi, rendendo più facile estendere il modello (ad esempio aggiungendo nuove regole o nuove metriche).\\
+\hspace*{1.5em}\textcolor{Indigo}{\textbf{(iii) Interpretazione del parametro di soglia.}} Le soglie 10 e 15 regolano direttamente il trade-off tra congestione e perdita di domanda: soglie più basse riducono la congestione ma aumentano i clienti persi, soglie più alte fanno l’opposto.\\
+\hspace*{1.5em}In sintesi, la versione (4b) è preferibile per riuso e manutenzione, mentre la versione (4a) è utile come implementazione immediata e trasparente della logica di simulazione.
+
+\subsection{Two-stage ATP/ATO: modello ai valori attesi vs modello stocastico (5a--5b)}
+
+\paragraph{Contesto del problema}
+Questi script confrontano due approcci per un problema di pianificazione in presenza di domanda incerta, formulato come \textbf{problema a due stadi}.\\
+\hspace*{1.5em}Nel \textcolor{Indigo}{\textbf{primo stadio}} si decide quante componenti produrre (\texttt{make}), soggette a vincoli di capacità sulle risorse. Nel \textcolor{Indigo}{\textbf{secondo stadio}} si decide quante unità di prodotto finito vendere (\texttt{sell}) una volta osservata la domanda (che varia per scenario).\\
+\hspace*{1.5em}Il codice implementa due strategie: (i) un \textbf{modello deterministico} basato sulla \textcolor{Indigo}{\textbf{domanda media}} (Expected Value, EV), e (ii) un \textbf{modello stocastico} (Recourse Problem, RP) che ottimizza il profitto atteso su più scenari.\\
+\hspace*{1.5em}Nel blocco 5b, oltre alla soluzione EV e RP, viene calcolata la metrica \textcolor{Indigo}{\textbf{VSS}} (\emph{Value of the Stochastic Solution}), che quantifica il guadagno di usare il modello stocastico rispetto a “fissare” le decisioni di primo stadio ottenute dal modello ai valori attesi.
+
+\begin{lstlisting}[style=matlabStyle]
+%% 5a - Two Stages ATP (con intlinprog): modello ai valori attesi vs modello stocastico
+
+% DATI DEL PROBLEMA
+numItems     = 3;
+numComp      = 5;
+numScenarios = 3;
+numResources = 3;
+
+compCost = [20; 30; 10; 10; 10];   % costo componenti (primo stadio)
+gozinto  = [ 1 1 1 0 0
+             1 1 0 1 0
+             1 1 0 0 1 ];          % matrice di distinta base (prodotti -> componenti)
+
+needRes  = [ 1 2 1
+             1 2 2
+             2 2 0
+             1 2 0
+             3 2 0 ];              % consumo risorse per ogni componente
+
+availRes = [800; 700; 600];        % disponibilita' risorse
+endPrice = [80; 70; 90];           % prezzo di vendita dei prodotti
+
+demand = [ 100  50 120
+            50  25  60
+           100 110  60 ];          % domanda per scenario (righe=prodotti, colonne=scenari)
+
+probs = ones(numScenarios,1)/numScenarios;
+demandAverage = mean(demand,2);
+
+%% 1) MODELLO DETERMINISTICO AI VALORI ATTESI (EV) - variabili intere
+% Variabili di decisione: [make; sell]
+% Obiettivo: massimizzare profitto = ricavi - costi
+% In intlinprog si minimizza, quindi cambio segno ai ricavi ( -endPrice )
+
+objCoeff = [compCost; -endPrice];
+
+% Bounds: componenti senza upper bound, vendite limitate dalla domanda media
+lb = zeros(numComp+numItems,1);
+ub = [repmat(Inf,numComp,1); demandAverage];
+
+% Vincoli componenti: gozinto' * sell <= make
+A1 = [-eye(numComp), gozinto'];
+b1 = zeros(numComp,1);
+
+% Vincoli risorse: needRes' * make <= availRes
+A2 = [needRes', zeros(numResources,numItems)];
+b2 = availRes;
+
+A = [A1; A2];
+b = [b1; b2];
+
+% Risoluzione
+[xVar, aux] = intlinprog(objCoeff,1:length(objCoeff),A,b,[],[],lb,ub);
+profit  = -aux;
+display(xVar);
+display(profit);
+
+%% 2) MODELLO STOCASTICO (RP) - variabili continue (secondo stadio per scenario)
+% Variabili: [make; sell_1; ...; sell_S]
+% Obiettivo: costi primo stadio + ricavi attesi sui vari scenari
+
+objCoeff = [compCost];
+for s = 1:numScenarios
+    objCoeff = [objCoeff; -probs(s)*endPrice];
+end
+
+lb = zeros(numComp+numScenarios*numItems,1);
+ub = [repmat(Inf,numComp,1); reshape(demand,numItems*numScenarios,1)];
+
+% Matrice vincoli con struttura a blocchi (due stadi)
+A = zeros(numResources+numScenarios*numComp, numComp+numScenarios*numItems);
+
+% Vincoli risorse (uguali per tutti gli scenari)
+A(1:numResources, 1:numComp) = needRes';
+
+% Vincoli componenti per ciascuno scenario: gozinto' * sell_s <= make
+baseRow = numResources;
+baseCol = numComp;
+for s = 1:numScenarios
+    A(baseRow+(1:numComp), 1:numComp) = -eye(numComp);
+    A(baseRow+(1:numComp), baseCol+(1:numItems)) = gozinto';
+    baseRow = baseRow + numComp;
+    baseCol = baseCol + numItems;
+end
+
+b = [availRes; zeros(numScenarios*numComp,1)];
+
+% Risoluzione
+[xVarS, aux] = intlinprog(objCoeff,1:length(objCoeff),A,b,[],[],lb,ub);
+profitS = -aux;
+display(xVarS);
+display(profitS);
+\end{lstlisting}
+
+\begin{lstlisting}[style=matlabStyle]
+%% 5b - In Two Stage ATO (con optimproblem): EV vs RP e calcolo VSS
+
+format bank
+typeVar = 'integer';      % soluzione con variabili intere
+% typeVar = 'continuous'; % alternativa: rilassamento continuo
+
+% DATI DEL PROBLEMA (stessi dati di 5a)
+numItems     = 3;
+numComp      = 5;
+numScenarios = 3;
+numResources = 3;
+
+compCost = [20; 30; 10; 10; 10];
+gozinto  = [ 1 1 1 0 0
+             1 1 0 1 0
+             1 1 0 0 1 ];
+needRes  = [ 1 2 1
+             1 2 2
+             2 2 0
+             1 2 0
+             3 2 0 ];
+availRes = [800; 700; 600];
+endPrice = [80; 70; 90];
+
+demand = [ 100  50 120
+            50  25  60
+           100 110  60 ];
+probs = ones(numScenarios,1)/numScenarios;
+
+%% 1) PROBLEMA AI VALORI ATTESI (EV)
+demandAverage = mean(demand,2);
+
+probEV = optimproblem('ObjectiveSense','max');
+x = optimvar('x', numComp, 1, 'LowerBound', 0, 'Type', typeVar);                 % componenti
+y = optimvar('y', numItems, 1, 'LowerBound', 0, 'UpperBound', demandAverage, ...
+             'Type', typeVar);                                                  % prodotti finiti (media)
+
+probEV.Objective = -dot(compCost,x) + dot(endPrice,y);
+probEV.Constraints.cons1 = needRes' * x <= availRes;     % vincoli capacita'
+probEV.Constraints.cons2 = gozinto' * y <= x;            % vincolo distinta base
+
+showproblem(probEV)
+[solEV, profitEV] = solve(probEV);
+
+solEV.x
+solEV.y
+profitEV
+
+%% 2) PROBLEMA STOCASTICO (RP) con ricorso
+probRP = optimproblem('ObjectiveSense','max');
+
+x = optimvar('x', numComp, 1, 'LowerBound', 0, 'Type', typeVar);                 % primo stadio
+y = optimvar('y', numItems, numScenarios, 'LowerBound', 0, 'UpperBound', demand, ...
+             'Type', typeVar);                                                  % secondo stadio per scenario
+
+% Ricavo atteso: per ogni scenario calcolo endPrice'*y(:,s) e faccio media pesata
+probRP.Objective = -dot(compCost,x) + dot(endPrice'*y, probs);
+
+probRP.Constraints.cons1 = needRes' * x <= availRes;     % vincoli primo stadio
+
+% Vincoli di componente per ogni scenario: gozinto' * y(:,s) <= x
+compConstr = optimconstr(numScenarios,numComp);
+for s = 1:numScenarios
+    compConstr(s,:) = gozinto' * y(:,s) <= x;
+end
+probRP.Constraints.cons2 = compConstr;
+
+showproblem(probRP)
+[solRP, profitRP] = solve(probRP);
+
+solRP.x
+solRP.y
+profitRP
+
+%% 3) VALUTAZIONE DELLA SOLUZIONE EV NEL MODELLO STOCASTICO (calcolo VSS)
+% Fisso la decisione di primo stadio alla soluzione EV e ricalcolo il profitto
+probRP.Constraints.fixFirstStage = x == solEV.x;
+[solRP2, profitRP2] = solve(probRP);
+
+solRP2.y
+profitRP2
+
+% VSS: valore aggiunto della soluzione stocastica rispetto alla EV "valutata" su scenari
+VSS = profitRP - profitRP2
+format
+\end{lstlisting}
+
+\paragraph{Conclusioni}
+I blocchi (5a--5b) mostrano chiaramente la differenza tra un modello ai \textbf{valori attesi} (EV) e un modello \textbf{stocastico a due stadi} (RP), e quantificano il beneficio di considerare l’incertezza tramite la metrica \textcolor{Indigo}{\textbf{VSS}}.\\
+\hspace*{1.5em}\textcolor{Indigo}{\textbf{(i) Soluzione EV (domanda media).}} Nel caso EV, il solver trova una soluzione ottima con profitto pari a \textbf{3220}. La decisione di primo stadio risulta \texttt{x} = (116,116,26,0,90) e la decisione di vendita sulla domanda media è \texttt{y} = (26,0,90). Questo conferma che il modello EV ottimizza rispetto a una domanda “aggregata”, ignorando esplicitamente la variabilità tra scenari.\\
+\hspace*{1.5em}\textcolor{Indigo}{\textbf{(ii) Soluzione stocastica RP.}} Nel modello a due stadi (RP), la soluzione ottima produce un profitto atteso pari a \textbf{2883.33}, con decisione di primo stadio \texttt{x} = (115,115,55,0,65). Al secondo stadio, le vendite \texttt{y} dipendono dallo scenario e si adattano ai diversi vincoli di domanda: questo è esattamente l’effetto del \textbf{ricorso} (si decide cosa vendere dopo aver osservato lo scenario).\\
+\hspace*{1.5em}\textcolor{Indigo}{\textbf{(iii) Valutazione della soluzione EV nel modello stocastico e VSS.}} Fissando nel problema stocastico la decisione di primo stadio uguale a quella EV (\texttt{x == solEV.x}), il profitto ottenuto scende a \textbf{2320}. La differenza tra la soluzione pienamente stocastica e la soluzione EV “trapiantata” nel modello a scenari è la \textcolor{Indigo}{\textbf{VSS}}, che nei risultati vale:
+\[
+\text{VSS} = 2883.33 - 2320 = \textbf{563.33}.
+\]
+Questo valore misura il guadagno ottenibile scegliendo \textbf{direttamente} una soluzione ottimizzata per scenari, anziché ottimizzare su domanda media e poi subire le conseguenze della variabilità.\\
+\hspace*{1.5em}In sintesi, anche se il profitto EV (\textbf{3220}) è più alto nel suo modello deterministico “ideale”, quando si passa a valutare su scenari la soluzione EV perde robustezza (profitto \textbf{2320}), mentre la soluzione RP è costruita per gestire l’incertezza e garantisce un profitto atteso maggiore in quel contesto (\textbf{2883.33}), con un vantaggio quantificato da \textbf{VSS = 563.33}.
+
+
+\subsection{Capacity control e tariffe aeree: protezione della classe alta e simulazione degli arrivi (6)}
+
+\paragraph{Contesto del problema}
+Lo script modella un problema di \textbf{revenue management} per un volo con capacità limitata: esistono due classi tariffarie con prezzi diversi (classe 1 più costosa, classe 2 più economica) e le richieste arrivano nel tempo secondo processi di Poisson.\\
+\hspace*{1.5em}L’obiettivo è applicare una regola semplice di \textcolor{Indigo}{\textbf{protezione}} (booking limit): si riserva un certo numero di posti alla classe più remunerativa, rifiutando parte delle richieste della classe 2 quando il livello di protezione è stato raggiunto.\\
+\hspace*{1.5em}Il punto chiave è che la decisione viene presa usando tassi di arrivo \textbf{stimati} ($\hat{\lambda}_1,\hat{\lambda}_2$), mentre la simulazione degli arrivi avviene usando i tassi \textbf{veri} ($\lambda_1,\lambda_2$): in questo modo si evidenzia l’impatto dell’errore di stima sul profitto.\\
+\hspace*{1.5em}Il livello di protezione viene calcolato tramite un quantile Poisson: si usa \texttt{poissinv} sul numero atteso di arrivi della classe 1 nell’intero orizzonte $T$.
+
+\begin{lstlisting}[style=matlabStyle]
+%% 6 - Aircraft capacity and tariffs
+% Scopo: gestire la capacita' (posti) di un volo con due classi tariffarie.
+% Applico una regola di protezione per la classe alta: accetto la classe 2
+% solo finche' non "invado" i posti riservati alla classe 1.
+
+% Dati del problema
+cap    = 100;   % capacita' totale (posti)
+price1 = 400;   % prezzo classe 1 (alta)
+price2 = 200;   % prezzo classe 2 (bassa)
+
+% Orizzonte temporale (giorni fino alla partenza)
+T = 60;
+
+% Tassi di arrivo (per giorno): veri e stimati
+trueArrivalRate1 = 0.4;  % tasso vero classe 1
+trueArrivalRate2 = 2.2;  % tasso vero classe 2
+
+hatArrivalRate1  = 0.5;  % tasso stimato classe 1 (usato per decidere)
+hatArrivalRate2  = 2;    % tasso stimato classe 2 (qui non entra nella regola)
+
+% Calcolo del livello di protezione (booking limit)
+% Nota: il numero di richieste classe 1 sull'orizzonte T e' Poisson con media hatArrivalRate1*T.
+% Uso un quantile: protezioneLevel = quantile_{1 - price2/price1}(Poisson(hatArrivalRate1*T))
+protectionLevel = poissinv(1 - price2/price1, hatArrivalRate1*T);
+
+% Stato del sistema
+count1 = 0;   % numero di richieste accettate per classe 1
+count2 = 0;   % numero di richieste accettate per classe 2
+full   = false;
+
+% Tempi del prossimo arrivo per le due classi (simulati sui tassi veri)
+nextArrival1 = exprnd(1/trueArrivalRate1);
+nextArrival2 = exprnd(1/trueArrivalRate2);
+
+% Condizione di stop: nessun arrivo prima della partenza
+stop = min(nextArrival1, nextArrival2) > T;
+
+% Simulazione a eventi discreti: arrivi di classe 1 e classe 2
+% Il loop termina quando (i) non arrivano piu' richieste prima della partenza oppure (ii) l'aereo e' pieno
+while ~stop && ~full
+
+    if nextArrival1 < nextArrival2
+        % Prossimo evento: arrivo classe 1
+        clock = nextArrival1;
+
+        % Accetto sempre classe 1 (scelta coerente con la regola di protezione)
+        count1 = count1 + 1;
+
+        % Pianifico il prossimo arrivo classe 1
+        nextArrival1 = clock + exprnd(1/trueArrivalRate1);
+
+    else
+        % Prossimo evento: arrivo classe 2
+        clock = nextArrival2;
+
+        % Accetto classe 2 solo se non supero il booking limit
+        % In pratica: lascio almeno protectionLevel posti "liberi" per la classe 1
+        if count2 < cap - protectionLevel
+            count2 = count2 + 1;
+        end
+
+        % Pianifico il prossimo arrivo classe 2
+        nextArrival2 = clock + exprnd(1/trueArrivalRate2);
+    end
+
+    % Controllo capacita'
+    if count1 + count2 >= cap
+        full = true;
+    end
+
+    % Aggiorno stop: la partenza avviene al tempo T
+    stop = min(nextArrival1, nextArrival2) > T;
+end
+
+% Profitto totale realizzato
+fprintf(1,'Total profit %d\n', count1*price1 + count2*price2);
+
+% POSSIBILI MIGLIORAMENTI
+% 1) Una volta raggiunto il booking limit per la classe 2, potrei ignorare i suoi arrivi
+%    e campionare direttamente il numero di arrivi classe 1 con una Poisson.
+% 2) Incapsulare in una funzione (con rate generici) per fare molte repliche e stimare media/varianza del profitto.
+% 3) Confrontare i risultati anche con un modello statico "ideale" (senza simulazione).
+% 4) La scelta del quantile Poisson puo' essere discutibile: quale quantile e' piu' corretto e perche'?
+\end{lstlisting}
+
+\paragraph{Conclusioni}
+Lo script implementa una regola di controllo capacità basata su un \textbf{livello di protezione} per la classe alta e stima il profitto realizzato tramite simulazione a eventi discreti.\\
+\hspace*{1.5em}\textcolor{Indigo}{\textbf{(i) Protezione e trade-off ricavo.}} La protezione riduce il rischio di “sprecare” capacità vendendola troppo presto alla classe economica, ma può anche generare rifiuti e posti vuoti se la domanda di classe 1 non si materializza.\\
+\hspace*{1.5em}\textcolor{Indigo}{\textbf{(ii) Errore di stima.}} Il livello di protezione viene deciso con tassi stimati: se $\hat{\lambda}_1$ è troppo alto si rischia di rifiutare troppa classe 2; se è troppo basso si rischia di saturare con classe 2 e poi non avere spazio per classe 1.\\
+\hspace*{1.5em}\textcolor{Indigo}{\textbf{(iii) Struttura del simulatore.}} Il modello è un simulatore a eventi con due processi di arrivo indipendenti; termina quando l’aereo è pieno oppure quando si supera l’orizzonte $T$.\\
+\hspace*{1.5em}In sintesi, il codice è un primo prototipo utile per studiare l’effetto del booking limit sul profitto, ma per un’analisi affidabile servono più repliche, confronto con benchmark (statico/dinamico) e una riflessione sulla scelta del quantile usato per la protezione.
+
+
+\subsection{Roll queue: simulazione a eventi discreti con buffer e domanda batch (7)}
+
+\paragraph{Contesto del problema}
+Lo script simula un sistema di tipo \textbf{queueing/inventory} in cui si preparano “roll” (panini) uno alla volta e i clienti arrivano nel tempo richiedendo un numero intero di roll.\\
+\hspace*{1.5em}La produzione dei roll avviene con tempi di preparazione \textbf{uniformi} tra \texttt{lowTime} e \texttt{highTime}. I roll pronti vengono accumulati in un \textbf{buffer} con capacità massima \texttt{maxPlaces}: quando il buffer è pieno, la produzione viene \textcolor{Indigo}{\textbf{bloccata}} (non si preparano ulteriori roll finché non si libera spazio).\\
+\hspace*{1.5em}I clienti arrivano con tempi tra arrivi \textbf{esponenziali} (media \texttt{meanInterTime}) e ogni cliente richiede una quantità casuale di roll (\texttt{demand}) distribuita \textbf{uniformemente discreta} tra 1 e \texttt{maxDemand}.\\
+\hspace*{1.5em}Se al momento dell’arrivo c’è già una coda (clienti in attesa) si entra in coda; se non c’è coda, il cliente prova a soddisfare immediatamente la domanda con il buffer disponibile. La performance misurata è il \textcolor{Indigo}{\textbf{tempo medio di attesa}} dei clienti serviti.
+
+\begin{lstlisting}[style=matlabStyle]
+%% 7 - Roll queue (Es. 3 tema 03/2024)
+% Unita' di tempo: 1 minuto
+% Idea: i roll vengono preparati (uno alla volta) e accumulati in un buffer finito.
+% I clienti arrivano e richiedono una quantita' intera di roll (domanda batch).
+% Se il buffer e' pieno, la produzione si blocca finche' non si libera spazio.
+
+% Parametri di preparazione roll (Uniforme)
+lowTime  = 1.5;
+highTime = 2;
+
+% Buffer
+maxPlaces = 6;    % capacita' massima del buffer (roll pronti)
+
+% Arrivi clienti e domanda
+meanInterTime = 4;  % media dei tempi tra arrivi (Esponenziale)
+maxDemand = 3;      % domanda massima per cliente (Uniforme discreta 1..maxDemand)
+
+% Contatori
+count   = 0;      % clienti serviti
+toServe = 1000;   % numero di clienti da servire
+
+% Stato del sistema
+clock = 0;
+
+% Prossimi eventi (due processi indipendenti)
+nextArrival = exprnd(meanInterTime);         % prossimo arrivo cliente
+nextRoll    = unifrnd(lowTime,highTime);     % prossimo completamento roll
+
+buffer  = 3;       % stato iniziale: roll gia' pronti
+blocked = false;   % se true: produzione bloccata per buffer pieno
+
+% Coda clienti (traccio: tempo di ingresso e domanda residua)
+joinTime       = [];   % istante di ingresso in coda di ciascun cliente
+residualDemand = [];   % domanda residua per ciascun cliente in coda
+
+% Statistica: tempo totale di attesa (solo per clienti che effettivamente attendono)
+totalWaitingTime = 0;
+
+while count <= toServe
+
+    % Evento 1: completamento di un roll (se avviene prima del prossimo arrivo)
+    if nextRoll <= nextArrival
+        clock = nextRoll;
+
+        if length(residualDemand) > 0
+            % C'e' almeno un cliente in coda: uso il roll appena pronto per servire il primo
+            residualDemand(1) = residualDemand(1) - 1;
+
+            if residualDemand(1) == 0
+                % Cliente completato: aggiorno statistiche e rimuovo dalla coda
+                totalWaitingTime = totalWaitingTime + (clock - joinTime(1));
+                count = count + 1;
+
+                joinTime(1) = [];
+                residualDemand(1) = [];
+            end
+
+        else
+            % Nessun cliente in attesa: metto il roll nel buffer
+            buffer = buffer + 1;
+        end
+
+        % Gestione del blocco: se buffer pieno, fermo la produzione
+        if buffer == maxPlaces
+            blocked  = true;
+            nextRoll = inf;   % nessun altro completamento finche' non si sblocca
+        else
+            nextRoll = clock + unifrnd(lowTime,highTime);
+        end
+
+    % Evento 2: arrivo di un cliente
+    else
+        clock = nextArrival;
+        nextArrival = clock + exprnd(meanInterTime);
+
+        % Domanda del cliente (Uniforme discreta)
+        demand = unidrnd(maxDemand);
+
+        if length(residualDemand) > 0
+            % Se c'e' gia' coda, il cliente entra in fondo
+            residualDemand(end+1) = demand;
+            joinTime(end+1) = clock;
+
+        else
+            % Se non c'e' coda, provo a servire subito con il buffer
+            if buffer >= demand
+                buffer = buffer - demand;
+                count = count + 1;  % attesa nulla
+            else
+                % Buffer insufficiente: consumo tutto il buffer e il resto diventa attesa
+                demand = demand - buffer;
+                buffer = 0;
+
+                residualDemand(1) = demand;
+                joinTime(1) = clock;
+            end
+
+            % Se la produzione era bloccata e ho liberato spazio, la riattivo
+            if blocked
+                blocked  = false;
+                nextRoll = clock + unifrnd(lowTime,highTime);
+            end
+        end
+    end
+end
+
+fprintf(1,'average waiting time = %.2f\n', totalWaitingTime/count);
+\end{lstlisting}
+
+\paragraph{Conclusioni}
+Lo script costruisce un simulatore a \textbf{eventi discreti} con due processi concorrenti (arrivi clienti e completamenti di roll) e un \textbf{buffer finito} che può bloccare la produzione.\\
+\hspace*{1.5em}\textcolor{Indigo}{\textbf{(i) Interazione tra coda e buffer.}} Se non ci sono clienti in attesa, i roll vengono accumulati; se arrivano clienti con domanda batch, il buffer può azzerarsi rapidamente e generare attesa (domanda residua).\\
+\hspace*{1.5em}\textcolor{Indigo}{\textbf{(ii) Meccanismo di blocco.}} Quando il buffer è pieno, la produzione viene fermata mettendo \texttt{nextRoll = inf}; la produzione riparte solo quando un cliente consuma roll e libera spazio (\texttt{blocked} torna \texttt{false}).\\
+\hspace*{1.5em}\textcolor{Indigo}{\textbf{(iii) Misura di performance.}} Il tempo medio di attesa viene stimato tramite la somma dei tempi in coda (\texttt{clock - joinTime}) per i clienti che attendono. I clienti serviti immediatamente contribuiscono con attesa nulla.\\
+\hspace*{1.5em}In sintesi, il modello è utile per studiare l’effetto combinato di \textbf{capacità del buffer}, \textbf{variabilità di produzione} e \textbf{domanda batch} sul congestionamento e sui tempi di attesa medi.
+
+\subsection{Cutting stock: formulazione simmetrica e generazione di colonne (8a--8c)}
+
+\paragraph{Contesto del problema}
+Il \textbf{cutting stock problem} consiste nel tagliare rotoli (o tronchi) di lunghezza fissa
+in pezzi di lunghezze predefinite per soddisfare una domanda assegnata, minimizzando
+il numero di rotoli utilizzati (o, in modo equivalente, lo spreco totale).\\
+\hspace*{1.5em}Il problema è noto per la sua elevata complessità combinatoria e per la presenza
+di numerose simmetrie, che rendono rapidamente impraticabili formulazioni dirette
+quando la dimensione dell’istanza cresce.\\
+\hspace*{1.5em}In questa sezione vengono confrontati tre approcci:
+\textbf{(8a)} una formulazione compatta e simmetrica di tipo Kantorovich,
+\textbf{(8b)} una risoluzione tramite \textcolor{Indigo}{\textbf{column generation}}
+con approccio \emph{problem-based},
+e \textbf{(8c)} la stessa tecnica di column generation implementata in versione
+\emph{solver-based}.  
+Le versioni (8b) e (8c) risolvono lo \textbf{medesimo modello matematico},
+ma differiscono per livello di astrazione e controllo sul solver.
+
+\begin{lstlisting}[style=matlabStyle]
+%% 8a - Cutting stock: formulazione simmetrica (Kantorovich) + symmetry breaking
+
+% Generazione casuale di un'istanza
+rng 'default'
+rollLength = 1000;
+numLenghts = 8;
+lenghts = randsample(10:800, numLenghts);
+demand  = 20 + unidrnd(150, numLenghts, 1);
+
+% Stima pessimistica del numero massimo di rotoli
+fudgeFactor = 2;
+numRolls = ceil(fudgeFactor*(dot(lenghts,demand)/rollLength));
+
+% Formulazione simmetrica
+cutStock = optimproblem("ObjectiveSense","minimize");
+
+% delta(j)=1 se il rotolo j viene usato
+delta  = optimvar("delta", numRolls, 1, "Type","integer", ...
+                  "LowerBound",0, "UpperBound",1);
+
+% numCut(i,j)=pezzi di tipo i tagliati dal rotolo j
+numCut = optimvar("numCut", numLenghts, numRolls, ...
+                  "Type","integer", "LowerBound",0);
+
+cutStock.Objective = sum(delta,'all');
+cutStock.Constraints.meetDemand = sum(numCut,2) >= demand;
+cutStock.Constraints.useLog = lenghts*numCut <= rollLength*delta';
+
+fprintf(1,"Running symmetric model formulation\n")
+solve(cutStock);
+
+% Vincoli di symmetry breaking: uso ordinato dei rotoli
+breaking = optimconstr(numRolls-1,1);
+for k = 1:(numRolls-1)
+    breaking(k) = delta(k+1) <= delta(k);
+end
+cutStock.Constraints.breaking = breaking;
+
+fprintf(1,"Running symmetry breaking model formulation\n")
+solve(cutStock);
+\end{lstlisting}
+
+\paragraph{Osservazioni su (8a)}
+La formulazione simmetrica è intuitiva e aderente alla descrizione del problema,
+ma introduce un numero molto elevato di variabili e soffre di \textcolor{Indigo}{\textbf{simmetria}}:
+rotoli indistinguibili generano molte soluzioni equivalenti.  
+I vincoli di symmetry breaking migliorano le prestazioni, ma la scalabilità rimane limitata,
+come evidenziato dai tempi di risoluzione e dal numero di nodi esplorati.
+
+\begin{lstlisting}[style=matlabStyle]
+%% 8b - Cutting stock: column generation (problem-based)
+
+logLength  = 40;
+lengthlist = [8; 12; 16; 20];
+quantity   = [90; 111; 55; 30];
+nLengths   = length(lengthlist);
+
+% Pattern iniziali (uno per ciascuna lunghezza)
+patterns  = diag(floor(logLength ./ lengthlist));
+nPatterns = size(patterns,2);
+
+% Sottoproblema di generazione pattern
+subproblem = optimproblem();
+cuts = optimvar('cuts', nLengths, 1, 'Type','integer', ...
+                'LowerBound', zeros(nLengths,1));
+subproblem.Constraints = dot(lengthlist,cuts) <= logLength;
+
+lpopts = optimoptions('linprog','Display','off');
+ipopts = optimoptions('intlinprog',lpopts);
+
+reducedCost = -inf;
+reducedCostTolerance = -0.0001;
+exitflag = 1;
+
+while reducedCost < reducedCostTolerance && exitflag > 0
+    logprob = optimproblem('Description','Cut Logs');
+    x = optimvar('x', nPatterns, 1, 'LowerBound', 0);
+
+    logprob.Objective.logsUsed = sum(x);
+    logprob.Constraints.Demand = patterns*x >= quantity;
+
+    [values,nLogs,exitflag,~,lambda] = solve(logprob,'options',lpopts);
+
+    if exitflag > 0
+        fprintf('Using %g logs\n',nLogs);
+        subproblem.Objective = 1 - dot(lambda.Constraints.Demand,cuts);
+        [values,reducedCost,pexitflag] = solve(subproblem,'options',ipopts);
+        newpattern = round(values.cuts);
+
+        if pexitflag > 0 && reducedCost < reducedCostTolerance
+            patterns = [patterns newpattern];
+            nPatterns = nPatterns + 1;
+        end
+    end
+end
+
+x.Type = 'integer';
+[values,logsUsed] = solve(logprob,'options',ipopts);
+values.x = round(values.x);
+fprintf('Optimal solution uses %g logs\n',sum(values.x));
+\end{lstlisting}
+
+\begin{lstlisting}[style=matlabStyle]
+%% 8c - Cutting stock: column generation (solver-based)
+
+logLength  = 40;
+lengthlist = [8; 12; 16; 20];
+quantity   = [90; 111; 55; 30];
+nLengths   = length(lengthlist);
+
+patterns  = diag(floor(logLength ./ lengthlist));
+nPatterns = size(patterns,2);
+
+lb2 = zeros(nLengths,1);
+A2  = lengthlist';
+b2  = logLength;
+
+lpopts = optimoptions('linprog','Display','off');
+ipopts = optimoptions('intlinprog',lpopts);
+
+reducedCost = -Inf;
+reducedCostTolerance = -0.0001;
+exitflag = 1;
+
+while reducedCost < reducedCostTolerance && exitflag > 0
+    lb = zeros(nPatterns,1);
+    f  = lb + 1;
+    A  = -patterns;
+    b  = -quantity;
+
+    [values,nLogs,exitflag,~,lambda] = linprog(f,A,b,[],[],lb,[],lpopts);
+
+    if exitflag > 0
+        fprintf('Using %g logs\n',nLogs);
+        f2 = -lambda.ineqlin;
+        [values,reducedCost,pexitflag] = intlinprog(f2,1:nLengths,A2,b2,[],[],lb2,[],ipopts);
+        reducedCost = 1 + reducedCost;
+        newpattern = round(values);
+
+        if pexitflag > 0 && reducedCost < reducedCostTolerance
+            patterns = [patterns newpattern];
+            nPatterns = nPatterns + 1;
+        end
+    end
+end
+\end{lstlisting}
+
+\paragraph{Conclusioni}
+Il blocco (8a--8c) evidenzia tre livelli di modellazione dello stesso problema.\\
+\hspace*{1.5em}\textcolor{Indigo}{\textbf{(i) Formulazione simmetrica (8a).}}
+È concettualmente semplice e utile per comprendere il problema,
+ma soffre di forti simmetrie e di scarsa scalabilità.\\
+\hspace*{1.5em}\textcolor{Indigo}{\textbf{(ii) Column generation (8b--8c).}}
+Evita l’enumerazione esplicita dei pattern e costruisce la soluzione
+in modo incrementale tramite un master LP e un sottoproblema ILP,
+seguendo un criterio di arresto analogo a quello del metodo del simplesso.\\
+\hspace*{1.5em}\textcolor{Indigo}{\textbf{(iii) Problem-based vs solver-based.}}
+Le versioni (8b) e (8c) implementano lo stesso algoritmo di column generation:
+la prima privilegia chiarezza e modularità, la seconda offre maggiore controllo
+sulle strutture matriciali e sul solver. I risultati coincidono,
+confermando l’equivalenza matematica delle due implementazioni.\\
+\hspace*{1.5em}In sintesi, (8a) è utile a fini didattici,
+mentre (8b--8c) rappresentano l’approccio standard ed efficiente
+per istanze realistiche di cutting stock.
+
+
+
 
 \end{document}
