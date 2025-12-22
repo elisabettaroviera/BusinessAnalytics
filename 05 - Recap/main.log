@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.11.21)  22 DEC 2025 11:58
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.11.21)  22 DEC 2025 17:54
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -695,59 +695,64 @@ Overfull \hbox (16.56265pt too wide) in paragraph at lines 3723--3724
 []\T1/cmr/m/n/12 se le marche sono omo-ge-nee (lo-cal-iz-zate nello stesso punto), al-lora $\OML/cmm/m/it/12 p[] \OT1/cmr/m/n/12 = \OML/cmm/m/it/12 p[] \OT1/cmr/m/n/12 = 0$ \T1/cmr/m/n/12 a causa dell'undercutting; 
  []
 
-[56] [57] [58] [59] [60] [61] [62] [63] [64] [65] [66] [67] [68] [69] [70] [71]
-Overfull \hbox (18.13983pt too wide) in paragraph at lines 4795--4796
-[] []\T1/cmr/bx/n/12 Prob-lema de-ter-min-is-tico[] \T1/cmr/m/n/12 In un prob-lema de-ter-min-is-tico, si cerca una se-quenza di vet-tori $\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 x[]; x[]; [] ; x[]\OT1/cmr/m/n/12 )$
+[56] [57] [58] [59] [60] [61] [62] [63] [64] [65] [66] [67] [68] [69] [70]
+Overfull \hbox (4.31905pt too wide) in paragraph at lines 4658--4658
+|[]\T1/cmr/bx/n/14.4 Il prin-ci-pio di de-com-po-sizione della pro-gram-mazione di-nam-ica -- Equazione
  []
 
-[72] [73] [74]
-Overfull \hbox (3.18137pt too wide) in paragraph at lines 5019--5020
+[71]
+Overfull \hbox (2.0237pt too wide) in paragraph at lines 4711--4730
+|  \T1/cmr/m/n/12 Quando si con-sid-era una sin-gola fun-zione $\OML/cmm/m/it/12 ^^V[]\OT1/cmr/m/n/12 (\OMS/cmsy/m/n/12 ^^A\OT1/cmr/m/n/12 )$ \T1/cmr/m/n/12 in-dipen-dente dal tempo si parla di []\T1/cmr/bx/n/12 po-lit-ica stazionaria[]\T1/cmr/m/n/12 ,
+ []
+
+[72] [73]
+Overfull \hbox (3.18137pt too wide) in paragraph at lines 4854--4855
 [] []\T1/cmr/bx/n/12 Mo-ti-vazione dell'approccio DP[] \T1/cmr/m/n/12 Il prob-lema può es-sere risolto in modo ef-fi-ciente con al-go-ritmi \T1/cmr/bx/n/12 branch-
  []
 
-[75]
-Overfull \hbox (27.38277pt too wide) in paragraph at lines 5097--5098
+[74]
+Overfull \hbox (27.38277pt too wide) in paragraph at lines 4932--4933
 [] []\T1/cmr/bx/n/12 Com-p-lessità com-putazionale[] \T1/cmr/m/n/12 As-sumendo dati in-teri, la com-p-lessità è $\OML/cmm/m/it/12 O\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 nB\OT1/cmr/m/n/12 )$\T1/cmr/m/n/12 , quindi \T1/cmr/bx/n/12 pseudo-polinomiale\T1/cmr/m/n/12 .
  []
 
-[76] [77]
+[75] [76]
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <12> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 5193.
- [78]
-Overfull \hbox (16.39912pt too wide) in paragraph at lines 5262--5264
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 5028.
+ [77]
+Overfull \hbox (16.39912pt too wide) in paragraph at lines 5097--5099
 [] []\T1/cmr/bx/n/12 Scopo di \T1/cmtt/m/n/12 MakePolicy[] \T1/cmr/m/n/12 La fun-zione \T1/cmtt/m/n/12 MakePolicy \T1/cmr/m/n/12 serve ad ap-pren-dere le fun-zioni val-ore \T1/cmr/bx/n/12 a ritroso \T1/cmr/m/n/12 (\T1/cmr/bx/n/12 backward\T1/cmr/m/n/12 )
  []
 
-[79] [80] [81] [82] [83] [84] [85]
-Overfull \hbox (1.01227pt too wide) in paragraph at lines 5775--5776
+[78] [79] [80] [81] [82] [83] [84]
+Overfull \hbox (1.01227pt too wide) in paragraph at lines 5609--5610
 [] []\T1/cmr/bx/n/12 Ap-procci quan-ti-ty-based e price-based[] \T1/cmr/m/n/12 Es-istono due ap-procci: \T1/cmr/bx/n/12 quantity-based \T1/cmr/m/n/12 (si limita la disponi-
  []
 
-[86] [87] [88] [89] [90] [91] [92] [93] [94] [95] [96] [97] (C:\Users\elisa\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
+[85] [86] [87] [88] [89] [90] [91] [92] [93] [94] [95] [96] (C:\Users\elisa\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
 File: lstlang1.sty 2025/10/06 1.11 listings language file
-) [98]
-<Figures/1.pdf, id=342, 442.65375pt x 229.85875pt>
+) [97]
+<Figures/1.pdf, id=339, 442.65375pt x 229.85875pt>
 File: Figures/1.pdf Graphic file (type pdf)
 <use Figures/1.pdf>
-Package pdftex.def Info: Figures/1.pdf  used on input line 6623.
+Package pdftex.def Info: Figures/1.pdf  used on input line 6457.
 (pdftex.def)             Requested size: 153.4249pt x 79.6678pt.
-<Figures/2.pdf, id=343, 455.7025pt x 324.21124pt>
+<Figures/2.pdf, id=340, 455.7025pt x 324.21124pt>
 File: Figures/2.pdf Graphic file (type pdf)
 <use Figures/2.pdf>
-Package pdftex.def Info: Figures/2.pdf  used on input line 6628.
+Package pdftex.def Info: Figures/2.pdf  used on input line 6462.
 (pdftex.def)             Requested size: 111.97836pt x 79.6678pt.
-<Figures/3.pdf, id=344, 436.63126pt x 201.75375pt>
+<Figures/3.pdf, id=341, 436.63126pt x 201.75375pt>
 File: Figures/3.pdf Graphic file (type pdf)
 <use Figures/3.pdf>
-Package pdftex.def Info: Figures/3.pdf  used on input line 6633.
+Package pdftex.def Info: Figures/3.pdf  used on input line 6467.
 (pdftex.def)             Requested size: 172.41748pt x 79.6678pt.
- [99 <./Figures/1.pdf> <./Figures/2.pdf> <./Figures/3.pdf>] [100] [101] [102] [103]
-<Figures/4.pdf, id=409, 368.37625pt x 300.12125pt>
+ [98 <./Figures/1.pdf> <./Figures/2.pdf> <./Figures/3.pdf>] [99] [100] [101] [102]
+<Figures/4.pdf, id=405, 368.37625pt x 300.12125pt>
 File: Figures/4.pdf Graphic file (type pdf)
 <use Figures/4.pdf>
-Package pdftex.def Info: Figures/4.pdf  used on input line 6889.
+Package pdftex.def Info: Figures/4.pdf  used on input line 6723.
 (pdftex.def)             Requested size: 157.16208pt x 128.0374pt.
- [104] [105 <./Figures/4.pdf>] [106] [107] [108] [109] [110] [111] [112] [113] [114] [115] [116] [117] [118] [119] [120] (main.aux)
+ [103] [104 <./Figures/4.pdf>] [105] [106] [107] [108] [109] [110] [111] [112] [113] [114] [115] [116] [117] [118] [119] (main.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-10-24>
@@ -762,9 +767,9 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  84i,15n,94p,1332b,2489s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\elisa\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbi1440.pk> <C:\Users\elisa\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1095.pk> <C:\Users\elisa\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1095.pk> <C:\Users\elisa\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1200.pk> <C:\Users\elisa\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0800.pk> <C:\Users\elisa\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1000.pk> <C:\Users\elisa\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbi1200.pk> <C:\Users\elisa\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\elisa\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1200.pk> <C:\Users\elisa\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\elisa\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk> <C:\Users\elisa\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1728.pk> <C:\Users\elisa\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2074.pk><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx8.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmib10.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cmextra/cmmib8.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (120 pages, 1011301 bytes).
+Output written on main.pdf (119 pages, 1010445 bytes).
 PDF statistics:
- 1182 PDF objects out of 1200 (max. 8388607)
+ 1179 PDF objects out of 1200 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  33 words of extra memory for PDF output out of 10000 (max. 10000000)
 

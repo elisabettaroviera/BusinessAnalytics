@@ -4285,6 +4285,19 @@ Se $F\in MDA(H)$ per una $H$ non degenere, allora $H$ deve essere una distribuzi
 \vspace{-1cm}
 \textcolor{DarkRed}{\section{CAP 7 -- Il principio della programmazione dinamica}}
 
+\paragraph{Recap}
+La \textcolor{DarkRed}{\textbf{programmazione dinamica (DP)}} è un \textbf{principio generale e flessibile} per la risoluzione di \textbf{problemi decisionali dinamici multistadio}, basato sulla \textbf{decomposizione} del problema complessivo in una sequenza di problemi più semplici a \textbf{singolo stadio}. Nei problemi stocastici, a differenza dei problemi multiperiodo deterministici, le decisioni non vengono fissate interamente all’istante iniziale, ma si adattano nel tempo alle realizzazioni osservate dei fattori di rischio, rendendo necessario un approccio \textbf{\textcolor{DarkRed}{closed-loop}} e l’uso di \textbf{strategie non anticipative}.
+\\ \hspace*{1.5em}
+L’applicazione della DP richiede una struttura \textbf{markoviana} del sistema, in cui lo stato \(s_t\) riassume l’informazione rilevante del passato e consente di descrivere l’evoluzione attraverso un’equazione di transizione del tipo \(s_{t+1}=g_{t+1}(s_t,x_t,\xi_{t+1})\). Le decisioni \(x_t\) vengono prese dopo aver osservato lo stato corrente, mentre gli input esogeni si realizzano nell’intervallo temporale successivo e influenzano lo stato futuro. In questo contesto, lo stato, le decisioni e i fattori di rischio possono essere discreti o continui e l’orizzonte temporale può essere finito o infinito.
+\\ \hspace*{1.5em}
+I problemi di programmazione dinamica sono tipicamente formulati tramite una \textbf{funzione obiettivo additiva nel tempo}, spesso con l’introduzione di un \textbf{fattore di sconto} e di un \textbf{contributo terminale}, la cui valutazione può richiedere un ragionamento \emph{ad hoc}. Quando i contributi immediati dipendono da variabili aleatorie, si lavora con valori attesi condizionati che, in pratica, possono essere stimati solo tramite campionamento o simulazione, come avviene nel \textbf{reinforcement learning}.
+\\ \hspace*{1.5em}
+Il \textbf{problema del cammino minimo} su una rete diretta aciclica rappresenta un esempio deterministico fondamentale per introdurre la \textbf{funzione valore} e il principio di \textbf{programmazione dinamica all’indietro}. Associando a ciascun nodo un valore pari al costo minimo per raggiungere il nodo terminale, emerge una proprietà di \textbf{annidamento} dei sottocammini ottimi e si ottiene una ricorsione sui valori che parte dalla condizione terminale. Questo esempio chiarisce il ruolo del valore dello stato successivo nella scelta locale delle decisioni.
+\\ \hspace*{1.5em}
+Nel \textbf{lot-sizing} dinamico a singolo prodotto, l’inventario costituisce una \textbf{variabile di stato}, la quantità ordinata una \textbf{variabile di controllo} e la domanda agisce come input esogeno deterministico o come fattore di rischio stocastico. In presenza di domanda incerta, modelli diversi derivano da ipotesi alternative sul comportamento dei clienti, distinguendo tra \emph{vendite perse} e \emph{backlog}, con effetti diretti sulla dinamica e sulla struttura dei costi.
+\\ \hspace*{1.5em}
+La formalizzazione generale dei problemi decisionali dinamici conduce all’\textcolor{DarkRed}{\textbf{equazione di Bellman}}, che esprime una condizione di ottimalità ricorsiva bilanciando \textbf{contributo immediato} e \textbf{valore atteso dello stato successivo}. Da essa si ricava una \textbf{politica ottima in feedback} della forma \(x_t^\star=\mu_t^\star(s_t)\). Nei problemi a orizzonte finito la soluzione si ottiene naturalmente tramite una procedura \textbf{backward}, mentre nei problemi a orizzonte infinito la funzione valore è caratterizzata come \textbf{punto fisso} di un opportuno operatore.
+
 \paragraph{Che cos'è la programmazione dinamica?}
 La \textcolor{DarkRed}{\textbf{programmazione dinamica (Dynamic Programming, DP)}} non è un algoritmo come l’algoritmo del simplesso per la programmazione lineare. È piuttosto un \textbf{principio notevolmente generale e flessibile} che può essere utilizzato per progettare una vasta gamma di algoritmi di ottimizzazione.
 \\ \hspace*{1.5em}
@@ -4432,7 +4445,6 @@ Un \textbf{problema di programmazione dinamica scontato a orizzonte infinito} ha
 \operatorname{opt}\ \mathbb{E}_0 \left[
 \sum_{t=0}^{\infty} \gamma^t f(s_t,x_t)
 \right],
-\tag{6}
 \]
 dove la sommatoria è ben definita se tutti i contributi sono positivi e limitati e si utilizza un fattore di sconto appropriato $\gamma < 1$.
 \\ \hspace*{1.5em}
@@ -4443,7 +4455,6 @@ In alcune applicazioni ingegneristiche si preferisce considerare una media nel t
 \operatorname{opt}\ \lim_{T \to \infty} \mathbb{E}_0 \left[
 \frac{1}{T} \sum_{t=0}^{T-1} f(s_t,x_t)
 \right].
-\tag{7}
 \]
 Questo conduce a formulazioni di programmazione dinamica basate sul contributo medio per stadio.
 \\ \hspace*{1.5em}
@@ -4485,7 +4496,6 @@ Una formulazione più precisa del problema a orizzonte finito è
 \sum_{t=0}^{T-1} \gamma^t f_t(s_t,\mu_t(s_t))
 + \gamma^T F_T(s_T)
 \right],
-\tag{11}
 \]
 dove $\mathcal{M}$ è l’insieme delle politiche ammissibili, tali che $x_t=\mu_t(s_t)\in X(s_t)$ per ogni istante temporale.
 \\ \hspace*{1.5em}
@@ -4588,400 +4598,225 @@ Si introduce il valore $V_j$ associato a ciascun nodo successore, risolvendo in 
 \[
 \min_{j\in S_i} (c_{ij}+V_j).
 \]
-
-\paragraph{Definizione del valore ottimo} \emph{Come si può introdurre un termine aggiuntivo di questo tipo?}
-Il punto di partenza consiste nel trovare una caratterizzazione della soluzione ottima. Sia $V_i$ la
-lunghezza del cammino minimo dal nodo $i \in N$ al nodo terminale $N$, indicato come $i \xrightarrow{*} N$:
+\paragraph{Definizione del valore ottimo}
+\emph{Come si può introdurre un termine aggiuntivo di questo tipo?} Il punto di partenza consiste nel trovare una caratterizzazione della soluzione ottima. Sia \(V_i\) la \textbf{lunghezza del cammino minimo} dal nodo \(i \in N\) al nodo terminale \(N\), indicato come \(i \xrightarrow{*} N\):
 \(
 V_i := L(i \xrightarrow{*} N).
 \)
-Supponiamo inoltre che, dato un cammino ottimo da $i$ a $N$, un nodo $j$ appartenga a tale cammino.
-Allora è immediato osservare che deve valere la seguente proprietà:
+\\ \hspace*{1.5em}
+Supponiamo inoltre che, dato un cammino ottimo da \(i\) a \(N\), un nodo \(j\) appartenga a tale cammino. Allora è immediato osservare che deve valere la seguente proprietà
 \[
 j \xrightarrow{*} N \ \text{è un sottocammino di} \ i \xrightarrow{*} N.
 \]
-Per comprenderne il motivo, consideriamo la decomposizione del cammino $i \xrightarrow{*} N$ in due sottocammini:
-$\mathcal{P}_{i \to j}$ dal nodo $i$ al nodo $j$, e $\mathcal{P}_{j \to N}$ dal nodo $j$ al nodo $N$.
-La lunghezza del cammino $i \xrightarrow{*} N$ è la somma delle lunghezze dei due sottocammini:
-\[
-V_i = L\!\left(i \xrightarrow{*} N\right)
-    = L(\mathcal{P}_{i \to j}) + L(\mathcal{P}_{j \to N}).
-\tag{15}
-\]
-Si noti che il secondo sottocammino non è influenzato dal modo in cui si va da $i$ a $j$.
-Il sistema è markoviano, nel senso che il modo in cui si raggiunge il nodo $j$ non ha alcuna influenza
-sulla lunghezza di qualunque cammino ``futuro'' che parte dal nodo $j$.
-La nostra affermazione equivale a dire che il sottocammino $\mathcal{P}_{j \to N}$ nella decomposizione
-dell’Equazione~(15) è ottimo, nel senso che
-\[
+Per comprenderne il motivo, consideriamo la decomposizione del cammino \(i \xrightarrow{*} N\) in due sottocammini: \(\mathcal{P}_{i \to j}\) dal nodo \(i\) al nodo \(j\), e \(\mathcal{P}_{j \to N}\) dal nodo \(j\) al nodo \(N\). La lunghezza del cammino \(i \xrightarrow{*} N\) è la somma delle lunghezze dei due sottocammini:
+\(
+V_i
+= L\!\left(i \xrightarrow{*} N\right) 
+= L(\mathcal{P}_{i \to j}) + L(\mathcal{P}_{j \to N}).
+\)
+\\ \hspace*{1.5em}
+Si noti che il secondo sottocammino non è influenzato dal modo in cui si va da \(i\) a \(j\). Il sistema è \textbf{\textcolor{DarkRed}{markoviano}}, nel senso che il modo in cui si raggiunge il nodo \(j\) non ha alcuna influenza sulla lunghezza di qualunque cammino \emph{futuro} che parte dal nodo \(j\).
+\\ \hspace*{1.5em}
+L'affermazione equivale a dire che il sottocammino \(\mathcal{P}_{j \to N}\) nella decomposizione precedente è \textbf{ottimo}, nel senso che
+\(
 L(\mathcal{P}_{j \to N}) = L\!\left(j \xrightarrow{*} N\right).
-\]
-Per dimostrarlo, supponiamo che $\mathcal{P}_{j \to N}$ non sia un cammino ottimo da $j$ a $N$, cioè che
-\[
+\)
+Per \textbf{dimostrarlo}, si suppone che \(\mathcal{P}_{j \to N}\) non sia un cammino ottimo da \(j\) a \(N\), cioè che
+\(
 L(\mathcal{P}_{j \to N}) > L\!\left(j \xrightarrow{*} N\right).
-\]
-Allora potremmo migliorare il lato destro dell’Equazione~(15) considerando il cammino costituito dallo stesso
-cammino iniziale $\mathcal{P}_{i \to j}$, seguito da un cammino ottimo $j \xrightarrow{*} N$:
-\[
+\)
+Allora potremmo migliorare il lato destro della decomposizione considerando il cammino costituito dallo stesso cammino iniziale \(\mathcal{P}_{i \to j}\), seguito da un cammino ottimo \(j \xrightarrow{*} N\):
+\(
 L(\mathcal{P}_{i \to j}) + L\!\left(j \xrightarrow{*} N\right)
-< L(\mathcal{P}_{i \to j}) + L(\mathcal{P}_{j \to N})
+< L(\mathcal{P}_{i \to j}) + L(\mathcal{P}_{j \to N}) 
 = L\!\left(i \xrightarrow{*} N\right)
 = V_i,
-\]
-che è una contraddizione, poiché abbiamo assunto che $V_i$ sia la lunghezza di un cammino minimo.
-I cammini minimi godono quindi di una sorta di proprietà di annidamento, e questo risultato suggerisce
-una decomposizione ricorsiva del problema complessivo di determinare il cammino minimo
-$0 \xrightarrow{*} N$.
-Se conoscessimo i valori $V_j$ per ciascun nodo $j \in \mathcal{S}_0$, potremmo effettuare la prima decisione
-risolvendo il problema a singolo stadio
+\)
+che è una contraddizione, poiché abbiamo assunto che \(V_i\) sia la lunghezza di un cammino minimo.
+\\ \hspace*{1.5em}
+I cammini minimi godono quindi di una sorta di \textbf{\textcolor{DarkRed}{proprietà di annidamento}}, e questo risultato suggerisce una decomposizione ricorsiva del problema complessivo di determinare il cammino minimo \(0 \xrightarrow{*} N\).
+\\ \hspace*{1.5em}
+Se si conoscessero i valori \(V_j\) per ciascun nodo \(j \in \mathcal{S}_0\), si potrebbe effettuare la prima decisione risolvendo il problema a singolo stadio
 \[
 V_0 = \min_{j \in \mathcal{S}_0} \bigl( c_{0j} + V_j \bigr).
-\tag{16}
 \]
-
 
 \paragraph{Ricorsione di Bellman}
-Si ottiene quindi l’equazione funzionale:
+L’ultima equazione può essere applicata a qualunque nodo, e non soltanto a quello iniziale. Si ottiene così una \textbf{programmazione dinamica all’indietro}, che parte dalla \textbf{condizione terminale} \(V_N = 0\) e procede risolvendo un’\textbf{equazione funzionale ricorsiva}
 \[
-V_i = \min_{j\in S_i} \{ c_{ij} + V_j \}, \qquad \forall i\in N,
-\tag{17}
+V_i = \min_{j\in S_i} \bigl( c_{ij} + V_j \bigr), \qquad \forall i\in N,
 \]
-con condizione terminale $V_N=0$.
+con condizione terminale \(V_N=0\).
+L’equazione viene risolta etichettando i nodi a partire da quello terminale, seguendo un \textbf{ordinamento topologico}.
+L’equazione precedente definisce una \textbf{funzione valore} \(V(\cdot):N\to\mathbb{R}\) che associa a ciascuno stato il suo valore ottimo.
 
-\paragraph{Programmazione dinamica all’indietro}
-L’equazione viene risolta etichettando i nodi a partire da quello terminale, seguendo un ordinamento topologico.
-
-\paragraph{Funzione valore}
-L’equazione (17) definisce una funzione valore $V(\cdot):N\to\mathbb{R}$ che associa a ciascuno stato il suo valore ottimo.
-
-\subsection{Esempio numerico}
-
-\paragraph{Condizione terminale e primi nodi etichettabili}
-Si ha la condizione terminale $V_7 = 0$ per il nodo terminale, e si considerano i suoi predecessori immediati 4 e 6 (non si può ancora etichettare il nodo 5; si noti che i nodi non sono stati numerati usando un ordinamento topologico).
-Si trova:
-\[
-V_4 = c_{47}+V_7 = 10+0 = 10;
-\qquad
-V_6 = c_{67}+V_7 = 8+0 = 8.
-\]
-Se si denota con $a_i^\star$ il nodo successore selezionato quando si è nel nodo $i\in N$ (l’azione ottima nello stato $i$), si ha banalmente:
-\[
-a_4^\star = 7;\qquad a_6^\star = 7.
-\]
-
-\paragraph{Etichettatura del nodo 5}
-Ora si può etichettare il nodo 5:
-\[
-V_5 =
-\min\left\{
-\begin{array}{l}
-c_{56}+V_6\\
-c_{57}+V_7
-\end{array}
-\right\}
-=
-\min\left\{
-\begin{array}{l}
-1+8\\
-5+0
-\end{array}
-\right\}
-=5
-\ \Rightarrow\ 
-a_5^\star = 7.
-\]
-
-\paragraph{Etichettatura del nodo 3}
-Si considera poi il nodo 3, i cui successori immediati 4, 5 e 6 sono già stati etichettati:
-\[
-V_3 =
-\min\left\{
-\begin{array}{l}
-c_{34}+V_4\\
-c_{35}+V_5\\
-c_{36}+V_6
-\end{array}
-\right\}
-=
-\min\left\{
-\begin{array}{l}
-3+10\\
-2+5\\
-1+8
-\end{array}
-\right\}
-=7
-\ \Rightarrow\ 
-a_3^\star = 5.
-\]
-
-\paragraph{Etichettatura dei nodi 1, 2 e 0}
-Allo stesso modo, si ha:
-\[
-V_1 =
-\min\left\{
-\begin{array}{l}
-c_{13}+V_3\\
-c_{14}+V_4
-\end{array}
-\right\}
-=
-\min\left\{
-\begin{array}{l}
-2+7\\
-1+10
-\end{array}
-\right\}
-=9
-\ \Rightarrow\ 
-a_1^\star = 3;
-\]
-\[
-V_2 =
-\min\left\{
-\begin{array}{l}
-c_{23}+V_3\\
-c_{25}+V_5
-\end{array}
-\right\}
-=
-\min\left\{
-\begin{array}{l}
-4+7\\
-7+5
-\end{array}
-\right\}
-=11
-\ \Rightarrow\ 
-a_2^\star = 3;
-\]
-\[
-V_0 =
-\min\left\{
-\begin{array}{l}
-c_{01}+V_1\\
-c_{02}+V_2
-\end{array}
-\right\}
-=
-\min\left\{
-\begin{array}{l}
-7+9\\
-6+11
-\end{array}
-\right\}
-=16
-\ \Rightarrow\ 
-a_0^\star = 1.
-\]
-
-\paragraph{Ricostruzione del cammino minimo}
-Le azioni ottime in ciascuno stato possono essere memorizzate in una tabella, e si può trovare facilmente il cammino minimo applicando la politica decisionale: $(0,1,3,5,7)$, con lunghezza totale pari a 16.
-
-\subsection{Cammini minimi su reti strutturate}
-
-\paragraph{Caso strutturato e interpretazione dinamica}
+\paragraph{Cammini minimi su reti strutturate}
 Il problema del cammino minimo considerato nella sezione precedente riguarda una rete non strutturata. Un caso più strutturato si verifica quando i nodi della rete corrispondono a stati di un sistema dinamico che evolve nel tempo.
+Questo tipo di grafo corrisponde a un \textbf{problema decisionale sequenziale deterministico} con un \textbf{insieme finito di stati}, che può derivare da una discretizzazione di uno spazio degli stati continuo.
+\\ \hspace*{1.5em}Se lo stato terminale \(s_T\) è fissato, non ha senso associare un valore terminale ad esso. Se lo stato terminale è libero, può invece avere senso associare un contributo terminale \(F_T(s_T)\). In tal caso si aggiunge uno strato temporale al grafo e si introduce un nodo terminale fittizio \(\Omega\).
 
-\paragraph{Contributo terminale e nodo fittizio}
-Se lo stato terminale $s_T$ è fissato, non ha senso associare un valore terminale ad esso [Fig. (a)]. Se lo stato terminale è libero, può invece avere senso associare un contributo terminale $F_T(s_T)$. In Fig. (b) si aggiunge uno strato temporale al grafo e si introduce un nodo terminale fittizio $\Omega$.
-
-\subsection{Il principio di decomposizione della programmazione dinamica}
-
+\subsection{Il principio di decomposizione della programmazione dinamica -- Equazione di Bellman}
 \paragraph{Decomposizione in problemi a singolo stadio}
 Il problema del cammino minimo suggerisce che un problema decisionale multistadio può essere decomposto in una sequenza di problemi più semplici a singolo stadio.
-
-\paragraph{Problema deterministico}
-In un problema deterministico, si cerca una sequenza di vettori $(x_0,x_1,\ldots,x_{T-1})$ per ottimizzare una misura di prestazione:
-\[
+\\ \hspace*{1.5em}In un \textcolor{DarkRed}{\textbf{problema deterministico}}, si cerca una sequenza di vettori \((x_0,x_1,\ldots,x_{T-1})\) per ottimizzare una misura di prestazione
+\(
 \operatorname{opt}\ H(x_0,x_1,\ldots,x_{T-1}; s_0,s_1,\ldots,s_T),
-\]
+\)
 soggetta a un insieme di vincoli su stati e decisioni.
-
-\paragraph{Problema stocastico}
-Nel caso stocastico, il problema è:
-\[
+\\ \hspace*{1.5em}Nel \textcolor{DarkRed}{\textbf{caso stocastico}}, il problema è
+\(
 \operatorname{opt}\ \mathbb{E}\!\left[
 H(x_0,x_1,\ldots,x_{T-1}; s_0,s_1,\ldots,s_T)
 \right],
-\]
-dove l’aspettazione è presa rispetto a una sequenza di variabili aleatorie $(\xi_1,\ldots,\xi_T)$.
+\)
+dove l’aspettazione è presa rispetto a una sequenza di variabili aleatorie \((\xi_1,\ldots,\xi_T)\).
 Questa notazione nasconde la vera natura multistadio del problema, poiché ora si dovrebbero trovare una sequenza di funzioni.
-
-\paragraph{Decisioni come funzioni della storia}
-Infatti, a parte la decisione iniziale $x_0$ da prendere qui e ora, i vettori decisionali possono essere funzioni delle decisioni passate e delle realizzazioni osservate dei fattori di rischio:
+\\ \hspace*{1.5em}Infatti, a parte la decisione iniziale \(x_0\) da prendere \emph{qui e ora}, i
+vettori decisionali possono essere funzioni delle decisioni passate e delle realizzazioni osservate dei fattori di rischio
 \[
-x_t=\mu_t\!\bigl(x[t-1],\xi[t]\bigr),\qquad t=1,\ldots,T-1.
-\tag{18}
+x_t=\mu_t\!\bigl(x_{[t-1]},\xi_{[t]}\bigr),\qquad t=1,\ldots,T-1.
 \]
-
-\paragraph{Riduzione tramite stato}
-Se si individua un insieme adatto di variabili di stato, si può semplificare (18) e cercare funzioni più semplici che mappano lo stato corrente nella decisione ottima, $x_t=\mu_t(s_t)$.
+\hspace*{1.5em}
+Se si individua un insieme adatto di \textbf{variabili di stato}, si può semplificare la dipendenza dalla storia e cercare funzioni più semplici che mappano lo stato corrente nella decisione ottima, cioè \(x_t=\mu_t(s_t)\).
 
 \paragraph{Additività della funzione obiettivo}
-Oltre alla struttura markoviana della dinamica, una decomposizione “pulita” è possibile se si assume che la funzione obiettivo abbia forma additiva:
+Oltre alla struttura \textbf{\textcolor{DarkRed}{markoviana}} della dinamica, una decomposizione \emph{pulita} è possibile se si assume che la funzione obiettivo abbia forma additiva
 \[
 \mathbb{E}_0\left[
 \sum_{t=0}^{T-1}\gamma^t f_t(s_t,x_t)+\gamma^T F_T(s_T)
 \right].
 \]
-
-\paragraph{Regola myopica}
-Una regola decisionale rapida e approssimativa è: quando si è nello stato $s_t$, risolvere il problema miopico
-\[
+Una \textbf{regola decisionale rapida} e approssimativa è: \emph{quando si è nello stato \(s_t\), risolvere il problema miopico}
+\(
 \operatorname{opt}_{x_t\in X(s_t)} f_t(s_t,x_t),
-\]
-dove $X(s_t)$ è l’insieme delle decisioni ammissibili nello stato $s_t$.
-È già noto che tale approccio greedy non è atteso funzionare bene in generale: occorre bilanciare obiettivi di breve e lungo periodo introducendo una funzione valore $V_t(\cdot)$.
-
-\paragraph{Significato della funzione valore}
-L’idea fondamentale della programmazione dinamica è che si può trovare una funzione valore tale da ottenere la prestazione ottima.
-Il valore $V_t(s)$ dovrebbe essere il costo/ricavo atteso ottenuto applicando una politica ottima dal tempo $t$ in avanti, partendo dallo stato $s$.
-
-\subsection{Equazione di Bellman}
+\)
+dove \(X(s_t)\) è l’insieme delle decisioni ammissibili nello stato \(s_t\).
+\\ \hspace*{1.5em}
+È già noto che tale approccio \textbf{\textcolor{DarkRed}{greedy}} non è atteso funzionare bene in generale: occorre bilanciare obiettivi di breve e lungo periodo introducendo una \textbf{funzione valore} \(V_t(\cdot)\).
+\\ \hspace*{1.5em}
+L’\textbf{idea fondamentale} della programmazione dinamica è che si può trovare una funzione valore tale da ottenere la prestazione ottima. Il valore \(V_t(s)\) dovrebbe essere il costo/ricavo atteso ottenuto applicando una politica ottima dal tempo \(t\) in avanti, partendo dallo stato \(s\).
 
 \paragraph{Problema a singolo stadio parametrizzato dallo stato}
-Formalmente, nello stato $s_t$ al tempo $t$ si deve risolvere:
+Formalmente, nello stato \(s_t\) al tempo \(t\) si deve risolvere
 \[
-\boxed{
+\begin{aligned}
 V_t(s_t)=\operatorname{opt}_{x_t\in X(s_t)}
-\left\{
-f_t(s_t,x_t)+\gamma\,\mathbb{E}\!\left[
-V_{t+1}\!\bigl(g_{t+1}(s_t,x_t,\xi_{t+1})\bigr)\,\middle|\, s_t,x_t
-\right]
-\right\}.
-}
-\tag{19}
+\Bigl\{
+f_t(s_t,x_t)
++ \gamma\,\mathbb{E}\!\bigl[
+V_{t+1}\!\bigl(g_{t+1}(s_t,x_t,\xi_{t+1})\bigr)\,\bigm|\, s_t,x_t
+\bigr]
+\Bigr\}.
+\end{aligned}
 \]
-Questa equazione funzionale ricorsiva è detta \textbf{equazione di Bellman}.
-
-\paragraph{Politica ottima in feedback}
-La decisione ottima $x_t^\star$ si ottiene risolvendo un problema di ottimizzazione parametrizzato dallo stato corrente $s_t$, usando la conoscenza della funzione valore $V_{t+1}(\cdot)$.
-Nel caso di uno spazio degli stati finito e piccolo, la politica ottima può essere rappresentata in forma tabellare. In generale, la politica è implicita nella sequenza delle funzioni valore.
-In ogni caso, concettualmente si trova una politica ottima in forma di feedback:
-\[
+Questa equazione funzionale ricorsiva è detta \textbf{\textcolor{DarkRed}{equazione di Bellman}}.
+\\ \hspace*{1.5em}
+La decisione ottima \(x_t^\star\) si ottiene risolvendo un problema di ottimizzazione parametrizzato dallo stato corrente \(s_t\), usando la conoscenza della funzione valore \(V_{t+1}(\cdot)\).
+Nel caso di uno \emph{spazio degli stati finito} e piccolo, la politica ottima può essere rappresentata in
+\textbf{forma tabellare}.
+In generale, la politica è implicita nella sequenza delle funzioni valore. In ogni caso, concettualmente si trova una 
+politica ottima in forma di feedback:
+\(
 x_t^\star=\mu_t^\star(s_t)\in X(s_t).
-\tag{20}
-\]
-Raccogliendo tutte le funzioni $\mu_t^\star(\cdot)$ si ottiene la politica complessiva:
-\[
+\)
+Raccogliendo tutte le funzioni \(\mu_t^\star(\cdot)\) si ottiene la politica complessiva:
+\(
 \mu^\star\equiv\bigl(\mu_0^\star(\cdot),\mu_1^\star(\cdot),\ldots,\mu_{T-1}^\star(\cdot)\bigr).
-\tag{21}
-\]
-Quando si considera una singola funzione $\mu^\star(\cdot)$ indipendente dal tempo si parla di \textbf{politica stazionaria}, adatta ai problemi a orizzonte infinito.
-Talvolta ci si accontenta di una politica subottima, ad esempio ottenuta da un’approssimazione della funzione valore ottima.
+\)
+\\ \hspace*{1.5em}
+Quando si considera una singola funzione \(\mu^\star(\cdot)\) indipendente dal tempo si parla di \textcolor{DarkRed}{\textbf{politica stazionaria}},
+adatta ai problemi a orizzonte infinito. Talvolta ci si accontenta di una politica subottima,
+ad esempio ottenuta da un’approssimazione della funzione valore ottima.
 
-\subsection{Teorema: principio di ottimalità della programmazione dinamica}
-
-\paragraph{Enunciato}
-Si consideri una politica ottima $\bigl(\mu_0^\star(\cdot),\mu_1^\star(\cdot),\ldots,\mu_{T-1}^\star(\cdot)\bigr)$ per il problema multistadio
+\paragraph{Teorema: principio di ottimalità della programmazione dinamica}
+Si consideri una politica ottima \(\bigl(\mu_0^\star(\cdot),\mu_1^\star(\cdot),\ldots,\mu_{T-1}^\star(\cdot)\bigr)\)
+per il \textbf{problema multistadio}
 \[
 \operatorname{opt}\ \mathbb{E}_0\left[
 \sum_{t=0}^{T-1}\gamma^t f_t(s_t,x_t)+\gamma^T F_T(s_T)
 \right].
 \]
-Si assuma che al tempo $\tau$ ci si trovi nello stato $s_\tau$ e si consideri il problema di coda:
+Si assuma che al tempo \(\tau\) ci si trovi nello stato \(s_\tau\) e si consideri il problema di coda
 \[
 \operatorname{opt}\ \mathbb{E}_\tau\left[
 \sum_{t=\tau}^{T-1}\gamma^{t-\tau} f_t(s_t,x_t)+\gamma^{T-\tau}F_T(s_T)
 \right].
 \]
-Allora la politica troncata $\bigl(\mu_\tau^\star(\cdot),\mu_{\tau+1}^\star(\cdot),\ldots,\mu_{T-1}^\star(\cdot)\bigr)$ è ottima per il problema di coda.
-
-\paragraph{Osservazione sulla dimostrazione}
-Le dimostrazioni si basano sull’induzione matematica e possono essere piuttosto complicate quando si considerano questioni matematiche sottili.
+Allora la politica troncata \(\bigl(\mu_\tau^\star(\cdot),\mu_{\tau+1}^\star(\cdot),\ldots,\mu_{T-1}^\star(\cdot)\bigr)\) è ottima per il problema di coda.
+\\ \hspace*{1.5em}
+Le \textbf{dimostrazioni} si basano sull’induzione matematica e possono essere piuttosto complicate
+quando si considerano questioni matematiche sottili.
 
 \subsection{DP stocastica per orizzonti finiti}
 
 \paragraph{Risoluzione all’indietro}
-L’equazione (19) è un’equazione di ottimalità e richiede di determinare la funzione valore per ogni istante temporale.
-Il processo naturale procede all’indietro nel tempo, partendo dalla condizione terminale:
+L’\textbf{equazione di Bellman} è un’\emph{equazione di ottimalità} e richiede di determinare la funzione valore per ogni
+istante temporale. Il processo naturale \textcolor{DarkRed}{procede all’indietro nel tempo}, partendo dalla condizione terminale:
+\(
+V_T(s_T)=F_T(s_T)\ \ \forall s_T.
+\)
+\\ \hspace*{1.5em}
+All’ultimo istante decisionale, \(t=T-1\), si risolve per ogni possibile stato \(s_{T-1}\)
 \[
-V_T(s_T)=F_T(s_T)\qquad \forall s_T,
-\]
-cioè il valore dello stato terminale è dato dalla funzione $F_T(\cdot)$.
-
-\paragraph{Ultimo istante decisionale}
-All’ultimo istante decisionale, $t=T-1$, si risolve per ogni possibile stato $s_{T-1}$:
-\[
-\boxed{
+\begin{aligned}
 V_{T-1}(s_{T-1})=\operatorname{opt}_{x_{T-1}\in X(s_{T-1})}
-\left\{
-f_{T-1}(s_{T-1},x_{T-1})+
-\gamma\,\mathbb{E}\!\left[
-V_T\!\bigl(g_T(s_{T-1},x_{T-1},\xi_T)\bigr)\,\middle|\, s_{T-1},x_{T-1}
-\right]
-\right\}.
-}
-\tag{22}
+\Bigl\{
+f_{T-1}(s_{T-1},x_{T-1})
++ \gamma\,\mathbb{E}\!\bigl[
+V_T\!\bigl(g_T(s_{T-1},x_{T-1},\xi_T)\bigr)\,\bigm|\, s_{T-1},x_{T-1}
+\bigr]
+\Bigr\}.
+\end{aligned}
 \]
-Questo è un problema statico ma non miopico, poiché $V_T(\cdot)$ incorpora l’effetto della decisione $x_{T-1}$ sullo stato terminale.
-
-\paragraph{Ricorsione fino a $V_1$}
-Risolvendo (22) per ogni stato $s_{T-1}$ si costruisce la funzione valore $V_{T-1}(\cdot)$.
-Poi, svolgendo la ricorsione all’indietro nel tempo, si ottengono $V_{T-2}(s_{T-2})$ e così via, fino a $V_1(s_1)$.
-
-\paragraph{Prima decisione}
-Infine, dato lo stato iniziale $s_0$, la prima decisione ottima si trova risolvendo:
+Questo è un \emph{problema statico ma non miopico}, poiché \(V_T(\cdot)\) incorpora l’effetto della decisione \(x_{T-1}\) sullo stato terminale.
+\\ \hspace*{1.5em}Risolvendo il problema precedente per ogni stato \(s_{T-1}\) si costruisce la funzione valore \(V_{T-1}(\cdot)\). Poi, svolgendo la ricorsione all’indietro nel tempo, si ottengono \(V_{T-2}(s_{T-2})\) e così via, fino a \(V_1(s_1)\).
+Infine, dato lo stato iniziale \(s_0\), la prima decisione ottima si trova risolvendo
 \[
-\boxed{
+\begin{aligned}
 V_0(s_0)=\operatorname{opt}_{x_0\in X(s_0)}
-\left\{
-f_0(s_0,x_0)+
-\gamma\,\mathbb{E}\!\left[
-V_1\!\bigl(g_1(s_0,x_0,\xi_1)\bigr)\,\middle|\, s_0,x_0
-\right]
-\right\}.
-}
-\tag{23}
+\Bigl\{
+f_0(s_0,x_0)
++ \gamma\,\mathbb{E}\!\bigl[
+V_1\!\bigl(g_1(s_0,x_0,\xi_1)\bigr)\,\bigm|\, s_0,x_0
+\bigr]
+\Bigr\}.
+\end{aligned}
 \]
 
 \paragraph{Uso delle funzioni valore: caso deterministico}
-Come sfruttare la conoscenza delle funzioni valore $V_t(\cdot)$?
-In un contesto deterministico, si può trovare la sequenza di decisioni ottime $x_t^\star$ risolvendo una sequenza di problemi a singolo stadio e aggiornando lo stato secondo le decisioni applicate.
+\emph{Come sfruttare la conoscenza delle funzioni valore \(V_t(\cdot)\)?} In un contesto \textbf{deterministico}, si può trovare la sequenza di decisioni ottime \(x_t^\star\) risolvendo una sequenza di problemi a singolo stadio e aggiornando lo stato secondo le decisioni applicate.
+\\ \hspace*{1.5em}
+In un contesto \textbf{stocastico}, si può eseguire una simulazione \textbf{\emph{Monte Carlo}} come segue. Dato lo stato iniziale \(s_0\) e la funzione valore \(V_1(\cdot)\), si risolve il problema del primo stadio e si trova \(x_0^\star\); quindi si campiona \(\xi_1\) e si genera lo stato successivo \(s_1=g_1(s_0,x_0^\star,\xi_1)\). Ripetendo lo stesso ragionamento, dato lo stato \(s_t\) e la funzione valore \(V_{t+1}(\cdot)\), si risolve il problema del tempo \(t\) ottenendo \(x_t^\star\), e si prosegue fino a generare l’ultima decisione \(x_{T-1}^\star\) e lo stato terminale \(s_T\).
 
-\paragraph{Uso delle funzioni valore: simulazione Monte Carlo}
-In un contesto stocastico, si può eseguire una simulazione Monte Carlo come segue:
-\begin{itemize}[label=-]
-\item dato lo stato iniziale $s_0$ e la funzione valore $V_1(\cdot)$, si risolve il problema del primo stadio e si trova $x_0^\star$;
-\item si campiona $\xi_1$ e si genera lo stato successivo $s_1=g_1(s_0,x_0^\star,\xi_1)$;
-\item dato lo stato $s_1$ e la funzione valore $V_2(\cdot)$, si risolve il problema del secondo stadio e si trova $x_2^\star$;
-\item si ripete il processo fino a generare l’ultima decisione $x_{T-1}^\star$ e lo stato terminale $s_T$.
-\end{itemize}
-
-\subsection{DP stocastica per orizzonti infiniti}
-
-\paragraph{Problema a orizzonte infinito}
-La forma ricorsiva (19) deve essere adattata per un problema a orizzonte infinito del tipo:
+\paragraph{DP stocastica per orizzonti infiniti}
+La forma ricorsiva deve essere adattata per un problema a orizzonte infinito del tipo
 \[
 \operatorname{opt}\ \mathbb{E}\left[
 \sum_{t=0}^{\infty}\gamma^t f(s_t,x_t)
 \right],
-\tag{24}
 \]
-dove si assume che i costi immediati siano limitati e $\gamma<1$, così che la serie converga a un valore finito.
-Si elimina l’indice $t$ dal contributo immediato e dalla funzione di transizione:
-\[
+dove si assume che i costi immediati siano limitati e \(\gamma<1\), così che la serie converga a un valore finito.
+\\ \hspace*{1.5em}
+Si elimina l’indice \(t\) dal contributo immediato e dalla funzione di transizione:
+\(
 s_{t+1}=g(s_t,x_t,\xi_{t+1}).
-\]
-
-\paragraph{Equazione al punto fisso}
-L’equazione funzionale diventa:
+\)
+\\ \hspace*{1.5em}
+L’equazione funzionale diventa
 \[
-\boxed{
+\begin{aligned}
 V(s)=\operatorname{opt}_{x\in X(s)}
-\left\{
+\Bigl\{
 f(s,x)+\gamma\,\mathbb{E}\!\left[
 V\bigl(g(s,x,\xi)\bigr)
 \right]
-\right\},
-}
-\tag{25}
+\Bigr\},
+\end{aligned}
 \]
-dove $X(s)$ è l’insieme delle decisioni ammissibili nello stato $s$.
-Ora la funzione valore è definita come \textbf{punto fisso} di un operatore potenzialmente complicato, poiché $V(s)$ compare su entrambi i lati dell’equazione.
-È necessario un metodo iterativo per risolvere (25).
-
+dove \(X(s)\) è l’insieme delle decisioni ammissibili nello stato \(s\).
+\\ \hspace*{1.5em}
+Ora la funzione valore è definita come \textbf{\textcolor{DarkRed}{punto fisso}} di un operatore potenzialmente complicato,
+poiché \(V(s)\) compare su entrambi i lati dell’equazione. È necessario un \emph{metodo iterativo} per risolvere tale equazione.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PDF 8 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \vspace{-1cm}
@@ -5491,7 +5326,6 @@ V_t(s_t) = \operatorname{opt}_{x_t \in X(s_t)}
 f_t(s_t, x_t) + \gamma\, \mathbb{E}\!\left[\,V_{t+1}(s_{t+1}) \mid s_t, x_t \right]
 \right\}.
 }
-\tag{1}
 \]
 
 \paragraph{Forme alternative della ricorsione DP}
