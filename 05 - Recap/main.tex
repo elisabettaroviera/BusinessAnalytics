@@ -4821,14 +4821,40 @@ poiché \(V(s)\) compare su entrambi i lati dell’equazione. È necessario un \
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PDF 8 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \vspace{-1cm}
 \textcolor{DarkGoldenrod}{
-\section{CAP 8 -- Implementazione della programmazione dinamica}}
+\section{CAP 8 -- Implementazione della programmazione dinamica}
+}
+
+\paragraph{Recap}
+\textcolor{DarkGoldenrod}{\textbf{Allocazione discreta di risorse: il problema dello zaino}}
+Il problema dello \textbf{zaino} rappresenta un caso paradigmatico di allocazione discreta di risorse, in cui la selezione delle attività è una decisione \textbf{tutto-o-niente} soggetta a un vincolo di capacità. La dipendenza dalle decisioni passate è catturata interamente dal \textbf{budget residuo}, che costituisce la variabile di stato naturale.  
+\\ \hspace*{1.5em}
+\textcolor{DarkGoldenrod}{\textbf{Riformulazione sequenziale e funzione valore}}
+Introducendo uno stadio fittizio associato agli oggetti, il problema viene riformulato come allocazione sequenziale. La funzione valore consente di rappresentare il profitto ottimale ottenibile dai sottoproblemi residui e conduce a una ricorsione di Bellman semplice e completamente tabulabile nel caso discreto.  
+\\ \hspace*{1.5em}
+\textcolor{DarkGoldenrod}{\textbf{Implementazione numerica}}
+La soluzione DP viene implementata tramite tabelle di valore e di decisione, calcolate con una procedura backward e utilizzate per ricostruire la soluzione ottima in avanti. La complessità risultante è \textbf{pseudo-polinomiale} e cresce linearmente con il budget.  
+\\ \hspace*{1.5em}
+\textcolor{DarkGoldenrod}{\textbf{Allocazione continua del budget}}
+Nel caso continuo, il budget viene allocato tramite decisioni reali e funzioni di profitto concave. In presenza di soluzioni interne, le condizioni di ottimalità sono caratterizzate dalla Lagrangiana, ma lo stesso problema può essere riformulato in termini di programmazione dinamica.  
+\\ \hspace*{1.5em}
+\textcolor{DarkGoldenrod}{\textbf{Approssimazione e interpolazione}}
+Nel continuo la funzione valore è definita su uno spazio \textbf{infinito-dimensionale}. La risoluzione numerica richiede discretizzazione dello stato e tecniche di interpolazione. Le spline cubiche permettono di evitare le oscillazioni tipiche dell’interpolazione polinomiale globale.  
+\\ \hspace*{1.5em}
+\textcolor{DarkGoldenrod}{\textbf{Controllo stocastico delle scorte}}
+La programmazione dinamica viene applicata a problemi di lot-sizing con domanda aleatoria discreta. La ricorsione DP incorpora l’aspettativa rispetto alla domanda futura e conduce a politiche ottime tabellari.  
+\\ \hspace*{1.5em}
+\textcolor{DarkGoldenrod}{\textbf{Struttura e politiche ottime}}
+Nel caso deterministico emergono forti proprietà strutturali, come il risultato di Wagner--Whitin, che consentono riformulazioni efficienti come cammini minimi. In ambiente stocastico compaiono politiche strutturate di tipo \textbf{base-stock} e \textbf{\((s,S)\)}.  
+\\ \hspace*{1.5em}
+\textcolor{DarkGoldenrod}{\textbf{Limiti della DP}}
+L’approccio DP soffre di limitazioni legate alla dimensionalità dello stato, alla difficoltà dei sottoproblemi, al calcolo delle aspettative e alla complessità della modellazione.
 
 \subsection{Allocazione discreta di risorse: il problema dello zaino}
 
-\paragraph{Definizione del problema}
-Il problema dello \textbf{zaino} richiede di selezionare un sottoinsieme di oggetti di \textbf{valore totale massimo}, rispettando un vincolo di \textbf{capacità} (budget).
-
-Per modellare la selezione di ciascun oggetto si introducono variabili decisionali \textbf{binarie}:
+\paragraph{Definizione, formulazione e motivazione DP}
+Il problema dello \textbf{zaino} richiede di selezionare un sottoinsieme di oggetti di \textbf{valore totale massimo}, rispettando un vincolo di \textbf{capacità} (budget).  
+\\ \hspace*{1.5em}
+Per modellare la selezione di ciascun oggetto si introducono variabili decisionali \textbf{binarie}
 \[
 x_k =
 \begin{cases}
@@ -4836,117 +4862,78 @@ x_k =
 0 & \text{altrimenti}.
 \end{cases}
 \]
-
-Il problema può essere formulato come un problema di \textbf{programmazione lineare binaria pura}:
+\\ \hspace*{1.5em}
+Il problema può essere formulato come un problema di \textbf{programmazione lineare binaria pura}
 \[
-\max \sum_{k=1}^{n} v_k x_k
+\begin{aligned}
+\max \ & \sum_{k=1}^{n} v_k x_k \\
+\text{s.t. } \ & \sum_{k=1}^{n} w_k x_k \le B,\\
+ \ &x_k \in \{0,1\} \quad \forall k.
+\end{aligned}
 \]
+\hspace*{1.5em}Si assume un’allocazione discreta del budget, poiché la selezione di un’attività è una decisione \textbf{tutto-o-niente}. Il problema può essere risolto con algoritmi \textbf{branch-and-cut}, ma si adotta un approccio basato sul principio della \textbf{programmazione dinamica}.
+
+\paragraph{Riformulazione sequenziale, stato e transizione}
+Il problema non è intrinsecamente dinamico, ma può essere riformulato come un problema di \textbf{allocazione sequenziale di risorse} introducendo un indice discreto fittizio \(k\).  
+\\ \hspace*{1.5em}
+Allo stadio iniziale si dispone del budget \(B\), mentre allo stadio finale resta da valutare solo l’ultimo oggetto dato il budget residuo. La dipendenza dalle decisioni passate è interamente riassunta dal \textbf{budget residuo}.  
+La variabile di stato allo stadio \(k\) è il budget disponibile \(s_k\), mentre la decisione è la variabile binaria \(x_k\). La transizione dello stato è
 \[
-\text{s.t. } \sum_{k=1}^{n} w_k x_k \le B
+s_{k+1}=s_k-w_k x_k,
+\qquad s_1=B.
 \]
+
+\paragraph{Funzione valore e ricorsione di Bellman}
+Si definisce la funzione valore
 \[
-x_k \in \{0,1\} \quad \forall k.
+V_k(s)=\text{profitto della selezione ottimale degli oggetti } \{k,\dots,n\} \text{ con budget residuo } s.
 \]
-
-Si assume un’allocazione discreta del budget, poiché la selezione di un’attività è una decisione \textbf{tutto-o-niente}.
-
-\paragraph{Motivazione dell’approccio DP}
-Il problema può essere risolto in modo efficiente con algoritmi \textbf{branch-and-cut} per la programmazione lineare intera, ma qui si adotta un approccio basato sul principio della \textbf{programmazione dinamica}.
-
-\subsection{Riformulazione sequenziale del problema}
-
-\paragraph{Indice temporale fittizio e stadi decisionali}
-Il problema non è intrinsecamente dinamico, ma può essere riformulato come un problema di \textbf{allocazione sequenziale di risorse} introducendo un indice discreto fittizio \(k\), associato agli oggetti.
-
-Per ogni stadio \(k = 1, \dots, n\), si decide se includere o meno l’oggetto \(k\) nel sottoinsieme.
-
-\paragraph{Stato e dipendenza dalle decisioni passate}
-Allo stadio \(k=1\) si dispone del budget \(B\) e si deve scegliere se includere il primo oggetto, affrontando un compromesso tra \textbf{ricompensa immediata} e \textbf{ricompense future}.  
-Allo stadio \(k=n\) il problema è banale, poiché resta da valutare solo l’ultimo oggetto dato il budget residuo.
-
-La selezione degli oggetti successivi dipende dalle decisioni passate soltanto attraverso il \textbf{budget residuo}. La variabile di stato naturale allo stadio \(k\) è il budget disponibile \(s_k\) prima di selezionare l’oggetto \(k\), mentre la variabile decisionale è la variabile binaria \(x_k\).
-
-\paragraph{Equazione di transizione dello stato}
-Poiché non esiste l’oggetto \(k=0\), si usa la transizione:
+\hspace*{1.5em}
+Nel caso \textbf{discreto} è possibile tabulare tutte le funzioni valore. La \emph{ricorsione DP} è
 \[
-s_{k+1} = s_k - w_k x_k, \quad k = 1, \dots, n,
-\]
-con condizione iniziale
-\[
-s_1 = B.
-\]
-Assumendo che i pesi \(w_k\) siano \textbf{interi}, anche la variabile di stato assume valori \textbf{interi}.
-
-\subsection{Funzione valore e ricorsione DP}
-
-\paragraph{Definizione della funzione valore}
-Si definisce la funzione valore:
-\[
-V_k(s) := \text{profitto della selezione ottimale degli oggetti } \{k, k+1, \dots, n\}\text{ con budget residuo } s.
-\]
-Nel caso discreto, è possibile \textbf{tabulare} tutte le funzioni \(V_k(s)\) per \(k=1,\dots,n\) e \(s\in\{0,\dots,B\}\).
-
-\paragraph{Equazione di Bellman}
-La ricorsione DP è:
-\[
-V_k(s) =
+V_k(s)=
 \begin{cases}
-V_{k+1}(s) & \text{se } 0 \le s < w_k,\\[6pt]
-\max\{ V_{k+1}(s),\; V_{k+1}(s - w_k) + v_k \} & \text{se } w_k \le s \le B.
+V_{k+1}(s) & 0\le s<w_k,\\
+\max\{V_{k+1}(s),V_{k+1}(s-w_k)+v_k\} & w_k\le s\le B.
 \end{cases}
 \]
-
-\paragraph{Interpretazione della ricorsione}
-Allo stadio \(k\), si considera l’oggetto \(k\).  
-Se \(s < w_k\), l’oggetto non entra nel budget residuo e quindi la funzione valore resta \textbf{invariata}.  
-Se \(s \ge w_k\), si confrontano due alternative: includere l’oggetto (ottenendo \(v_k\) e aggiornando lo stato a \(s-w_k\)) oppure escluderlo (lasciando lo stato a \(s\)).  
-Poiché la decisione è \textbf{binaria}, l’ottimizzazione a singolo stadio è immediata.
-
-\paragraph{Condizione terminale}
-Per l’ultimo oggetto \(k=n\):
+L’equazione esprime che, allo stadio \(k\), viene considerato l’oggetto \(k\).  
+\textbf{Se} il suo peso \(w_k\) non è compatibile con il budget residuo \(s\), cioè se \textbf{\(s < w_k\)}, l’oggetto non può essere selezionato. In questo caso la variabile di stato rimane invariata e la funzione valore nello stato \(s\) coincide con quella dello stadio successivo, ossia \(V_k(s)=V_{k+1}(s)\).  
+\\ \hspace*{1.5em}
+\textbf{Se invece \(s \ge w_k\)}, è necessario confrontare due alternative. La \emph{prima} consiste nell’includere l’oggetto \(k\) nel sottoinsieme, ottenendo una ricompensa pari al suo valore \(v_k\) e allocando in modo ottimale il budget aggiornato \(s-w_k\) agli oggetti successivi \(k+1,\dots,n\). La \emph{seconda} consiste nel non includere l’oggetto \(k\), allocando l’intero budget residuo \(s\) in modo ottimale agli oggetti \(k+1,\dots,n\).  
+Poiché la decisione è binaria, il problema di ottimizzazione a singolo stadio risulta immediato.
+Per l’ultimo oggetto, corrispondente allo stadio \(k=n\), la funzione valore è definita come
 \[
-V_n(s) =
+V_n(s)=
 \begin{cases}
 0 & \text{se } 0 \le s < w_n,\\
 v_n & \text{se } w_n \le s \le B.
 \end{cases}
 \]
 
-\subsection{Implementazione MATLAB del problema dello zaino}
 
-\paragraph{Obiettivo della funzione}
-La funzione \texttt{DPKnapsack} ha lo scopo di calcolare la soluzione ottima del problema dello \textbf{zaino} dato un vettore di \textbf{valori}, un vettore di \textbf{pesi} e una \textbf{capacità}.  
-L’output è la selezione ottima come vettore \textbf{binario} e il \textbf{valore totale} ottenuto.
-
-\paragraph{Idea di memorizzazione: tabelle di valore e decisione}
-La funzione valore viene memorizzata in una tabella \texttt{valueTable}, indicizzata per \textbf{stadio} (oggetto) e per \textbf{stato} (budget residuo).  
-Poiché MATLAB indicizza a partire da \(1\), lo stato \(s\) corrisponde alla riga \(s+1\).
-
-In parallelo, la tabella \texttt{decisionTable} memorizza, per ogni coppia \textbf{stato--stadio}, la \textbf{decisione ottima} (includere o non includere).
-
-\paragraph{Ricorsione backward e ricostruzione forward}
-La tabulazione implementa una ricorsione \textbf{backward} sugli stadi, calcolando le funzioni valore a ritroso.  
-Successivamente, la soluzione ottima viene ricostruita procedendo \textbf{forward} sugli oggetti, usando la tabella delle decisioni e aggiornando lo stato (budget residuo) coerentemente.
-
-\paragraph{Complessità computazionale}
-Assumendo dati interi, la complessità è \(O(nB)\), quindi \textbf{pseudo-polinomiale}. Quando \(B\) è grande, occorre costruire una tabella molto grande e l’algoritmo può diventare poco efficiente.
+\paragraph{Implementazione MATLAB e complessità}
+La funzione \textcolor{DarkGoldenrod}{\texttt{DPKnapsack}} memorizza la funzione valore in una tabella indicizzata per stato e stadio e una tabella delle decisioni ottime.  
+\\ \hspace*{1.5em}
+La ricorsione è calcolata backward e la soluzione ottima è ricostruita forward. Assumendo dati interi, la complessità è \(O(nB)\), quindi \textbf{pseudo-polinomiale}.
 
 \subsection{Allocazione continua del budget}
-
-\paragraph{Formulazione del problema}
-Si considera una versione \textbf{continua} del problema di allocazione delle risorse: un budget \(B\) deve essere allocato tra \(n\) attività, con decisioni continue \(x_k \ge 0\), \(k=1,\dots,n\).  
-Il contributo di profitto dell’attività \(k\) dipende dall’allocazione tramite una funzione \(f_k(\cdot)\) \textbf{crescente e concava}:
+\paragraph{Formulazione e soluzione analitica}
+Si considera una versione \textbf{continua} del problema di allocazione delle risorse, in cui un budget
+complessivo \(B\) deve essere allocato tra un insieme di \(n\) attività.  
+\\ \hspace*{1.5em}
+L’allocazione all’attività \(k\) è rappresentata da una variabile decisionale continua \(x_k \ge 0\),
+per \(k=1,\dots,n\). Il \textbf{contributo al profitto} dell’attività \(k\) dipende dall’allocazione di risorse tramite una funzione \(f_k(\cdot)\) \textbf{crescente} e \textbf{concava}.
 \[
-\max \sum_{k=1}^{n} f_k(x_k)
+\begin{aligned}
+\max \ & \sum_{k=1}^{n} f_k(x_k) \\
+\text{s.t. } \ & \sum_{k=1}^{n} x_k \le B, \\
+& x_k \ge 0 \quad \forall k.
+\end{aligned}
 \]
-\[
-\text{s.t. } \sum_{k=1}^{n} x_k \le B,
-\qquad
-x_k \ge 0 \quad \forall k.
-\]
-
-\paragraph{Uso completo del budget}
-Poiché le funzioni di profitto sono \textbf{strettamente crescenti}, si può assumere che il budget sia interamente utilizzato, quindi il vincolo di budget è soddisfatto come \textbf{uguaglianza} nella soluzione ottima.
+\hspace*{1.5em}
+Se le funzioni di profitto sono \textbf{concave}, ad esempio \(f_k(x)=\sqrt{x}\) per \(k=1,\dots,n\), il problema risulta relativamente semplice da risolvere.
+Poiché le funzioni sono strettamente crescenti, il budget è interamente utilizzato. Assumendo una soluzione interna, la Lagrangiana conduce a un’allocazione uniforme \(x_k^\ast=B/n\).
 
 \paragraph{Soluzione interna e Lagrangiana}
 Assumendo una soluzione interna \(x_k^\ast>0\), il problema diventa un problema non lineare con un solo vincolo di uguaglianza.  
