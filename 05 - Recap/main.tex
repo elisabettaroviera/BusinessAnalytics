@@ -3477,7 +3477,7 @@ necessariamente vale
 Se questa disuguaglianza fosse violata, $(x_1^*,x_2^*)$ non sarebbe soluzione ottima del problema iniziale.
 Questo significa che, \textbf{decentralizzando le decisioni, il sistema complessivo è verosimilmente incapace di raggiungere la performance ottima globale}.
 
-\textcolor{Red}{\section{FINIRE CAP 6 -- SLIDE 54/90}}
+\textcolor{Red}{\textbf{FINIRE CAP 6 -- SLIDE 54/90}}
 
 \paragraph{Giochi con decisioni continue}
 Nel seguito si considera l’equilibrio di Nash nel caso in cui ogni giocatore disponga di un continuo di azioni possibili.
@@ -4303,158 +4303,131 @@ lungo il percorso.
 Ciò che serve è una \textbf{strategia}, ovvero una \textbf{regola per prendere decisioni dopo aver osservato le
 realizzazioni casuali} (\textbf{\textcolor{DarkRed}{approccio closed-loop}}).
 
-\textcolor{DarkRed}{\textbf{RIPARTI DA QUA SLIDE 4}}
-\subsection{Ambito di applicazione della programmazione dinamica}
-
-\paragraph{Limiti della programmazione dinamica}
-La programmazione dinamica non è un approccio universale, poiché la sua applicazione richiede una struttura specifica nel modello del sistema, che deve essere \textbf{markoviana}.
-
-\paragraph{Classi di problemi trattabili}
-Nonostante ciò, la programmazione dinamica può essere applicata a una vasta gamma di problemi:
+\paragraph{Ambito di applicazione della programmazione dinamica}
+La programmazione dinamica non è un approccio universale, poiché la sua applicazione richiede una struttura specifica
+nel modello del sistema, che deve essere \textbf{markoviana}.
+\\ \hspace*{1.5em}Nonostante ciò, la programmazione dinamica può essere applicata a una vasta gamma di problemi
 \begin{itemize}[label=-]
-\item problemi continui e discreti, dove la natura discreta o continua può riguardare:
+\item \textbf{Problemi continui e discreti}, dove la natura discreta o continua può riguardare:
+variabili di stato, variabili decisionali e rappresentazione del tempo.
+\item \textbf{Problemi deterministici e stocastici}.
+\item \textbf{Problemi a orizzonte finito e infinito}.
+\end{itemize}
+\hspace*{1.5em}
+All’interno di questa ampia collezione di problemi, può essere necessario risolvere problemi a \emph{dimensione finita o
+infinita}. Per alcune strutture, la \textcolor{DarkRed}{programmazione dinamica} rappresenta \textbf{l’unico approccio risolutivo praticabile}.
+
+\paragraph{Problemi decisionali dinamici}
+Si considerano modelli a tempo discreto ed è necessario chiarire la distinzione tra
+\textbf{istanti temporali} e \textbf{intervalli di tempo}.
+\\ \hspace*{1.5em}
+Le \emph{decisioni} vengono prese agli \emph{istanti} temporali, ma possono essere \emph{implementate} lungo un \emph{intervallo} di tempo,
+non necessariamente in modo istantaneo. Inoltre, le decisioni devono essere prese prima di osservare la realizzazione
+dei fattori di rischio, che si manifestano nell’intervallo temporale successivo.
+\\ \hspace*{1.5em}
+Si adotta la seguente \textbf{convenzione}
 \begin{itemize}[label=-]
-\item variabili di stato;
-\item variabili decisionali;
-\item rappresentazione del tempo;
+\item Gli \textcolor{DarkRed}{\textbf{istanti temporali}} sono indicizzati da $t = 0,1,2,\ldots$; in tali istanti si osserva lo stato del sistema e si prende una decisione.
+\item L’\textcolor{DarkRed}{\textbf{intervallo di tempo}} $t$ è l’intervallo tra gli istanti $t-1$ e $t$; dopo aver applicato la decisione presa all’istante $t-1$, il sistema evolve durante l’intervallo successivo e raggiunge un nuovo stato all’istante $t$.
+Durante tale intervallo può realizzarsi un input esterno, eventualmente casuale, che influenza la transizione di stato.
 \end{itemize}
-\item problemi deterministici e stocastici;
-\item problemi a orizzonte finito e infinito.
-\end{itemize}
-
-\paragraph{Dimensione del problema}
-All’interno di questa ampia collezione di problemi, può essere necessario risolvere problemi a dimensione finita o infinita. Per alcune strutture, la programmazione dinamica rappresenta \textbf{l’unico approccio risolutivo praticabile}.
-
-\subsection{Problemi decisionali dinamici}
-
-\paragraph{Modelli a tempo discreto}
-Si considerano modelli a tempo discreto ed è necessario chiarire la distinzione tra \textbf{istanti temporali} e \textbf{intervalli di tempo}.
-
-\paragraph{Decisioni e intervalli}
-Le decisioni vengono prese agli istanti temporali, ma possono essere implementate lungo un intervallo di tempo, non necessariamente in modo istantaneo. Inoltre, le decisioni devono essere prese prima di osservare la realizzazione dei fattori di rischio, che si manifestano nell’intervallo temporale successivo.
-
-\paragraph{Convenzione temporale}
-Si adotta la seguente convenzione:
-\begin{itemize}[label=-]
-\item gli istanti temporali sono indicizzati da $t = 0,1,2,\ldots$; in tali istanti si osserva lo stato del sistema e si prende una decisione;
-\item l’intervallo di tempo $t$ è l’intervallo tra gli istanti $t-1$ e $t$; dopo aver applicato la decisione presa all’istante $t-1$, il sistema evolve durante l’intervallo successivo e raggiunge un nuovo stato all’istante $t$;
-\item durante tale intervallo può realizzarsi un input esterno, eventualmente casuale, che influenza la transizione di stato.
-\end{itemize}
-
-\subsection{Orizzonte temporale e dinamica del sistema}
 
 \paragraph{Orizzonte finito e infinito}
-Un problema può avere un orizzonte finito, definito sugli istanti $t=0,1,\ldots,T$, oppure un orizzonte infinito, definito sugli istanti $t=0,1,\ldots$. Il primo istante temporale è $t=0$, mentre il primo intervallo temporale è indicizzato da $t=1$. In un problema a orizzonte finito, vi sono $T$ intervalli di tempo e $T+1$ istanti temporali.
-
-\paragraph{Equazione di transizione di stato}
-La dinamica del sistema è rappresentata da un’equazione di transizione di stato del tipo:
+Un problema può avere un \textbf{orizzonte finito}, definito sugli istanti $t=0,1,\ldots,T$, oppure un
+\textbf{orizzonte infinito}, definito sugli istanti $t=0,1,\ldots$. Il primo istante temporale è $t=0$,
+mentre il primo intervallo temporale è indicizzato da $t=1$. In un problema a orizzonte finito, vi
+sono $T$ intervalli di tempo e $T+1$ istanti temporali.
+\\ \hspace*{1.5em}
+La \textcolor{DarkRed}{dinamica del sistema} è rappresentata da un’\textcolor{DarkRed}{\textbf{equazione di transizione di stato}} del tipo
 \[
 s_{t+1} = g_{t+1}(s_t, x_t, \xi_{t+1}),
 \]
-dove:
+dove
 \begin{itemize}[label=-]
-\item $g_{t+1}$ è la funzione di transizione sul periodo $t+1$;
-\item $s_t$ è il vettore delle variabili di stato all’istante $t$, che riassumono tutta l’informazione rilevante del passato;
-\item $s_0$ è lo stato iniziale, tipicamente noto, mentre $s_T$ è lo stato terminale;
-\item $x_t$ è il vettore delle variabili decisionali all’istante $t$, dette anche variabili di controllo;
-\item $\xi_{t+1}$ è un fattore esogeno che si realizza durante l’intervallo $t+1$.
+\item $g_{t+1}$ è la \textbf{funzione di transizione} sul periodo $t+1$.
+\item $s_t$ è il \textbf{vettore delle variabili di stato} all’istante $t$, che riassumono tutta l’informazione rilevante del passato;
+$s_0$ è lo \textbf{stato iniziale}, tipicamente noto, mentre $s_T$ è lo stato terminale.
+\item $x_t$ è il \textbf{vettore delle variabili decisionali} all’istante $t$, dette anche variabili di controllo.
+\item $\xi_{t+1}$ è un \textbf{fattore esogeno} che si realizza durante l’intervallo $t+1$.
 \end{itemize}
+\hspace*{1.5em}Le decisioni $x_t$ vengono prese all’istante di tempo $t$, dopo aver osservato lo stato $s_t$; lo stato successivo $s_{t+1}$ dipende dalla realizzazione della variabile aleatoria $\xi_{t+1}$.
 
-\subsection{Variabili di stato e processi}
-
-\paragraph{Tipologie di variabili di stato}
-Si distinguono diverse tipologie di variabili di stato:
+\paragraph{Variabili di stato e processi}
+Si distinguono diverse tipologie di \textbf{variabili di stato}
 \begin{itemize}[label=-]
-\item \textbf{variabili di stato fisiche}, che descrivono risorse fisiche o finanziarie e sono direttamente influenzate dalle decisioni;
-\item \textbf{variabili di stato informative}, come il prezzo di un’azione finanziaria, non influenzate dall’azione di un singolo decisore;
-\item \textbf{variabili di stato di credenza}, rilevanti in problemi con incertezza sui parametri del modello.
+\item \textcolor{DarkRed}{\textbf{Variabili di stato fisiche}}, che descrivono risorse fisiche o finanziarie e sono direttamente influenzate dalle decisioni.
+\item \textcolor{DarkRed}{\textbf{Variabili di stato informative}}, come il prezzo di un’azione finanziaria, non influenzate dall’azione di un singolo decisore.
+\item \textcolor{DarkRed}{\textbf{Variabili di stato di credenza}}, rilevanti in problemi con incertezza sui parametri del modello.
 \end{itemize}
-
-\paragraph{Processi decisionali e stocastici}
-Si definiscono:
-\begin{itemize}[label=-]
-\item il processo dei dati $(\xi_t)_{t \ge 1}$;
-\item il processo decisionale $(x_t)_{t \ge 0}$;
-\item il processo di stato $(s_t)_{t \ge 0}$;
-\end{itemize}
+\hspace*{1.5em}Si definiscono:
+il \textbf{processo dei dati} $(\xi_t)_{t \ge 1}$,
+il \textbf{processo decisionale} $(x_t)_{t \ge 0}$ e 
+il \textbf{processo di stato} $(s_t)_{t \ge 0}$,
 che possono essere deterministici o stocastici.
 
-\subsection{Informazione e non anticipatività}
-
-\paragraph{Disponibilità dell’informazione}
-Nei problemi decisionali dinamici sotto incertezza, due aspetti sono cruciali:
+\paragraph{Informazione e non anticipatività}
+Nei problemi decisionali dinamici sotto incertezza, due aspetti sono cruciali
 \begin{enumerate}
-\item come modellare la disponibilità dell’informazione;
-\item come sono correlati i processi dei dati, dello stato e delle decisioni.
+\item Come modellare la \emph{disponibilità dell’informazione}.
+\item Come sono \emph{correlati i processi} dei dati, dello stato e delle decisioni.
 \end{enumerate}
-
-\paragraph{Storia osservata}
-Si introduce la notazione:
-\[
-x[t] := (x_0, x_1, \ldots, x_t), \qquad \xi[t] := (\xi_1, \xi_2, \ldots, \xi_t).
-\]
-
-\paragraph{Politiche non anticipative}
+\hspace*{1.5em}
+Si introduce la notazione
+\(
+x_{[t]} := (x_0, x_1, \ldots, x_t), \; \xi_{[t]} := (\xi_1, \xi_2, \ldots, \xi_t),
+\)
+utile per rappresentare la storia osservata fino all'istante di tempo $t$.
+\\ \hspace*{1.5em}
 La decisione $x_t$ può dipendere solo dalle realizzazioni dei fattori di rischio fino all’istante $t$ incluso. Una politica decisionale implementabile è detta \textbf{non anticipativa}.
 
-\subsection{Dipendenza temporale dei fattori di rischio}
-
-\paragraph{Struttura del processo dei dati}
+\paragraph{Dipendenza temporale dei fattori di rischio}
 I vettori casuali del processo dei dati possono presentare diversi livelli di dipendenza:
-\begin{itemize}[label=-]
-\item indipendenza interstadio;
-\item dipendenza markoviana;
-\item dipendenza dall’intera storia osservata.
-\end{itemize}
-
-\paragraph{Endogeneità ed esogeneità}
-È inoltre necessario specificare se la distribuzione dei fattori di rischio dipende dal tempo o dallo stato e dalle decisioni.
-
-\paragraph{Obiettivo additivo}
-L’obiettivo è ottimizzare una funzione obiettivo additiva nel tempo, pari alla somma dei costi o dei ricavi generati in ciascun istante.
+\emph{indipendenza interstadio}, \emph{dipendenza markoviana} e \emph{dipendenza dall’intera storia osservata}.
+\\ \hspace*{1.5em}
+È inoltre necessario specificare se la distribuzione dei fattori di rischio dipende dal tempo o dallo stato e
+dalle decisioni.
+\\ \hspace*{1.5em}
+L’\textbf{obiettivo} è \textcolor{DarkRed}{\textbf{ottimizzare una funzione obiettivo additiva nel tempo}},
+pari alla somma dei costi o dei ricavi generati in ciascun istante.
 
 \subsection{Problemi a orizzonte finito scontati}
-
-\paragraph{Formulazione generale}
-Un problema stocastico a orizzonte finito $T$ può essere formulato come:
+\paragraph{Definizione}Un problema stocastico a orizzonte finito $T$ può essere formulato
 \[
 \operatorname{opt} \ \mathbb{E}_0 \left[
 \sum_{t=0}^{T-1} \gamma^t f_t(s_t,x_t) + \gamma^T F_T(s_T)
 \right],
 \]
-dove $\operatorname{opt}$ indica una minimizzazione o massimizzazione.
-
-\paragraph{Interpretazione dei termini}
-La funzione obiettivo include:
+dove $\operatorname{opt}$ indica una minimizzazione o massimizzazione. La notazione $\mathbb{E}_0[\cdot]$ viene 
+utilizzata per indicare che l’aspettativa è valutata all’istante di tempo $t = 0$; si tratta quindi di
+un’aspettativa incondizionata, poiché non è stata ancora osservata alcuna realizzazione dei fattori di
+rischio (ad eccezione di quelle che hanno condotto allo stato iniziale $s_0$).
+\\ \hspace*{1.5em}La \textcolor{DarkRed}{\textbf{funzione obiettivo}} include
 \begin{itemize}[label=-]
-\item il contributo immediato $f_t(s_t,x_t)$;
-\item il contributo terminale $F_T(s_T)$.
+\item Il \textbf{contributo immediato} $f_t(s_t,x_t)$ in cui incorriamo prendendo la decisione $x_t$ quando siamo nello stato $s_t$.
+\item Il \textbf{contributo terminale} $F_T(s_T)$, che dipende solamente dallo stato terminale $s_T$.
 \end{itemize}
 
 \paragraph{Fattore di sconto}
-Il fattore di sconto $\gamma \in (0,1)$ è tipico nelle applicazioni finanziarie, anche se non è strettamente necessario in un problema a orizzonte finito.
+Il fattore di sconto $\gamma \in (0,1)$ è tipico nelle applicazioni finanziarie, anche se non è strettamente necessario
+in un problema a orizzonte finito perchè la funzione obiettivo è ben definita. Individuare un modo appropriato per associare un valore allo stato terminale può richiedere un ragionamento \emph{ad hoc}.
 
-\subsection{Contributi stocastici e apprendimento}
 
-\paragraph{Contributo dipendente dal rischio}
-Il contributo immediato può dipendere dalla realizzazione del fattore di rischio:
-\[
+\paragraph{Contributi stocastici e apprendimento}
+Il contributo immediato può dipendere dalla realizzazione del fattore di rischio
+\(
 h_t(s_t,x_t,\xi_{t+1}).
-\]
-
-\paragraph{Aspettazione condizionata}
-In tal caso, si può definire:
+\)
+In tal caso, si può definire un'attesa condizionata
 \[
 f_t(s_t,x_t) = \mathbb{E}_t \left[ h_t(s_t,x_t,\xi_{t+1}) \right].
 \]
-
-\paragraph{Difficoltà pratiche}
-In pratica, il calcolo dell’aspettazione può essere difficile o impossibile. In tali casi, si dispone solo di campioni osservabili tramite simulazione Monte Carlo o sperimentazione online, come avviene nel \textbf{reinforcement learning}.
+In pratica, il calcolo dell’attesa può essere difficile o impossibile. In tali casi, si
+dispone solo di campioni osservabili tramite simulazione Monte Carlo o sperimentazione online,
+come avviene nel \textbf{reinforcement learning}.
 
 \subsection{Problemi a orizzonte infinito}
-
 \paragraph{Problemi scontati a orizzonte infinito}
-Un problema di programmazione dinamica scontato a orizzonte infinito ha la forma:
+Un \textbf{problema di programmazione dinamica scontato a orizzonte infinito} ha la forma
 \[
 \operatorname{opt}\ \mathbb{E}_0 \left[
 \sum_{t=0}^{\infty} \gamma^t f(s_t,x_t)
@@ -4462,12 +4435,10 @@ Un problema di programmazione dinamica scontato a orizzonte infinito ha la forma
 \tag{6}
 \]
 dove la sommatoria è ben definita se tutti i contributi sono positivi e limitati e si utilizza un fattore di sconto appropriato $\gamma < 1$.
-
-\paragraph{Ruolo del fattore di sconto}
+\\ \hspace*{1.5em}
 La programmazione dinamica scontata è naturale nelle applicazioni di business ed economia. Talvolta il fattore di sconto non ha una reale giustificazione economica ed è utilizzato solo come espediente per rendere trattabile un problema a orizzonte infinito.
-
-\paragraph{Criterio del costo medio}
-In alcune applicazioni ingegneristiche si preferisce considerare una media nel tempo:
+\\ \hspace*{1.5em}
+In alcune applicazioni ingegneristiche si preferisce considerare una media nel tempo
 \[
 \operatorname{opt}\ \lim_{T \to \infty} \mathbb{E}_0 \left[
 \frac{1}{T} \sum_{t=0}^{T-1} f(s_t,x_t)
@@ -4475,47 +4446,39 @@ In alcune applicazioni ingegneristiche si preferisce considerare una media nel t
 \tag{7}
 \]
 Questo conduce a formulazioni di programmazione dinamica basate sul contributo medio per stadio.
+\\ \hspace*{1.5em}
+Esistono anche problemi con orizzonte non definito, nei quali il processo decisionale termina quando viene
+raggiunto uno stato obiettivo.
 
-\paragraph{Orizzonte non definito}
-Esistono anche problemi con orizzonte non definito, nei quali il processo decisionale termina quando viene raggiunto uno stato obiettivo.
-
-\subsection{Politiche decisionali}
-
-\paragraph{Vincolo di fattibilità delle decisioni}
+\paragraph{Politiche decisionali}
 Ad ogni istante temporale occorre selezionare una decisione $x_t$. Si può introdurre un vincolo astratto del tipo:
-\[
+\(
 x_t \in X(s_t),
-\tag{8}
-\]
+\)
 che impone che la decisione al tempo $t$ appartenga a un insieme ammissibile $X$, eventualmente dipendente dallo stato corrente $s_t$.
 
 \paragraph{Caso deterministico e stocastico}
-In un contesto deterministico, questo vincolo sarebbe sufficiente, poiché al tempo $t=0$ si dovrebbe individuare una sequenza di decisioni $(x_t)_{t\ge 0}$ da implementare nel tempo. Nel caso stocastico, tuttavia, entra in gioco un vincolo fondamentale.
-
-\paragraph{Non anticipatività}
-Le decisioni devono essere \textbf{non anticipative}, cioè non possono dipendere da informazioni future non ancora osservate.
-
-\paragraph{Politiche in feedback}
-Una politica decisionale chiusa e non anticipativa è naturalmente espressa nella forma:
+In un contesto \textcolor{DarkRed}{\textbf{deterministico}}, questo vincolo sarebbe sufficiente,
+poiché al tempo $t=0$ si dovrebbe individuare una sequenza di decisioni $(x_t)_{t\ge 0}$ da implementare nel tempo.
+Nel caso \textcolor{DarkRed}{\textbf{stocastico}}, tuttavia, entra in gioco un vincolo fondamentale.
+Le decisioni devono essere \textcolor{DarkRed}{\textbf{non anticipative}}, cioè non possono dipendere da informazioni future non ancora osservate.
+\\ \hspace*{1.5em}
+Una \emph{politica decisionale chiusa} e \emph{non anticipativa} è naturalmente espressa nella forma
 \[
 x_t = \mu_t(s_t) \in X(s_t),
-\tag{9}
 \]
 dove $\mu_t(\cdot)$ è una funzione che associa allo stato al tempo $t$ una decisione ammissibile.
-
-\paragraph{Politica come sequenza di funzioni}
-Una politica può essere vista come una sequenza di funzioni:
+\\ \hspace*{1.5em}
+Una politica può essere vista come una \textbf{sequenza di funzioni}
 \[
 \mu \equiv \bigl( \mu_0(\cdot), \mu_1(\cdot), \ldots, \mu_{T-1}(\cdot) \bigr),
-\tag{10}
 \]
 una per ciascun istante temporale in cui è richiesta una decisione.
-
-\paragraph{Politiche stazionarie}
-Nel caso di problemi a orizzonte infinito, si cercano politiche \textbf{stazionarie}, caratterizzate dalla stessa funzione $\mu(\cdot)$ in ogni stadio.
+\\ \hspace*{1.5em}
+Nel caso di problemi a \emph{orizzonte infinito}, si cercano politiche \textbf{stazionarie}, caratterizzate dalla stessa funzione $\mu(\cdot)$ in ogni stadio.
 
 \paragraph{Formulazione del problema in termini di politiche}
-Una formulazione più precisa del problema a orizzonte finito è:
+Una formulazione più precisa del problema a orizzonte finito è
 \[
 \operatorname{opt}_{\mu \in \mathcal{M}}
 \mathbb{E}_0 \left[
@@ -4525,55 +4488,31 @@ Una formulazione più precisa del problema a orizzonte finito è:
 \tag{11}
 \]
 dove $\mathcal{M}$ è l’insieme delle politiche ammissibili, tali che $x_t=\mu_t(s_t)\in X(s_t)$ per ogni istante temporale.
-
-\paragraph{Politiche deterministiche e randomizzate}
-Sono state introdotte politiche deterministiche. Esistono tuttavia casi in cui politiche randomizzate possono essere necessarie o utili.
-
-\paragraph{Vincoli probabilistici sugli stati}
-Le politiche randomizzate possono essere richieste per gestire vincoli probabilistici sugli stati:
-\[
+\\ \hspace*{1.5em}
+Sono state introdotte \textbf{politiche deterministiche}. Esistono tuttavia casi in cui politiche
+randomizzate possono essere necessarie o utili.
+\\ \hspace*{1.5em}
+Le \textbf{politiche randomizzate} possono essere richieste per gestire vincoli probabilistici sugli stati:
+\(
 \mathbb{P}\{ s_t \in G \} \ge 1 - \alpha,
-\]
-dove $\alpha$ è una probabilità accettabile di violazione del vincolo.
-
-\paragraph{Esplorazione e sfruttamento}
+\)
+dove $\alpha$ è una \textbf{probabilità accettabile di violazione del vincolo}.
 Le politiche randomizzate risultano inoltre necessarie nel contesto del trade-off tra esplorazione e sfruttamento nel reinforcement learning.
 
-\subsection{Un esempio: il lot-sizing dinamico a singolo prodotto}
-
-\paragraph{Formulazione del problema}
-Si consideri il problema di lot-sizing non capacitated a singolo prodotto:
+\paragraph{Un esempio: il lot-sizing dinamico a singolo prodotto}
+Si consideri il problema di lot-sizing non capacitated a singolo prodotto
 \[
-\min \sum_{t=0}^{T-1} \bigl[ c x_t + \varphi \cdot \delta(x_t) \bigr]
-+ \sum_{t=1}^{T} h I_t
-\tag{12}
+\begin{aligned}
+\min \ & \sum_{t=0}^{T-1} \bigl[ c x_t + \phi \cdot \delta(x_t) \bigr]
+      + \sum_{t=1}^{T} h I_t\\
+\text{s.t.}\ & I_{t+1} = I_t + x_t - d_{t+1}, \qquad t=0,1,\ldots,T-1, \\
+            & x_t \ge 0,\; I_t \ge 0.
+\end{aligned}
 \]
-soggetto a:
-\[
-I_{t+1} = I_t + x_t - d_{t+1}, \qquad t=0,1,\ldots,T-1,
-\tag{13}
-\]
-\[
-x_t, I_t \ge 0.
-\]
-
-\paragraph{Significato delle variabili}
-Dove:
-\begin{itemize}[label=-]
-\item $x_t$ è la quantità ordinata e consegnata immediatamente agli istanti $t=0,1,\ldots,T-1$;
-\item $I_t$ è il livello di inventario disponibile agli istanti $t=0,1,\ldots,T$;
-\item $d_t$ è la domanda durante gli intervalli temporali $t=1,\ldots,T$.
-\end{itemize}
-
-\paragraph{Struttura dei costi}
-L’obiettivo è soddisfare la domanda al costo minimo, che comprende:
-\begin{itemize}[label=-]
-\item un costo di mantenimento a magazzino, con tasso $h$ per unità e per unità di tempo;
-\item un costo di ordinazione, composto da una parte variabile con coefficiente $c$ e da un costo fisso $\varphi$, sostenuto solo quando si ordina una quantità positiva.
-\end{itemize}
-
-\paragraph{Funzione indicatrice del costo fisso}
-Per rappresentare il costo fisso si introduce la funzione:
+L’\textbf{obiettivo} è soddisfare la domanda al costo minimo, che comprende:
+un \emph{costo di mantenimento a magazzino}, con tasso $h$ per unità e per unità di tempo e 
+un \emph{costo di ordinazione}, composto da una parte variabile con coefficiente $c$ e da un costo fisso $\phi$, sostenuto solo quando si ordina una quantità positiva.
+Per rappresentare il costo fisso si introduce la funzione
 \[
 \delta(x) =
 \begin{cases}
@@ -4581,103 +4520,125 @@ Per rappresentare il costo fisso si introduce la funzione:
 0 & \text{se } x=0.
 \end{cases}
 \]
+\hspace*{1.5em}
+Il \textbf{livello di inventario} $I_t$ è una variabile di stato, la quantità ordinata $x_t$ è una variabile di
+controllo, e la domanda $d_t$ può essere interpretata come input esogeno nel caso deterministico o come fattore
+di rischio nel caso stocastico.
 
-\paragraph{Variabili di stato e controllo}
-Il livello di inventario $I_t$ è una variabile di stato, la quantità ordinata $x_t$ è una variabile di controllo, e la domanda $d_t$ può essere interpretata come input esogeno nel caso deterministico o come fattore di rischio nel caso stocastico.
-
-\paragraph{Equazione di transizione}
-L’equazione di stato è data da (13); $I_0$ è lo stato iniziale e $I_T$ è lo stato terminale alla fine dell’orizzonte di pianificazione.
-
-\subsection{Domanda incerta e modelli alternativi}
-
-\paragraph{Vendite perse}
-Nel caso di vendite perse, l’equazione di transizione diventa:
-\[
+\paragraph{Domanda incerta e modelli alternativi}
+Come si dovrebbe adattare il modello nel caso in cui si consideri l’incertezza della domanda? Esistono due modelli di base, che dipendono da assunzioni specifiche sul comportamento dei clienti
+\begin{enumerate}
+\item Nel caso di vendite perse, l’equazione di transizione diventa:
+\(
 I_{t+1} = \max \{0, I_t + x_t - d_{t+1}\}.
-\]
+\)
 Si introduce inoltre una penalità $q$ per ogni unità di domanda insoddisfatta, aggiungendo il termine:
-\[
+\(
 \sum_{t=1}^{T} q \max \{0, d_t - (I_{t-1}+x_{t-1}) \}.
-\]
-
-\paragraph{Clienti pazienti e backlog}
+\)
+\item
 Se i clienti sono pazienti, la domanda può essere accumulata come backlog, con una penalità $b$, con $b>h$.
-
-\paragraph{Backlog con una variabile di stato}
 Una prima opzione è mantenere una singola variabile di stato $I_t$, rilassandone la non negatività e interpretando valori negativi come backlog.
-
-\paragraph{Backlog con due variabili di stato}
 Una seconda opzione è introdurre due variabili di stato:
-\begin{itemize}[label=-]
-\item inventario disponibile $O_t \ge 0$;
-\item backlog $B_t \ge 0$.
-\end{itemize}
-Il costo diventa:
+\emph{inventario disponibile} $O_t \ge 0$ e \emph{backlog} $B_t \ge 0$.
+Il costo diventa
 \[
 \sum_{t=1}^{T} (h O_t + b B_t),
 \]
 e le equazioni di transizione sono:
-\[
-O_{t+1} = \max \{0, O_t - B_t + x_t - d_{t+1}\},
-\]
-\[
+\(
+O_{t+1} = \max \{0, O_t - B_t + x_t - d_{t+1}\}, \;
 B_{t+1} = \max \{0, -O_t + B_t - x_t + d_{t+1}\}.
-\]
-
+\)
+\end{enumerate}
 \paragraph{Ulteriori problematiche}
-In applicazioni reali possono sorgere ulteriori difficoltà:
-\begin{itemize}[label=-]
-\item valutazione dello stato terminale;
-\item stati parzialmente osservabili;
-\item domanda censurata;
-\item ritardi dovuti a lead time di consegna;
-\item incertezza dipendente dallo stato e dalle decisioni.
-\end{itemize}
+In applicazioni reali possono sorgere ulteriori difficoltà: valutazione dello \textbf{stato terminale},
+stati \emph{parzialment} osservabili, domanda censurata, 
+\textbf{ritardi} dovuti a lead time di consegna e \emph{incertezza} dipendente dallo stato e dalle decisioni.
 
 \subsection{Uno sguardo al principio di programmazione dinamica: il problema del cammino minimo}
 
 \paragraph{Rete diretta aciclica}
-Si consideri un problema deterministico: il cammino minimo su una rete diretta aciclica. Una rete diretta è costituita da un insieme di nodi $N=\{0,1,2,\ldots,N\}$ e da un insieme di archi $A$.
-
-\paragraph{Archi e costi}
-Un arco è una coppia ordinata $(i,j)\in A$, con $i,j\in N$, ed è associato a un costo $c_{ij}>0$.
-
-\paragraph{Successori e predecessori}
-Per un nodo $i\in N$ si definiscono:
+Si consideri un \textbf{problema deterministico}: il \textcolor{DarkRed}{cammino minimo su una rete diretta aciclica}.
+Una \textbf{rete diretta} è costituita da un insieme di nodi $N=\{0,1,2,\ldots,N\}$ e da un insieme di archi $A$.
+Un \textcolor{DarkRed}{\textbf{arco}} è una coppia ordinata $(i,j)\in A$, con $i,j\in N$, ed è associato a un costo $c_{ij}>0$.
+Si assume che la rete sia \emph{aciclica}.
+\\ \hspace*{1.5em}Per un \textcolor{DarkRed}{\textbf{nodo}} $i\in N$ si definiscono, rispettivamente, 
 \[
 S_i = \{ j\in N \mid (i,j)\in A \},
 \qquad
-B_i = \{ j\in N \mid (j,i)\in A \}.
+B_i = \{ j\in N \mid (j,i)\in A \},
 \]
-
-\paragraph{Cammini e lunghezza}
-Un cammino diretto da $i$ a $j$ è una sequenza di nodi $(k_1,k_2,\ldots,k_m)$ con $k_1=i$, $k_m=j$, e archi consecutivi in $A$. La lunghezza del cammino è la somma dei costi sugli archi.
-
-\paragraph{Interpretazione dinamica}
-Ogni nodo è uno stato e ogni arco una transizione possibile. In ogni stato occorre scegliere una transizione in modo da raggiungere lo stato terminale al costo minimo.
+il set di \textbf{successori} e \textbf{predecessori} del nodo $i$.
+Un \textcolor{DarkRed}{\textbf{cammino diretto}} da $i$ a $j$ è una sequenza di nodi $(k_1,k_2,\ldots,k_m)$
+con $k_1=i$, $k_m=j$, e archi consecutivi in $A$. La \textbf{lunghezza del cammino} è la somma dei costi sugli archi.
+\\ \hspace*{1.5em}
+Ogni \emph{nodo} è uno \emph{stato} e ogni \emph{arco} una \emph{transizione} possibile. In ogni stato occorre scegliere una transizione
+in modo da raggiungere lo stato terminale al costo minimo.
 
 \paragraph{Approccio greedy}
-Una regola greedy consisterebbe nel muoversi verso il nodo più vicino:
+Una \textcolor{DarkRed}{\textbf{regola greedy}} consisterebbe nel muoversi verso il nodo più vicino
 \[
 \min_{j\in S_i} c_{ij}.
-\tag{14}
 \]
-Tale approccio non è in generale ottimale.
-
-\paragraph{Valore degli stati}
+Tale approccio non è in generale ottimale. Tuttavia, l’\textbf{idea} di risolvere una sequenza di semplici problemi a singolo
+stadio presenta un certo fascino. Può quindi essere utile affinare l’\textbf{obiettivo} introducendo una misura della
+bontà dello stato successivo.
 Si introduce il valore $V_j$ associato a ciascun nodo successore, risolvendo in $i$ il problema:
 \[
 \min_{j\in S_i} (c_{ij}+V_j).
 \]
 
-\paragraph{Definizione del valore ottimo}
-Sia $V_i$ la lunghezza del cammino minimo da $i$ al nodo terminale $N$:
+\paragraph{Definizione del valore ottimo} \emph{Come si può introdurre un termine aggiuntivo di questo tipo?}
+Il punto di partenza consiste nel trovare una caratterizzazione della soluzione ottima. Sia $V_i$ la
+lunghezza del cammino minimo dal nodo $i \in N$ al nodo terminale $N$, indicato come $i \xrightarrow{*} N$:
+\(
+V_i := L(i \xrightarrow{*} N).
+\)
+Supponiamo inoltre che, dato un cammino ottimo da $i$ a $N$, un nodo $j$ appartenga a tale cammino.
+Allora è immediato osservare che deve valere la seguente proprietà:
 \[
-V_i := L(i^* \to N).
+j \xrightarrow{*} N \ \text{è un sottocammino di} \ i \xrightarrow{*} N.
+\]
+Per comprenderne il motivo, consideriamo la decomposizione del cammino $i \xrightarrow{*} N$ in due sottocammini:
+$\mathcal{P}_{i \to j}$ dal nodo $i$ al nodo $j$, e $\mathcal{P}_{j \to N}$ dal nodo $j$ al nodo $N$.
+La lunghezza del cammino $i \xrightarrow{*} N$ è la somma delle lunghezze dei due sottocammini:
+\[
+V_i = L\!\left(i \xrightarrow{*} N\right)
+    = L(\mathcal{P}_{i \to j}) + L(\mathcal{P}_{j \to N}).
+\tag{15}
+\]
+Si noti che il secondo sottocammino non è influenzato dal modo in cui si va da $i$ a $j$.
+Il sistema è markoviano, nel senso che il modo in cui si raggiunge il nodo $j$ non ha alcuna influenza
+sulla lunghezza di qualunque cammino ``futuro'' che parte dal nodo $j$.
+La nostra affermazione equivale a dire che il sottocammino $\mathcal{P}_{j \to N}$ nella decomposizione
+dell’Equazione~(15) è ottimo, nel senso che
+\[
+L(\mathcal{P}_{j \to N}) = L\!\left(j \xrightarrow{*} N\right).
+\]
+Per dimostrarlo, supponiamo che $\mathcal{P}_{j \to N}$ non sia un cammino ottimo da $j$ a $N$, cioè che
+\[
+L(\mathcal{P}_{j \to N}) > L\!\left(j \xrightarrow{*} N\right).
+\]
+Allora potremmo migliorare il lato destro dell’Equazione~(15) considerando il cammino costituito dallo stesso
+cammino iniziale $\mathcal{P}_{i \to j}$, seguito da un cammino ottimo $j \xrightarrow{*} N$:
+\[
+L(\mathcal{P}_{i \to j}) + L\!\left(j \xrightarrow{*} N\right)
+< L(\mathcal{P}_{i \to j}) + L(\mathcal{P}_{j \to N})
+= L\!\left(i \xrightarrow{*} N\right)
+= V_i,
+\]
+che è una contraddizione, poiché abbiamo assunto che $V_i$ sia la lunghezza di un cammino minimo.
+I cammini minimi godono quindi di una sorta di proprietà di annidamento, e questo risultato suggerisce
+una decomposizione ricorsiva del problema complessivo di determinare il cammino minimo
+$0 \xrightarrow{*} N$.
+Se conoscessimo i valori $V_j$ per ciascun nodo $j \in \mathcal{S}_0$, potremmo effettuare la prima decisione
+risolvendo il problema a singolo stadio
+\[
+V_0 = \min_{j \in \mathcal{S}_0} \bigl( c_{0j} + V_j \bigr).
+\tag{16}
 \]
 
-\paragraph{Proprietà di annidamento}
-Se $j$ appartiene a un cammino ottimo da $i$ a $N$, allora il sottocammino da $j$ a $N$ è ottimo.
 
 \paragraph{Ricorsione di Bellman}
 Si ottiene quindi l’equazione funzionale:
