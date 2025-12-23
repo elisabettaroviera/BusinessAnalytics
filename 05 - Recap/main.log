@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.11.21)  22 DEC 2025 18:38
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.11.21)  23 DEC 2025 15:48
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -705,61 +705,63 @@ Overfull \hbox (2.0237pt too wide) in paragraph at lines 4711--4730
 |  \T1/cmr/m/n/12 Quando si con-sid-era una sin-gola fun-zione $\OML/cmm/m/it/12 ^^V[]\OT1/cmr/m/n/12 (\OMS/cmsy/m/n/12 ^^A\OT1/cmr/m/n/12 )$ \T1/cmr/m/n/12 in-dipen-dente dal tempo si parla di []\T1/cmr/bx/n/12 po-lit-ica stazionaria[]\T1/cmr/m/n/12 ,
  []
 
-[72] [73] [74] [75] [76]
-LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <12> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 5015.
- [77]
-Overfull \hbox (16.39912pt too wide) in paragraph at lines 5084--5086
-[] []\T1/cmr/bx/n/12 Scopo di \T1/cmtt/m/n/12 MakePolicy[] \T1/cmr/m/n/12 La fun-zione \T1/cmtt/m/n/12 MakePolicy \T1/cmr/m/n/12 serve ad ap-pren-dere le fun-zioni val-ore \T1/cmr/bx/n/12 a ritroso \T1/cmr/m/n/12 (\T1/cmr/bx/n/12 backward\T1/cmr/m/n/12 )
+[72] [73] [74] [75]
+Overfull \hbox (10.37639pt too wide) in paragraph at lines 4961--4966
+|  \T1/cmr/m/n/12 Nel \T1/cmr/bx/n/12 caso con-tinuo\T1/cmr/m/n/12 , la value func-tion $\OML/cmm/m/it/12 V[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 s\OT1/cmr/m/n/12 )$ \T1/cmr/m/n/12 è un oggetto in uno spazio fun-zionale \T1/cmr/bx/n/12 infinito-dimensionale\T1/cmr/m/n/12 .
  []
 
-[78] [79] [80] [81] [82] [83] [84]
-Overfull \hbox (1.01227pt too wide) in paragraph at lines 5596--5597
-[] []\T1/cmr/bx/n/12 Ap-procci quan-ti-ty-based e price-based[] \T1/cmr/m/n/12 Es-istono due ap-procci: \T1/cmr/bx/n/12 quantity-based \T1/cmr/m/n/12 (si limita la disponi-
+[76] [77] [78] [79] [80]
+Overfull \hbox (5.71637pt too wide) in paragraph at lines 5267--5268
+[] []\T1/cmr/bx/n/12 Ri-cor-sioni DP per MDP[] \T1/cmr/m/n/12 Nel con-testo MDP, la value func-tion al tempo $\OML/cmm/m/it/12 t$ \T1/cmr/m/n/12 è un vet-tore finito-dimensionale
  []
 
-[85] [86] [87] [88] [89] [90] [91] [92] [93] [94] [95] [96] (C:\Users\elisa\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
+[81] [82] [83]
+Overfull \hbox (1.01227pt too wide) in paragraph at lines 5415--5416
+[] []\T1/cmr/bx/n/12 Ap-procci quan-ti-ty-based e price-based[] \T1/cmr/m/n/12 Es-istono due ap-procci: []\T1/cmr/bx/n/12 quantity-based[] \T1/cmr/m/n/12 (si limita la disponi-
+ []
+
+[84] [85] [86] [87] [88] [89] [90] [91] [92] [93] [94] (C:\Users\elisa\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
 File: lstlang1.sty 2025/10/06 1.11 listings language file
-) [97]
-<Figures/1.pdf, id=339, 442.65375pt x 229.85875pt>
+) [95] [96]
+<Figures/1.pdf, id=335, 442.65375pt x 229.85875pt>
 File: Figures/1.pdf Graphic file (type pdf)
 <use Figures/1.pdf>
-Package pdftex.def Info: Figures/1.pdf  used on input line 6444.
+Package pdftex.def Info: Figures/1.pdf  used on input line 6197.
 (pdftex.def)             Requested size: 153.4249pt x 79.6678pt.
-<Figures/2.pdf, id=340, 455.7025pt x 324.21124pt>
+<Figures/2.pdf, id=336, 455.7025pt x 324.21124pt>
 File: Figures/2.pdf Graphic file (type pdf)
 <use Figures/2.pdf>
-Package pdftex.def Info: Figures/2.pdf  used on input line 6449.
+Package pdftex.def Info: Figures/2.pdf  used on input line 6202.
 (pdftex.def)             Requested size: 111.97836pt x 79.6678pt.
-<Figures/3.pdf, id=341, 436.63126pt x 201.75375pt>
+<Figures/3.pdf, id=337, 436.63126pt x 201.75375pt>
 File: Figures/3.pdf Graphic file (type pdf)
 <use Figures/3.pdf>
-Package pdftex.def Info: Figures/3.pdf  used on input line 6454.
+Package pdftex.def Info: Figures/3.pdf  used on input line 6207.
 (pdftex.def)             Requested size: 172.41748pt x 79.6678pt.
- [98 <./Figures/1.pdf> <./Figures/2.pdf> <./Figures/3.pdf>] [99] [100] [101] [102]
-<Figures/4.pdf, id=405, 368.37625pt x 300.12125pt>
+ [97 <./Figures/1.pdf> <./Figures/2.pdf> <./Figures/3.pdf>] [98] [99] [100] [101]
+<Figures/4.pdf, id=402, 368.37625pt x 300.12125pt>
 File: Figures/4.pdf Graphic file (type pdf)
 <use Figures/4.pdf>
-Package pdftex.def Info: Figures/4.pdf  used on input line 6710.
+Package pdftex.def Info: Figures/4.pdf  used on input line 6463.
 (pdftex.def)             Requested size: 157.16208pt x 128.0374pt.
- [103] [104 <./Figures/4.pdf>] [105] [106] [107] [108] [109] [110] [111] [112] [113] [114] [115] [116] [117] [118] [119] (main.aux)
+ [102 <./Figures/4.pdf>] [103] [104] [105] [106] [107] [108] [109] [110] [111] [112] [113] [114] [115] [116] [117] [118] (main.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-10-24>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 20422 strings out of 467871
- 380251 string characters out of 5418375
- 1528152 words of memory out of 5000000
- 48960 multiletter control sequences out of 15000+600000
+ 20421 strings out of 467871
+ 380236 string characters out of 5418375
+ 1533251 words of memory out of 5000000
+ 48959 multiletter control sequences out of 15000+600000
  652167 words of font info for 100 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,15n,94p,1332b,2489s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 84i,15n,94p,1332b,2488s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\elisa\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbi1440.pk> <C:\Users\elisa\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1095.pk> <C:\Users\elisa\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1095.pk> <C:\Users\elisa\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1200.pk> <C:\Users\elisa\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0800.pk> <C:\Users\elisa\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1000.pk> <C:\Users\elisa\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbi1200.pk> <C:\Users\elisa\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\elisa\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1200.pk> <C:\Users\elisa\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\elisa\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk> <C:\Users\elisa\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1728.pk> <C:\Users\elisa\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2074.pk><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx8.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmib10.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cmextra/cmmib8.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/elisa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (119 pages, 1011606 bytes).
+Output written on main.pdf (118 pages, 1011767 bytes).
 PDF statistics:
- 1179 PDF objects out of 1200 (max. 8388607)
+ 1174 PDF objects out of 1200 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  33 words of extra memory for PDF output out of 10000 (max. 10000000)
 
