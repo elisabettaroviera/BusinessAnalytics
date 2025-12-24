@@ -3479,806 +3479,6 @@ Questo significa che, \textbf{decentralizzando le decisioni, il sistema compless
 
 \textcolor{Red}{\textbf{FINIRE CAP 6 -- SLIDE 54/90}}
 
-\paragraph{Giochi con decisioni continue}
-Nel seguito si considera l’equilibrio di Nash nel caso in cui ogni giocatore disponga di un continuo di azioni possibili.
-Si analizza prima il comportamento di due imprese che competono in termini di quantità. Entrambe massimizzano il profitto, ma influenzano reciprocamente il prezzo di mercato tramite la quantità totale prodotta. Il prezzo è comune a entrambe, poiché si assume un prodotto perfettamente identico.
-Questa competizione si chiama competizione di Cournot; il caso in cui le imprese competono sui prezzi si chiama competizione di Bertrand.
-Nel caso di competizione sui prezzi, si distingue tra prodotti omogenei o differenziati.
-
-\subsection{Competizione di Cournot}
-
-\paragraph{Impostazione del modello}
-Un gioco a mosse simultanee in cui le azioni sono quantità conduce all’equilibrio di Cournot--Nash.
-Ciò può essere rilevante in mercati, come l’energia, dove le imprese scelgono quantità e i prezzi sono determinati tramite meccanismi d’asta.
-Si considera un modello molto semplice in cui ciascuna impresa ha solo costo variabile:
-\[
-TC_i(q_i)=c_i q_i,\qquad i=1,2,
-\]
-dove $TC_i$ è il costo totale dell’impresa $i$, $c_i$ è il costo variabile, e $q_i$ è la quantità prodotta dall’impresa $i$.
-La quantità totale sul mercato è $Q=q_1+q_2$ e influenza il prezzo secondo una funzione di domanda inversa lineare:
-\[
-P(Q)=a-bQ,\qquad a,b>0,\qquad a\ge c_i.
-\]
-Questo modello implica che tutta la produzione venga venduta sul mercato.
-Il profitto dell’impresa $i$ è:
-\[
-\pi_i(q_1;q_2)=P(q_1+q_2)q_i-TC_i(q_i)
-=
-\bigl[a-b(q_1+q_2)\bigr]q_i-c_iq_i,\qquad i=1,2.
-\]
-
-\paragraph{Funzioni di reazione (best response)}
-Assumendo decisioni simultanee, si può determinare l’equilibrio tramite le funzioni di best response $R_i(q_j)$.
-La condizione di stazionarietà per l’impresa 1 è:
-\[
-\frac{\partial \pi_1(q_1;q_2)}{\partial q_1}
-=
-a-2bq_1-bq_2-c_1=0
-\;\Rightarrow\;
-R_1(q_2)=\frac{a-c_1}{2b}-\frac{1}{2}q_2. \tag{7}
-\]
-Analogamente, per l’impresa 2:
-\[
-R_2(q_1)=\frac{a-c_2}{2b}-\frac{1}{2}q_1. \tag{8}
-\]
-
-\paragraph{Sistema per l’equilibrio di Cournot}
-Per trovare l’equilibrio si individua l’intersezione delle due funzioni di risposta, cioè si risolve:
-\[
-\begin{cases}
-q_1^c = R_1(q_2^c)\\
-q_2^c = R_2(q_1^c)
-\end{cases}
-\]
-(dove il superscritto $c$ denota l’equilibrio di Cournot; le funzioni di risposta sono rette a pendenza negativa).
-Si risolve quindi il sistema lineare:
-\[
-\begin{cases}
-q_1^c = \dfrac{a-c_1}{2b}-\dfrac{1}{2}q_2^c\\[6pt]
-q_2^c = \dfrac{a-c_2}{2b}-\dfrac{1}{2}q_1^c
-\end{cases}
-\]
-ottenendo:
-\[
-q_1^c=\frac{a-2c_1+c_2}{3b},
-\qquad
-q_2^c=\frac{a-2c_2+c_1}{3b}. \tag{9}
-\]
-
-\paragraph{Prezzo di equilibrio e profitti}
-Il prezzo di equilibrio risulta:
-\[
-p^c=\frac{a+c_1+c_2}{3}. \tag{10}
-\]
-Il profitto di ciascuna impresa è:
-\[
-\pi_i^c=(p^c-c_i)q_i^c
-=
-\left(\frac{a+c_i+c_j}{3}-c_i\right)
-\left(\frac{a-2c_i+c_j}{3b}\right)
-=
-\frac{(a-2c_i+c_j)^2}{9b}
-=
-b\,(q_i^c)^2. \tag{11}
-\]
-Se un’impresa riduce il proprio costo, aumenta sia la quantità prodotta sia il profitto.
-Se le imprese hanno la stessa tecnologia ($c_1=c_2$), si ottiene una soluzione simmetrica $q_1^c=q_2^c$, come atteso.
-
-\subsection{Competizione di Bertrand}
-
-\paragraph{Impostazione del problema}
-Si considerino due imprese che competono sui prezzi per un bene omogeneo, sotto l’ipotesi semplice di domanda e costi lineari.
-È necessario specificare la reazione dei consumatori ai prezzi.
-Con prodotto omogeneo, è sensato assumere che i consumatori acquistino dal venditore più economico; se i prezzi sono uguali, si assume che il mercato sia diviso equamente tra le due imprese.
-Non si considerano vincoli di capacità.
-
-\paragraph{Quantità venduta in funzione dei prezzi}
-La quantità venduta dall’impresa $i$ (con $i=1,2$ e $j=2,1$ per indicare il concorrente) è:
-\[
-q_i=
-\begin{cases}
-0 & \text{se } p_i \ge \alpha/\beta,\\
-0 & \text{se } p_i > p_j,\\
-\dfrac{\alpha-\beta p}{2} & \text{se } p_i=p_j \equiv p < \alpha/\beta,\\
-\alpha-\beta p_i & \text{se } p_i < \min\{p_j,\alpha/\beta\}.
-\end{cases} \tag{12}
-\]
-L’idea è che non ci sia domanda se il prezzo supera il prezzo limite $\alpha/\beta$ oppure se è strettamente maggiore di quello del concorrente.
-Se i prezzi coincidono (e sono sotto il limite) la domanda viene divisa a metà; altrimenti l’impresa più economica cattura tutta la domanda.
-
-\paragraph{Definizione di equilibrio di Bertrand--Nash}
-Un equilibrio di Bertrand--Nash è una quadrupla di prezzi e quantità,
-\[
-(p_1^b,\;p_2^b,\;q_1^b,\;q_2^b),
-\]
-tale che:
-\begin{enumerate}[label=\arabic*.]
-    \item $p_1^b$ risolve $\max_{p_1}\ \pi_1(p_1;p_2^b)=(p_1-c_1)q_1$, per $p_2=p_2^b$;
-    \item $p_2^b$ risolve $\max_{p_2}\ \pi_2(p_1^b;p_2)=(p_2-c_2)q_2$, per $p_1=p_1^b$;
-    \item le quantità $q_1$ e $q_2$ sono date dall’equazione (12).
-\end{enumerate}
-Chiaramente, i prezzi non saranno fissati al di sotto dei costi marginali $c_1$ e $c_2$, rispettivamente.
-
-\paragraph{Undercutting e (assenza di) equilibrio con costi diversi}
-Il concetto chiave è l’undercutting.
-Se $c_1<c_2$, l’impresa 1 può undercut l’impresa 2 fissando un prezzo strettamente minore di $p_2$.
-In senso stretto non esiste equilibrio, poiché non c’è un massimo (ma solo un supremo).
-In effetti, c’è una discontinuità (a differenza di Cournot): una diminuzione infinitesima del prezzo può generare un salto della domanda per un’impresa.
-
-\paragraph{Equilibrio con costi marginali uguali}
-Si può mostrare che esiste equilibrio quando il costo marginale è lo stesso $c$ per entrambe le imprese:
-\[
-p_1=p_2=c,
-\qquad
-q_1=q_2=\frac{\alpha-\beta c}{2}.
-\]
-Il risultato si dimostra facilmente per assurdo: per qualunque altra configurazione dei prezzi, un’impresa avrebbe incentivo a deviare.
-
-\paragraph{Conseguenze e discreto passo di prezzo}
-Il risultato netto è che può non esserci profitto per nessuna impresa.
-Se i costi marginali sono diversi, per trovare un massimo (e un equilibrio) è necessario che i prezzi possano variare solo di un ammontare minimo $\varepsilon$ (ad esempio un centesimo di euro).
-Se $c_2-c_1>\varepsilon$, allora l’impresa 1 può undercut impostando $p_1=p_2-\varepsilon$, e l’equilibrio risultante è:
-\[
-p_2=c_2,\qquad p_1=c_2-\varepsilon,\qquad
-q_1=\alpha-\beta(c_2-\varepsilon),\qquad q_2=0.
-\]
-
-\paragraph{Osservazioni finali}
-Lasciando da parte le tecnicalità, questa previsione è in parte in contrasto con i risultati empirici.
-Nella pratica, la struttura dei costi non è semplicemente lineare, esistono vincoli di capacità e i beni non sono realmente omogenei.
-Possono emergere ulteriori complicazioni, per cui non è detto che esista una sola impresa sul mercato.
-Guardando il risultato in modo opposto, esso suggerisce che le imprese dovrebbero differenziare le proprie offerte e sfruttare l’eterogeneità dei consumatori.
-
-\subsection{Parte 2 -- Competizione di prezzo con beni non omogenei: modello di Hotelling}
-
-\paragraph{Beni differenziati e scelta del consumatore}
-Per trattare beni non omogenei (differenziati), è necessario un modello di scelta del consumatore.
-Si consideri un modello unidimensionale delle preferenze dei consumatori.
-I beni prodotti da due imprese, $A$ e $B$, sono caratterizzati da una feature, misurata su una scala da $0$ a $L$.
-Per semplicità, si trascurano i costi di produzione.
-L’impresa $A$ produce un bene con feature al livello $a$, e l’impresa $B$ produce un bene con feature al livello $L-b$, a distanza $b$ dal livello massimo.
-Questa rappresentazione geometrica è nota come \emph{Hotelling's linear street model}.
-Ogni consumatore ha un livello preferito per la feature, rappresentato dalla sua posizione sulla ``strada''.
-Si assuma che i consumatori siano uniformemente distribuiti sulla strada, dal livello $0$ al livello $L$.
-Ogni consumatore ha una marca preferita, quella più vicina ai propri gusti.
-Se i due prezzi $p_A$ e $p_B$ sono uguali, ciascun consumatore acquista semplicemente la marca più vicina.
-Tuttavia, esiste un trade-off tra prezzo e soddisfazione.
-
-\paragraph{Costo di trasporto e utilità}
-Si immagini di esprimere la (dis)utilità di ciascun consumatore misurando un costo di ``trasporto'' $\tau$.
-Per un consumatore in posizione $x$ sulla scala, l’utilità è:
-\[
-u(x)=
-\begin{cases}
--p_A-\tau |x-a| & \text{se sceglie la marca } A,\\
--p_B-\tau |x-(L-b)| & \text{se sceglie la marca } B.
-\end{cases}
-\]
-Si cerca un consumatore critico, in posizione $x_i$, tale che $a<x_i<L-b$, indifferente tra le due marche:
-\[
--p_A-\tau(x_i-a)=-p_B-\tau(L-b-x_i),
-\]
-da cui segue:
-\[
-x_i=\frac{p_B-p_A}{2\tau}+\frac{L-b+a}{2}. \tag{13}
-\]
-Come controllo di coerenza, quando i prezzi sono uguali, $x_i$ è il punto medio tra le due posizioni delle marche.
-L’impresa $A$ cattura tutta la domanda nell’intervallo $[0,x_i)$, quindi la sua domanda è $x_i$, mentre la domanda per la marca $B$ è:
-\[
-L-x_i=\frac{p_A-p_B}{2\tau}+\frac{L+b-a}{2}.
-\]
-Ci si può chiedere se esista un equilibrio di Bertrand--Nash nei prezzi, a posizioni fissate.
-
-\paragraph{Problemi di massimizzazione dei profitti}
-L’impresa $A$, dato $p_B$, risolve:
-\[
-\max_{p_A}\ \pi_A
-=
-\left(\frac{p_Bp_A-p_A^2}{2\tau}+\frac{L-b+a}{2}\right)p_A,
-\]
-mentre l’impresa $B$, dato $p_A$, risolve:
-\[
-\max_{p_B}\ \pi_B
-=
-\left(\frac{p_Ap_B-p_B^2}{2\tau}+\frac{L+b-a}{2}\right)p_B.
-\]
-
-\paragraph{Condizioni del primo ordine ed equilibrio nei prezzi}
-Le condizioni di stazionarietà del primo ordine sono:
-\[
-\frac{\partial \pi_A}{\partial p_A}
-=
-\frac{p_B-2p_A}{2\tau}+\frac{L-b+a}{2}=0,
-\qquad
-\frac{\partial \pi_B}{\partial p_B}
-=
-\frac{p_A-2p_B}{2\tau}+\frac{L+b-a}{2}=0,
-\]
-che forniscono i prezzi di equilibrio:
-\[
-p_A^e=\frac{\tau(3L-b+a)}{3},
-\qquad
-p_B^e=\frac{\tau(3L+b-a)}{3}.
-\]
-
-\paragraph{Profitto dell’impresa A}
-Il profitto per l’impresa $A$ è:
-\[
-\pi_A^e=x_i^e\,p_A^e=\frac{\tau(3L-b+a)^2}{18}.
-\]
-
-\paragraph{Caso simmetrico}
-Nel caso simmetrico $a=b$ (che non implica che le posizioni coincidano), i prezzi sono uguali e il profitto si riduce a:
-\[
-\frac{\tau L^2}{2}
-\]
-per entrambe le imprese.
-Si osserva che, maggiore è il costo di trasporto, maggiori sono i prezzi.
-Ciò vale anche in contesti con switching costs.
-
-\paragraph{Esistenza di prezzi di equilibrio positivi}
-Non si deve dare per scontato che esista una coppia di prezzi di equilibrio strettamente positivi.
-Si può mostrare che:
-\begin{enumerate}[label=\arabic*.]
-    \item se le marche sono omogenee (localizzate nello stesso punto), allora $p_A^e=p_B^e=0$ a causa dell’undercutting;
-    \item se le marche non sono troppo vicine, allora valgono gli equilibri precedenti; altrimenti, non esiste equilibrio (si veda la discussione successiva);
-    \item non esiste equilibrio nel gioco in cui sia le posizioni sia i prezzi sono variabili decisionali.
-\end{enumerate}
-
-\subsection{Esistenza di equilibrio nel modello di Hotelling}
-
-\paragraph{Caso simmetrico e condizione su $a$}
-Si consideri il caso simmetrico $a=b$.
-Dalla discussione precedente si dovrebbe avere:
-\[
-p_A^e=p_B^e=\tau L,
-\qquad
-\pi_A^e=\pi_B^e=\frac{\tau L^2}{2}.
-\]
-In realtà, si può dimostrare che ciò vale solo per $a\le L/4$.
-
-\paragraph{Prezzo limite per catturare tutto il mercato}
-Si assuma $p_B=\tau L$, il prezzo di equilibrio, e si cambi $p_A$.
-L’impresa $A$ cattura tutto il mercato se anche il consumatore in $L-b$ sceglie $A$.
-Ciò accade se il prezzo $p_A$ più il costo di trasporto è minore di $p_B=\tau L$.
-Osservando che la distanza tra $A$ e $B$ è $L-2a$, $A$ cattura il mercato se:
-\[
-p_A<\tau L-\tau(L-2a)=2a\tau=p_{A,\lim}.
-\]
-In questo caso, il profitto per $A$ è una funzione lineare crescente di $p_A$ e il suo valore limite è:
-\[
-\pi_A^{\triangle}=p_{A,\lim}L=2a\tau L.
-\]
-Per il prezzo limite c’è un’ambiguità, poiché i consumatori a destra di $B$ sono indifferenti; si può assumere che quel segmento di mercato sia diviso in parti uguali.
-In ogni caso, esiste una discontinuità nel profitto di $A$ in funzione del prezzo.
-
-\paragraph{Profitto quando il mercato è diviso}
-Per $p_A>p_{A,\lim}$, il mercato si divide e, dalla (13), si ottiene:
-\[
-\pi_A=
-\left[\frac{p_B-p_A}{2\tau}+\frac{L-b+a}{2}\right]p_A
-=
-\left[\frac{\tau L-p_A}{2\tau}+\frac{L}{2}\right]p_A
-=
-p_A L-\frac{p_A^2}{2\tau}.
-\]
-All’equilibrio, quando $p_A=\tau L$, si ottiene:
-\[
-\pi_A^e=\frac{\tau L^2}{2}.
-\]
-Poi, quando $p_A$ diventa abbastanza grande, l’impresa $B$ cattura tutto il mercato e $\pi_A$ scende a 0.
-
-\paragraph{Condizione di esistenza dell’equilibrio}
-Esiste un equilibrio (cioè esiste un massimo e non solo un supremo) se:
-\[
-\pi_A^e \ge \pi_A^{\triangle},
-\]
-ossia:
-\[
-\frac{\tau L^2}{2}\ge 2a\tau L
-\;\Rightarrow\;
-a\le \frac{L}{4}.
-\]
-Ciò significa che le imprese devono essere sufficientemente distanti per garantire l’esistenza di un equilibrio.
-
-\subsection{Giochi simultanei vs. giochi sequenziali}
-
-\paragraph{Motivazione dei giochi sequenziali}
-Finora si è assunto che le due imprese competano simultaneamente e debbano prendere decisioni simili.
-Talvolta è più naturale assumere che uno dei due giocatori muova per primo.
-Ad esempio, un produttore può dover decidere il prezzo all’ingrosso, e un retailer la quantità acquistata (assumendo prezzo di vendita fissato).
-
-\paragraph{Da Cournot a von Stackelberg}
-Si consideri quindi che cosa accade nel gioco sulle quantità se si assume che l’impresa 1 (leader) scelga la quantità $q_1$ prima dell’impresa 2 (follower).
-Diversamente dal gioco simultaneo, l’impresa 2 conosce la decisione di $1$ prima di decidere; quindi ha informazione perfetta.
-L’analisi del gioco sequenziale porta all’equilibrio di von Stackelberg.
-
-\paragraph{Problema del leader}
-L’impresa 1 prende la decisione conoscendo la best response dell’impresa 2, data dall’equazione (8).
-Il problema del leader è:
-\[
-\max_{q_1}\ \pi_1^s
-=
-P\bigl(q_1+R_2(q_1)\bigr)q_1-c_1q_1
-=
-\left[
-a-b\left(
-q_1+\frac{a-c_2}{2b}-\frac{q_1}{2}
-\right)
-\right]q_1-c_1q_1,
-\]
-dove il superscritto $s$ si riferisce alla competizione di von Stackelberg.
-
-\paragraph{Quantità ottima del leader}
-Applicando la condizione di stazionarietà si ottiene:
-\[
-q_1^s=\frac{a-2c_1+c_2}{2b}
-=\frac{3}{2}\,q_1^c.
-\]
-L’impresa 1 produce di più nel gioco sequenziale rispetto a Cournot.
-
-\paragraph{Quantità del follower}
-Sostituendo in $R_2(q_1)$ si ottiene:
-\[
-q_2^s
-=
-\frac{a-c_2}{2b}-\frac{a-2c_2+c_1}{4b}
-=
-\frac{a-3c_2+2c_1}{4b}
-=
-\frac{3}{4}q_2^c+\frac{c_1-c_2}{4b}. \tag{15}
-\]
-La produzione dell’impresa 2 è una frazione di quella del gioco di Cournot, più un termine positivo se l’impresa 1 è meno efficiente dell’impresa 2.
-
-\paragraph{Confronto dei profitti}
-È interessante confrontare i profitti delle due imprese in questo gioco.
-Ciò è semplice quando i costi marginali sono uguali; l’idea è illustrata con un esempio numerico.
-
-\subsection{Esempio}
-
-\paragraph{Dati}
-Due imprese hanno lo stesso costo marginale, $c_1=c_2=5$, e il mercato è caratterizzato dalla funzione prezzo/quantità:
-\[
-P(Q)=120-Q.
-\]
-Si confrontano tre casi:
-\begin{enumerate}[label=\arabic*.]
-    \item le due imprese colludono e operano come un cartello (o come due rami di un monopolista);
-    \item le imprese non cooperano e muovono simultaneamente (gioco di Cournot);
-    \item le imprese non cooperano e muovono sequenzialmente (gioco di von Stackelberg).
-\end{enumerate}
-
-\paragraph{Caso 1: monopolio/cartello}
-Nel primo caso si lavora con l’output aggregato $Q$. Il monopolista risolve:
-\[
-\max\ \pi^m=(120-Q)Q-5Q.
-\]
-Applicando la condizione di stazionarietà:
-\[
-120-2Q-5=0 \;\Rightarrow\; Q^m=57.50.
-\]
-Il prezzo e il profitto risultano:
-\[
-p^m=120-57.5=62.50,
-\qquad
-\pi_{1+2}^m=(62.50-5)\cdot 57.50=3306.25.
-\]
-
-\paragraph{Caso 2: Cournot (simultaneo)}
-Nel secondo caso, la soluzione (9) è simmetrica:
-\[
-q_1^c=q_2^c=\frac{120-10+5}{3}=38.33.
-\]
-La produzione totale e il prezzo sono:
-\[
-Q^c=2\cdot 38.33=76.77,
-\qquad
-p^c=120-76.77=43.33.
-\]
-Il profitto di ciascuna impresa è:
-\[
-\pi_1^c=\pi_2^c=(q_1^c)^2=1469.19.
-\]
-Il profitto complessivo è:
-\[
-\pi_{1+2}^c=2\cdot 1469.19=2938.89 < 3306.25=\pi_{1+2}^m.
-\]
-Il monopolista restringe l’output per aumentare il prezzo, ottenendo un profitto totale maggiore rispetto alla competizione di Cournot.
-La collusione produce quindi un profitto maggiore della competizione.
-
-\paragraph{Caso 3: von Stackelberg (sequenziale)}
-Nel gioco sequenziale, usando (14) e (15), si ottiene:
-\[
-q_1^s=\frac{120-10+5}{2}=57.5,
-\qquad
-q_2^s=\frac{120-10+5}{4}=28.75.
-\]
-Rispetto al gioco simultaneo, l’output dell’impresa 1 aumenta mentre quello dell’impresa 2 diminuisce.
-La produzione totale e il prezzo sono:
-\[
-Q^s=57.5+28.75=86.25,
-\qquad
-p^s=120-86.25=33.75.
-\]
-Il prezzo è inferiore rispetto ai due casi precedenti e la distribuzione del profitto è asimmetrica:
-\[
-\pi_1^s=(33.75-5)\cdot 57.5=1653.13,
-\]
-\[
-\pi_2^s=(33.75-5)\cdot 28.75=826.56,
-\]
-\[
-\pi_{1+2}^s=1653.13+826.56=2479.69.
-\]
-Il profitto totale del gioco sequenziale è inferiore a quello del gioco simultaneo; tuttavia, il leader ha un vantaggio netto e il suo profitto è maggiore nel gioco sequenziale.
-
-\subsection{Parte 2 -- Conviene sempre muovere per primi?}
-
-\paragraph{Vantaggio del leader e limiti}
-L’esempio giocattolo precedente mostra che il privilegio di muovere per primi può dare un vantaggio al leader.
-Data la struttura del gioco, è facile vedere che il leader nel gioco sequenziale non può fare peggio che nel gioco simultaneo; infatti, potrebbe comunque produrre la stessa quantità del gioco di Cournot.
-Tuttavia, ciò non vale in generale.
-In particolare, quando esistono asimmetrie informative o elementi casuali, la scelta del leader, o il suo esito in presenza di incertezza, può fornire al follower informazione utile.
-L’esempio seguente mostra che essere i primi a muovere non è sempre desiderabile.
-
-\paragraph{Esempio: battle of the sexes (Juliet muove per prima)}
-Si consideri il battle of the sexes, assumendo che Juliet abbia il privilegio di muovere per prima.
-\[
-\begin{array}{c|cc}
- & \text{Romeo: Horror} & \text{Romeo: Shopping} \\
-\hline
-\text{Juliet: Horror} & (1,3) & (0,0) \\
-\text{Juliet: Shopping} & (0,0) & (3,1)
-\end{array}
-\]
-Qualunque sia la scelta di Juliet, Romeo sceglierà la mossa che gli consente di godere della sua compagnia.
-Di conseguenza, Juliet sceglierà certamente \emph{shopping} ed è certamente felice di muovere per prima.
-
-\paragraph{Un caso diverso: Morticia}
-La situazione è molto diversa per i payoff seguenti:
-\[
-\begin{array}{c|cc}
- & \text{Romeo: Cinema} & \text{Romeo: Restaurant} \\
-\hline
-\text{Morticia: Cinema} & (5,-100) & (0,1) \\
-\text{Morticia: Restaurant} & (0,1) & (5,-100)
-\end{array}
-\]
-In questo caso, Romeo è indifferente tra andare al cinema o al ristorante.
-Ciò che teme davvero è una serata con Morticia.
-È facile vedere che questo gioco non ha un equilibrio di Nash, poiché uno dei due giocatori ha sempre incentivo a deviare.
-Un equilibrio può essere trovato ammettendo strategie miste, in cui i giocatori selezionano un’azione secondo una distribuzione di probabilità, legata all’incertezza sulla mossa del concorrente.
-Qui non si considerano strategie miste, ma il punto importante è che, in questo caso, nessun giocatore vorrebbe muovere per primo.
-
-\paragraph{Interpretazione economica dei due giochi}
-Si è notato che la prima versione del battle of the sexes è un gioco di coordinamento stilizzato per due imprese che devono adottare uno standard comune; nella seconda versione, un’impresa vuole adottare lo stesso standard del concorrente, mentre l’altra impresa vorrebbe selezionarne uno differente.
-
-\subsection{Pricing e double marginalization}
-
-\paragraph{Impostazione B2B: produttore e retailer}
-Come applicazione interessante al pricing, si consideri un contesto B2B, in cui un produttore e un retailer interagiscono tramite prezzi (si veda Tirole, 2003, Capitolo 4).
-È interessante confrontare decisioni di prezzo e profitti complessivi della supply chain in due contesti:
-\begin{enumerate}[label=\arabic*.]
-    \item impresa verticalmente integrata, che gestisce produzione e distribuzione (un solo decisore prende tutte le decisioni);
-    \item schema decentralizzato, in cui il produttore decide il prezzo all’ingrosso e il retailer decide il prezzo di mercato.
-\end{enumerate}
-In entrambi i casi si considera un mercato con funzione di domanda lineare:
-\[
-d(p)=1-p,
-\]
-dove $p$ è il prezzo di mercato, e si assume una struttura di costo lineare con costo marginale $c<1$.
-
-\paragraph{Caso 1: impresa verticalmente integrata}
-Il problema complessivo dell’impresa integrata è:
-\[
-\max_{p}\ (p-c)\,(1-p).
-\]
-Risolvendo, si ottengono prezzo ottimo, domanda e profitto:
-\[
-p_{vi}^*=\frac{1+c}{2},
-\qquad
-d_{vi}^*=\frac{1-c}{2},
-\qquad
-\pi_{vi}^*=\frac{(1-c)^2}{4},
-\]
-rispettivamente.
-
-\paragraph{Caso 2: supply chain decentralizzata}
-Se la catena non è integrata, ciascun attore imposta un prezzo.
-Si assuma che il produttore sia il leader in un gioco sequenziale e fissi un prezzo all’ingrosso $p_w$.
-Serve la funzione di risposta del retailer, che imposta il prezzo di mercato $p_m$ risolvendo, dato $p_w$:
-\[
-\max_{p_m}\ (p_m-p_w)\,(1-p_m).
-\]
-Questo produce la best response:
-\[
-R_m(p_w)=\frac{1+p_w}{2}.
-\]
-
-\paragraph{Problema del produttore e prezzo all’ingrosso di equilibrio}
-Il problema del produttore diventa:
-\[
-\max_{p_w}\ (p_w-c)\left[1-\frac{1+p_w}{2}\right],
-\]
-che fornisce il prezzo di equilibrio:
-\[
-p_{w;dec}^*=\frac{1+c}{2}.
-\]
-
-\paragraph{Prezzo retail e domanda nel caso decentralizzato}
-Il prezzo retail è maggiore che nel caso integrato (si ricordi $c<1$):
-\[
-p_{m;dec}^*=\frac{3+c}{4},
-\]
-e la domanda di mercato è più piccola:
-\[
-d_{dec}^*=\frac{1-c}{4}.
-\]
-
-\paragraph{Profitto complessivo nel caso decentralizzato}
-Il profitto complessivo del controllo decentralizzato è la somma dei due profitti:
-\[
-\pi_{dec}^*=(p_{w;dec}^*-c)\,d_{dec}^*+(p_{m;dec}^*-p_{w;dec}^*)\,d_{dec}^*
-=
-\frac{(1-c)^2}{8}+\frac{(1-c)^2}{16}
-=
-\frac{3(1-c)^2}{16}
-<
-\pi_{vi}^*.
-\]
-
-\paragraph{Double marginalization e coordinamento della supply chain}
-Questo tipo di problema è noto come \textbf{double marginalization} ed è dovuto al fatto che entrambi i giocatori applicano un markup al costo marginale che osservano, e tale costo percepito cresce lungo la catena.
-In un contesto più realistico, si dovrebbe considerare anche l’incertezza della domanda, che introduce temi di risk sharing.
-In tal caso, politiche di prezzo (two-part tariffs e buyback contracts) possono essere utilizzate per superare il problema e coordinare la supply chain.
-
-\subsection{Parte 3 -- Modelli di scelta discreta}
-
-\subsection{Conjoint analysis}
-
-\paragraph{Idea di base e utilizzi}
-La \emph{conjoint analysis} è un metodo ampiamente utilizzato nel marketing (e in altri campi) per progettare prodotti e servizi, valutare l’impatto del prezzo e costruire simulatori di mercato.
-L’idea di base è che i consumatori reagiscono ad alternative rappresentate da combinazioni di valori degli attributi.
-Esistono alcune varianti della conjoint analysis, ma le principali sono:
-\begin{itemize}[label=-]
-    \item \emph{ratings-based conjoint analysis} (quella tradizionale);
-    \item \emph{choice-based conjoint analysis} (la più comune).
-\end{itemize}
-
-\paragraph{Modello a rating}
-Il rating di preferenza $Y_i$ per l’alternativa $i$ può essere modellato come:
-\[
-Y_i=\sum_{k=1}^{m} U_k(x_{ik})+\varepsilon_i,
-\]
-dove ciascuna funzione $U_k$ cattura la \emph{partworth} per l’attributo $k$, ed $\varepsilon_i$ è un termine di errore.
-Si noti che chiedere ai consumatori di dare priorità agli attributi è tipicamente inutile (``tutto è importante!''). Chiedere un rating $Y_i$ può essere una scelta migliore.
-
-\paragraph{Limiti e interazioni}
-La conjoint analysis classica inferisce le partworth sulla base dei rating forniti dai consumatori per un insieme di alternative (stimoli, profili, ecc.).
-Il carattere additivo del modello è un chiaro limite, ma esistono modi per introdurre interazioni tra attributi, che possono essere rilevanti per valori specifici (ad esempio ``rosso'' e ``Ferrari'').
-
-\paragraph{Dati di scelta: revealed vs. stated preferences}
-Tuttavia, assegnare rating non è il modo in cui i consumatori prendono decisioni.
-Per costruire un modello di preferenza migliore, si devono raccogliere dati da scelte effettive tra un insieme di alternative (inclusa l’opzione di non acquistare).
-Si possono avere:
-\begin{itemize}[label=-]
-    \item \emph{revealed preference data}, dove si osservano scelte reali di mercato;
-    \item \emph{stated preference data}, dove si analizza la reazione di un panel di consumatori a un insieme di stimoli accuratamente progettati (alternative ipotetiche).
-\end{itemize}
-La \emph{choice-based conjoint analysis} si basa su stated preferences, poiché offre grande flessibilità nella generazione degli stimoli e nella raccolta dati (al costo di una possibile perdita di realismo).
-
-\paragraph{Design degli esperimenti e stima dei modelli}
-Un ruolo chiave è svolto da un’attenta progettazione degli esperimenti (design ortogonali, ecc.), per massimizzare l’informazione raccolta senza imporre un carico cognitivo eccessivo all’utente (troppe alternative per scelta e troppe scelte).
-Oltre alle questioni classiche di design of experiments, è importante:
-\begin{itemize}[label=-]
-    \item scegliere (ed eventualmente combinare) attributi e livelli;
-    \item considerare proibizioni (combinazioni prive di senso);
-    \item evitare profili incoerenti (prestazioni migliori a prezzo più basso);
-    \item gestire con attenzione variabili ordinali.
-\end{itemize}
-Un modello tipico stimabile tramite CBC è un modello \emph{multinomial logit} (MNL).
-Esistono versioni sofisticate di CBC, basate su modelli Bayesiani gerarchici, per tenere conto dell’eterogeneità dei consumatori.
-Valutando le partworth utilities, si può prevedere la market share di beni non attualmente offerti, così come l’impatto delle decisioni di prezzo.
-
-\subsection{Microfondazioni dei modelli MNL: utilità casuali}
-
-\paragraph{Utilità rappresentativa e componente casuale}
-Si assuma che il consumatore scelga uno tra $n$ beni, in base all’utilità di ciascuna alternativa.
-L’utilità del bene $i\in[n]$ è $V_i+\varepsilon_i$, ossia somma di una componente deterministica e una componente casuale.
-La componente deterministica è spesso detta \emph{representative utility}.
-L’alternativa $i$ è scelta se:
-\[
-V_i+\varepsilon_i > V_j+\varepsilon_j,\qquad \forall j\neq i.
-\]
-Quindi, la probabilità di scelta dell’alternativa $i$ è:
-\[
-\pi_i=\mathbb{P}\{V_i+\varepsilon_i>V_j+\varepsilon_j,\ \forall j\neq i\}
-=
-\mathbb{P}\{\varepsilon_j<\varepsilon_i+V_i-V_j,\ \forall j\neq i\}.
-\]
-
-\paragraph{Probabilità condizionata e integrazione}
-Assumendo indipendenza tra le componenti casuali, condizionatamente a $\varepsilon_i$, si ha:
-\[
-\pi_i\mid \varepsilon_i=\prod_{j\neq i} F_j(\varepsilon_i+V_i-V_j),
-\]
-dove $F_j$ è la DF di $\varepsilon_j$.
-Quindi:
-\[
-\pi_i=\int_{-\infty}^{+\infty}\prod_{j\neq i} F_j(\varepsilon_i+V_i-V_j)\, f_i(s)\,ds,
-\]
-dove $f_i$ è la PDF di $\varepsilon_i$.
-
-\paragraph{Caso i.i.d. Gumbel}
-Si assuma ora che tutte le componenti casuali siano i.i.d. e seguano una distribuzione di Gumbel, con DF e PDF:
-\[
-F(x)=\exp\!\left(-e^{-x}\right),\qquad
-f(x)=e^{-x}\exp\!\left(-e^{-x}\right).
-\]
-Allora:
-\[
-\pi_i=
-\int_{-\infty}^{+\infty}
-\prod_{j\neq i}
-\exp\!\left(-e^{-(s+V_i-V_j)}\right)\;
-e^{-s}\exp\!\left(-e^{-s}\right)\,ds.
-\]
-Per calcolare l’integrale, si osserva che $s+V_i-V_j=s$ per $j=i$, quindi si può includere il fattore $\exp(-e^{-s})$ nel prodotto e raccogliere i termini che non dipendono da $j$:
-\[
-\pi_i=
-\int_{-\infty}^{+\infty}
-\prod_{j=1}^{n}
-\exp\!\left(-e^{-(s+V_i-V_j)}\right)\; e^{-s}\,ds
-=
-\int_{-\infty}^{+\infty}
-\exp\!\left(-\sum_{j=1}^{n} e^{-(s+V_i-V_j)}\right)\; e^{-s}\,ds
-\]
-\[
-=
-\int_{-\infty}^{+\infty}
-\exp\!\left(-e^{-s}\sum_{j=1}^{n} e^{-(V_i-V_j)}\right)\; e^{-s}\,ds.
-\]
-Si applica ora un cambio di variabile $t=e^{-s}$, così che $-e^{-s}ds=dt$ e i limiti inferiore e superiore diventano rispettivamente $+\infty$ e $0$.
-
-\paragraph{Derivazione del modello MNL}
-Correggendo per il cambio di segno:
-\[
-\pi_i=
-\int_{0}^{1}
-\exp\!\left(-t\sum_{j=1}^{n} e^{-(V_i-V_j)}\right)\,dt
-=
-\left.
-\frac{-\exp\!\left(-t\sum_{j} e^{-(V_i-V_j)}\right)}
-{\sum_{j} e^{-(V_i-V_j)}}
-\right|_{0}^{1}
-=
-\frac{1}{\sum_{j} e^{-(V_i-V_j)}}
-=
-\frac{e^{V_i}}{\sum_{j} e^{V_j}},
-\]
-che corrisponde al modello MNL.
-
-\paragraph{Assunzione IIA}
-Il modello MNL è comune nel machine learning e nella classificazione ed è relativamente semplice da gestire in modelli di ottimizzazione (ad esempio decisioni di assortimento ottimo).
-Tuttavia, ha limitazioni definite, in particolare l’assunzione IIA (\emph{Independence from Irrelevant Alternatives}).
-Si considerino gli odds relativi di scegliere gli item $i$ e $k$:
-\[
-\frac{\pi_i}{\pi_k}
-=
-\frac{e^{V_i}/\sum_{j}e^{V_j}}{e^{V_k}/\sum_{j}e^{V_j}}
-=
-e^{V_i-V_k},
-\]
-che non dipendono da nessun’altra alternativa.
-Quindi gli odds relativi non cambiano quando nuove alternative vengono aggiunte al choice set.
-
-\paragraph{Esempio (red--blue bus problem)}
-Si consideri una decisione sul modo di viaggio tra auto e bus (un bus blu), assumendo utilità rappresentative uguali, quindi $\pi_c=\pi_{bb}=1/2$.
-Si introduca ora un bus rosso, per cui è ragionevole assumere $\pi_{rb}=\pi_{bb}$.
-Con un modello MNL si ottiene $\pi_c=\pi_{rb}=\pi_{bb}=1/3$, mentre sarebbe più ragionevole assumere una suddivisione della probabilità di scegliere l’autobus, quindi $\pi_c=1/2$ e $\pi_{rb}=\pi_{bb}=1/4$.
-I modelli \emph{nested logit} sono un possibile approccio per aggirare l’IIA, quando necessario.
-Se si assume che la componente casuale dell’utilità sia normalmente distribuita, si ottiene un modello \emph{probit}.
-
-\subsection{Supplemento tecnico -- EVT e massimi a blocchi}
-
-\paragraph{Distribuzione dei massimi a blocchi}
-Nella \emph{Extreme Value Theory} (EVT), tra le altre cose, si studia la distribuzione dei massimi a blocchi.
-Si consideri un campione i.i.d. di taglia $n$ da una distribuzione con funzione di distribuzione $F_X(x)$.
-Qual è la distribuzione di $M_n=\max\{X_1,\dots,X_n\}$? Che cosa accade quando $n\to\infty$?
-Per indipendenza:
-\[
-F_{\max}(x)=\mathbb{P}\{M_n\le x\}
-=
-\mathbb{P}\{X_1\le x,\dots,X_n\le x\}
-=
-\mathbb{P}\{X_1\le x\}\cdots \mathbb{P}\{X_n\le x\}
-=
-F_X(x)^n.
-\]
-
-\paragraph{Esempio: uniforme}
-Per $U\sim U(0,1)$:
-\[
-F_U(x)=x \ \Rightarrow\ F_{\max}(x)=x^n,\qquad x\in[0,1].
-\]
-Quando $n\to\infty$, la distribuzione collassa in una distribuzione degenere con massa di probabilità concentrata in $x=1$.
-Inoltre, in questo caso:
-\[
-\mathbb{E}[M_n]=\frac{n}{n+1}.
-\]
-Un caso degenere come questo, dovuto al supporto limitato, non è particolarmente interessante.
-Se si considera una variabile casuale con supporto illimitato verso l’alto, la distribuzione si sposta verso $+\infty$. Quindi?
-
-\paragraph{Normalizzazione: confronto con il CLT}
-Nel caso della somma $S_n=\sum_{k\in[n]}X_k$, rilevante per il teorema del limite centrale, si normalizza definendo sequenze $a_n$ e $b_n$:
-\[
-\lim_{n\to\infty}\mathbb{P}\left\{\frac{S_n-a_n}{b_n}\le x\right\}=\Phi(x),
-\qquad
-a_n=n\mathbb{E}(X_1),
-\qquad
-b_n=\sqrt{n\operatorname{Var}(X_1)}.
-\]
-
-\paragraph{Normalizzazione per i massimi}
-Per ottenere una distribuzione limite per i massimi a blocchi, si introducono sequenze normalizzanti $d_n$ e $c_n$ e si verifica se:
-\[
-\lim_{n\to\infty}\mathbb{P}\left\{\frac{M_n-d_n}{c_n}\le x\right\}
-=
-\lim_{n\to\infty}F_X^n(c_nx+d_n)
-=
-H(x), \tag{16}
-\]
-per una funzione di distribuzione non degenere $H(x)$.
-
-\paragraph{Esempio: esponenziale}
-Si consideri una distribuzione esponenziale con rate $\beta>0$, per cui:
-\[
-F(x)=1-e^{-\beta x},\qquad x\ge 0.
-\]
-Scegliendo $c_n=1/\beta$ e $d_n=(\log n)/\beta$ si ottiene:
-\[
-F_X^n(c_nx+d_n)=\left(1-\frac{1}{n}e^{-x}\right)^n,\qquad x\ge -\log n,
-\]
-e:
-\[
-\lim_{n\to\infty}F_X^n(c_nx+d_n)=\exp\!\left(-e^{-x}\right).
-\]
-
-\paragraph{Definizione: distribuzione GEV}
-La funzione di distribuzione della \emph{generalized extreme value} (GEV) standard è:
-\[
-H_\xi(x)=
-\begin{cases}
-\exp\!\left(-(1+\xi x)^{-1/\xi}\right), & \xi\neq 0,\\[4pt]
-\exp\!\left(-e^{-x}\right), & \xi=0,
-\end{cases}
-\]
-dove $1+\xi x>0$.
-Introducendo un parametro di location $\mu\in\mathbb{R}$ e un parametro di scala $\sigma>0$, si ottiene la famiglia:
-\[
-H_{\xi;\mu;\sigma}(x):=
-H_\xi\!\left(\frac{x-\mu}{\sigma}\right).
-\]
-Il parametro $\xi$ definisce la forma di una famiglia di distribuzioni simili (dello stesso tipo).
-Si ricorda che quando due variabili casuali $V$ e $W$ differiscono in distribuzione per un parametro di scala $a>0$ e un parametro di location $b\in\mathbb{R}$, cioè $V \overset{d}{=} aW+b$, allora hanno lo stesso tipo (sono simili).
-
-\paragraph{Interpretazione del parametro di forma}
-La figura mostra densità per alcuni valori del parametro di forma (assumendo $\mu=0$, $\sigma=1$):
-\begin{itemize}[label=-]
-    \item se $\xi>0$, si ha una distribuzione di Fr\'echet;
-    \item se $\xi=0$, si ha una distribuzione di Gumbel;
-    \item se $\xi<0$, si ha una distribuzione di Weibull.
-\end{itemize}
-La distribuzione di Weibull ha un estremo destro finito.
-La distribuzione di Fr\'echet presenta una decrescita più lenta della Gumbel.
-Nota: la distribuzione di Gumbel, tra le altre cose, svolge un ruolo chiave nei modelli di scelta discreta.
-
-\paragraph{Dominio di attrazione e teorema FTG}
-Se la condizione (16) vale per una $H$ non degenere, si dice che la funzione di distribuzione $F$ appartiene al massimo dominio di attrazione di $H$: $F\in MDA(H)$.
-Nel caso della distribuzione esponenziale, si ha $F\in MDA(H_0)$.
-
-\paragraph{Teorema (Fisher--Tippett--Gnedenko)}
-Se $F\in MDA(H)$ per una $H$ non degenere, allora $H$ deve essere una distribuzione GEV di tipo $H_\xi$ per qualche valore di $\xi$.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% PDF 7 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -4507,7 +3707,7 @@ Le \textbf{politiche randomizzate} possono essere richieste per gestire vincoli 
 \mathbb{P}\{ s_t \in G \} \ge 1 - \alpha,
 \)
 dove $\alpha$ è una \textbf{probabilità accettabile di violazione del vincolo}.
-Le politiche randomizzate risultano inoltre necessarie nel contesto del trade-off tra esplorazione e sfruttamento nel reinforcement learning.
+Le politiche randomizzate risultano inoltre necessarie nel contesto del trade-off tra esplorazione e exploitation nel reinforcement learning.
 
 \paragraph{Un esempio: il lot-sizing dinamico a singolo prodotto}
 Si consideri il problema di lot-sizing non capacitated a singolo prodotto
@@ -5225,6 +4425,17 @@ Infine, si presenta la \textbf{maledizione della modellazione}. Il sistema può 
 \vspace{-1cm}
 \textcolor{DeepPink}{\section{CAP 9 -- Modelli per la programmazione dinamica}}
 
+\paragraph{Recap}
+La \textcolor{DeepPink}{\textbf{programmazione dinamica}} fornisce un principio generale di \textbf{modellazione} per problemi \textbf{decisionali multistadio}, fondato sulla \textcolor{DeepPink}{\textbf{decomposizione}} del problema complessivo in una sequenza di sottoproblemi a singolo stadio e sull’uso di una \textcolor{DeepPink}{\textbf{value function}}. Tale funzione consente di bilanciare in modo sistematico la \textbf{ricompensa immediata} con il \textbf{valore atteso delle decisioni future}, attraverso una ricorsione che incorpora \textbf{azioni ammissibili}, \textcolor{DeepPink}{\textbf{fattori di rischio}} e \textbf{dinamiche di transizione} dello stato.
+\\ \hspace*{1.5em}
+Nel caso dei \textcolor{DeepPink}{\textbf{processi decisionali di Markov finiti}}, caratterizzati da spazi di stato e di azione discreti, la dinamica è descritta tramite \textcolor{DeepPink}{\textbf{probabilità di transizione}} dipendenti dall’azione e la ricorsione di DP assume una forma esplicita e computazionalmente ben definita. Tuttavia, l’applicazione pratica è spesso limitata dalla \textcolor{DeepPink}{\textbf{curse of modeling}} e dalla rapida crescita dimensionale dello spazio degli stati.
+\\ \hspace*{1.5em}
+Per superare tali difficoltà, si introduce la formulazione in termini di \textcolor{DeepPink}{\textbf{Q-factors}} e l’impiego di tecniche di \textbf{campionamento Monte Carlo}, che consentono di riscrivere la ricorsione di programmazione dinamica ottenendo uno \textcolor{DeepPink}{\textbf{scambio tra attesa e ottimizzazione}}. Questa riformulazione risulta particolarmente utile nei problemi di grande scala o con dinamica sconosciuta, aprendo la strada a metodi di apprendimento \textbf{model-free} e all’utilizzo di \textbf{architetture di approssimazione}.
+\\ \hspace*{1.5em}
+Un’idea strettamente collegata è l’introduzione dello \textcolor{DeepPink}{\textbf{stato post-decisione}}, che consente di separare la componente deterministica della decisione dall’incertezza legata ai fattori di rischio, riformulando la ricorsione di programmazione dinamica in una forma caratterizzata da \textbf{ottimizzazione deterministica} e \textbf{attesa esterna}. Questa struttura semplifica sia l’analisi teorica sia lo sviluppo di algoritmi numerici.
+\\ \hspace*{1.5em}
+Questi principi vengono illustrati attraverso esempi rilevanti, quali l’\textbf{aumento dello stato} nei problemi di gestione delle scorte in presenza di \textbf{lead time} o articoli deperibili, e i modelli di \textcolor{DeepPink}{\textbf{revenue management}}. In quest’ultimo contesto, nelle versioni statiche e dinamiche, con \textbf{segmentazione perfetta} o con \textbf{scelta del cliente}, emergono naturalmente \textbf{livelli di protezione}, politiche dipendenti dal tempo e diverse forme della ricorsione di DP, determinate dalla struttura informativa e dal timing delle decisioni.
+
 
 \subsection{Principio di modellazione per la programmazione dinamica}
 \paragraph{Idea generale della programmazione dinamica}
@@ -5539,574 +4750,449 @@ poiché l’offerta \(S_t\) deve essere fissata \emph{prima} della decisione del
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PDF 10 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \vspace{-1cm}
 \textcolor{MediumVioletRed}{\section{CAP 10 -- Programmazione dinamica numerica per stati discreti}}
-\subsection{Catene di Markov a tempo discreto}
 
-\paragraph{Definizione di catena di Markov a tempo discreto}
-Una \textbf{catena di Markov a tempo discreto} è un processo stocastico con variabile di stato $s_t$, $t = 0,1,2,\dots$, che assume valori in un insieme \textbf{discreto}.  
-Se lo spazio degli stati è numerabile, è possibile associare ciascuno stato a un numero intero e rappresentare il processo mediante una \textbf{rete}.
+\paragraph{Recap}
+La \textcolor{MediumVioletRed}{\textbf{programmazione dinamica numerica per stati discreti}} riguarda problemi decisionali in cui lo stato evolve a tempo discreto $t=0,1,2,\ldots$ su uno spazio di stati finito o numerabile e la dinamica è descritta da \textbf{probabilità di transizione} che rispettano la proprietà di Markov. Nel caso \textbf{omogeneo} le probabilità non dipendono dal tempo, ipotesi naturale nei problemi a \textbf{orizzonte infinito}; nei \textbf{Markov Decision Processes} (MDP) la dinamica è \textbf{parzialmente controllata} tramite la scelta di un’azione $a\in\mathcal A(i)$ e, per ogni azione, la transizione è descritta da $\pi(i,a,j)$, che consente di rappresentare il modello anche tramite insiemi di matrici di transizione indicizzate dall’azione.  
+\\ \hspace*{1.5em}
+La valutazione delle prestazioni di una politica richiede di distinguere le proprietà della catena indotta: la presenza di \textbf{stati assorbenti} genera stati transienti e può rendere la dinamica dipendente dalla condizione iniziale; se la catena non è \textbf{irriducibile} si possono ottenere limiti diversi a seconda dello stato di partenza, mentre l’assenza di \textbf{aperiodicità} impedisce di definire una distribuzione stazionaria. Per evitare comportamenti degeneri e garantire che gli algoritmi “vedano” gli stati con sufficiente frequenza, si assume che il processo sia \textbf{ben comportato} per qualunque politica, tipicamente con struttura \textbf{unichain} e senza periodicità, così da rendere sensata l’idea di prestazione di lungo periodo e l’uso di metodi iterativi.  
+\\ \hspace*{1.5em}
+Nei problemi a \textbf{orizzonte temporale finito} la soluzione è espressa da una ricorsione di Bellman in cui la funzione di valore $V_t(i)$ dipende esplicitamente da $t$ e bilancia contributo immediato e valore futuro atteso,
+\( V_t(i)=\opt_{a\in\mathcal A(i)}\{f(i,a)+\gamma\sum_j \pi(i,a,j)V_{t+1}(j)\} \),
+con condizione terminale al bordo che determina il comportamento all’ultimo istante decisionale. Nell’esempio di \textbf{arresto ottimo} su catena lineare, l’azione \emph{wait} induce un \emph{random walk} mentre l’azione di stop produce una ricompensa $R_i$ e porta a uno stato assorbente; la struttura locale delle transizioni implica una \textbf{matrice di transizione tridiagonale} e consente una forma vettoriale compatta del confronto tra ricompensa e valore di continuazione, evidenziando che la politica ottima può essere \textbf{non stazionaria} e dipendere sia dallo stato sia dal tempo residuo.  
+\\ \hspace*{1.5em}
+Nei problemi a \textbf{orizzonte infinito} la funzione di valore è invece definita come soluzione di un’equazione di punto fisso del tipo
+\( V(i)=\opt_{a\in\mathcal A(i)}\{f(i,a)+\gamma\sum_j \pi(i,a,j)V(j)\} \),
+o in forma equivalente tramite contributi immediati $h(i,a,j)$ dentro la somma. Per MDP finiti con \textbf{sconto stretto} $\gamma<1$ e contributi immediati limitati, l’operatore di Bellman $\mathcal T$ e l’operatore associato a una politica fissata $\mathcal T_\mu$ risultano \textbf{contrazioni}, quindi ammettono un unico punto fisso: \( \mathbf V=\mathcal T\mathbf V \) caratterizza il valore ottimo e \( \mathbf V_\mu=\mathcal T_\mu \mathbf V_\mu \) caratterizza il valore della politica.  
+\\ \hspace*{1.5em}
+Su questa base si introducono due schemi numerici: la \textcolor{MediumVioletRed}{\textbf{value iteration}}, che applica ripetutamente $\mathcal T$ ottenendo aggiornamenti poco costosi e una convergenza al limite verso $\mathbf V$, e la \textcolor{MediumVioletRed}{\textbf{policy iteration}}, che alterna \emph{policy evaluation} e \emph{policy improvement}. In particolare, fissata $\mu$, la valutazione della politica equivale a risolvere un sistema lineare
+\( (\mathbf I-\gamma\Pi_\mu)\mathbf V_\mu=f_\mu \),
+mentre il miglioramento sceglie per ogni stato un’azione in
+\( \tilde\mu(i)\in\arg\opt_{a\in\mathcal A(i)}\{f(i,a)+\gamma\sum_j \pi(i,a,j)V_\mu(j)\} \),
+garantendo che la politica non peggiori e portando a convergenza in un numero finito di passi perché le politiche stazionarie deterministiche sono in numero finito.  
+\\ \hspace*{1.5em}
+Il confronto tra i metodi mette in luce un continuum di approcci intermedi: quando la valutazione esatta tramite eliminazione di Gauss è impraticabile su grandi sistemi o su matrici sparse, si può valutare $\mu$ iterando il punto fisso di $\mathcal T_\mu$ e interrompere dopo un numero finito di passi ottenendo una stima $\hat V_\mu$, applicando poi il miglioramento; questo schema è alla base della \textbf{optimistic policy iteration} e, più in generale, della \textbf{generalized policy iteration}. La distinzione diventa cruciale nel \textcolor{MediumVioletRed}{\textbf{reinforcement learning}}: se il modello non è noto, si ricorre a metodi \emph{model-free} che sostituiscono $V$ con i \textbf{Q-factors} $Q(s,a)$, con approcci \emph{off-policy} come il \textbf{Q-learning} e approcci \emph{on-policy} come \textbf{SARSA}, in cui non è realistico stimare esattamente il valore di una politica e i passi di miglioramento devono essere eseguiti comunque in modo anticipato.
 
-\paragraph{Probabilità di transizione}
-Le transizioni tra stati sono rappresentate da archi diretti etichettati con le \textbf{probabilità di transizione}.  
-Le probabilità di transizione sono \textbf{probabilità condizionate} che dipendono solo dallo stato corrente:
+
+\paragraph{Catene di Markov a tempo discreto}
+Una \textcolor{MediumVioletRed}{\textbf{catena di Markov a tempo discreto}} è un \emph{processo stocastico} caratterizzato da una variabile di stato $s_t$, con $t = 0,1,2,\ldots$, che assume valori in un \textbf{insieme discreto}. Quando lo spazio degli stati è numerabile, è possibile associare gli stati a numeri interi e rappresentare il processo mediante un \emph{grafo orientato}, in cui le transizioni sono descritte da archi diretti etichettati con le \textcolor{MediumVioletRed}{\textbf{probabilità di transizione}}. Le probabilità di transizione sono \emph{probabilità condizionate} e dipendono esclusivamente dallo stato corrente, secondo la proprietà di Markov; in particolare, nel caso \textbf{omogeneo} (invariante nel tempo), esse non dipendono dall’istante temporale, ipotesi tipica nei problemi a \emph{orizzonte infinito}.  
+\\ \hspace*{1.5em}
+La dinamica della catena può essere descritta raccogliendo le probabilità di transizione in una \textcolor{MediumVioletRed}{\textbf{matrice di transizione a un passo}}, in cui ogni riga rappresenta uno stato di partenza e ogni colonna uno stato di arrivo; poiché dopo ogni transizione il processo deve necessariamente trovarsi in uno degli stati dello spazio degli stati, la somma degli elementi di ciascuna riga è pari a uno. Nei \emph{Markov Decision Processes} (MDP), le transizioni sono \textbf{parzialmente controllate} dalla scelta di un’azione: a ogni stato $i$ è associato un insieme finito di azioni ammissibili, e per ciascuna azione è definita una distribuzione di probabilità di transizione sugli stati successivi.  
+\\ \hspace*{1.5em}
+Per valutare le prestazioni di una \textbf{politica di controllo stazionaria}, si introducono le \emph{probabilità stazionarie di lungo periodo} di trovarsi nei diversi stati, raccolte in un vettore; tali probabilità, tuttavia, possono non esistere se la catena non è sufficientemente \emph{ben comportata}. Dall’esempio si evince che, se la catena non è \textbf{irriducibile}, le probabilità di lungo periodo possono dipendere dallo stato iniziale; per questo motivo si assume una catena \textbf{unichain}, connessa, in cui ogni stato è raggiungibile da ogni altro in tempo finito con probabilità positiva ed è visitato infinitamente spesso nel lungo periodo.  
+\\ \hspace*{1.5em}
+Nel caso di stati \textbf{assorbenti}, una volta raggiunti essi vengono visitati per sempre, mentre gli altri stati risultano \emph{transienti}; al contrario, in una catena priva di stati assorbenti tutti gli stati possono essere \emph{ricorrenti}. In generale, la presenza simultanea di stati ricorrenti e transienti non impedisce necessariamente l’esistenza di una distribuzione stazionaria, ma può creare difficoltà per il funzionamento di alcuni algoritmi di apprendimento, che richiedono che ogni stato venga visitato con sufficiente frequenza. Infine, in presenza di \textbf{periodicità} negli stati non è possibile definire una distribuzione stazionaria; per questo motivo, le catene \textbf{aperiodiche} sono una condizione fondamentale affinché valgano diversi risultati teorici rilevanti. Nel seguito si assume che il processo di Markov considerato sia ben comportato per qualunque scelta della politica di controllo.
+
+\paragraph{Processi decisionali di Markov a orizzonte temporale finito}
+Una \textcolor{MediumVioletRed}{\textbf{catena di decisione di Markov a orizzonte finito}} è caratterizzata da una ricorsione di \textbf{programmazione dinamica} in cui, a ogni istante $t$, la funzione di valore $V_t(i)$ bilancia il \emph{contributo immediato} associato all’azione scelta nello stato $i$ e il \emph{valore atteso futuro}, calcolato tramite le probabilità di transizione e la funzione di valore allo stadio successivo, secondo la relazione
+\[ V_t(i) = \opt_{a \in \mathcal A(i)} \bigl\{ f(i,a) + \gamma \sum_j \pi(i,a,j)\, V_{t+1}(j) \bigr\}; \]
+la funzione di valore dipende quindi esplicitamente dal tempo e dall’orizzonte finale.
+\\ \hspace*{1.5em}
+Il problema viene illustrato tramite un esempio di \textbf{arresto ottimo}, in cui gli stati sono disposti lungo una catena lineare che rappresenta un \emph{random walk}: dagli stati interni è possibile rimanere nello stesso stato, salire o scendere con probabilità assegnate, mentre dagli stati di bordo sono ammesse solo alcune transizioni. A ogni istante temporale si deve scegliere se \emph{attendere}, lasciando evolvere il sistema in modo stocastico senza costi, oppure \emph{fermare il processo}.
+\\ \hspace*{1.5em}
+Se si sceglie di attendere, lo stato evolve secondo il meccanismo di random walk e le probabilità di transizione coincidono con quelle associate all’azione \emph{wait}, cioè $\pi_{ij} = \pi(i,\text{wait},j)$. Se invece si sceglie di fermare il processo, si ottiene una \textbf{ricompensa dipendente dallo stato} $R_i$ e il sistema entra in uno stato terminale assorbente, nel quale rimane fino all’istante finale dell’orizzonte. Questo meccanismo può essere interpretato come il problema di \emph{vendere in modo ottimale un asset}, il cui prezzo segue un random walk non influenzato dalle decisioni del decisore, mentre lo stato ha natura puramente informativa.
+\\ \hspace*{1.5em}
+Si osserva una leggera deviazione dalla notazione standard, poiché la decisione è consentita fino all’istante finale $T$ incluso, che rappresenta l’ultimo istante in cui è possibile fermare il processo; ciò implica che la \textbf{politica ottima non è stazionaria}. Le funzioni di valore $V_t(i)$ devono essere determinate per tutti gli istanti e tutti gli stati, imponendo come condizione al bordo
+\( V_T(i) = R_i \),
+cioè che, al tempo finale, la scelta ottima consista nel fermare immediatamente il processo.
+\\ \hspace*{1.5em}
+Le equazioni di programmazione dinamica assumono una forma esplicita che confronta, in ciascuno stato, la ricompensa immediata ottenibile fermando il processo con il valore scontato dell’attesa, che negli stati interni può essere scritto come
+\( \gamma\bigl(\pi_{i,i-1}V_{t+1}(i-1)+\pi_{i,i}V_{t+1}(i)+\pi_{i,i+1}V_{t+1}(i+1)\bigr) \).
+Dall’esempio si evince che la struttura delle transizioni induce una \textbf{matrice di transizione tridiagonale}, che consente una rappresentazione compatta del problema.
+\\ \hspace*{1.5em}
+In forma vettoriale, la ricorsione può essere scritta come
+\( \mathbf V_t = \max\{\mathbf R, \gamma \Pi \mathbf V_{t+1}\} \),
+dove il massimo è inteso componente per componente, evidenziando la natura deterministica dell’operatore di Bellman nel caso a orizzonte temporale finito.
+
+\paragraph{Implementazione numerica della politica ottima}
+La funzione MATLAB \textcolor{MediumVioletRed}{\texttt{\texttt{FindPolicyFiniteRW}}} implementa la \emph{ricorsione di programmazione dinamica} per un problema di \textbf{arresto ottimo} a orizzonte temporale finito, dato una matrice di transizione tridiagonale, un vettore di payoff, un orizzonte temporale e un fattore di sconto.
+\\ \hspace*{1.5em}
+La funzione calcola iterativamente, procedendo all’indietro nel tempo, la \textbf{funzione di valore} e la \textbf{politica ottima}, confrontando in ogni stato il valore dell’attesa con il payoff immediato.
+\\ \hspace*{1.5em}
+In uscita si ottengono una tabella dei valori e una tabella binaria delle decisioni, da cui si evince che la \emph{politica risultante non è stazionaria} e che le decisioni di arresto dipendono sia dallo stato sia dal tempo residuo.
+
+\paragraph{Processi decisionali di Markov a orizzonte temporale infinito}
+Nel caso di un \textcolor{MediumVioletRed}{\textbf{MDP a orizzonte temporale infinito}}, la funzione di valore è definita in modo implicito come soluzione di un’equazione di Bellman del tipo
 \[
-\pi(i,j) := \mathbb{P}\{ s_{t+1} = j \mid s_t = i \}.
+V(i) = \opt_{a \in \mathcal A(i)} \bigl\{ f(i,a) + \gamma \sum_j \pi(i,a,j)\, V(j) \bigr\}, \quad i \in \mathcal S,
 \]
-
-\paragraph{Catene omogenee}
-Nel caso di problemi a \textbf{orizzonte infinito} si utilizzano catene \textbf{omogenee} (o \textbf{time-invariant}), in cui le probabilità di transizione non dipendono dal tempo.
-
-\paragraph{Matrice di transizione}
-Una catena di Markov a tempo discreto può essere descritta raccogliendo le probabilità di transizione in una \textbf{matrice di transizione a un passo} $\Pi$, in cui l’elemento $\pi_{ij}$ rappresenta la probabilità di transizione dallo stato $i$ allo stato $j$.
-
-\paragraph{Proprietà di normalizzazione}
-Poiché dopo una transizione il processo deve necessariamente trovarsi in uno stato dello spazio degli stati, ogni riga della matrice di transizione somma a uno:
+oppure, in forma equivalente,
 \[
-\sum_{j=1}^N \pi(i,j) = 1, \quad \forall i.
+V(i) = \opt_{a \in \mathcal A(i)} \sum_{j \in \mathcal S} \pi(i,a,j)\bigl\{ h(i,a,j) + \gamma V(j) \bigr\}, \quad i \in \mathcal S.
 \]
-
-\subsection{Catene di Markov controllate e MDP}
-
-\paragraph{Azioni e transizioni controllate}
-Nei \textbf{processi decisionali markoviani} (MDP), le transizioni sono parzialmente controllate tramite la selezione di azioni.  
-In ciascuno stato $i$ è disponibile un insieme finito di azioni ammissibili $A(i)$.  
-Per ogni azione $a \in A(i)$ sono definite probabilità di transizione:
+Poiché si considerano MDP finiti, lo spazio degli stati può essere identificato con un insieme finito di interi $\mathcal S = \{1,\ldots,n\}$ e la funzione di valore $V : \mathcal S \to \mathbb R$ può essere rappresentata come un vettore $\mathbf V \in \mathbb R^n$, con componenti $V(i)$, $i \in \mathcal S$. Le equazioni precedenti non forniscono una soluzione in forma chiusa, ma definiscono un problema di punto fisso.
+\\ \hspace*{1.5em}
+Per risolvere numericamente tali equazioni ed individuare la politica ottima, si introducono due strategie fondamentali: la \textcolor{MediumVioletRed}{\textbf{value iteration}}, basata su iterazioni computazionalmente poco costose che convergono alla funzione di valore ottima solo al limite, e la \textcolor{MediumVioletRed}{\textbf{policy iteration}}, che richiede iterazioni più onerose ma converge in tempo finito nel caso di MDP finiti, grazie al numero finito di politiche ammissibili.
+\\ \hspace*{1.5em}
+A tal fine, è utile definire due operatori. Dato un generico vettore di valori $\tilde{\mathbf V}$, non necessariamente ottimo, si definisce l’operatore di Bellman $\mathcal T$ come
 \[
-\pi(i,a,j).
+[\mathcal T \tilde V](i) = \opt_{a \in \mathcal A(i)} \sum_{j \in \mathcal S} \pi(i,a,j)\bigl\{ h(i,a,j) + \gamma \tilde V(j) \bigr\}, \quad i \in \mathcal S,
 \]
-
-\paragraph{Distribuzione stazionaria}
-Per valutare le prestazioni di una politica di controllo stazionaria, si può considerare la \textbf{probabilità di lungo periodo} di trovarsi in ciascuno stato, indicata con $q(i)$ e raccolta nel vettore $q$.  
-Tali probabilità potrebbero non esistere se la catena non soddisfa opportune proprietà strutturali.
-
-\paragraph{Proprietà strutturali delle catene}
-Una catena può presentare stati \textbf{transienti}, \textbf{ricorrenti}, \textbf{assorbenti} e \textbf{periodicità}.  
-Si assume una \textbf{unichain}, tale che ogni stato possa essere visitato infinitamente spesso nel lungo periodo e raggiunto da ogni altro stato in tempo finito con probabilità positiva.  
-Nel seguito si assume che il processo di Markov sia \textbf{ben comportato} per ogni politica di controllo.
-
-\subsection{MDP a orizzonte temporale finito}
-
-\paragraph{Ricorsione di programmazione dinamica}
-Per un MDP a \textbf{orizzonte finito}, la ricorsione di DP è:
+che associa a $\tilde{\mathbf V}$ un nuovo vettore di valori sullo spazio degli stati.
+\\ \hspace*{1.5em}
+Dato invece un generico vettore $\tilde{\mathbf V}$ e una politica stazionaria $\mu$, non necessariamente ottima, si definisce l’operatore $\mathcal T_\mu$ come
 \[
-V_t(i) = \operatorname{opt}_{a \in A(i)}
-\left\{
-f(i,a) + \sum_j \pi(i,a,j)\, V_{t+1}(j)
-\right\}, \quad i \in S.
+[\mathcal T_\mu \tilde V](i) = \sum_{j \in \mathcal S} \pi(i,\mu(i),j)\bigl\{ h(i,\mu(i),j) + \gamma \tilde V(j) \bigr\}, \quad i \in \mathcal S.
 \]
-
-\paragraph{Cosa insegna l’esempio (arresto ottimo su random walk)}
-L’esempio mostra che, in un problema di arresto ottimo a orizzonte finito, la politica risultante può essere \textbf{non stazionaria} e dipendere dal tempo residuo (confronto tra \texttt{wait} e \texttt{stop} tramite DP).
-
-\subsection{Processi decisionali markoviani a orizzonte infinito}
-
-\paragraph{Equazioni di Bellman a orizzonte infinito}
-Nel caso di un \textbf{MDP a orizzonte infinito}, la value function è definita implicitamente da equazioni del tipo:
-\[
-V(i) = \operatorname{opt}_{a \in A(i)}
-\left\{
-f(i,a) + \sum_j \pi(i,a,j)\, V(j)
-\right\}, \quad i \in S,
-\tag{2}
-\]
-oppure, quando il contributo immediato dipende anche dallo stato successivo,
-\[
-V(i) = \operatorname{opt}_{a \in A(i)}
-\sum_{j \in S} \pi(i,a,j)
-\left\{
-h(i,a,j) + V(j)
-\right\}, \quad i \in S.
-\tag{3}
-\]
-
-\paragraph{Rappresentazione vettoriale}
-Per MDP finiti, lo spazio degli stati è:
-\[
-S = \{1,\dots,n\},
-\]
-e la value function $V : S \to \mathbb{R}$ è rappresentabile come vettore $V \in \mathbb{R}^n$ con componenti $V(i)$.
-
-\paragraph{Strategie di soluzione}
-Esistono due strategie fondamentali:
-\begin{itemize}[label=-]
-\item \textbf{Value iteration}: iterazioni economiche, convergenza al valore ottimo solo nel limite;
-\item \textbf{Policy iteration}: iterazioni più costose, ma convergenza in tempo finito per MDP finiti (numero finito di politiche).
-\end{itemize}
-
-\subsection{Operatori di Bellman}
-
-\paragraph{Operatore ottimo}
-Data una value function generica $\tilde V$, si definisce l’operatore $T$:
-\[
-[T\tilde V](i) =
-\operatorname{opt}_{a \in A(i)}
-\sum_{j \in S} \pi(i,a,j)
-\left\{
-h(i,a,j) + \tilde V(j)
-\right\}, \quad i \in S.
-\tag{4}
-\]
-
-\paragraph{Operatore associato a una politica}
-Data una politica stazionaria generica $\mu$, si definisce l’operatore $T_\mu$:
-\[
-[T_\mu \tilde V](i) =
-\sum_{j \in S} \pi(i,\mu(i),j)
-\left\{
-h(i,\mu(i),j) + \tilde V(j)
-\right\}, \quad i \in S.
-\tag{5}
-\]
-
-\paragraph{Ruolo degli operatori e punti fissi}
-L’operatore $T$ è centrale per la \textbf{value iteration}, mentre $T_\mu$ è centrale per la \textbf{policy iteration}.  
-Il vettore valore ottimo $V$ è un \textbf{punto fisso} di $T$:
-\[
-V = TV.
-\tag{6}
-\]
-La value function $V^\mu$ di una politica stazionaria $\mu$ è il punto fisso di $T_\mu$.
-
-\paragraph{Condizioni di esistenza}
-Per un MDP finito con \textbf{sconto stretto} ($\gamma < 1$) e contributi per stadio \textbf{limitati} (esiste $M$ con $|h(i,a,j)| \le M$), si assume che $T$ e $T_\mu$ siano \textbf{operatori di contrazione}, con punto fisso unico.
-
-\paragraph{Miglioramento delle politiche}
-L’operatore $T$ fornisce una caratterizzazione della politica stazionaria ottima e consente di \textbf{migliorare} una politica non ottima usando il valore $V^\mu$, che viene ottenuto tramite $T_\mu$.
+L’operatore $\mathcal T$ svolge un ruolo centrale nella value iteration, mentre $\mathcal T_\mu$ è alla base della policy iteration.
+\\ \hspace*{1.5em}
+Si osserva che il vettore di valore ottimo $\mathbf V$ è un \textbf{punto fisso} dell’operatore $\mathcal T$, ossia soddisfa
+\(
+\mathbf V = \mathcal T \mathbf V,
+\)
+mentre la funzione di valore $\mathbf V_\mu$ associata a una politica stazionaria $\mu$ è il punto fisso dell’operatore $\mathcal T_\mu$, cioè
+\(
+\mathbf V_\mu = \mathcal T_\mu \mathbf V_\mu.
+\)
+\\ \hspace*{1.5em}
+Dato una politica stazionaria $\mu$, la quantità $V_\mu(i)$ rappresenta la prestazione attesa scontata ottenuta partendo dallo stato $i$ e applicando tale politica. L’esistenza di una funzione di valore e di una politica stazionaria ottima non è garantita in generale, ma è assicurata nel caso di MDP finiti con \textbf{sconto stretto} $\gamma < 1$ e contributi immediati limitati, cioè quando esiste una costante $M$ tale che $|h(i,a,j)| \le M$.
+\\ \hspace*{1.5em}
+L’ingrediente chiave delle dimostrazioni è il fatto che sia $\mathcal T$ sia $\mathcal T_\mu$ sono \textbf{operatori di contrazione}, e quindi ammettono un unico punto fisso. Ai fini applicativi, è sufficiente osservare che l’operatore $\mathcal T$ fornisce una caratterizzazione della politica stazionaria ottima e che, tramite una singola operazione di ottimizzazione, consente di migliorare una politica stazionaria non ottima, mentre l’operatore $\mathcal T_\mu$ permette di calcolarne la funzione di valore associata.
 
 \subsection{Value iteration}
 
-\paragraph{Idea di base}
-Con sconto stretto ($\gamma<1$), si cerca un punto fisso di $T$ tramite iterazione:
+\paragraph{Metodo di iterazione del valore}
+Secondo l’equazione \( \mathbf V = \mathcal T \mathbf V \), nel caso di \textcolor{MediumVioletRed}{\textbf{MDP finiti con sconto stretto}} \( \gamma < 1 \) il problema può essere affrontato ricercando un \textbf{punto fisso} dell’operatore di Bellman \( \mathcal T \). A tal fine, si considera un problema a orizzonte finito con funzione di valore terminale assegnata \( \mathbf V^{(0)} \) e si applica l’operatore \( \mathcal T \) ottenendo una nuova funzione di valore
 \[
-V^{(k+1)} = T V^{(k)}.
+V^{(1)}(i) = [\mathcal T V^{(0)}](i) = \opt_{a \in \mathcal A(i)} \sum_{j \in \mathcal S} \pi(i,a,j)\bigl\{ h(i,a,j) + \gamma V^{(0)}(j) \bigr\}, \quad i \in \mathcal S,
 \]
-Se $V^{(k)} \to V$, allora $V$ è un punto fisso di $T$ e rappresenta la soluzione.
-
-\subsection{Algoritmo di Value Iteration}
+dove il pedice indica il numero di passi rimanenti. La procedura può essere iterata, mappando \( \mathbf V^{(k)} \) in \( \mathbf V^{(k+1)} \) secondo
+\[
+V^{(k+1)}(i) = [\mathcal T V^{(k)}](i) = \opt_{a \in \mathcal A(i)} \sum_{j \in \mathcal S} \pi(i,a,j)\bigl\{ h(i,a,j) + \gamma V^{(k)}(j) \bigr\}, \quad i \in \mathcal S,
+\]
+che può essere interpretata come la ricorsione di un MDP a orizzonte finito con funzione di valore terminale \( \mathbf V^{(0)} \).
+\\ \hspace*{1.5em}
+L’intuizione suggerisce che, in presenza di sconto stretto, il contributo della funzione di valore terminale \( \mathbf V^{(0)} \) diventi trascurabile al crescere di \( k \), poiché è moltiplicato da un fattore \( \gamma^k \) che tende a zero. Se la successione \( \{\mathbf V^{(k)}\} \), interpretando \( k \) come contatore delle iterazioni, converge a un limite \( \mathbf V \), allora tale limite costituisce un punto fisso dell’operatore \( \mathcal T \).
+\\ \hspace*{1.5em}
+Più in generale, dato un operatore \( H(\cdot) : \mathbb R^n \to \mathbb R^n \), la ricerca di una soluzione dell’equazione di punto fisso \( \mathbf y = H(\mathbf y) \) può essere affrontata mediante lo schema iterativo
+\(
+\mathbf y^{(k+1)} = H(\mathbf y^{(k)}), \quad k = 0,1,2,\ldots,
+\)
+a partire da una stima iniziale \( \mathbf y^{(0)} \); tuttavia, in assenza di ulteriori proprietà, non vi è garanzia di convergenza né di esistenza o unicità del punto fisso. Nel caso in esame, il fatto che l’operatore \( \mathcal T \) sia un \textbf{operatore di contrazione} assicura invece l’esistenza e l’unicità del punto fisso, giustificando teoricamente l’algoritmo di \textbf{value iteration}.
 
 \begin{algorithm}[H]
-\caption{Value Iteration per MDP a orizzonte infinito}
+\caption{Value iteration (MDP finito con sconto stretto)}
 \begin{algorithmic}[1]
-\State Scegliere una value function iniziale $V^{(0)}$ (ad esempio $V^{(0)}(i)=0$ per ogni $i \in S$)
-\State Scegliere una tolleranza $\varepsilon$
-\State Inizializzare $k=0$ e \texttt{stop}=\texttt{false}
-\While{\texttt{stop} $\neq$ \texttt{true}}
-    \For{ogni stato $i \in S$}
-        \State
-        \[
-        V^{(k+1)}(i) =
-        \operatorname{opt}_{a \in A(i)}
-        \left\{
-        f(i,a) + \sum_{j \in S} \pi(i,a,j)\, V^{(k)}(j)
-        \right\}
-        \]
+\State Scegliere una funzione di valore iniziale $V^{(0)}$; se non vi sono indicazioni, porre $V^{(0)}(i)=0$ per ogni $i\in\mathcal S$.
+\State Scegliere un parametro di tolleranza $\epsilon$.
+\State Porre $k=0$ e $\texttt{stop}=\texttt{false}$.
+\While{$\texttt{stop}\neq \texttt{true}$}
+    \ForAll{$i\in\mathcal S$}
+        \State Calcolare
+        \[V^{(k+1)}(i)=\opt_{a\in\mathcal A(i)}\left\{f(i,a)+\gamma\sum_{j\in\mathcal S}\pi(i,a,j)\,V^{(k)}(j)\right\}.\]
     \EndFor
-    \If{$\|V^{(k+1)} - V^{(k)}\|_1 < \varepsilon$}
-        \State \texttt{stop}=\texttt{true}
+    \If{$\left\|V^{(k+1)}-V^{(k)}\right\|_{\infty}<\epsilon$}
+        \State $\texttt{stop}=\texttt{true}$.
     \Else
-        \State $k = k + 1$
+        \State $k=k+1$.
     \EndIf
 \EndWhile
-\State Porre $\hat V = V^{(k+1)}$
-\State Per ogni $i \in S$, determinare una politica stimata ottima:
+\State Porre $\hat V = V^{(k+1)}$.
+\State Trovare la politica ottima stimata scegliendo un’azione arbitraria se l’insieme delle azioni ottime non è un singleton
 \[
-\hat\mu(i) \in
-\arg\operatorname{opt}_{a \in A(i)}
-\left\{
-f(i,a) + \sum_j \pi(i,a,j)\, \hat V(j)
-\right\}
+\hat\mu(i)\in\arg\opt_{a\in\mathcal A(i)}\left\{f(i,a)+\gamma\sum_{j\in\mathcal S}\pi(i,a,j)\,\hat V(j)\right\},\ \ i\in\mathcal S.
 \]
-\State Restituire $\hat V$ e $\hat\mu$
+\State Restituire $\hat V$ e $\hat\mu$.
 \end{algorithmic}
 \end{algorithm}
 
-\paragraph{Cosa insegna l’esempio numerico (value iteration)}
-L’esempio illustra che la politica ottima ottenuta da value iteration può dipendere in modo sensibile da probabilità di transizione e fattore di sconto, e che la convergenza in iterazioni può variare significativamente con tali parametri.
+\paragraph{Idea dell’esempio numerico}
+Si considera un semplice problema di \textbf{arresto ottimo ricorrente} modellato come una catena di Markov con quattro stati, in cui il decisore può scegliere tra le azioni \emph{wait} e \emph{reset}. Avanzando lungo la catena, la probabilità di raggiungere stati migliori diminuisce, mentre i payoff crescono con lo stato, rendendo il trade-off tra attesa e arresto fortemente dipendente dal \textbf{fattore di sconto} $\gamma$. L’esempio mostra come, al variare delle probabilità di transizione e di $\gamma$, la politica ottima passi da una strategia \emph{greedy} (arresto immediato) a politiche più pazienti, evidenziando chiaramente il ruolo del discounting nella value iteration.
+
+\paragraph{Idea delle funzioni MATLAB}
+La funzione \textcolor{MediumVioletRed}{\texttt{PW311\_FindPolicy}} implementa la \textbf{value iteration} sfruttando la struttura specifica del problema: è sufficiente descrivere le probabilità di permanenza nello stato e confrontare, a ogni iterazione, il valore dell’attesa con quello del reset. L’algoritmo restituisce la funzione di valore ottima, la politica binaria associata e il numero di iterazioni necessarie alla convergenza. La funzione \textcolor{MediumVioletRed}{\texttt{PW311\_Simulate}} utilizza invece una \textbf{simulazione Monte Carlo} per stimare le prestazioni scontate di una politica fissata, consentendo di confrontare i valori stimati con quelli teorici e di valutarne la robustezza rispetto a possibili errori di modellazione.
 
 \subsection{Policy iteration}
-
-\paragraph{Motivazione}
-Con value iteration può accadere di individuare presto la politica ottima (da valori approssimati) ma senza valutarne ancora con precisione il valore.  
-Policy iteration mira invece alla valutazione (più) diretta del valore di una politica.
-
-\paragraph{Policy evaluation come sistema lineare}
-Per una politica stazionaria $\mu$, $T_\mu$ non include ottimizzazione:
+\paragraph{Idea e formulazione matematica}
+Con la \textcolor{MediumVioletRed}{\textbf{policy iteration}} può accadere che, a differenza della value iteration, non ci si accontenti di individuare rapidamente una politica ottima basata su valori approssimati degli stati, ma si miri a valutare in modo \emph{esatto} il valore di una politica fissata. Si consideri l’operatore $T_\mu$ associato a una politica stazionaria $\mu$, definito come
 \[
-[T_\mu \tilde V](i)= f\bigl(i,\mu(i)\bigr)+\sum_{j\in S}\pi\bigl(i,\mu(i),j\bigr)\tilde V(j),\quad i\in S.
+[T_\mu \tilde V](i)
+=
+f\bigl(i,\mu(i)\bigr)
++
+\gamma \sum_{j\in\mathcal S} \pi\bigl(i,\mu(i),j\bigr)\tilde V(j),
+\qquad i\in\mathcal S.
 \]
-Il valore $V^\mu$ soddisfa:
+\hspace*{1.5em}A differenza dell’operatore di Bellman $T$, l’operatore $T_\mu$ non coinvolge alcuna ottimizzazione ed è interamente determinato dalla politica $\mu$. La funzione di valore $V_\mu$ associata alla politica $\mu$ è un punto fisso di $T_\mu$ e soddisfa, per ogni $i\in\mathcal S$, il sistema di equazioni lineari
 \[
-V^\mu(i)= f\bigl(i,\mu(i)\bigr)+\sum_{j\in S}\pi\bigl(i,\mu(i),j\bigr)V^\mu(j),\quad i\in S.
+V_\mu(i)
+=
+f\bigl(i,\mu(i)\bigr)
++
+\gamma \sum_{j\in\mathcal S} \pi\bigl(i,\mu(i),j\bigr) V_\mu(j).
 \]
-Definendo la matrice di transizione indotta $\Pi^\mu$ e il vettore dei contributi $f^\mu$:
+Raccogliendo le probabilità di transizione indotte da $\mu$ nella matrice
 \[
-f^\mu :=
+\Pi_\mu :=
 \begin{bmatrix}
-f\bigl(1,\mu(1)\bigr)\\
-f\bigl(2,\mu(2)\bigr)\\
-\vdots\\
-f\bigl(n,\mu(n)\bigr)
+\pi(1,\mu(1),1) & \pi(1,\mu(1),2) & \cdots & \pi(1,\mu(1),n) \\
+\pi(2,\mu(2),1) & \pi(2,\mu(2),2) & \cdots & \pi(2,\mu(2),n) \\
+\vdots & \vdots & \ddots & \vdots \\
+\pi(n,\mu(n),1) & \pi(n,\mu(n),2) & \cdots & \pi(n,\mu(n),n)
 \end{bmatrix},
-\tag{9}
 \]
-si ottiene il sistema:
+e i contributi immediati nel vettore
 \[
-V^\mu = f^\mu + \gamma \Pi^\mu V^\mu,
-\qquad
-\bigl(I-\gamma \Pi^\mu\bigr)V^\mu=f^\mu.
+f_\mu :=
+\begin{bmatrix}
+f(1,\mu(1))\\
+f(2,\mu(2))\\
+\vdots\\
+f(n,\mu(n))
+\end{bmatrix},
 \]
-Formalmente:
+il problema di valutazione della politica può essere scritto in forma compatta come
+\(
+V_\mu = f_\mu + \gamma \Pi_\mu V_\mu,
+\)
+ossia
+\(
+(\mathbf I - \gamma \Pi_\mu)V_\mu = f_\mu,
+\)
+dove $\mathbf I\in\mathbb R^{n\times n}$ è la matrice identità. Formalmente, la soluzione è data da
+\(
+V_\mu = (\mathbf I - \gamma \Pi_\mu)^{-1} f_\mu.
+\)
+\\ \hspace*{1.5em}Sebbene l’inversione matriciale fornisca una soluzione chiusa, per problemi di grandi dimensioni essa risulta computazionalmente onerosa e distrugge la sparsità della matrice, rendendo preferibili metodi iterativi. Una volta calcolato $V_\mu$, è possibile migliorare la politica definendo
 \[
-V^\mu = \bigl(I-\gamma \Pi^\mu\bigr)^{-1}f^\mu.
-\]
-Per matrici grandi e sparse, metodi diretti possono essere proibitivi; si adottano quindi metodi iterativi.
-
-\paragraph{Policy improvement}
-Data $V^\mu$, una politica migliorata $\tilde\mu$ è definita da:
-\[
-\tilde\mu(i)\in
-\arg\operatorname{opt}_{a\in A(i)}
+\tilde\mu(i)\in \arg\opt_{a\in\mathcal A(i)}
 \left\{
-f(i,a)+\sum_j \pi(i,a,j)\,V^\mu(j)
-\right\},\quad i\in S.
+f(i,a)
++
+\gamma \sum_{j\in\mathcal S}\pi(i,a,j)V_\mu(j)
+\right\},
+\qquad i\in\mathcal S.
 \]
-Per un problema di massimizzazione:
-\[
-V^\mu(i)\le V^{\tilde\mu}(i),\quad i\in S,
-\]
-(con disuguaglianza invertita in minimizzazione). Se $\mu$ non è ottima, la disuguaglianza è stretta per almeno uno stato.  
-Poiché il numero di politiche stazionarie deterministiche è finito, una sequenza di miglioramenti porta a una politica ottima.
-
-\subsection{Algoritmo di Policy Iteration}
+\hspace*{1.5em}Questa operazione, detta \textbf{policy improvement}, garantisce che la nuova politica non sia peggiore della precedente, cioè
+\(
+V_\mu(i) \le V_{\tilde\mu}(i), \; i\in\mathcal S,
+\)
+nel caso di un problema di massimizzazione, con disuguaglianza stretta in almeno uno stato se $\mu$ non è ottima. Poiché in un MDP finito il numero di politiche stazionarie deterministiche è finito, una sequenza di valutazioni e miglioramenti conduce necessariamente a una politica ottima, che costituisce il fondamento dell’algoritmo di policy iteration.
 
 \begin{algorithm}[H]
-\caption{Policy Iteration per MDP finito a orizzonte infinito}
+\caption{Policy iteration}
 \begin{algorithmic}[1]
-\State Definire una politica stazionaria iniziale arbitraria $\mu^{(0)}$
-\State Inizializzare $k=0$ e \texttt{stop}=\texttt{false}
+\State Definire una politica stazionaria iniziale arbitraria $\mu^{(0)}$.
+\State Porre $k=0$ e \texttt{stop = false}.
 \While{\texttt{stop} $\neq$ \texttt{true}}
-    \State \textbf{Policy evaluation:} risolvere
+    \State Valutare la politica $\mu^{(k)}$ risolvendo
     \[
-    \bigl(I-\gamma \Pi^{\mu^{(k)}}\bigr)V^{\mu^{(k)}} = f^{\mu^{(k)}}
+    \bigl(\mathbf I-\gamma \Pi_{\mu^{(k)}}\bigr)\,V_{\mu^{(k)}}=f_{\mu^{(k)}}.
     \]
-    \State \textbf{Policy improvement:} porre, per ogni $i\in S$,
+    \State Trovare una nuova politica stazionaria $\mu^{(k+1)}$ tramite \emph{policy improvement}
     \[
-    \mu^{(k+1)}(i)\in
-    \arg\operatorname{opt}_{a\in A(i)}
-    \left\{
-    f(i,a)+\sum_j \pi(i,a,j)\,V^{\mu^{(k)}}(j)
-    \right\}
+    \mu^{(k+1)}(i)\in \arg\opt_{a\in\mathcal A(i)}
+    \left\{ f(i,a)+\gamma\sum_{j\in\mathcal S}\pi(i,a,j)V_{\mu^{(k)}}(j)\right\},
+    \qquad i\in\mathcal S.
     \]
     \If{$\mu^{(k+1)}=\mu^{(k)}$}
-        \State \texttt{stop}=\texttt{true}
+        \State \texttt{stop = true}.
     \Else
-        \State $k=k+1$
+        \State $k \leftarrow k+1$.
     \EndIf
 \EndWhile
-\State Restituire la value function ottima e la politica stazionaria ottima
+\State Restituire $V_{\mu^{(k)}}$ e $\mu^{(k)}$.
 \end{algorithmic}
 \end{algorithm}
 
-\paragraph{Cosa insegna l’esempio numerico (policy iteration)}
-L’esempio evidenzia che policy iteration può raggiungere la politica ottima in un numero finito (spesso piccolo) di passi di miglioramento, grazie alla valutazione esplicita della politica corrente.
+\paragraph{Idea dell’implementazione MATLAB}
+La funzione \textcolor{MediumVioletRed}{\texttt{FindPolicyPI}} realizza una versione generale e diretta della \emph{policy iteration}, alternando esplicitamente le fasi di \emph{policy evaluation} e \emph{policy improvement}. A partire da una politica iniziale \textcolor{MediumVioletRed}{\texttt{initialPolicy}}, a ogni iterazione viene costruito il sistema lineare $(\mathbf I-\gamma\Pi_\mu)V_\mu=f_\mu$ tramite la funzione annidata \texttt{makeArrays} e risolto con eliminazione di Gauss per ottenere la funzione di valore della politica corrente. Successivamente, la politica viene migliorata stato per stato scegliendo l’azione che minimizza o massimizza il valore atteso, tramite \texttt{findMin} o \texttt{findMax}, fino a quando la politica non cambia più. L’output finale consiste nel vettore \texttt{stateValues}, che approssima $V_\mu$, e nel vettore \texttt{policy}, che rappresenta la politica stazionaria ottima.
 
-\subsection{Value iteration vs. policy iteration}
+\paragraph{Esempio numerico}
+Dall’esempio numerico si evince che la \textbf{policy iteration} converge in un numero molto ridotto di passi rispetto alla value iteration. Partendo dalla politica iniziale, che prescrive di attendere ogniqualvolta possibile, la valutazione della politica e il successivo passo di \emph{policy improvement} portano immediatamente alla nuova politica, che risulta già ottima. Questo comportamento conferma che, una volta calcolata esattamente la funzione di valore $V_\mu$, il miglioramento della politica può produrre variazioni significative in un singolo passo, evidenziando l’efficienza concettuale della policy iteration nel caso di MDP finiti con struttura semplice.
 
-\paragraph{Confronto e collegamento}
-Value iteration impiega molte iterazioni economiche e converge nel limite; policy iteration usa poche iterazioni potenzialmente costose e converge in tempo finito per MDP finiti.  
-La valutazione di una politica può anche essere eseguita iterativamente tramite:
+\paragraph{Value iteration vs.\ policy iteration}
+A prima vista, la \textbf{value iteration} e la \textbf{policy iteration} appaiono molto diverse. La value iteration si basa su un numero potenzialmente elevato di iterazioni computazionalmente poco costose, mentre la policy iteration si fonda su un numero (auspicabilmente ridotto) di iterazioni che possono essere computazionalmente onerose. Inoltre, la convergenza della value iteration è garantita solo al limite, mentre per la policy iteration si ottiene una convergenza in tempo finito. È tuttavia possibile colmare il divario tra i due approcci. Si consideri la valutazione di una politica stazionaria $\mu$ mediante iterazione del punto fisso dell’operatore $T_\mu$, secondo
 \[
-V^{(k+1)}_\mu(i)= f\bigl(i,\mu(i)\bigr)+\sum_{j\in S}\pi\bigl(i,\mu(i),j\bigr)V^{(k)}_\mu(j),\quad i\in S,
-\tag{10}
+V^{(k+1)}_\mu(i)
+=
+f\bigl(i,\mu(i)\bigr)
++
+\gamma \sum_{j\in\mathcal S}\pi\bigl(i,\mu(i),j\bigr)V^{(k)}_\mu(j),
+\qquad i\in\mathcal S.
 \]
-e interrompendo in modo prematuro tale procedura si ottiene una stima $\widehat V_\mu$ da usare nel miglioramento, dando luogo a \textbf{optimistic policy iteration} e, più in generale, a metodi di \textbf{generalized policy iteration}.  
-Value iteration e policy iteration possono quindi essere visti come estremi di un continuum di approcci.
+\hspace*{1.5em}In pratica, questa procedura è necessaria quando l’\emph{eliminazione di Gauss} per la risoluzione di grandi sistemi lineari non è applicabile. Idealmente, prima del passo di miglioramento si dovrebbe attendere la convergenza completa dello schema precedente; tuttavia, se si interrompe prematuramente l’iterazione assumendo in modo ottimistico di aver valutato correttamente la politica corrente, si ottiene una stima $\hat V_\mu(i)=V^{(k+1)}_\mu(i)$ e si applica il passo di miglioramento
+\[
+\tilde\mu(i)\in \arg\opt_{a\in\mathcal A(i)}
+\left\{
+f(i,a)+\gamma \sum_{j\in\mathcal S}\pi(i,a,j)\hat V_\mu(j)
+\right\},
+\qquad i\in\mathcal S.
+\]
+\hspace*{1.5em}Questo approccio prende il nome di \textcolor{MediumVioletRed}{\textbf{optimistic policy iteration}} ed è alla base della cosiddetta \textbf{generalized policy iteration}. A seconda del grado di ottimismo nella valutazione della politica, l’equazione precedente può essere iterata per un numero elevato o ridotto di passi. Nella value iteration, la politica viene invece aggiornata implicitamente a ogni iterazione tramite
+\[
+V^{(k+1)}(i)
+=
+\opt_{a\in\mathcal A(i)}
+\sum_{j\in\mathcal S}\pi(i,a,j)\bigl\{h(i,a,j)+\gamma V^{(k)}(j)\bigr\},
+\qquad i\in\mathcal S,
+\]
+applicando ripetutamente l’operatore $T$ senza mai valutare esplicitamente $T_\mu$. Al contrario, la policy iteration applica molte iterazioni di $T_\mu$ prima di passare a una nuova politica. Pertanto, value iteration e policy iteration possono essere viste come gli estremi di un continuo di approcci correlati.
+\\ \hspace*{1.5em}Questa distinzione diventa particolarmente rilevante nel contesto del \textcolor{MediumVioletRed}{\textbf{reinforcement learning}}. Quando le probabilità di transizione (e i contributi immediati) non sono note, si ricorre a una programmazione dinamica \emph{model-free}, in cui la funzione di valore è sostituita dai \textbf{Q-factors} $Q(s,a)$ dipendenti sia dallo stato sia dall’azione. In questo contesto, il \textbf{Q-learning} rappresenta il corrispettivo della value iteration ed è uno schema di apprendimento \emph{off-policy}, mentre i metodi ispirati alla policy iteration sono tipicamente \emph{on-policy}, come nel caso dell’algoritmo \textbf{SARSA}. In reinforcement learning non è in genere possibile apprendere esattamente la funzione di valore di una politica, soprattutto se ciò richiede simulazioni Monte Carlo costose o esperimenti online, rendendo inevitabile l’esecuzione anticipata di passi di miglioramento e dando origine a una vasta famiglia di strategie di apprendimento.
 
-\subsection{Collegamento con Reinforcement Learning}
-
-\paragraph{DP model-free e Q-factors}
-Quando le probabilità di transizione (e possibilmente i contributi immediati) non sono note, si passa a una DP \textbf{model-free}. In tale contesto, la value function è tipicamente sostituita dai \textbf{Q-factors} $Q(s,a)$ dipendenti da stati e azioni.
-
-\paragraph{Q-learning e SARSA}
-Il \textbf{Q-learning} è il corrispettivo RL della value iteration ed è un metodo \textbf{off-policy}.  
-I corrispettivi RL della policy iteration sono \textbf{on-policy}; un approccio noto è \textbf{SARSA}.
-
-\paragraph{Osservazione operativa in RL}
-In RL non è in generale possibile valutare esattamente il valore di una politica se ciò richiede simulazioni Monte Carlo costose o esperimenti online; è quindi necessario effettuare un passo di miglioramento prima o poi, generando diverse varianti di strategie.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PDF 11 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \vspace{-1cm}
 \textcolor{DarkViolet}{\section{CAP 11 -- Programmazione dinamica approssimativa e apprendimento per rinforzo per stati discreti}}
+\paragraph{Recap}
+La \textcolor{DarkViolet}{\textbf{programmazione dinamica approssimativa (ADP)}} raccoglie metodi numerici che rinunciano alla garanzia di ottimalità per attenuare le \textcolor{DarkViolet}{\textbf{maledizioni della DP}} e rendere affrontabili MDP finiti a \textbf{orizzonte infinito} anche in assenza di un modello esplicito. Nel contesto \textbf{model-free}, le versioni approssimate di value iteration e policy iteration rientrano nel \textcolor{DarkViolet}{\textbf{reinforcement learning (RL)}}, in cui un agente apprende interagendo con il sistema osservando stato, contributo immediato e stato successivo. Un punto chiave è che la sola funzione di valore sugli stati non basta per valutare le azioni senza informazioni di transizione; per questo si introducono i \textcolor{DarkViolet}{\textbf{valori stato--azione}} tramite \textbf{Q-factor}, assumendo (quando possibile) una rappresentazione tabellare oppure ricorrendo a rappresentazioni compatte.
+\\ \hspace*{1.5em}
+L’apprendimento tramite campionamento porta a due difficoltà strutturali, il compromesso tra \textcolor{DarkViolet}{\textbf{exploration}} ed \textcolor{DarkViolet}{\textbf{exploitation}} e la \textbf{non stazionarietà} del bersaglio, dovuta al fatto che la politica evolve durante l’apprendimento. Per gestire il compromesso si impiegano politiche casuali, come $\varepsilon$-greedy (statico o dinamico) e \textcolor{DarkViolet}{\textbf{Boltzmann exploration}} basata su soft-max, mentre la non stazionarietà motiva aggiornamenti incrementali con \textcolor{DarkViolet}{\textbf{smoothing esponenziale}} e learning rate costante o decrescente. L’esempio dei \textbf{multi-armed bandits} mostra come campioni piccoli e varianza elevata rendano facile selezionare azioni subottimali, giustificando la necessità di exploration controllata.
+\\ \hspace*{1.5em}
+Nel quadro dei metodi a \textbf{temporal differences} si ottiene \textcolor{DarkViolet}{\textbf{SARSA}}, schema \textbf{on-policy} che apprende i Q-factor di una politica stazionaria tramite correzioni smussate dal learning rate e procedure di \textcolor{DarkViolet}{\textbf{bootstrapping}}; l’aggiornamento della politica prima di una valutazione esatta conduce alla \textcolor{DarkViolet}{\textbf{generalized (optimistic) policy iteration}}, che può accelerare l’apprendimento ma indebolire la convergenza. In alternativa, il \textcolor{DarkViolet}{\textbf{Q-learning}} apprende direttamente i Q-factor \textbf{ottimi} con logica \textbf{off-policy}, utilizzando un target che combina contributo immediato e valore ottimo stimato dello stato successivo, e aggiornamenti in stile smoothing esponenziale o temporal difference. La differenza concettuale con SARSA emerge nel fatto che SARSA aggiorna rispetto all’azione scelta dalla politica corrente, mentre Q-learning usa l’azione ottimale (stimata) nello stato successivo.
+\\ \hspace*{1.5em}
+Le implementazioni MATLAB evidenziano la separazione tra algoritmo e simulatore tramite un oggetto di sistema (\texttt{systemObj}/\texttt{systemClass}) che fornisce contributo e transizione, il conteggio delle visite stato--azione e la possibilità di integrare una scelta \textcolor{DarkViolet}{\textbf{$\varepsilon$-greedy}}. L’esempio numerico mostra che l’esito pratico del Q-learning dipende in modo critico da inizializzazione, learning rate e exploration: senza exploration alcune azioni possono non essere mai provate e i relativi Q-factor non vengono aggiornati, mentre una strategia $\varepsilon$-greedy può recuperare la politica ottima, a costo di maggiore effort computazionale.
 
 
-\subsection{Approximate Dynamic Programming e DP model-free}
+\paragraph{ADP e programmazione dinamica model-free}
+La \textcolor{DarkViolet}{\textbf{approximate dynamic programming (ADP)}} è un termine ombrello che identifica un’ampia classe di metodi numerici di programmazione dinamica che, a differenza dei metodi standard, \textbf{non garantiscono il raggiungimento di una politica ottima}. In cambio della loro natura approssimata, tali metodi mirano ad attenuare le ben note \textcolor{DarkViolet}{\textbf{maledizioni della DP}}, rendendo trattabili problemi che sarebbero altrimenti computazionalmente proibitivi. Si considerano qui metodi approssimati per \textbf{MDP finiti} nel contesto a \textbf{orizzonte infinito}.
+\\ \hspace*{1.5em}Le versioni \textbf{model-free} sia della value iteration sia della policy iteration rientrano collettivamente nel quadro del \textcolor{DarkViolet}{\textbf{reinforcement learning (RL)}}. In tale impostazione, un \textbf{agente} interagisce con un sistema al fine di apprendere una politica di controllo adeguata: non si dispone di un modello del sistema, ma si osservano lo stato corrente e l’esito dell’azione scelta, costituito dal contributo immediato e dallo stato successivo. Una buona politica deve bilanciare obiettivi di breve e di lungo periodo, valutati rispettivamente tramite il contributo immediato e il valore dello stato futuro.
+\\ \hspace*{1.5em}Un punto cruciale del RL model-free è che, anche disponendo di una conoscenza perfetta della funzione di valore degli stati, non è possibile valutare correttamente un’azione in assenza di informazioni sulle transizioni. Per ovviare a questo limite si introducono i \textcolor{DarkViolet}{\textbf{valori stato--azione}}, sotto forma di \textbf{Q-factor}, che consentono di apprendere una politica decisionale tramite strategie di campionamento. Si assume inizialmente che lo spazio stato--azione non sia eccessivamente grande e che una rappresentazione tabellare dei Q-factor sia praticabile; nella maggior parte dei casi, tuttavia, ciò non è vero e diventa necessario ricorrere a rappresentazioni compatte.
 
-\paragraph{Approximate Dynamic Programming}
-L’\textbf{Approximate Dynamic Programming (ADP)} è il nome collettivo di un’ampia classe di \textbf{metodi numerici di programmazione dinamica} che, a differenza dei metodi standard, \textbf{non garantiscono} di trovare una \textbf{politica ottima}.  
-In cambio della natura approssimata, i metodi ADP mirano ad attenuare le \textbf{maledizioni della DP}.  
-Nel seguito si considerano \textbf{metodi approssimati} per \textbf{MDP finiti} nel caso \textbf{a orizzonte infinito}.
+\paragraph{Campionamento e stima in contesti non stazionari}
+Nella teoria della probabilità si è spesso interessati al \textcolor{DarkViolet}{\textbf{valore atteso}} di una funzione $h(\cdot)$ di una variabile aleatoria o di un vettore di variabili aleatorie, definito come
+$$\theta = \mathbb{E}[h(X)] = \int_{\mathcal{X}} h(x) f_X(x)\,dx,$$
+dove $\mathcal{X}$ rappresenta il supporto della distribuzione.  
+\\ \hspace*{1.5em}
+Poiché la valutazione di integrali ad alta dimensionalità risulta in generale complessa, si ricorre a tecniche di \textcolor{DarkViolet}{\textbf{campionamento Monte Carlo}}, che permettono di approssimare il valore atteso mediante una media campionaria, ossia
+$$\hat{\theta} = \frac{1}{m}\sum_{k=1}^m h\!\left(X^{(k)}\right).$$
+Tale stima risulta \textbf{non distorta}, in quanto il suo valore atteso coincide con il valore vero di $\theta$.  
+\\ \hspace*{1.5em}
+Nel contesto dei \textbf{processi decisionali di Markov}, tuttavia, l’obiettivo non è la stima di una quantità statica, bensì dei \textcolor{DarkViolet}{\textbf{valori di stato}} $V(i)$ o dei \textcolor{DarkViolet}{\textbf{Q-factor}} $Q(i,a)$. In questa impostazione, l’apprendimento statistico deve confrontarsi con due principali difficoltà: da un lato la necessità di bilanciare \textbf{exploration} e \textbf{exploitation}, dall’altro la complessità legata alla stima di un \textbf{bersaglio non stazionario}, che evolve nel tempo man mano che la politica viene aggiornata.
 
-\paragraph{Reinforcement Learning}
-Le versioni \textbf{model-free} di \textbf{value iteration} e \textbf{policy iteration} sono raccolte sotto il termine \textbf{Reinforcement Learning (RL)}.  
-Lo schema di base è il seguente: un \textbf{agente} interagisce con un sistema per apprendere una \textbf{politica di controllo} senza disporre di un \textbf{modello} del sistema; al tempo $t$ osserva lo \textbf{stato} $s_t$, prova un’\textbf{azione} $a_t$, e osserva il \textbf{contributo immediato} $h_{t+1}$ e lo \textbf{stato successivo} $s_{t+1}$.  
-Una buona politica deve bilanciare \textbf{obiettivi di breve e lungo periodo}, misurati dal contributo immediato e dal valore dello stato successivo.
+\paragraph{Il compromesso tra exploration ed exploitation}
+Si supponga di voler apprendere i \textcolor{DarkViolet}{\textbf{Q-factor}} $Q(i,a)$ tramite campionamento e di trovarsi attualmente nello stato $i$. Sorge allora il problema di stabilire quale azione selezionare. Una possibilità consiste nel fare affidamento sulle stime correnti dei Q-factor e scegliere l’azione che appare più promettente. Questa strategia risulta sensata solo quando il valore associato a ciascuna azione nello stato considerato è stato stimato con sufficiente accuratezza.  
+\\ \hspace*{1.5em}
+All’inizio del processo di apprendimento, tuttavia, tale condizione è difficilmente soddisfatta. Può infatti esistere un’azione che sembra poco conveniente semplicemente perché il suo contributo immediato è stato valutato in modo impreciso; inoltre, tale azione potrebbe condurre a uno stato favorevole, del quale non si ha ancora conoscenza. Queste considerazioni conducono al problema fondamentale del bilanciamento tra \textcolor{DarkViolet}{\textbf{exploration}} delle alternative poco conosciute ed \textcolor{DarkViolet}{\textbf{exploitation}} delle informazioni attualmente disponibili.  
+\\ \hspace*{1.5em}
+Per chiarire il concetto, si consideri un problema di apprendimento statico, in cui si deve scegliere un’azione da un insieme finito $A$ di alternative. A ciascuna azione $a \in A$ è associata una ricompensa aleatoria $R(a)$. Se fossero noti i valori attesi $\nu(a) = \mathbb{E}[R(a)]$ per ogni azione, in un contesto di neutralità al rischio sarebbe sufficiente ordinare le azioni in base ai rispettivi valori attesi e selezionare quella più promettente.  
+\\ \hspace*{1.5em}
+Si supponga invece di poter ottenere solo stime rumorose $\hat{\nu}(a)$ tramite campionamento. Seguendo una strategia di \textbf{pura exploitation}, si sceglierebbe l’azione che massimizza $\hat{\nu}(\cdot)$; tuttavia, una tale scelta può rivelarsi inadeguata, poiché trascura l’incertezza associata alle stime e il potenziale informativo derivante dall’exploration di azioni meno conosciute.
+\\ \hspace*{1.5em}
+All’estremo opposto rispetto alla pura exploitation si colloca la \textbf{pura exploration}, che consiste nella selezione casuale delle azioni secondo probabilità uniformi. È evidente come nessuna di queste due strategie estreme risulti soddisfacente, rendendo necessario individuare un compromesso ragionevole tra exploration ed exploitation.  
+\\ \hspace*{1.5em}
+Una prima possibilità è rappresentata dall’approccio \textcolor{DarkViolet}{\textbf{$\varepsilon$-greedy statico}}, in cui si fissa una probabilità $\varepsilon$ e si seleziona l’azione più promettente con probabilità $1-\varepsilon$, mentre con probabilità $\varepsilon$ si sceglie un’azione casuale. In questo modo si introduce una componente esplorativa controllata, pur privilegiando le azioni che appaiono migliori sulla base delle stime correnti.  
+\\ \hspace*{1.5em}
+Un raffinamento naturale consiste nell’adottare un approccio \textcolor{DarkViolet}{\textbf{$\varepsilon$-greedy dinamico}}, in cui il parametro $\varepsilon$ viene fatto variare nel tempo, ad esempio ponendo $\varepsilon^{(k)} = \frac{c}{d+k}$ oppure $\varepsilon^{(k)} = d + \frac{c}{k}$ all’iterazione $k$. In tal modo l’exploration risulta più marcata nelle fasi iniziali dell’apprendimento e viene progressivamente ridotta man mano che le stime diventano più affidabili.  
+\\ \hspace*{1.5em}
+Un’alternativa più sofisticata è fornita dalla \textcolor{DarkViolet}{\textbf{Boltzmann exploration}}, che definisce una politica stocastica mediante una funzione soft-max, assegnando a ciascuna azione $a \in A$ una probabilità
+$$\varepsilon(a) = \dfrac{\exp\!\big(\rho\,\hat{\nu}(a)\big)}{\sum_{a' \in A} \exp\!\big(\rho\,\hat{\nu}(a')\big)}.$$
+Il parametro $\rho$ regola il compromesso tra exploration ed exploitation: per $\rho = 0$ si ottiene una scelta puramente casuale, mentre nel limite $\rho \to +\infty$ la politica converge verso una pura exploitation.
+\\ \hspace*{1.5em}
+Si osserva quindi che, per gestire il compromesso tra exploration ed exploitation, si ricorre in modo sistematico a \textbf{politiche casuali}, nelle quali la selezione delle azioni incorpora deliberatamente una componente stocastica.
 
-\subsection{Valori di stato, Q-factors e necessità di rappresentazioni compatte}
 
-\paragraph{Perché $V(s)$ non basta in RL model-free}
-Un punto chiave nel RL model-free è che, anche con una conoscenza perfetta della \textbf{value function} $V(s)$, non è possibile valutare correttamente la bontà di un’azione se mancano informazioni sulle \textbf{transizioni} verso lo stato successivo.
+\paragraph{Osservazioni sull’esempio dei multi-armed bandits}
+Dall’esempio numerico si evince come, in un problema di \textcolor{DarkViolet}{\textbf{multi-armed bandit}}, l’azione ottima in termini di valore atteso possa risultare difficile da individuare quando il numero di osservazioni è limitato. In particolare, sebbene il terzo braccio presenti il valore atteso più elevato, esso è anche caratterizzato da una variabilità significativamente maggiore rispetto agli altri.  
+\\ \hspace*{1.5em}
+A causa dell’elevata varianza, le medie campionarie calcolate su pochi campioni possono discostarsi sensibilmente dal valore atteso, producendo stime che rendono temporaneamente più attrattivi bracci subottimali. Ne consegue che, con una dimensione campionaria ridotta, è altamente probabile selezionare un’azione diversa da quella realmente ottima.  
+\\ \hspace*{1.5em}
+L’esempio mette quindi in evidenza il ruolo cruciale dell’incertezza statistica nella fase di apprendimento e mostra come una strategia basata esclusivamente sulle stime correnti possa condurre a decisioni errate. Ciò giustifica la necessità di meccanismi che favoriscano un’adeguata exploration, soprattutto nelle fasi iniziali, al fine di ridurre il rischio di convergere prematuramente verso scelte subottimali.
 
-\paragraph{Q-factors}
-Un rimedio consiste nell’introdurre i \textbf{valori stato--azione}, cioè i \textbf{Q-factors}:
-\[
-Q(s,a).
-\]
-Sostituendo i valori di stato con i valori stato--azione, diventa possibile adottare \textbf{strategie di campionamento} per apprendere una politica decisionale.  
-Si assume che lo spazio \textbf{stato--azione} non sia troppo grande e che una rappresentazione \textbf{tabellare} dei Q-factors sia fattibile; spesso, però, ciò non vale, e risulta necessaria una \textbf{rappresentazione compatta}.
+\paragraph{Non stazionarietà e smoothing esponenziale}
+Anche qualora il sistema sottostante sia stazionario, la politica utilizzata per prendere decisioni non lo è, poiché viene aggiornata progressivamente durante il processo di apprendimento. A titolo di confronto, si consideri la media campionaria utilizzata per stimare il valore atteso $\theta = \mathbb{E}[X]$ di una variabile aleatoria scalare $X$, nella quale tutte le osservazioni raccolte contribuiscono con lo stesso peso.  
+\\ \hspace*{1.5em}
+Indicando con $\hat{\theta}^{(m)}$ la stima ottenuta dopo $m$ osservazioni, si ha
+$$\hat{\theta}^{(m)} = \frac{1}{m}\sum_{k=1}^m X^{(k)} = \frac{1}{m}\left(X^{(m)} + \sum_{k=1}^{m-1} X^{(k)}\right) = \frac{1}{m}\left(X^{(m)} + (m-1)\hat{\theta}^{(m-1)}\right)$$
+$$= \frac{1}{m}X^{(m)} + \frac{m-1}{m}\hat{\theta}^{(m-1)} = \hat{\theta}^{(m-1)} + \frac{1}{m}\left(X^{(m)} - \hat{\theta}^{(m-1)}\right).$$
+Quando si osserva un nuovo dato $X^{(m)}$, la stima precedente viene quindi corretta di una quantità proporzionale all’errore di previsione, con un fattore di smoothing pari a $1/m$, che tende ad annullarsi all’aumentare di $m$.  
+\\ \hspace*{1.5em}
+In un contesto non stazionario può invece risultare opportuno mantenere costante l’entità della correzione, introducendo un coefficiente $\alpha \in (0,1)$ e ponendo
+$$\hat{\theta}^{(m)} = \hat{\theta}^{(m-1)} + \alpha\left(X^{(m)} - \hat{\theta}^{(m-1)}\right) = \alpha X^{(m)} + (1-\alpha)\hat{\theta}^{(m-1)}.$$
+Questo schema prende il nome di \textcolor{DarkViolet}{\textbf{smoothing esponenziale}}.  
+\\ \hspace*{1.5em}
+Sviluppando ricorsivamente l’espressione precedente si ottiene
+$$\hat{\theta}^{(m)} = \alpha X^{(m)} + (1-\alpha)\hat{\theta}^{(m-1)} = \alpha X^{(m)} + \alpha(1-\alpha)X^{(m-1)} + (1-\alpha)^2\hat{\theta}^{(m-2)}$$
+$$= \sum_{k=0}^{m-1}\alpha(1-\alpha)^k X^{(m-k)} + (1-\alpha)^m\hat{\theta}^{(0)},$$
+dove $\hat{\theta}^{(0)}$ è una stima iniziale. A differenza della media campionaria standard, il peso delle osservazioni passate decresce esponenzialmente. Il coefficiente $\alpha$ è noto come \textcolor{DarkViolet}{\textbf{learning rate}}, o coefficiente di smoothing, o fattore di dimenticanza.  
+\\ \hspace*{1.5em}
+Valori elevati di $\alpha$ producono aggiornamenti più reattivi ma anche più instabili, mentre valori piccoli introducono maggiore inerzia e filtraggio del rumore. Se la non stazionarietà è dovuta esclusivamente al processo di apprendimento e non a variazioni nella dinamica del sistema, è possibile considerare una sequenza decrescente di learning rate (step sizes) $\alpha^{(k)}$, da applicare al passo $k$, tale che
+$$\sum_{k=1}^{\infty} \alpha^{(k)} = \infty \quad \text{ e } \quad \sum_{k=1}^{\infty}\left[\alpha^{(k)}\right]^2 < \infty.$$
 
-\subsection{Campionamento e stima in contesti non stazionari}
+\paragraph{Learning tramite temporal differences e algoritmo SARSA}
+Si è introdotto l’operatore $\mathcal{T}_\mu$, definito come $$[\mathcal{T}_\mu \tilde V](i)=\sum_{j\in S}\pi(i,\mu(i),j)\big(h(i,\mu(i),j)+\gamma \tilde V(j)\big),$$ dove $\mu$ è una politica stazionaria e $\tilde V$ è una funzione di valore. Il valore $V_\mu$ associato alla politica $\mu$ può essere ottenuto come punto fisso dell’operatore, risolvendo l’equazione $\mathcal{T}_\mu V_\mu = V_\mu$.  
+\\ \hspace*{1.5em}
+La stessa equazione di punto fisso può essere riscritta in termini di \textcolor{DarkViolet}{\textbf{Q-factor}} associati alla politica $\mu$, ottenendo $$Q_\mu(i,\mu(i))=\mathbb{E}\!\left[h(i,\mu(i),j)+\gamma Q_\mu(j,\mu(j))\right],$$ dove l’aspettativa è presa rispetto allo stato successivo $j$. Astrattamente, il problema può essere ricondotto a un’equazione di punto fisso del tipo $y=Hy$, la cui soluzione tramite iterazione diretta $y^{(k)}=Hy^{(k-1)}$ non garantisce in generale la convergenza.  
+\\ \hspace*{1.5em}
+Anche nel caso in cui l’operatore $H$ sia una contrazione, non è possibile valutarlo esattamente poiché la distribuzione di probabilità necessaria a calcolare l’aspettativa non è nota. Si riscrive allora l’equazione come $y=y+\alpha(Hy-y)$, da cui deriva lo schema iterativo $y^{(k)}=y^{(k-1)}+\alpha\big(Hy^{(k-1)}-y^{(k-1)}\big)$, che consente di applicare uno smoothing esponenziale sostituendo le aspettative con osservazioni casuali.  
+\\ \hspace*{1.5em}
+Applicando tale schema al contesto dei processi decisionali di Markov, si consideri di trovarsi allo stato $s^{(k)}=i$ e di applicare l’azione $a^{(k)}=\mu(i)$, osservando lo stato successivo $s^{(k+1)}=j$ e il contributo immediato $h(i,\mu(i),j)$. L’adattamento dello schema porta all’aggiornamento definito dalla \textcolor{DarkViolet}{\textbf{temporal difference}} $$\Delta^{(k)} = h(i,\mu(i),j)+\gamma \hat Q_\mu^{(k-1)}(j,\mu(j))-\hat Q_\mu^{(k-1)}(i,\mu(i))$$ e dalla relazione $$\hat Q_\mu^{(k)}(i,\mu(i))=\hat Q_\mu^{(k-1)}(i,\mu(i))+\alpha\,\Delta^{(k)}.$$ Il valore atteso della temporal difference sarebbe nullo se fossero noti i veri Q-factor; in pratica, si utilizza una singola osservazione casuale e una correzione non nulla indica la necessità di aggiornare la stima corrente, con un fattore di smoothing pari al learning rate $\alpha$.  
+\\ \hspace*{1.5em}
+Poiché il metodo utilizza stime per costruire nuove stime, esso rientra nella classe dei metodi di \textcolor{DarkViolet}{\textbf{bootstrapping}}. L’algoritmo così ottenuto prende il nome di \textcolor{DarkViolet}{\textbf{SARSA}}, acronimo della sequenza (State, Action, Reward, State, Action), ed è un metodo \textcolor{DarkViolet}{\textbf{on-policy}}, poiché il comportamento dell’agente segue la politica $\mu$ di cui si vuole apprendere il valore, come avviene nella policy iteration.  
+\\ \hspace*{1.5em}
+Per rendere operativo l’algoritmo sono necessari un adeguato livello di exploration, ad esempio tramite una strategia $\varepsilon$-greedy, e l’arresto anticipato dell’apprendimento per eseguire un passo di miglioramento della politica. Questo schema prende il nome di \textcolor{DarkViolet}{\textbf{generalized (o optimistic) policy iteration}}, in quanto si assume in modo ottimistico di disporre di una valutazione sufficientemente accurata della politica corrente. Tale scelta può accelerare l’apprendimento, ma può avere effetti negativi sulla convergenza. Una volta ottenuta una stima $\hat Q_\mu(i,a)$ dei Q-factor, la politica viene aggiornata in modo greedy ponendo $$\tilde\mu(i)\in\arg\opt_{a\in A(i)}\hat Q_\mu(i,a);$$ a differenza dell’iterazione esatta, non vi è tuttavia garanzia che la nuova politica risulti effettivamente migliorata.
 
-\paragraph{Monte Carlo}
-In teoria della probabilità si è interessati al valore atteso di una funzione $h(\cdot)$ di una variabile aleatoria $X$:
-\[
-\theta=\mathbb{E}\!\left[h(X)\right]=\int_{\mathcal{X}} h(x)f_X(x)\,dx.
-\]
-Poiché l’integrazione ad alta dimensionalità è difficile, si ricorre al \textbf{campionamento Monte Carlo}:
-\[
-\hat{\theta}=\frac{1}{m}\sum_{k=1}^{m} h\!\left(X^{(k)}\right),
-\]
-che fornisce una stima \textbf{non distorta} di $\theta$.
+\paragraph{Q-learning per MDP finiti}
+Il \textcolor{DarkViolet}{\textbf{Q-learning}} è un approccio di reinforcement learning \textbf{model-free} alternativo per il trattamento di MDP finiti. Si richiamano innanzitutto le equazioni fondamentali della programmazione dinamica in termini di \textbf{Q-factor ottimi}, date da
+$$
+Q(i,a)=\sum_{j\in S}\pi(i,a,j)\Big(h(i,a,j)+\gamma \opt_{a'\in A(j)} Q(j,a')\Big), 
+\qquad i\in S,\; a\in A(i),
+$$
+e dalla relazione
+$$
+V(i)=\opt_{a\in A(i)} Q(i,a).
+$$
+A differenza del caso SARSA, in cui si considerano Q-factor associati a una politica stazionaria fissata $\mu$, in questo contesto si lavora direttamente con i fattori \textbf{ottimi}.  
+\\ \hspace*{1.5em}
+Poiché non si conoscono a priori né il contributo immediato $h(i,a,j)$ né le probabilità di transizione $\pi(i,a,j)$, tali quantità devono essere apprese tramite sperimentazione e campionamento. All’iterazione $k$, prima di selezionare l’azione $a^{(k)}$, si dispone di un insieme corrente di stime dei Q-factor, indicato con $\hat Q^{(k-1)}(i,a)$, dove l’indice $(k-1)$ segnala che le stime sono state aggiornate al passo precedente, dopo aver osservato l’effetto dell’azione $a^{(k-1)}$.  
+\\ \hspace*{1.5em}
+Trovandosi nello stato $s^{(k)}=i$, l’azione successiva viene selezionata sulla base delle stime correnti secondo una regola greedy,
+$$
+a^{(k)}\in\arg\opt_{a\in A(i)} \hat Q^{(k-1)}(i,a).
+$$
+\hspace*{1.5em}In questo senso, il Q-learning applica la stessa logica \textbf{off-policy} utilizzata nella value iteration. A differenza della policy iteration, non si valuta una politica fissata $\mu$: la politica è implicita nei Q-factor e, poiché questi vengono aggiornati continuamente, la politica cambia nel tempo; in altre parole, si utilizza una politica per apprenderne un’altra.  
+\\ \hspace*{1.5em}
+Dopo aver applicato l’azione selezionata, si osservano lo stato successivo $s^{(k+1)}=j$ e il contributo immediato $h(i,a^{(k)},j)$, oppure $f(i,a^{(k)})$ nel caso deterministico. Queste informazioni permettono di costruire una nuova osservazione di una variabile aleatoria che bilancia l’obiettivo di breve periodo e quello di lungo periodo, data da
+$$
+\hat q = h\big(i,a^{(k)},s^{(k+1)}\big)
++ \gamma \opt_{a'\in A(s^{(k+1)})} \hat Q^{(k-1)}\big(s^{(k+1)},a'\big),
+$$
+che include sia l’osservazione casuale dello stato successivo sia il valore associato a tale stato seguendo la politica implicita nelle stime dei Q-factor al passo $k-1$, ossia
+$$
+\hat V^{(k-1)}\big(s^{(k+1)}\big)
+= \opt_{a'\in A(s^{(k+1)})} \hat Q^{(k-1)}\big(s^{(k+1)},a'\big).
+$$
+\\ \hspace*{1.5em}
+Il Q-factor relativo alla coppia stato–azione $\big(s^{(k)},a^{(k)}\big)$ viene quindi aggiornato secondo la logica dello \textcolor{DarkViolet}{\textbf{smoothing esponenziale}},
+$$
+\hat Q^{(k)}\big(s^{(k)},a^{(k)}\big)
+= \alpha \hat q + (1-\alpha)\hat Q^{(k-1)}\big(s^{(k)},a^{(k)}\big),
+$$
+assumendo un coefficiente di smoothing costante $\alpha$, sebbene sia possibile considerare anche coefficienti decrescenti. La stessa idea può essere espressa in termini di \textbf{temporal difference} definendo
+$$
+\Delta^{(k)} =
+\Big[h\big(s^{(k)},a^{(k)},j\big)
++ \gamma \opt_{a'\in A(j)} \hat Q^{(k-1)}(j,a')\Big]
+- \hat Q^{(k-1)}\big(s^{(k)},a^{(k)}\big),
+$$
+e scrivendo l’aggiornamento come
+$$
+\hat Q^{(k)}(s,a)=
+\begin{cases}
+\hat Q^{(k-1)}(s,a)+\alpha\,\Delta^{(k)}, & \text{se } s=s^{(k)},\ a=a^{(k)},\\
+\hat Q^{(k-1)}(s,a), & \text{altrimenti},
+\end{cases}
+$$
+dove $j=s^{(k+1)}$ è lo stato successivo osservato.  
+\\ \hspace*{1.5em}
+La differenza tra SARSA e Q-learning emerge confrontando le correzioni introdotte nei due casi: entrambe aggiornano le stime dei valori stato–azione, ma SARSA è un metodo \textbf{on-policy}, riferito a una politica stazionaria $\mu$ fissata, mentre il Q-learning è \textbf{off-policy}, poiché la politica continua a cambiare durante il processo di apprendimento.
 
-\paragraph{Complicazioni negli MDP}
-Negli MDP si vogliono stimare \textbf{valori di stato} $V(i)$ o \textbf{Q-factors} $Q(i,a)$. In questo contesto l’apprendimento statistico deve affrontare:
-\begin{itemize}[label=-]
-\item il bilanciamento tra \textbf{esplorazione} ed \textbf{exploitation};
-\item la difficoltà di stimare un \textbf{target non stazionario}.
-\end{itemize}
+\paragraph{Implementazione MATLAB del Q-learning}
+Una possibile implementazione del Q-learning in ambiente MATLAB è riportata nel codice mostrato, che traduce operativamente lo schema teorico discusso in precedenza. La funzione \textcolor{DarkViolet}{\texttt{QLearning}} restituisce i Q-factor appresi, la politica stazionaria associata e una matrice che conta le visite delle coppie stato--azione, permettendo di monitorare il processo di apprendimento.  
+\\ \hspace*{1.5em}
+L’algoritmo interagisce con il sistema dinamico tramite un oggetto \texttt{systemObj}, che fornisce il contributo immediato e lo stato successivo in risposta a un’azione selezionata. A ogni iterazione l’azione viene scelta sulla base delle stime correnti dei Q-factor, con la possibilità di introdurre exploration mediante una strategia \textcolor{DarkViolet}{\textbf{$\varepsilon$-greedy}}.  
+\\ \hspace*{1.5em}
+Dopo l’osservazione della transizione, il Q-factor corrispondente viene aggiornato tramite uno schema di \textbf{smoothing esponenziale}, combinando la nuova informazione con la stima precedente mediante il learning rate $\alpha$. Al termine dell’apprendimento, la politica viene ricavata in modo greedy dai Q-factor, fornendo una realizzazione compatta e coerente dell’approccio \textbf{off-policy} del Q-learning per MDP finiti.
 
-\subsection{Il tradeoff esplorazione--exploitation}
+\paragraph{Definizione MATLAB di una classe di sistema generica}
+Poiché il Q-learning è un approccio \textbf{model-free}, è necessario mantenere separato l’algoritmo di apprendimento dalla simulazione del sistema dinamico. Tale separazione è ottenuta tramite la classe MATLAB \textcolor{DarkViolet}{\texttt{systemClass}}, che funge da interfaccia tra il Q-learner e il sistema da controllare, incapsulando stati, azioni ammissibili, probabilità di transizione e contributi immediati.  
+\\ \hspace*{1.5em}
+Il metodo centrale della classe è \texttt{getNext}, che, dato lo stato corrente e un’azione selezionata, restituisce il contributo immediato e lo stato successivo campionato secondo le probabilità di transizione, aggiornando lo stato interno dell’oggetto. In questo schema il contributo è associato alla coppia stato–azione, assumendo che sia deterministico oppure noto in valore atteso.  
+\\ \hspace*{1.5em}
+La struttura proposta fornisce un’interfaccia minimale ma sufficiente per l’integrazione con il Q-learning; in un’implementazione orientata agli oggetti più rigorosa, la classe dovrebbe essere astratta e limitarsi a definire l’interfaccia, demandando a classi derivate l’implementazione delle dinamiche specifiche.
 
-\paragraph{Scelta dell’azione durante l’apprendimento}
-Se si sta imparando $Q(i,a)$ e ci si trova nello stato $i$, una strategia di pura \textbf{exploitation} sceglierebbe l’azione che massimizza le stime correnti.  
-Questa scelta è sensata solo quando le stime dei valori delle azioni sono sufficientemente accurate, condizione che tipicamente non vale all’inizio. Un’azione può apparire non buona perché:
-\begin{itemize}[label=-]
-\item il contributo immediato è stato stimato male;
-\item conduce a uno stato molto buono che non è ancora stato esplorato.
-\end{itemize}
-Da qui nasce il problema fondamentale di bilanciare \textbf{exploitation} ed \textbf{esplorazione}.
+\paragraph{Esempio numerico}
+Dall’esempio numerico si evince che il comportamento del Q-learning dipende in modo critico sia dall’inizializzazione dei Q-factor sia dalla scelta del learning rate e della strategia di exploration. In condizioni favorevoli, con un’inizializzazione ragionevole e un numero sufficiente di iterazioni, le stime dei valori stato--azione risultano coerenti con i valori ottimi ottenuti tramite value iteration e sono sufficientemente accurate da indurre la politica ottima, anche quando alcune stime restano imprecise a causa di visite rare di certi stati. Tuttavia, inizializzazioni sfavorevoli possono portare a politiche subottimali persistenti, poiché azioni inizialmente penalizzate non vengono mai esplorate e i corrispondenti Q-factor non vengono aggiornati. Un aumento del learning rate può in parte mitigare il problema accelerando l’apprendimento, ma non è sufficiente quando l’esplorazione è completamente assente. L’esempio mostra infatti che, in mancanza di exploration, il Q-learning può rimanere intrappolato in politiche errate indipendentemente dal numero di iterazioni. L’introduzione di una strategia $\varepsilon$-greedy consente di superare tali difficoltà, garantendo che tutte le azioni vengano esplorate e permettendo il recupero della politica ottima anche a partire da inizializzazioni sfavorevoli, al prezzo però di un aumento significativo dello sforzo computazionale. Quindi, \emph{l’esempio evidenzia il ruolo centrale del compromesso tra exploration ed exploitation per l’efficacia pratica del Q-learning}.
 
-\paragraph{Problema statico semplificato}
-Si consideri un insieme finito $A$ di azioni, ciascuna associata a una ricompensa casuale $R(a)$. Se fossero noti i valori attesi $\nu(a)$, un decisore neutrale al rischio sceglierebbe l’azione con valore atteso massimo. Se invece si hanno solo stime rumorose $\hat{\nu}(a)$, la pura exploitation (massimizzare $\hat{\nu}$) può essere una strategia inadeguata.
-
-\subsection{Multi-armed bandits}
-
-\paragraph{Idea}
-Un classico esempio è il \textbf{multi-armed bandit}: una slot machine con bracci diversi, associati a differenti distribuzioni di payoff.  
-Con pochi campioni è facile mancare l’azione ottima, soprattutto quando l’azione con valore atteso più alto presenta anche una varianza elevata.
-
-\subsection{Politiche randomizzate per l’esplorazione}
-
-\paragraph{Compromesso tra estremi}
-All’estremo opposto della pura exploitation, la pura esplorazione seleziona azioni a caso con probabilità uniformi. Occorre un compromesso, che porta a \textbf{politiche randomizzate}.
-
-\paragraph{Approccio $\varepsilon$-greedy}
-\textbf{Versione statica}: fissata una probabilità $\varepsilon$,
-con probabilità $1-\varepsilon$ si seleziona l’azione più promettente, e con probabilità $\varepsilon$ si seleziona un’azione casuale.
-
-\textbf{Versione dinamica}: una possibile raffinazione è rendere $\varepsilon$ dipendente dal tempo, ad esempio:
-\[
-\varepsilon(k)=\frac{c}{d+k},
-\qquad \text{oppure} \qquad
-\varepsilon(k)=d+\frac{c}{k}.
-\]
-
-\paragraph{Esplorazione di Boltzmann}
-L’esplorazione può essere realizzata tramite una funzione soft-max che definisce la probabilità di scegliere l’azione $a\in A$:
-\[
-\pi(a)=\frac{\exp\!\big(\rho\,\hat{\nu}(a)\big)}{\sum_{a'\in A}\exp\!\big(\rho\,\hat{\nu}(a')\big)}.
-\]
-Quando $\rho=0$ si ha \textbf{pura esplorazione}, mentre per $\rho\to +\infty$ si tende alla \textbf{pura exploitation}.
-
-\subsection{Non stazionarietà e smoothing esponenziale}
-
-\paragraph{Media campionaria e aggiornamento incrementale}
-Per stimare $\theta=\mathbb{E}[X]$ si usa la media campionaria, che soddisfa:
-\[
-\hat{\theta}(m)
-=
-\hat{\theta}(m-1)+\frac{1}{m}\Big(X(m)-\hat{\theta}(m-1)\Big).
-\]
-La correzione è smussata da $1/m$, che tende a zero all’aumentare di $m$.
-
-\paragraph{Passo costante in contesti non stazionari}
-In un contesto non stazionario si può mantenere costante la correzione:
-\[
-\boxed{
-\hat{\theta}(m)=\hat{\theta}(m-1)+\alpha\Big(X(m)-\hat{\theta}(m-1)\Big)
-=\alpha X(m)+(1-\alpha)\hat{\theta}(m-1)
-}
-\]
-dove $\alpha\in(0,1)$ pesa nuova informazione e informazione passata.
-
-\paragraph{Smoothing esponenziale e ruolo di $\alpha$}
-Questa procedura è nota come \textbf{smoothing esponenziale}: le osservazioni più vecchie ricevono pesi \textbf{esponenzialmente decrescenti}.  
-Il coefficiente $\alpha$ è detto \textbf{learning rate}, \textbf{smoothing coefficient} o \textbf{forgetting factor}.  
-Un $\alpha$ grande produce aggiornamenti più reattivi e ``nervosi''; un $\alpha$ piccolo introduce più inerzia e filtraggio del rumore.
-
-\paragraph{Learning rate decrescente}
-Se la non stazionarietà è dovuta solo all’apprendimento (e non a variazioni della dinamica del sistema), si può usare una sequenza decrescente $\alpha(k)$ che soddisfa condizioni del tipo:
-\[
-\boxed{
-\sum_{k=1}^{\infty}\alpha(k)=\infty,
-\qquad
-\sum_{k=1}^{\infty}\alpha(k)^2<\infty.
-}
-\]
-
-\subsection{Apprendimento tramite differenze temporali e SARSA}
-
-\paragraph{Operatore $T_\mu$ e punto fisso}
-Si introduce l’operatore $T_\mu$:
-\[
-[T_\mu \tilde V](i)
-=
-\sum_{j\in S}\pi(i;\mu(i);j)\Big(h(i;\mu(i);j)+\gamma \tilde V(j)\Big),
-\qquad i\in S,
-\]
-dove $\mu$ è una \textbf{politica stazionaria} e $\tilde V$ è una value function.  
-Il valore $V_\mu$ della politica $\mu$ si ottiene trovando il \textbf{punto fisso} di $T_\mu$:
-\[
-T_\mu V_\mu = V_\mu.
-\]
-
-\paragraph{Punto fisso in termini di Q-factors della politica}
-La stessa idea può essere riscritta in termini dei \textbf{Q-factors} associati alla politica stazionaria $\mu$:
-\[
-Q_\mu\big(i;\mu(i)\big)
-=
-\mathbb{E}\Big[
-h\big(i;\mu(i);j\big)+\gamma Q_\mu\big(j;\mu(j)\big)
-\Big],
-\]
-dove l’aspettativa è rispetto allo \textbf{stato successivo} $j$.
-
-\subsection{Schema di punto fisso, smoothing e differenze temporali}
-
-\paragraph{Riformulazione astratta}
-Si consideri un’equazione di punto fisso:
-\[
-y = Hy,
-\]
-dove $y$ è un vettore e $H$ è un operatore.  
-L’iterazione diretta $y^{(k)}=Hy^{(k-1)}$ non garantisce convergenza in generale e, inoltre, in pratica $H$ non è valutabile esattamente perché richiede aspettative non note.
-
-\paragraph{Schema incrementale con learning rate}
-L’equazione può essere riscritta come:
-\[
-y = y + \alpha(Hy-y),
-\]
-da cui lo schema iterativo:
-\[
-y^{(k)}=y^{(k-1)}+\alpha\big(Hy^{(k-1)}-y^{(k-1)}\big).
-\]
-
-\paragraph{Sostituzione dell’aspettativa con osservazioni}
-Applicando \textbf{smoothing esponenziale} e sostituendo l’aspettativa con osservazioni campionate, si ottiene lo schema tipico dell’apprendimento statistico.
-
-\paragraph{Differenza temporale e aggiornamento (SARSA)}
-Quando si osserva una transizione da $i=s(k)$ a $j=s(k+1)$ applicando l’azione prescritta dalla politica $\mu$, la \textbf{differenza temporale} è:
-\[
-\boxed{
-\delta(k)=\Big[h\big(i;\mu(i);j\big)+\gamma \hat Q_\mu^{(k-1)}\big(j;\mu(j)\big)\Big]
--\hat Q_\mu^{(k-1)}\big(i;\mu(i)\big)
-}
-\]
-e l’aggiornamento dei Q-factors è:
-\[
-\boxed{
-\hat Q_\mu^{(k)}\big(i;\mu(i)\big)=\hat Q_\mu^{(k-1)}\big(i;\mu(i)\big)+\alpha\,\delta(k).
-}
-\]
-La differenza temporale svolge il ruolo della correzione $Hy-y$.  
-Poiché si usano stime per ottenere nuove stime, il termine \textbf{bootstrapping} descrive questo tipo di procedura.
-
-\paragraph{Significato di SARSA e natura on-policy}
-L’algoritmo è noto come \textbf{SARSA} perché utilizza la sequenza
-\textbf{(State, Action, Reward, State, Action)}: si osserva lo stato $i$, si seleziona l’azione $\mu(i)$, si osservano il reward e il nuovo stato $j$, e si considera l’azione $\mu(j)$ nel nuovo stato.  
-SARSA è un approccio \textbf{on-policy}: si agisce secondo una politica e si apprende il valore di quella stessa politica, come richiesto nella \textbf{policy iteration}.
-
-\paragraph{Esplorazione e policy iteration generalizzata (ottimistica)}
-Servono due ingredienti:
-\begin{itemize}[label=-]
-\item una quantità adeguata di \textbf{esplorazione}, ad esempio tramite \textbf{$\varepsilon$-greedy} (con probabilità $\varepsilon(k)$ si devia dalla politica e si seleziona un’azione casuale);
-\item l’interruzione dell’apprendimento prima della valutazione esatta della politica, seguita da un passo di \textbf{miglioramento} della politica.
-\end{itemize}
-Questo schema è detto \textbf{generalized} o \textbf{optimistic policy iteration}: si assume ottimisticamente che la politica corrente sia stata valutata con accuratezza sufficiente. Ciò può accelerare l’apprendimento, ma può essere dannoso per la convergenza.
-
-\paragraph{Miglioramento greedy della politica}
-Quando si dispone di un’approssimazione $\hat Q_\mu(i;a)$, si tenta di migliorare la politica con una scelta greedy:
-\[
-\boxed{
-\tilde\mu(i)\in \arg\opt_{a\in A(i)} \hat Q_\mu(i;a),
-\qquad i\in S.
-}
-\]
-A differenza dell’iterazione esatta, non vi è garanzia che $\tilde\mu$ sia effettivamente migliorativa.
-
-\subsection{Q-learning per MDP finiti}
-
-\paragraph{Equazioni per i Q-factors ottimali}
-Nel Q-learning si considera direttamente la forma DP basata sui \textbf{Q-factors ottimali}:
-\[
-Q(i;a)
-=
-\sum_{j\in S}\pi(i;a;j)\Big[h(i;a;j)+\gamma \opt_{a'\in A(j)}Q(j;a')\Big],
-\qquad i\in S,\ a\in A(i),
-\]
-\[
-V(i)=\opt_{a\in A(i)}Q(i;a).
-\]
-A differenza di SARSA, qui non si valuta una politica fissata $\mu$, ma si mira ai fattori ottimali.
-
-\paragraph{Logica off-policy e scelta dell’azione}
-In Q-learning la politica è \textbf{implicita} nei Q-factors: aggiornandoli continuamente, si continua a cambiare politica; in un certo senso, si usa una politica per impararne un’altra.  
-Al passo $k$, nello stato $s(k)=i$, la scelta greedy è:
-\[
-a(k)\in \arg\opt_{a\in A(i)}\hat Q^{(k-1)}(i;a).
-\]
-
-\paragraph{Target campionato e aggiornamento con smoothing}
-Dopo l’azione si osservano lo stato successivo $j=s(k+1)$ e il contributo immediato.  
-Si costruisce un target campionato che bilancia breve e lungo periodo:
-\[
-\tilde q
-=
-h\big(i;a(k);j\big)+\gamma \opt_{a'\in A(j)}\hat Q^{(k-1)}(j;a').
-\]
-L’aggiornamento tramite smoothing esponenziale è:
-\[
-\boxed{
-\hat Q^{(k)}\big(s(k);a(k)\big)
-=
-\alpha \tilde q + (1-\alpha)\hat Q^{(k-1)}\big(s(k);a(k)\big).
-}
-\]
-
-\paragraph{Forma a differenze temporali}
-La correzione può essere scritta come differenza temporale:
-\[
-\delta(k)
-=
-\Big[h\big(s(k);a(k);j\big)+\gamma \opt_{a'\in A(j)}\hat Q^{(k-1)}(j;a')\Big]
--\hat Q^{(k-1)}\big(s(k);a(k)\big),
-\]
-e l’aggiornamento riguarda solo la coppia stato--azione osservata.
-
-\paragraph{Confronto SARSA vs Q-learning}
-La differenza si coglie confrontando le correzioni:
-\begin{itemize}[label=-]
-\item \textbf{SARSA} è \textbf{on-policy} e riferito a una politica stazionaria incumbente $\mu$;
-\item \textbf{Q-learning} è \textbf{off-policy} e la politica cambia mentre si aggiornano i Q-factors.
-\end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PDF 12 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \vspace{-1cm}
