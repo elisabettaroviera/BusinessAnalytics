@@ -5225,7 +5225,6 @@ Infine, si presenta la \textbf{maledizione della modellazione}. Il sistema può 
 \vspace{-1cm}
 \textcolor{DeepPink}{\section{CAP 9 -- Modelli per la programmazione dinamica}}
 
-\paragraph{Recap} MANCA
 
 \subsection{Principio di modellazione per la programmazione dinamica}
 \paragraph{Idea generale della programmazione dinamica}
@@ -5334,11 +5333,9 @@ Q(i,a)= f(i,a)+\gamma \sum_{j\in S}\pi(i,a,j)\left[\operatorname{opt}_{\tilde a\
 Confrontando le equazioni, emergono sia aspetti negativi sia aspetti positivi. Lo \textbf{svantaggio principale} è che,
 al posto della funzione valore sugli stati \(V(i)\), si introducono ora funzioni valore \textbf{stato--azione}
 \(Q(i,a)\); salvo casi di dimensione molto ridotta, ciò sembra aggravare ulteriormente la \textbf{curse of dimensionality}.
-Il \textbf{vantaggio fondamentale} è però lo \textbf{scambio tra aspettazione e ottimizzazione}. Questo aspetto risulta particolarmente rilevante nei problemi continui, nei quali è spesso più semplice risolvere molti problemi di ottimizzazione deterministici di piccole dimensioni piuttosto che un unico grande problema stocastico. Inoltre, i Q-factors possono essere \textbf{appresi tramite campionamento statistico}, caratteristica cruciale sia nei problemi di grande scala sia quando la dinamica sottostante è sconosciuta; ciò apre la strada alla \textbf{programmazione dinamica model-free}. Infine, quando la dimensionalità rende impossibile determinare esplicitamente tutti i Q-factors per ogni coppia stato--azione, è possibile ricorrere a una \textbf{rappresentazione compatta} basata su un’\textbf{architettura di approssimazione}, che può spaziare da una regressione lineare relativamente semplice fino alle \textbf{reti neurali profonde}.
+Il \textbf{vantaggio fondamentale} è però lo \textbf{scambio tra attesa e ottimizzazione}. Questo aspetto risulta particolarmente rilevante nei problemi continui, nei quali è spesso più semplice risolvere molti problemi di ottimizzazione deterministici di piccole dimensioni piuttosto che un unico grande problema stocastico. Inoltre, i Q-factors possono essere \textbf{appresi tramite campionamento statistico}, caratteristica cruciale sia nei problemi di grande scala sia quando la dinamica sottostante è sconosciuta; ciò apre la strada alla \textbf{programmazione dinamica model-free}. Infine, quando la dimensionalità rende impossibile determinare esplicitamente tutti i Q-factors per ogni coppia stato--azione, è possibile ricorrere a una \textbf{rappresentazione compatta} basata su un’\textbf{architettura di approssimazione}, che può spaziare da una regressione lineare relativamente semplice fino alle \textbf{reti neurali profonde}.
 
-\subsection{Diverse forme di DP stocastica}
-
-\paragraph{Ricorsione DP di base}
+\paragraph{Diverse forme di DP stocastica}
 Si consideri nuovamente la \emph{ricorsione di DP}
 \[
 V_t(s_t) = \operatorname{opt}_{x_t \in X(s_t)}
@@ -5346,40 +5343,36 @@ V_t(s_t) = \operatorname{opt}_{x_t \in X(s_t)}
 f_t(s_t, x_t) + \gamma \,\mathbb{E}\!\left[\,V_{t+1}(s_{t+1}) \mid s_t, x_t \right]
 \right\}.
 \]
-
-\paragraph{Ipotesi sottostanti}
-Si osserva lo stato $s_t$ all'istante $t$; si prende una decisione ammissibile $x_t\in X(s_t)$; si osserva un contributo immediato $f_t(s_t,x_t)$; si passa a un nuovo stato $s_{t+1}$ che dipende dai fattori di rischio realizzati $\xi_{t+1}$, secondo una distribuzione che può dipendere da $s_t$ e $x_t$.
+Si osserva lo stato $s_t$ all'istante $t$, si prende una decisione ammissibile $x_t\in X(s_t)$, si osserva un contributo immediato $f_t(s_t,x_t)$, si passa a un nuovo stato $s_{t+1}$ che dipende dai fattori di rischio realizzati $\xi_{t+1}$, secondo una distribuzione che può dipendere da $s_t$ e $x_t$.
 \\ \hspace*{1.5em}
 Per determinare $V_t(\cdot)$ a partire da $V_{t+1}(\cdot)$ si dovrebbe risolvere un problema di \textcolor{DeepPink}{\textbf{ottimizzazione stocastica}} che può includere un'attesa impegnativa; nei MDP i Q-factors consentono di scambiare ottimizzazione e attesa, e talvolta lo scambio è richiesto dalla struttura informativa.
 
 \paragraph{Esempio: lot-sizing con lookahead limitato}
-Dall’esempio si evince che, quando la domanda del periodo successivo è nota al momento della decisione, il contributo immediato diventa deterministico e la ricorsione di programmazione dinamica assume una forma in cui l’ottimizzazione è interna all’aspettazione. La struttura della ricorsione riflette quindi direttamente l’ordine temporale tra informazione, decisione e dinamica del sistema.
+Dall’esempio si evince che, quando la domanda del periodo successivo è nota al momento della decisione, il contributo immediato diventa deterministico e la ricorsione di programmazione dinamica assume una forma in cui l’ottimizzazione è interna all’attesa. La struttura della ricorsione riflette quindi direttamente l’ordine temporale tra informazione, decisione e dinamica del sistema.
 
-\subsection{Variabili di stato post-decisione}
-
-\paragraph{Ricorsione in forma scambiata}
-Una forma alternativa è:
+\paragraph{Variabili di stato post-decisione}
+Una \emph{forma alternativa} è
 \[
 V_t(s_t)= \mathbb{E}_t\!\left[\operatorname{opt}_{x_t\in X(s_t)}\left\{f_t(x_t,s_t)+\gamma V_{t+1}(s_{t+1})\right\}\right].
 \]
+\hspace*{1.5em}
+Il \textbf{problema di ottimizzazione} interno è deterministico e l'attesa esterna può essere stimata tramite campionamento statistico.
+Poiché si tratta di vantaggi rilevanti, si può tentare di \textbf{riformulare la ricorsione standard di programmazione dinamica} in questa forma, anche quando essa non rappresenta la formulazione più naturale del problema. In alcuni casi, ciò può essere ottenuto riscrivendo la \textbf{dinamica del sistema} tramite l’introduzione di \textbf{variabili di stato post-decisione}.
+Nella rappresentazione consueta della dinamica di un sistema, si considerano transizioni dallo stato \(s_t\) allo stato \(s_{t+1}\), che dipendono dalla decisione selezionata \(x_t\) e dalla realizzazione del \textbf{fattore di rischio} \(\xi_{t+1}\). In alcune situazioni, risulta tuttavia conveniente introdurre uno \textbf{stato intermedio}, osservato dopo che la decisione \(x_t\) è stata presa ma prima che il fattore di rischio \(\xi_{t+1}\) si realizzi. Tale stato prende il nome di \textcolor{DeepPink}{\textbf{stato post-decisione}} e può essere indicato con \(s_t^x\).
 
-\paragraph{Vantaggi potenziali}
-Il problema di ottimizzazione interno è deterministico e l'attesa esterna può essere stimata tramite campionamento statistico.
-
-\paragraph{Introduzione dello stato post-decisione}
-Si introduce uno stato intermedio osservato dopo la decisione $x_t$ ma prima della realizzazione di $\xi_{t+1}$, detto \textcolor{DeepPink}{\textbf{stato post-decisione}} $s_t^x$. Si scinde la transizione in due passi: $s_t^x = g_t^{(1)}(s_t,x_t)$, $s_{t+1}= g_{t+1}^{(2)}(s_t^x,\xi_{t+1})$.
+\paragraph{Esempio}
+Dall’esempio si evince che l’introduzione dello \textbf{stato post-decisione} permette di separare la componente deterministica della decisione da quella stocastica legata al fattore di rischio. In questo modo, l’incertezza viene assorbita in un’\textbf{attesa priva di decisioni}, mentre l’ottimizzazione diventa \textbf{deterministica}. La ricorsione di programmazione dinamica assume quindi una forma con \textbf{scambio tra attesa e ottimizzazione}, che facilita sia l’analisi sia l’approssimazione numerica.
 
 \paragraph{Relazione tra funzioni valore}
-Si definisce il valore del post-decision state $V_t^x(s_t^x)$ e vale $V_t^x(s_t^x)= \mathbb{E}\!\left[\,V_{t+1}(s_{t+1}) \mid s_t^x\right]$. Quindi la ricorsione standard può essere riscritta come ottimizzazione deterministica:
+Si definisce il valore del post-decision state $V_t(s_t)$ e $V_t^x(s_t^x)$: $V_t^x(s_t^x)= \mathbb{E}\!\left[\,V_{t+1}(s_{t+1}) \mid s_t^x\right]$. Quindi la \textbf{ricorsione standard} può essere riscritta come \textbf{ottimizzazione deterministica}
 \[
 V_t(s_t)= \operatorname{opt}_{x_t\in X(s_t)}\left\{f_t(s_t,x_t)+\gamma V_t^x(s_t^x)\right\}.
 \]
-
-\paragraph{Passo all'indietro e nuovo scambio}
-Scrivendo la relazione un passo indietro e sostituendo l'espressione precedente, si ottiene una ricorsione che presenta nuovamente lo scambio tra attesa e ottimizzazione:
+\hspace*{1.5em}
+Scrivendo la relazione un passo indietro e sostituendo l'espressione precedente, si ottiene una ricorsione che presenta nuovamente lo \textcolor{DeepPink}{\textbf{scambio tra attesa e ottimizzazione}}
 \[
 V_{t-1}^x(s_{t-1}^x)
-=
+= \mathbb{E}\left[ V_t(s_t) \Bigm| s_{t-1}^x \right] =
 \mathbb{E}\!\left[
 \operatorname{opt}_{x_t\in X(s_t)}
 \left(
@@ -5388,156 +5381,161 @@ f_t(s_t,x_t)+\gamma V_t^x(s_t^x)
 \Bigm| s_{t-1}^x
 \right].
 \]
+\hspace*{1.5em}
+Trascurando lo slittamento temporale privo di conseguenze, si ottiene nuovamente una ricorsione di programmazione dinamica caratterizzata dallo \textbf{scambio tra attesa e ottimizzazione}. La ricorsione di DP formulata in termini di \textbf{Q-factors} si inserisce naturalmente in questo quadro, poiché la coppia \textbf{stato--azione} \((i,a)\) può essere interpretata come uno \textbf{stato post-decisione}, prima dell’osservazione della transizione casuale verso il nuovo stato.
 
-\paragraph{Connessione con i Q-factors}
-La coppia stato–azione $(i,a)$ può essere interpretata come stato post-decisione prima di osservare la transizione casuale al nuovo stato; la formulazione in termini di Q-factors si inserisce naturalmente in questo quadro.
+\paragraph{Aumento dello stato nella gestione delle scorte}
+Nel contesto della gestione delle scorte, l’inventario \textbf{on-hand} appare come la variabile di stato naturale e come la base più immediata per qualsiasi decisione di riordino. Al contrario, le decisioni di ordinazione non dovrebbero essere basate sull’inventario on-hand, bensì sull’\textbf{inventario disponibile}, che tiene conto sia dell’inventario \textbf{on-order} (articoli ordinati al fornitore ma non ancora consegnati) sia dell’eventuale \textbf{backlog}.
+\\ \hspace*{1.5em}
+L’equazione di stato standard
+\(
+I_{t+1} = I_t + x_t - d_{t+1},
+\)
+assume che quanto ordinato all’istante di tempo \(t\) sia immediatamente disponibile per soddisfare la domanda durante l’intervallo di tempo successivo \(t+1\).
+\\ \hspace*{1.5em}
+Se il \textbf{lead time} di consegna è un numero intero \(LT \ge 1\) di intervalli di tempo, è necessario introdurre variabili di stato che tengano traccia di ciò che è stato ordinato in passato e si trova ancora nella pipeline di trasporto.
+\\ \hspace*{1.5em}
+Si denotino tali variabili di stato con \(z_{t,\tau}\), che rappresentano la quantità che verrà consegnata \(\tau\) intervalli di tempo dopo l’istante corrente \(t\), dove \(\tau = 0,1,2,\dots,LT-1\). In particolare, \(z_{t,0}\) rappresenta ciò che è immediatamente disponibile all’istante di tempo \(t\) ed è coinvolto nell’equazione di transizione dell’inventario on-hand:
+\(
+I_{t+1} = I_t + z_{t,0} - d_{t+1},
+\)
+se si trascura l’incertezza sulla domanda.
+\\ \hspace*{1.5em}
+Ciò che viene ordinato all’istante di tempo \(t\), rappresentato dalla variabile decisionale \(x_t\), sarà disponibile dopo \(LT\) intervalli di tempo. Pertanto, all’istante di tempo successivo \(t+1\), la quantità \(x_t\) si troverà a \(LT-1\) intervalli di tempo dalla consegna. Si può quindi collegare la decisione \(x_t\) alla variabile di stato aggiuntiva corrispondente a \(\tau = LT-1\) come segue:
+\(
+z_{t+1,LT-1} = x_t.
+\)
+\hspace*{1.5em}L’equazione di transizione generale per le variabili di stato aggiuntive \(z_{t,\tau}\), per \(\tau < LT-1\), si riduce a un semplice \textcolor{DeepPink}{\textbf{shift temporale}}
+\[
+z_{t+1,\tau} = z_{t,\tau+1},
+\qquad \tau = 0,1,\dots,LT-2.
+\]
+\hspace*{1.5em}
+In modo analogo, nel caso di articoli \textbf{deperibili} è necessario descrivere l’inventario a ciascuna età, introducendo un array di variabili di stato \(I_{t,\tau}\) che rappresentano la quantità di inventario on-hand al tempo \(t\) con un’età pari a \(\tau\) periodi di tempo.
+Le transizioni di stato non sono immediate da scrivere in forma esplicita e dipendono dal tipo di politica di issuing adottata, \textbf{FIFO} (\emph{first-in-first-out}) oppure \textbf{LIFO} (\emph{last-in-first-out}).
 
-\subsection{Aumento dello stato nella gestione delle scorte}
-
-\paragraph{Inventario on-hand vs inventario disponibile}
-L'\textcolor{DeepPink}{\textbf{inventario on-hand}} appare naturale come variabile di stato, ma le decisioni d'ordine dovrebbero basarsi sull'\textcolor{DeepPink}{\textbf{inventario disponibile}}, che include on-order e backlog.
-
-\paragraph{Limite dell'equazione di stato standard}
-L'equazione $I_{t+1}= I_t + x_t - d_{t+1}$ assume disponibilità immediata di quanto ordinato al tempo $t$.
-
-\paragraph{Lead time e variabili di pipeline}
-Se il \textcolor{DeepPink}{\textbf{lead time}} è un intero $LT\ge 1$, si introducono variabili $z_{t,\tau}$ (pipeline), con $\tau=0,1,\dots,LT-1$. Vale $I_{t+1}= I_t + z_{t,0} - d_{t+1}$ (trascurando l'incertezza) e la decisione $x_t$ entra come $z_{t+1,LT-1}= x_t$. Per $\tau<LT-1$, le transizioni sono uno shift temporale: $z_{t+1,\tau}= z_{t,\tau+1}$, $\tau=0,1,\dots,LT-2$.
-
-\paragraph{Items deperibili e stato per età}
-Per prodotti deperibili si introduce un array $I_{t,\tau}$ che descrive l'inventario per età; le transizioni dipendono dalla politica di issuing FIFO o LIFO.
-
-\subsection{Revenue management}
-
-\paragraph{Definizione e obiettivo}
-Il \textcolor{DeepPink}{\textbf{revenue management}} consiste in modelli e tecniche per massimizzare il ricavo ottenuto vendendo risorse deperibili; l'idea nasce (come \textcolor{DeepPink}{\textbf{yield management}}) nell'industria aerea.
-
-\paragraph{Approcci quantity-based e price-based}
-Esistono due approcci: \textcolor{DeepPink}{\textbf{quantity-based}} (si limita la disponibilità della risorsa per massimizzare il ricavo) e \textcolor{DeepPink}{\textbf{price-based}} (si aggiustano dinamicamente i prezzi, dynamic pricing). Si considerano modelli DP quantity-based assumendo costo marginale nullo o trascurabile, così che massimizzare il profitto equivale a massimizzare il ricavo.
-
-\paragraph{Classi tariffarie e prezzi}
-Si considerino $C$ unità di risorsa da allocare a $n$ classi $j=1,\dots,n$, vendute a prezzi $p_j$ con $p_1 > p_2 > \cdots > p_n$. I posti sono fisicamente identici, ma differenziati tramite ancillaries (cancellazione, vincoli, pasti, ecc.).
-
-\paragraph{Caratteristiche essenziali}
-La domanda $D_j$ è casuale e può realizzarsi con schemi diversi. Due aspetti sono essenziali: \textcolor{DeepPink}{\textbf{comportamento dei clienti}} (segmentazione perfetta vs preferenze da modellare con un choice model) e \textcolor{DeepPink}{\textbf{timing della domanda}} (sequentialità auspicabile; caso peggiore quando arrivano prima i clienti low-budget).
-
-\paragraph{Modelli statici e dinamici; protection levels e bid-prices}
-Un modello con intervalli disgiunti, ciascuno dedicato a una sola classe, è statico; se le richieste sono interleaved nel tempo è dinamico. La policy si esprime tramite \textcolor{DeepPink}{\textbf{protection levels}} oppure \textcolor{DeepPink}{\textbf{bid-prices}} (prezzo minimo accettabile per vendere un posto).
+\paragraph{Revenue management}
+Il \textcolor{DeepPink}{\textbf{revenue management}} consiste in una serie di modelli e tecniche finalizzate a massimizzare il \textbf{ricavo} ottenuto dalla vendita di \textbf{risorse deperibili}. L’\emph{idea} è stata introdotta, con il nome di \textcolor{DeepPink}{\emph{yield management}}, nell’industria del trasporto aereo.
+\\ \hspace*{1.5em}
+Si distinguono due approcci fondamentali al revenue management: l’approccio \textbf{quantity-based} e l’approccio \textbf{price-based}. Nel primo caso, la disponibilità della risorsa viene limitata secondo una certa politica al fine di massimizzare il ricavo; nel secondo caso, i prezzi vengono aggiustati dinamicamente e si parla di \textbf{dynamic pricing}.
+\\ \hspace*{1.5em}
+Si considerano modelli di programmazione dinamica semplici per il revenue management quantity-based, assumendo che il costo marginale di ciascuna unità di risorsa sia nullo o trascurabile, così che la massimizzazione del profitto si riduca alla massimizzazione del ricavo.
+\\ \hspace*{1.5em}
+Si considerino \(C\) unità di una singola risorsa, ad esempio posti su un aeromobile, che devono essere allocate a \(n\) classi tariffarie, indicizzate da \(j = 1,2,\dots,n\). Le unità della classe \(j\) sono vendute al prezzo \(p_j\), con
+\(
+p_1 > p_2 > \dots > p_n,
+\)
+così che la classe 1 corrisponde alla classe dalla quale si ottiene il ricavo più elevato.
+\\ \hspace*{1.5em}
+Si assume che i posti allocati alle diverse classi siano fisicamente \textbf{identici}, ma vengano differenziati mediante \textbf{servizi accessori} (\emph{ancillaries}), come diritti di cancellazione, restrizioni sul weekend o servizi a bordo, così da offrire pacchetti differenti.
+\\ \hspace*{1.5em}
+Il prezzo di ciascuna classe è fissato, mentre il controllo avviene sulla \textbf{disponibilità di inventario}, limitando il numero di posti offerti a ciascuna classe. La domanda \(D_j\) di ciascuna classe è aleatoria e può realizzarsi secondo schemi differenti, dando luogo a formulazioni di problema diverse.
+\\ \hspace*{1.5em}
+Due sono le caratteristiche essenziali considerate. La prima riguarda il \textcolor{DeepPink}{\textbf{comportamento dei clienti}}: in un mercato perfettamente segmentato, ciascun passeggero è disposto ad acquistare una sola classe e non è necessario modellare le preferenze; al contrario, per tener conto delle preferenze è necessario introdurre un \textbf{modello di scelta}. La seconda riguarda il \textcolor{DeepPink}{\textbf{timing della domanda}}: sarebbe auspicabile che la domanda si realizzasse in modo sequenziale, dalla classe 1 fino alla classe \(n\), mentre il caso peggiore si verifica quando i clienti a basso budget arrivano per primi.
+\\ \hspace*{1.5em}
+Un modello in cui esistono intervalli di tempo disgiunti, durante i quali una sola classe è in domanda, è detto \textbf{statico}; il termine \textbf{dinamico} è invece riservato a modelli in cui le richieste dei clienti per classi diverse sono intercalate nel tempo. La politica decisionale può essere espressa in termini di \textbf{livelli di protezione}, ossia il numero massimo di posti disponibili per ciascuna classe, oppure in termini di \textbf{bid-prices}, ovvero il prezzo minimo al quale si è disposti a vendere un posto.
 
 \subsection{Modello statico con segmentazione perfetta della domanda}
 
-\paragraph{Assunzioni, stadi e stato}
-Le domande sono indipendenti e avvengono sequenzialmente (prima $D_n$); nessun cliente cambia classe. Gli stadi decisionali sono $j=n,n-1,\dots,1$. La variabile di stato è la capacità residua $s_j$, con stato iniziale $s_n=C$. Condizione al contorno: $V_0(s_0)=0$, $s_0=0,1,\dots,C$.
+\paragraph{Ipotesi di segmentazione e struttura della domanda}
+Nel modello statico con \textcolor{DeepPink}{\textbf{segmentazione perfetta della domanda}}, le richieste associate alle diverse classi tariffarie sono assunte \textbf{indipendenti} e si realizzano in modo \textbf{sequenziale}, a partire dalla classe a prezzo più basso. Nessun cliente è disposto a passare a una classe differente, il che implica l’assenza di sostituzione tra prodotti e rende superflua la modellazione delle preferenze individuali.
 
-\paragraph{Ricorsione DP in forma scambiata}
-La ricorsione assume la forma scambiata:
+\paragraph{Stadi decisionali e variabile di stato}
+In questo contesto si associano gli \textbf{stadi decisionali} alle classi tariffarie, indicizzate in ordine decrescente \( j = n, n-1, \dots, 1 \). La variabile di stato naturale è \( s_j \), che rappresenta la \textbf{capacità residua} all’inizio dello stadio \( j \); lo stato iniziale è quindi \( s_n = C \), pari al numero totale di posti disponibili.
+
+\paragraph{Funzione valore e condizioni al contorno}
+L’obiettivo complessivo è determinare il \textbf{ricavo atteso massimo} ottenibile allocando i \( C \) posti alle \( n \) classi, valore indicato con \( V_n(C) \), mentre la condizione al contorno è data da \( V_0(s_0)=0 \) per ogni \( s_0=0,1,\dots,C \). Non si considerano gruppi o famiglie e, data l’indipendenza, non emerge alcun effetto di apprendimento della domanda lungo il processo.
+
+\paragraph{Sequenza degli eventi e formulazione della ricorsione}
+Un risultato apparentemente sorprendente è che la ricorsione di programmazione dinamica può essere costruita assumendo, per ciascuna classe \( j \), una sequenza degli eventi in cui si osserva dapprima la domanda \( D_j \), successivamente si decide quante richieste accettare, rappresentate dalla variabile intera \( x_j \), e infine si incassa il ricavo \( p_j x_j \), passando allo stadio successivo con stato aggiornato \( s_{j-1}=s_j-x_j \).
+
+\paragraph{Indipendenza della decisione dalla distribuzione della domanda}
+Sebbene ciò sembri in contrasto con il fatto che le decisioni dovrebbero essere prese prima di osservare la domanda, si dimostra che la decisione ottima non dipende dalla distribuzione di probabilità di \( D_j \).
+
+\paragraph{Interpretazione operativa della decisione}
+L’intuizione è che non sia necessario fissare a priori il valore di \( x_j \). Le richieste possono essere osservate una alla volta e, per ciascuna di esse, si decide se accettarla o rifiutarla; nel momento in cui una richiesta viene rifiutata, la classe viene dichiarata chiusa.
+\\ \hspace*{1.5em}
+In questo modo, la ricorsione di programmazione dinamica assume la \textcolor{DeepPink}{\textbf{forma scambiata}}
 \[
-V_j(s_j)=
-\mathbb{E}\!\left[
-\max_{0\le x_j \le \min\{s_j,D_j\}}
-\left(
-p_j x_j + V_{j-1}(s_j-x_j)
-\right)
-\right].
-\]
-Con uno shift di indice e notazione compatta:
-\[
-V_{j+1}(s)=
-\mathbb{E}\!\left[
-\max_{0\le x \le \min\{s,D_{j+1}\}}
-\left(
-p_{j+1}x + V_j(s-x)
-\right)
-\right].
+V_j(s_j)=\mathbb{E}\!\left[\max_{0\le x_j\le \min\{s_j,D_j\}}\bigl(p_j x_j+V_{j-1}(s_j-x_j)\bigr)\right].
 \]
 
-\subsection{Valore marginale atteso e livelli di protezione}
+\paragraph{Shift di indice e semplificazione della notazione}
+Per semplificare la notazione, si introduce uno \textbf{shift inconsequenziale dell’indice} e si omettono i pedici di stadio nelle variabili di stato e di decisione, ottenendo
+\[
+V_{j+1}(s)=\mathbb{E}\!\left[\max_{0\le x\le \min\{s,D_{j+1}\}}\bigl(p_{j+1}x+V_j(s-x)\bigr)\right].
+\]
+\\ \hspace*{1.5em}
+La decisione \( x \) allo stadio \( j+1 \) è naturalmente vincolata sia dalla capacità residua \( s \) sia dalla domanda realizzata \( D_{j+1} \).
 
 \paragraph{Valore marginale atteso della capacità}
-Si definisce $\Delta V_j(s):= V_j(s)-V_j(s-1)$, che misura il \textcolor{DeepPink}{\textbf{costo opportunità}} di un posto dato $s$.
-
-\paragraph{Somma telescopica e riscrittura}
-Si ottiene:
+Per analizzare la struttura della politica ottima si introduce il \textcolor{DeepPink}{\textbf{valore marginale atteso della capacità}} \( \Delta V_j(s):=V_j(s)-V_j(s-1) \), che misura il \textbf{costo opportunità} di un posto aereo dato un livello di capacità residua \( s \).
+\\ \hspace*{1.5em}
+Utilizzando una \textbf{somma telescopica}, la ricorsione può essere riscritta come
 \[
-V_{j+1}(s)
-=
-V_j(s)
-+
-\mathbb{E}\!\left[
-\max_{0\le x \le \min\{s,D_{j+1}\}}
-\left(
-\sum_{z=1}^{x}\bigl(p_{j+1}-\Delta V_j(s+1-z)\bigr)
-\right)
-\right].
-\]
-La riscrittura usa una somma telescopica: $V_j(s-x)= V_j(s)-\sum_{z=1}^{x}\Delta V_j(s+1-z)$.
-
-\paragraph{Proprietà dei valori marginali}
-Si possono provare: $\Delta V_j(s+1)\le \Delta V_j(s)$, $\Delta V_{j+1}(s)\ge \Delta V_j(s)$, $\forall s,j$.
-
-\paragraph{Regola di accettazione e protezione annidata}
-I termini $p_{j+1}-\Delta V_j(s+1-z)$ sono decrescenti in $z$: si aumenta $x$ finché compare il primo termine negativo o si raggiunge $\min\{s,D_{j+1}\}$. Si ottiene un livello di protezione \textcolor{DeepPink}{\textbf{annidato}}:
-\[
-y_j^\ast:= \max\{\,y:\; p_{j+1}<\Delta V_j(y)\,\},
-\qquad j=1,\dots,n-1.
-\]
-La decisione ottima allo stadio $j+1$ è:
-\[
-x_{j+1}^\ast(s_{j+1},D_{j+1})
-=
-\min\{(s_{j+1}-y_j^\ast)^+,\; D_{j+1}\}.
-\]
-Lo scambio tra attesa e ottimizzazione è giustificato dal fatto che non serve conoscere $D_{j+1}$ in anticipo: si accetta finché si raggiunge la protezione o si esaurisce la capacità o termina lo stadio.
-
-\subsection{Modello dinamico con segmentazione perfetta della domanda}
-
-\paragraph{Assunzioni e probabilità di arrivo}
-Si rilassa la sequenzialità della domanda, mantenendo una segmentazione rigida. Il tempo è discretizzato in $t=1,\dots,T$ assumendo al più un arrivo per intervallo. Sia $\lambda_j(t)$ la probabilità di arrivo della classe $j$ nell'intervallo $t$, con vincolo $\sum_{j=1}^{n}\lambda_j(t)\le 1$, $\forall t$.
-
-\paragraph{value function e condizioni al contorno}
-Si determinano $V_t(s)$ (capacità residua $s$) con $V_t(0)=0$, $t=1,\dots,T$, $V_{T+1}(s)=0$, $s=0,1,\dots,C$.
-
-\paragraph{Ricavo disponibile e decisione binaria}
-Sia $R(t)$ il ricavo disponibile al tempo $t$: vale $p_j$ se arriva un cliente di classe $j$, $0$ altrimenti. Alla richiesta si decide con $x\in\{0,1\}$ se accettare o meno.
-
-\paragraph{Ricorsione DP in forma scambiata}
-La ricorsione assume la forma scambiata:
-\[
-V_t(s)=
-\mathbb{E}\!\left[
-\max_{x\in\{0,1\}}
-\left\{
-R(t)\,x+V_{t+1}(s-x)
-\right\}
-\right].
-\]
-Usando i valori marginali attesi si ottiene una politica in termini di protection levels, qui potenzialmente time-varying.
-
-\subsection{Modello dinamico con scelta del cliente}
-
-\paragraph{Modello di scelta}
-Se la segmentazione perfetta viene rilassata, occorre un \textcolor{DeepPink}{\textbf{choice model}}. La decisione di controllo al tempo $t$ è il sottoinsieme $S_t\subseteq N=\{1,\dots,n\}$ delle classi offerte.
-
-\paragraph{Ricavi e probabilità di scelta}
-Si introduca $p_0=0$ per il caso di non-acquisto. Con probabilità $\lambda$ arriva un potenziale passeggero; dato $S_t$, la probabilità di scelta della classe $j$ è $P_j(S_t)$, includendo $P_0(S_t)$, con vincoli: $P_j(S)\ge 0$, $S\subseteq N$, $j\in S\cup\{0\}$, $\sum_{j\in S}P_j(S)+P_0(S)=1$, $S\subseteq N$.
-
-\paragraph{Probabilità di acquisto dipendenti dalla decisione}
-Le probabilità dipendenti dalla decisione sono $\lambda P_j(S_t)$ per $j=1,\dots,n$, e $(1-\lambda)+\lambda P_0(S_t)$ per $j=0$.
-
-\paragraph{Ricorsione DP}
-In questo caso la decisione deve essere dichiarata prima della scelta del passeggero, quindi la ricorsione è nella forma standard:
-\[
-V_t(s)
-=
-\max_{S_t\subseteq N}
-\left\{
-\sum_{j\in S_t}\lambda P_j(S_t)\bigl(p_j+V_{t+1}(s-1)\bigr)
-+
-\bigl(\lambda P_0(S_t)+1-\lambda\bigr)\,V_{t+1}(s)
-\right\}.
+V_{j+1}(s)=V_j(s)+\mathbb{E}\!\left[\max_{0\le x\le \min\{s,D_{j+1}\}}\sum_{z=1}^{x}\bigl(p_{j+1}-\Delta V_j(s+1-z)\bigr)\right].
 \]
 
-\paragraph{Osservazione conclusiva}
-La forma della ricorsione riflette la \textcolor{DeepPink}{\textbf{struttura informativa}}: qui la massimizzazione è sull'attesa perché la decisione precede la scelta del cliente.
+
+La riscrittura precedente si basa su un \textbf{trucco standard del mestiere}, ossia su una \textcolor{DeepPink}{\textbf{somma telescopica}}
+\[
+\begin{aligned}
+V_j(s-x)
+= V_j(s)-\bigl[V_j(s)-V_j(s-x)\bigr] 
+= V_j(s)-\bigl[V_j(s)\pm V_j(s-1)\pm \dots \pm V_j(s+1-x)-V_j(s-x)\bigr] \\
+= V_j(s)-\sum_{z=1}^{x}\bigl[V_j(s+1-z)-V_j(s-z)\bigr] 
+= V_j(s)-\sum_{z=1}^{x}\Delta V_j(s+1-z).
+\end{aligned}
+\]
+
+\paragraph{Proprietà di monotonicità}
+Si può dimostrare che valgono \( \Delta V_j(s+1)\le \Delta V_j(s) \) e \( \Delta V_{j+1}(s)\ge \Delta V_j(s) \), da cui segue che il valore della capacità decresce con la capacità disponibile e cresce con il numero di stadi rimanenti.
+\\ \hspace*{1.5em}
+Di conseguenza, i termini \( p_{j+1}-\Delta V_j(s+1-z) \) sono decrescenti in \( z \), e la soluzione ottima si ottiene aumentando \( x \) finché compare il primo termine negativo oppure si raggiunge \( \min\{s,D_{j+1}\} \).
+Questo porta alla definizione di un \textcolor{DeepPink}{\textbf{livello di protezione annidato ottimo}}
+\[
+y_j^\ast:=\max\{y:\;p_{j+1}<\Delta V_j(y)\}, \quad j=1,\dots,n-1.
+\]
+
+\paragraph{Decisione ottima e interpretazione}
+Il livello \( y_j^\ast \) vincola il numero massimo di biglietti vendibili per la classe \( j+1 \), con decisione ottima
+\(
+x_{j+1}^\ast(s_{j+1},D_{j+1})=\min\{(s_{j+1}-y_j^\ast)^+,\,D_{j+1}\}.
+\)
+\\ \hspace*{1.5em}
+Le richieste possono essere soddisfatte progressivamente senza conoscere \( D_{j+1} \) in anticipo, il che giustifica lo \textcolor{DeepPink}{\textbf{scambio tra attesa e ottimizzazione}} nella ricorsione di programmazione dinamica.
+
+
+\paragraph{Modello dinamico con segmentazione perfetta della domanda}
+Si rilassa l’ipotesi secondo cui la domanda delle diverse classi si realizzi in modo sequenziale su intervalli di tempo disgiunti; rimane tuttavia valida l’assunzione di \textcolor{DeepPink}{\textbf{segmentazione rigida del mercato}}. Il tempo entra esplicitamente nella ricorsione di programmazione dinamica, ma si ottiene un modello semplice assumendo che gli intervalli temporali siano sufficientemente piccoli da consentire l’osservazione di \textbf{al più un arrivo per intervallo}.
+\\ \hspace*{1.5em}
+Si denoti con \( \lambda_j(t) \) la probabilità di un arrivo della classe \( j \) nell’intervallo di tempo \( t \), per \( t=1,\dots,T \). Poiché il mercato è perfettamente segmentato, tali probabilità si riferiscono a eventi indipendenti e devono soddisfare il vincolo di consistenza \( \sum_{j=1}^n \lambda_j(t)\le 1 \) per ogni \( t \).
+\\ \hspace*{1.5em}
+La ricorsione DP mira a determinare le funzioni valore \( V_t(s) \), dove \( s \) rappresenta la \textbf{capacità residua}, soggette alle condizioni al contorno \( V_t(0)=0 \) per \( t=1,\dots,T \) e \( V_{T+1}(s)=0 \) per \( s=0,1,\dots,C \), dove \( T+1 \) indica la fine dell’orizzonte temporale.
+\\ \hspace*{1.5em}
+Si introduca la variabile casuale \( R(t) \), che rappresenta il \textbf{ricavo disponibile} al tempo \( t \), pari a \( p_j \) quando si verifica un arrivo della classe \( j \) e pari a zero in caso contrario. In presenza di un arrivo, si deve decidere se accettare o meno la richiesta tramite una variabile decisionale binaria \( x\in\{0,1\} \).
+\\ \hspace*{1.5em}
+Come nel modello statico, non è necessario prendere decisioni in anticipo, poiché è sufficiente reagire alla richiesta osservata; di conseguenza, la ricorsione di programmazione dinamica assume nuovamente la \textcolor{DeepPink}{\textbf{forma scambiata}}
+\[
+V_t(s)=\mathbb{E}\!\left[\max_{x\in\{0,1\}}\bigl(R(t)x+V_{t+1}(s-x)\bigr)\right].
+\]
+\\ \hspace*{1.5em}
+Utilizzando ancora i \textbf{valori marginali attesi della capacità}, è possibile definire una politica ottima in termini di \textcolor{DeepPink}{\textbf{livelli di protezione}}, che in questo contesto risultano però \textbf{dipendenti dal tempo}.
+
+\paragraph{Modello dinamico con scelta del cliente}
+Nel caso in cui si rilassi l’ipotesi di \textcolor{DeepPink}{\textbf{mercato perfettamente segmentato}}, è necessario introdurre un esplicito \textcolor{DeepPink}{\textbf{modello di scelta del cliente}}. Un approccio consiste nel suddividere il mercato in segmenti e stimare, per ciascun segmento, sia la frazione di passeggeri sia la probabilità che una determinata classe venga acquistata quando essa è offerta.
+\\ \hspace*{1.5em}
+La \textcolor{DeepPink}{\textbf{decisione di controllo}} all’istante di tempo \(t\) non è più una quantità, ma un insieme: il sottoinsieme \(S_t \subseteq \mathcal{N}=\{1,\dots,n\}\) delle classi che vengono offerte. A ciascuna classe \(j\) è associato un ricavo \(p_j\); si introduce inoltre \(p_0=0\) per rappresentare il caso di \textbf{non-acquisto}, ossia quando un passeggero è disposto a volare ma non sceglie nessuna delle classi offerte.
+\\ \hspace*{1.5em}
+Formalmente, una potenziale richiesta arriva al tempo \(t\) con probabilità \(\lambda\) e, dato l’insieme \(S_t\), il cliente sceglie una classe \(j\in S_t\cup\{0\}\) con probabilità \(P_j(S_t)\), con vincoli \(P_j(S)\ge 0\) e \(\sum_{j\in S}P_j(S)+P_0(S)=1\). Ne segue che le probabilità effettive di acquisto al tempo \(t\) sono \(\lambda P_j(S_t)\) per \(j=1,\dots,n\) e \((1-\lambda)+\lambda P_0(S_t)\) per il non-acquisto.
+\\ \hspace*{1.5em}
+In questo contesto, la \textcolor{DeepPink}{\textbf{ricorsione di programmazione dinamica}} assume la forma
+\[
+V_t(s)=\max_{S_t\subseteq\mathcal{N}}\left\{\sum_{j\in S_t}\lambda P_j(S_t)\big(p_j+V_{t+1}(s-1)\big)+\big(\lambda P_0(S_t)+1-\lambda\big)V_{t+1}(s)\right\},
+\]
+poiché l’offerta \(S_t\) deve essere fissata \emph{prima} della decisione del passeggero. Di conseguenza, a differenza dei modelli con segmentazione perfetta, l’ottimizzazione avviene nella forma usuale, come \textcolor{DeepPink}{\textbf{massimizzazione di un valore atteso}}.
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PDF 10 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \vspace{-1cm}
 \textcolor{MediumVioletRed}{\section{CAP 10 -- Programmazione dinamica numerica per stati discreti}}
