@@ -1,0 +1,423 @@
+\contentsline {section}{\numberline {1}CAP 1 -- Introduzione alle decisioni in condizioni di incertezza}{1}{}%
+\contentsline {paragraph}{Recap}{1}{}%
+\contentsline {paragraph}{Introduzione}{2}{}%
+\contentsline {subsection}{\numberline {1.1}Motivazione: perché considerare l’incertezza}{2}{}%
+\contentsline {paragraph}{Previsioni puntuali e decisioni}{2}{}%
+\contentsline {paragraph}{Errore quadratico medio (MSE)}{2}{}%
+\contentsline {paragraph}{Perdita assoluta e penalità asimmetriche}{2}{}%
+\contentsline {paragraph}{Modelli decisionali in ambito business}{3}{}%
+\contentsline {paragraph}{Differenza tra rischio e incertezza}{3}{}%
+\contentsline {subsection}{\numberline {1.2}Modelli decisionali statistici}{3}{}%
+\contentsline {paragraph}{Il modello classico del newsvendor}{3}{}%
+\contentsline {paragraph}{Espressione generale del profitto e riscrittura con costi di underage/overage}{3}{}%
+\contentsline {paragraph}{Teorema -- Regola di Leibniz}{4}{}%
+\contentsline {paragraph}{Modelli con vincoli probabilistici (chance-constrained models)}{4}{}%
+\contentsline {subsection}{\numberline {1.3}Alberi decisionali}{5}{}%
+\contentsline {paragraph}{Dalle decisioni statiche a quelle adattive}{5}{}%
+\contentsline {paragraph}{Strategia e criterio di ottimalità}{5}{}%
+\contentsline {paragraph}{Esempio: introduzione di un nuovo prodotto}{5}{}%
+\contentsline {subsection}{\numberline {1.4}EVPI and VSS}{5}{}%
+\contentsline {paragraph}{Problema statico di ottimizzazione stocastica}{5}{}%
+\contentsline {paragraph}{Valore atteso dell’informazione perfetta (EVPI)}{6}{}%
+\contentsline {paragraph}{Esempio: scelta di una strategia di investimento}{6}{}%
+\contentsline {paragraph}{Soluzione a valore atteso}{6}{}%
+\contentsline {paragraph}{Collegamento con modelli multi-stadio}{6}{}%
+\contentsline {subsection}{\numberline {1.5}Un'introduzione a un modello a due stadi: Assemble-to-order (ATO)}{6}{}%
+\contentsline {paragraph}{ATO}{6}{}%
+\contentsline {paragraph}{Modello deterministico a valore atteso}{7}{}%
+\contentsline {paragraph}{Limiti della soluzione deterministica}{7}{}%
+\contentsline {paragraph}{Modello stocastico a due stadi}{7}{}%
+\contentsline {paragraph}{Confronto corretto tra le soluzioni}{8}{}%
+\contentsline {subsection}{\numberline {1.6}Modelli a due stadi}{8}{}%
+\contentsline {paragraph}{Dall’ATO ai modelli a due stadi con ricorso}{8}{}%
+\contentsline {paragraph}{Formulazione annidata del modello}{8}{}%
+\contentsline {paragraph}{Ricorso fisso e non-linearità indotta dal ricorso}{8}{}%
+\contentsline {paragraph}{Modello deterministico equivalente (LP a grande scala)}{9}{}%
+\contentsline {paragraph}{Fattibilità del secondo stadio e concetti di ricorso completo}{9}{}%
+\contentsline {subsubsection}{\numberline {1.6.1}The plant location model}{9}{}%
+\contentsline {paragraph}{Descrizione del problema e rete bipartita}{9}{}%
+\contentsline {paragraph}{Scenari estremi e necessità di formulazioni elastiche}{10}{}%
+\contentsline {paragraph}{Modello elastico con domanda non soddisfatta penalizzata}{10}{}%
+\contentsline {paragraph}{Osservazioni di modellazione}{10}{}%
+\contentsline {subsubsection}{\numberline {1.6.2}Modello del newsvendor a due stadi}{10}{}%
+\contentsline {paragraph}{Motivazione e struttura informativa}{10}{}%
+\contentsline {subsubsection}{\numberline {1.6.3}Programmazione lineare stocastica multistadio con ricorso}{11}{}%
+\contentsline {paragraph}{Generalizzazione ai modelli multistadio}{11}{}%
+\contentsline {subsubsection}{\numberline {1.6.4}Un modello di pianificazione finanziaria multistadio con costi di transazione proporzionali}{12}{}%
+\contentsline {paragraph}{Asset--liability management su albero di scenario}{12}{}%
+\contentsline {paragraph}{Osservazioni operative}{13}{}%
+\contentsline {subsection}{\numberline {1.7}Modelli multiperiodali e multistadio}{13}{}%
+\contentsline {paragraph}{Esplosione dell’albero di scenario nei modelli multistadio}{13}{}%
+\contentsline {paragraph}{Multiperiodo non significa multistage}{13}{}%
+\contentsline {paragraph}{Caso particolare del two-stage multiperiod}{13}{}%
+\contentsline {subsubsection}{\numberline {1.7.1}Un modello multiperiodo a due stadi: Unit commitment}{13}{}%
+\contentsline {paragraph}{Domanda aleatoria come processo discreto nel tempo}{13}{}%
+\contentsline {paragraph}{Classi di generatori e struttura dei costi}{14}{}%
+\contentsline {paragraph}{Osservazioni critiche sul modello}{14}{}%
+\contentsline {subsection}{\numberline {1.8}Generazione di scenari e stabilità nella programmazione stocastica}{15}{}%
+\contentsline {paragraph}{Ruolo centrale dell’albero di scenario}{15}{}%
+\contentsline {paragraph}{Complicazioni principali}{15}{}%
+\contentsline {paragraph}{Due classi di approcci alla generazione di scenari}{15}{}%
+\contentsline {paragraph}{Interpretazione come integrazione numerica (quadratura)}{15}{}%
+\contentsline {paragraph}{Moment/property matching e alternative}{15}{}%
+\contentsline {paragraph}{Linee guida pratiche per progettare l’albero}{16}{}%
+\contentsline {subsubsection}{\numberline {1.8.1}In-- and out--of--sample stability}{16}{}%
+\contentsline {paragraph}{Perché serve controllare la stabilità}{16}{}%
+\contentsline {paragraph}{Problema “esatto” e problema approssimato}{16}{}%
+\contentsline {paragraph}{Stabilità del valore obiettivo}{16}{}%
+\contentsline {paragraph}{In-sample stability}{16}{}%
+\contentsline {paragraph}{Out-of-sample stability}{16}{}%
+\contentsline {paragraph}{Valutazione out-of-sample: due stadi vs multistadio}{16}{}%
+\contentsline {paragraph}{Rolling horizon e shrinking horizon}{16}{}%
+\contentsline {paragraph}{Test economico alternativo: scambio degli alberi}{17}{}%
+\contentsline {paragraph}{Osservazione finale: limite operativo dello stochastic programming}{17}{}%
+\contentsline {subsection}{\numberline {1.9}Convessità nei modelli di programmazione stocastica}{17}{}%
+\contentsline {paragraph}{Vincoli probabilistici congiunti}{17}{}%
+\contentsline {paragraph}{Struttura dell’insieme ammissibile}{17}{}%
+\contentsline {paragraph}{Vincolo probabilistico lineare con distribuzione normale}{17}{}%
+\contentsline {paragraph}{Convessità della funzione di ricorso}{18}{}%
+\contentsline {paragraph}{Dimostrazione della convessità}{18}{}%
+\contentsline {paragraph}{Osservazioni finali}{18}{}%
+\contentsline {section}{\numberline {2}CAP 2 -- Elementi di complessità computazionale}{18}{}%
+\contentsline {paragraph}{Recap}{18}{}%
+\contentsline {paragraph}{Complessità di problemi e algoritmi}{19}{}%
+\contentsline {paragraph}{Complessità intrinseca di un problema}{19}{}%
+\contentsline {paragraph}{Teorema (regola EDD -- Earliest Due Date)}{20}{}%
+\contentsline {paragraph}{Introduzione dei tempi di rilascio}{20}{}%
+\contentsline {subsection}{\numberline {2.1}Caratterizzazione della complessità -- classi P, NP, NPC e NPH}{20}{}%
+\contentsline {paragraph}{Teoria della NP-completezza}{20}{}%
+\contentsline {paragraph}{Problemi di decisione e di ottimizzazione}{20}{}%
+\contentsline {paragraph}{Classe P}{21}{}%
+\contentsline {paragraph}{Classe NP}{21}{}%
+\contentsline {paragraph}{Riduzione in tempo polinomiale}{21}{}%
+\contentsline {paragraph}{Problemi NP-difficili}{21}{}%
+\contentsline {paragraph}{Problemi NP-completi}{21}{}%
+\contentsline {paragraph}{L'innesco della catena}{22}{}%
+\contentsline {paragraph}{Teorema}{22}{}%
+\contentsline {subsection}{\numberline {2.2}Dai problemi di decisione ai problemi di ottimizzazione}{22}{}%
+\contentsline {paragraph}{Problemi di ottimizzazione}{22}{}%
+\contentsline {paragraph}{L’impatto della codifica di un problema}{23}{}%
+\contentsline {section}{\numberline {3}CAP 3 -- Metodi di decomposizione in ottimizazione}{23}{}%
+\contentsline {paragraph}{Recap}{23}{}%
+\contentsline {paragraph}{Ruolo dei metodi di decomposizione}{24}{}%
+\contentsline {paragraph}{Problema separabile}{24}{}%
+\contentsline {paragraph}{Struttura block-angular}{25}{}%
+\contentsline {paragraph}{Classificazione dei metodi}{25}{}%
+\contentsline {subsection}{\numberline {3.1}Decomposizione duale e progressive hedging per la programmazione stocastica}{25}{}%
+\contentsline {subsubsection}{\numberline {3.1.1}Decomposizione duale}{25}{}%
+\contentsline {paragraph}{Problema di partenza}{25}{}%
+\contentsline {paragraph}{Dualizzazione del vincolo di budget}{26}{}%
+\contentsline {paragraph}{Osservazioni sulla dual decomposition}{26}{}%
+\contentsline {subsubsection}{\numberline {3.1.2}Copertura progressiva per la programmazione stocastica multistadio}{26}{}%
+\contentsline {paragraph}{Rappresentazione dell’incertezza}{26}{}%
+\contentsline {paragraph}{Insiemi di scenari indistinguibili}{26}{}%
+\contentsline {paragraph}{Formulazione del problema multistadio}{27}{}%
+\contentsline {subsection}{\numberline {3.2}Decomposizione di Benders e decomposizione L-shaped per la programmazione stocastica}{28}{}%
+\contentsline {paragraph}{Kelley's cutting planes}{28}{}%
+\contentsline {paragraph}{Proprietà di convessità dei programmi stocastici}{28}{}%
+\contentsline {paragraph}{Dimostrazione di convessità (caso con regione duale non aleatoria)}{28}{}%
+\contentsline {paragraph}{Convessità della funzione di ricorso}{29}{}%
+\contentsline {subsubsection}{\numberline {3.2.1}Decomposizione L-shaped}{29}{}%
+\contentsline {paragraph}{Modello}{29}{}%
+\contentsline {paragraph}{Optimality cuts}{30}{}%
+\contentsline {paragraph}{Feasibility cuts}{30}{}%
+\contentsline {paragraph}{Schema iterativo}{30}{}%
+\contentsline {paragraph}{Variazioni sul tema}{30}{}%
+\contentsline {subsection}{\numberline {3.3}Decomposizione Dantzig--Wolfe e generazione di colonne}{31}{}%
+\contentsline {paragraph}{Problema di cutting stock}{31}{}%
+\contentsline {paragraph}{Modello MILP}{31}{}%
+\contentsline {paragraph}{Modello a pattern di taglio}{31}{}%
+\contentsline {paragraph}{Generazione di una nuova colonna (by pricing)}{31}{}%
+\contentsline {paragraph}{Pricing come knapsack}{32}{}%
+\contentsline {subsubsection}{\numberline {3.3.1}Decomposizione di Dantzig--Wolfe}{32}{}%
+\contentsline {paragraph}{Modello LP}{32}{}%
+\contentsline {paragraph}{Rappresentazione mediante combinazioni convesse e coniche}{32}{}%
+\contentsline {paragraph}{Restricted Master Problem (RMP)}{33}{}%
+\contentsline {paragraph}{Costo ridotto per punti estremi e direzioni estreme}{33}{}%
+\contentsline {section}{\numberline {4}CAP 4 -- Sistemi MRP/ERP e approccio JIT}{34}{}%
+\contentsline {paragraph}{Recap}{34}{}%
+\contentsline {subsection}{\numberline {4.1}Limiti degli approcci classici di gestione delle scorte}{34}{}%
+\contentsline {paragraph}{Inadeguatezza dei modelli tradizionali}{34}{}%
+\contentsline {paragraph}{Effetto di amplificazione della variabilità}{34}{}%
+\contentsline {subsection}{\numberline {4.2}Evoluzione dai modelli MRP ai sistemi ERP}{34}{}%
+\contentsline {paragraph}{Lot-sizing multilivello e difficoltà computazionali}{34}{}%
+\contentsline {paragraph}{Evoluzione verso MRPII ed ERP}{35}{}%
+\contentsline {subsection}{\numberline {4.3}Logica MRP}{35}{}%
+\contentsline {paragraph}{Assunzione di capacità infinita}{35}{}%
+\contentsline {paragraph}{Record MRP}{35}{}%
+\contentsline {subsection}{\numberline {4.4}Esplosione dei fabbisogni e struttura del processo MRP}{35}{}%
+\contentsline {paragraph}{Domanda indipendente e MPS}{35}{}%
+\contentsline {paragraph}{Ordini pianificati, rilascio e regole di lot-sizing}{35}{}%
+\contentsline {subsection}{\numberline {4.5}Il problema del nervosismo}{35}{}%
+\contentsline {paragraph}{Nervosismo}{35}{}%
+\contentsline {paragraph}{Effetto di bordo, nervosismo e strategie di mitigazione}{36}{}%
+\contentsline {subsection}{\numberline {4.6}Master Production Scheduling e Legge di Little}{36}{}%
+\contentsline {paragraph}{Master Production Scheduling (MPS)}{36}{}%
+\contentsline {paragraph}{Capacity Requirements Planning (CRP)}{36}{}%
+\contentsline {paragraph}{Factory Physics}{36}{}%
+\contentsline {paragraph}{Legge di Little}{36}{}%
+\contentsline {paragraph}{Modello di una singola macchina}{36}{}%
+\contentsline {paragraph}{Effetto della variabilità}{37}{}%
+\contentsline {paragraph}{Buffering Law}{37}{}%
+\contentsline {paragraph}{Produzione livellata e fonti di variabilità}{37}{}%
+\contentsline {subsection}{\numberline {4.7}Approccio Just-In-Time (Toyota)}{37}{}%
+\contentsline {paragraph}{Principi dell’approccio Just-In-Time}{37}{}%
+\contentsline {paragraph}{Sequenziamento e regolarità dei flussi}{37}{}%
+\contentsline {paragraph}{Formalizzazione del problema}{37}{}%
+\contentsline {paragraph}{Funzione obiettivo del goal chasing}{38}{}%
+\contentsline {paragraph}{Ruolo dei tempi di setup nel JIT}{38}{}%
+\contentsline {subsubsection}{\numberline {4.7.1}Modello di rotazione ciclica dei prodotti}{38}{}%
+\contentsline {paragraph}{Impostazione del modello}{38}{}%
+\contentsline {paragraph}{Limite inferiore del periodo di rotazione}{38}{}%
+\contentsline {section}{\numberline {5}CAP 5 -- Schedulazione nella produzione e nei servizi}{38}{}%
+\contentsline {paragraph}{Recap}{38}{}%
+\contentsline {subsection}{\numberline {5.1}Modelli classici di machine scheduling}{39}{}%
+\contentsline {paragraph}{Scheduling}{39}{}%
+\contentsline {paragraph}{Caratteristiche dei job}{39}{}%
+\contentsline {paragraph}{Soluzioni e diagrammi di Gantt}{39}{}%
+\contentsline {subsection}{\numberline {5.2}Tipi di flusso}{39}{}%
+\contentsline {paragraph}{Strutture di precedenza}{39}{}%
+\contentsline {subsection}{\numberline {5.3}Misure di prestazione}{40}{}%
+\contentsline {paragraph}{Funzioni di penalità}{40}{}%
+\contentsline {paragraph}{Pesi e priorità dei job}{40}{}%
+\contentsline {paragraph}{Principali misure di prestazione aggregate}{40}{}%
+\contentsline {paragraph}{Equivalenza tra misure di prestazione}{40}{}%
+\contentsline {paragraph}{Misure di prestazione regolari}{41}{}%
+\contentsline {paragraph}{Misure di prestazione non regolari}{41}{}%
+\contentsline {paragraph}{Notazione di Graham}{41}{}%
+\contentsline {subsection}{\numberline {5.4}Algoritmi di soluzione}{41}{}%
+\contentsline {paragraph}{Algoritmi polinomiali}{41}{}%
+\contentsline {paragraph}{Problemi NP-hard ed euristiche}{42}{}%
+\contentsline {paragraph}{Regola ATC (Apparent Tardiness Cost)}{42}{}%
+\contentsline {paragraph}{Interpretazione del termine di slack}{42}{}%
+\contentsline {paragraph}{Relazione con la tardiness totale pesata}{42}{}%
+\contentsline {paragraph}{Lookahead e ricerca locale}{42}{}%
+\contentsline {paragraph}{Grafi disgiuntivi}{42}{}%
+\contentsline {subsection}{\numberline {5.5}Modello MILP per $J//C_{max}$}{43}{}%
+\contentsline {paragraph}{Formulazione}{43}{}%
+\contentsline {paragraph}{Il ruolo del cammino critico}{43}{}%
+\contentsline {subsection}{\numberline {5.6}Procedura Shifting Bottleneck}{43}{}%
+\contentsline {paragraph}{Idea generale}{43}{}%
+\contentsline {paragraph}{Teste e code nel grafo disgiuntivo}{43}{}%
+\contentsline {paragraph}{Approssimazione del makespan}{43}{}%
+\contentsline {paragraph}{Riduzione a $1/r_i/L_{max}$}{43}{}%
+\contentsline {paragraph}{Identificazione del collo di bottiglia}{44}{}%
+\contentsline {section}{\numberline {6}CAP 6 -- Fondamenti microeconomici del pricing e modelli di scelta discreta}{44}{}%
+\contentsline {paragraph}{Recap}{44}{}%
+\contentsline {paragraph}{Driver del profitto}{45}{}%
+\contentsline {paragraph}{Sensibilità del profitto ai fattori}{45}{}%
+\contentsline {paragraph}{Osservazioni}{45}{}%
+\contentsline {paragraph}{Catene causali}{45}{}%
+\contentsline {paragraph}{Pricing e revenue management}{45}{}%
+\contentsline {paragraph}{Strategie di pricing}{46}{}%
+\contentsline {paragraph}{Tipologie di interazione}{46}{}%
+\contentsline {paragraph}{Pricing nella pratica}{46}{}%
+\contentsline {paragraph}{Scelta del modello}{46}{}%
+\contentsline {paragraph}{Meccanismi alternativi}{46}{}%
+\contentsline {subsection}{\numberline {6.1}Pricing e funzioni di domanda}{46}{}%
+\contentsline {paragraph}{Un modello introduttivo: relazione lineare tra domanda e prezzo}{46}{}%
+\contentsline {paragraph}{Interpretazione dei parametri}{47}{}%
+\contentsline {paragraph}{Dominio di validità}{47}{}%
+\contentsline {paragraph}{Forma troncata della funzione di domanda}{47}{}%
+\contentsline {paragraph}{Funzione di domanda inversa}{47}{}%
+\contentsline {paragraph}{Massimizzazione dei ricavi e del profitto}{47}{}%
+\contentsline {paragraph}{Condizione di ottimalità}{47}{}%
+\contentsline {paragraph}{Osservazioni}{48}{}%
+\contentsline {paragraph}{Interpretazione geometrica}{48}{}%
+\contentsline {paragraph}{Stima del modello}{48}{}%
+\contentsline {paragraph}{Apprendimento e sperimentazione}{48}{}%
+\contentsline {paragraph}{Problemi pratici aggiuntivi}{48}{}%
+\contentsline {paragraph}{La funzione di costo}{48}{}%
+\contentsline {paragraph}{Costo marginale e costo medio}{49}{}%
+\contentsline {paragraph}{Regolarità della funzione di costo}{49}{}%
+\contentsline {paragraph}{Economie e diseconomie di scala}{49}{}%
+\contentsline {paragraph}{Funzioni di domanda}{49}{}%
+\contentsline {paragraph}{La funzione di domanda lineare}{49}{}%
+\contentsline {paragraph}{Funzioni di domanda: elasticità puntuale}{49}{}%
+\contentsline {paragraph}{Esempio: funzione di domanda lineare}{50}{}%
+\contentsline {paragraph}{Esempio: funzione di domanda a elasticità costante}{50}{}%
+\contentsline {paragraph}{Stima tramite trasformazione logaritmica}{50}{}%
+\contentsline {paragraph}{Interpretare i modelli di domanda: willingness-to-pay}{51}{}%
+\contentsline {paragraph}{Surplus del consumatore e discriminazione di prezzo}{51}{}%
+\contentsline {paragraph}{Esempio di discriminazione di prezzo}{51}{}%
+\contentsline {paragraph}{Formalizzare willingness-to-pay e consumer surplus}{51}{}%
+\contentsline {paragraph}{Surplus del consumatore aggregato}{52}{}%
+\contentsline {paragraph}{Obiettivo di estrarre consumer surplus}{52}{}%
+\contentsline {paragraph}{La funzione logit}{52}{}%
+\contentsline {paragraph}{Definizione della funzione logistica}{52}{}%
+\contentsline {paragraph}{Esempio: un modello ibrido}{53}{}%
+\contentsline {subsection}{\numberline {6.2}Modelli di teoria dei giochi}{53}{}%
+\contentsline {paragraph}{Problemi decisionali con più decisori}{53}{}%
+\contentsline {paragraph}{Ipotesi semplificative}{53}{}%
+\contentsline {paragraph}{Caso non cooperativo}{54}{}%
+\contentsline {paragraph}{Equilibrio e perdita di performance}{54}{}%
+\contentsline {paragraph}{Giochi con decisioni continue}{54}{}%
+\contentsline {paragraph}{Competizione di Cournot}{55}{}%
+\contentsline {paragraph}{Competizione di Bertrand}{56}{}%
+\contentsline {paragraph}{Competizione di prezzo per beni non omogenei: modello di Hotelling}{56}{}%
+\contentsline {paragraph}{Esistenza dell’equilibrio nel modello di Hotelling}{58}{}%
+\contentsline {paragraph}{Giochi simultanei e sequenziali}{58}{}%
+\contentsline {paragraph}{Esempio}{59}{}%
+\contentsline {paragraph}{È sempre conveniente muoversi per primi?}{59}{}%
+\contentsline {paragraph}{Pricing e doppia marginalizzazione}{59}{}%
+\contentsline {subsection}{\numberline {6.3}Discrete choice models}{60}{}%
+\contentsline {paragraph}{Conjoint analysis}{60}{}%
+\contentsline {paragraph}{Microfondamenti dei modelli MNL: utilità casuali}{61}{}%
+\contentsline {paragraph}{Supplemento tecnico: EVT e massimi a blocchi}{62}{}%
+\contentsline {paragraph}{Teorema (Fisher--Tippett--Gnedenko)}{63}{}%
+\contentsline {section}{\numberline {7}CAP 7 -- Il principio della programmazione dinamica}{63}{}%
+\contentsline {paragraph}{Recap}{63}{}%
+\contentsline {paragraph}{Che cos'è la programmazione dinamica?}{64}{}%
+\contentsline {paragraph}{Problemi multistadio e multiperiodo}{64}{}%
+\contentsline {paragraph}{Ambito di applicazione della programmazione dinamica}{64}{}%
+\contentsline {paragraph}{Problemi decisionali dinamici}{64}{}%
+\contentsline {paragraph}{Orizzonte finito e infinito}{64}{}%
+\contentsline {paragraph}{Variabili di stato e processi}{65}{}%
+\contentsline {paragraph}{Informazione e non anticipatività}{65}{}%
+\contentsline {paragraph}{Dipendenza temporale dei fattori di rischio}{65}{}%
+\contentsline {subsection}{\numberline {7.1}Problemi a orizzonte finito scontati}{65}{}%
+\contentsline {paragraph}{Definizione}{65}{}%
+\contentsline {paragraph}{Fattore di sconto}{66}{}%
+\contentsline {paragraph}{Contributi stocastici e apprendimento}{66}{}%
+\contentsline {subsection}{\numberline {7.2}Problemi a orizzonte infinito}{66}{}%
+\contentsline {paragraph}{Problemi scontati a orizzonte infinito}{66}{}%
+\contentsline {paragraph}{Politiche decisionali}{66}{}%
+\contentsline {paragraph}{Caso deterministico e stocastico}{66}{}%
+\contentsline {paragraph}{Formulazione del problema in termini di politiche}{67}{}%
+\contentsline {paragraph}{Un esempio: il lot-sizing dinamico a singolo prodotto}{67}{}%
+\contentsline {paragraph}{Domanda incerta e modelli alternativi}{67}{}%
+\contentsline {paragraph}{Ulteriori problematiche}{68}{}%
+\contentsline {subsection}{\numberline {7.3}Uno sguardo al principio di programmazione dinamica: il problema del cammino minimo}{68}{}%
+\contentsline {paragraph}{Rete diretta aciclica}{68}{}%
+\contentsline {paragraph}{Approccio greedy}{68}{}%
+\contentsline {paragraph}{Definizione del valore ottimo}{68}{}%
+\contentsline {paragraph}{Ricorsione di Bellman}{69}{}%
+\contentsline {paragraph}{Cammini minimi su reti strutturate}{69}{}%
+\contentsline {subsection}{\numberline {7.4}Il principio di decomposizione della programmazione dinamica -- Equazione di Bellman}{69}{}%
+\contentsline {paragraph}{Decomposizione in problemi a singolo stadio}{69}{}%
+\contentsline {paragraph}{Additività della funzione obiettivo}{70}{}%
+\contentsline {paragraph}{Problema a singolo stadio parametrizzato dallo stato}{70}{}%
+\contentsline {paragraph}{Teorema: principio di ottimalità della programmazione dinamica}{70}{}%
+\contentsline {subsection}{\numberline {7.5}DP stocastica per orizzonti finiti}{70}{}%
+\contentsline {paragraph}{Risoluzione all’indietro}{70}{}%
+\contentsline {paragraph}{Uso delle funzioni valore: caso deterministico}{71}{}%
+\contentsline {paragraph}{DP stocastica per orizzonti infiniti}{71}{}%
+\contentsline {section}{\numberline {8}CAP 8 -- Implementazione della programmazione dinamica}{71}{}%
+\contentsline {paragraph}{Recap}{71}{}%
+\contentsline {subsection}{\numberline {8.1}Allocazione discreta di risorse: il problema dello zaino}{72}{}%
+\contentsline {paragraph}{Definizione, formulazione e motivazione DP}{72}{}%
+\contentsline {paragraph}{Riformulazione sequenziale, stato e transizione}{72}{}%
+\contentsline {paragraph}{value function e ricorsione di Bellman}{73}{}%
+\contentsline {paragraph}{Implementazione MATLAB e complessità}{73}{}%
+\contentsline {subsection}{\numberline {8.2}Allocazione continua del budget}{73}{}%
+\contentsline {paragraph}{Formulazione e soluzione analitica}{73}{}%
+\contentsline {paragraph}{Soluzione interna e Lagrangiana}{73}{}%
+\contentsline {paragraph}{Formulazione DP}{74}{}%
+\contentsline {paragraph}{Interpolazione con spline cubiche in MATLAB}{74}{}%
+\contentsline {paragraph}{Risoluzione numerica del problema continuo tramite DP}{74}{}%
+\contentsline {paragraph}{Implementazione MATLAB: idea generale}{74}{}%
+\contentsline {subsection}{\numberline {8.3}Controllo stocastico delle scorte}{75}{}%
+\contentsline {paragraph}{Impostazione del problema}{75}{}%
+\contentsline {paragraph}{Spazio degli stati e azioni ammissibili}{75}{}%
+\contentsline {paragraph}{Ricorsione di programmazione dinamica}{75}{}%
+\contentsline {paragraph}{Modellazione dell’incertezza}{75}{}%
+\contentsline {paragraph}{Lot-sizing stocastico: idea delle procedure MATLAB}{75}{}%
+\contentsline {subsection}{\numberline {8.4}Sfruttare la struttura: cammini minimi per il lot-sizing deterministico}{75}{}%
+\contentsline {paragraph}{Motivazione}{75}{}%
+\contentsline {paragraph}{Teorema: proprietà di Wagner--Whitin}{76}{}%
+\contentsline {paragraph}{Bilancio globale dei flussi e nodo fittizio}{76}{}%
+\contentsline {paragraph}{Conseguenza pratica della condizione di Wagner--Whitin}{76}{}%
+\contentsline {paragraph}{Riformulazione come problema di cammino minimo}{76}{}%
+\contentsline {paragraph}{Significato economico degli archi}{77}{}%
+\contentsline {subsection}{\numberline {8.5}Lot-sizing stocastico: politiche \(S\) e \((s,S)\)}{77}{}%
+\contentsline {paragraph}{Backlog e penalità convessa}{77}{}%
+\contentsline {paragraph}{Convessità e livello obiettivo \(S_t\)}{77}{}%
+\contentsline {paragraph}{Politiche \((s,S)\) con costi fissi}{78}{}%
+\contentsline {paragraph}{Le maledizioni della programmazione dinamica}{78}{}%
+\contentsline {section}{\numberline {9}CAP 9 -- Modelli per la programmazione dinamica}{78}{}%
+\contentsline {paragraph}{Recap}{78}{}%
+\contentsline {subsection}{\numberline {9.1}Principio di modellazione per la programmazione dinamica}{79}{}%
+\contentsline {paragraph}{Idea generale della programmazione dinamica}{79}{}%
+\contentsline {paragraph}{Scambio tra attesa e ottimizzazione}{79}{}%
+\contentsline {paragraph}{Processi decisionali di Markov finiti}{79}{}%
+\contentsline {paragraph}{Esempio: controllo stocastico di inventario}{79}{}%
+\contentsline {paragraph}{Ricorsioni DP per MDP}{79}{}%
+\contentsline {paragraph}{Esempio: arresto ottimo ricorrente}{80}{}%
+\contentsline {subsection}{\numberline {9.2}Valutazione delle politiche e Q-factors}{80}{}%
+\contentsline {paragraph}{Valutazione delle politiche e Q-factors}{80}{}%
+\contentsline {paragraph}{Policy evaluation e policy iteration}{80}{}%
+\contentsline {paragraph}{Definizione di Q-factor per una politica}{80}{}%
+\contentsline {paragraph}{Vantaggi e svantaggi}{81}{}%
+\contentsline {paragraph}{Diverse forme di DP stocastica}{81}{}%
+\contentsline {paragraph}{Esempio: lot-sizing con lookahead limitato}{81}{}%
+\contentsline {paragraph}{Variabili di stato post-decisione}{81}{}%
+\contentsline {paragraph}{Esempio}{81}{}%
+\contentsline {paragraph}{Relazione tra funzioni valore}{82}{}%
+\contentsline {paragraph}{Aumento dello stato nella gestione delle scorte}{82}{}%
+\contentsline {paragraph}{Revenue management}{82}{}%
+\contentsline {subsection}{\numberline {9.3}Modello statico con segmentazione perfetta della domanda}{83}{}%
+\contentsline {paragraph}{Ipotesi di segmentazione e struttura della domanda}{83}{}%
+\contentsline {paragraph}{Stadi decisionali e variabile di stato}{83}{}%
+\contentsline {paragraph}{Funzione valore e condizioni al contorno}{83}{}%
+\contentsline {paragraph}{Sequenza degli eventi e formulazione della ricorsione}{83}{}%
+\contentsline {paragraph}{Indipendenza della decisione dalla distribuzione della domanda}{83}{}%
+\contentsline {paragraph}{Interpretazione operativa della decisione}{84}{}%
+\contentsline {paragraph}{Shift di indice e semplificazione della notazione}{84}{}%
+\contentsline {paragraph}{Valore marginale atteso della capacità}{84}{}%
+\contentsline {paragraph}{Proprietà di monotonicità}{84}{}%
+\contentsline {paragraph}{Decisione ottima e interpretazione}{84}{}%
+\contentsline {paragraph}{Modello dinamico con segmentazione perfetta della domanda}{84}{}%
+\contentsline {paragraph}{Modello dinamico con scelta del cliente}{85}{}%
+\contentsline {section}{\numberline {10}CAP 10 -- Programmazione dinamica numerica per stati discreti}{85}{}%
+\contentsline {paragraph}{Recap}{85}{}%
+\contentsline {paragraph}{Catene di Markov a tempo discreto}{86}{}%
+\contentsline {paragraph}{Processi decisionali di Markov a orizzonte temporale finito}{87}{}%
+\contentsline {paragraph}{Implementazione numerica della politica ottima}{87}{}%
+\contentsline {paragraph}{Processi decisionali di Markov a orizzonte temporale infinito}{88}{}%
+\contentsline {subsection}{\numberline {10.1}Value iteration}{88}{}%
+\contentsline {paragraph}{Metodo di iterazione del valore}{88}{}%
+\contentsline {paragraph}{Idea dell’esempio numerico}{89}{}%
+\contentsline {paragraph}{Idea delle funzioni MATLAB}{90}{}%
+\contentsline {subsection}{\numberline {10.2}Policy iteration}{90}{}%
+\contentsline {paragraph}{Idea e formulazione matematica}{90}{}%
+\contentsline {paragraph}{Idea dell’implementazione MATLAB}{91}{}%
+\contentsline {paragraph}{Esempio numerico}{91}{}%
+\contentsline {paragraph}{Value iteration vs.\ policy iteration}{91}{}%
+\contentsline {section}{\numberline {11}CAP 11 -- Programmazione dinamica approssimativa e RL per stati discreti}{92}{}%
+\contentsline {paragraph}{Recap}{92}{}%
+\contentsline {paragraph}{ADP e programmazione dinamica model-free}{93}{}%
+\contentsline {paragraph}{Campionamento e stima in contesti non stazionari}{93}{}%
+\contentsline {paragraph}{Il compromesso tra exploration ed exploitation}{94}{}%
+\contentsline {paragraph}{Osservazioni sull’esempio dei multi-armed bandits}{94}{}%
+\contentsline {paragraph}{Non stazionarietà e smoothing esponenziale}{95}{}%
+\contentsline {paragraph}{Learning tramite temporal differences e algoritmo SARSA}{95}{}%
+\contentsline {paragraph}{Q-learning per MDP finiti}{96}{}%
+\contentsline {paragraph}{Implementazione MATLAB del Q-learning}{97}{}%
+\contentsline {paragraph}{Definizione MATLAB di una classe di sistema generica}{98}{}%
+\contentsline {paragraph}{Esempio numerico}{98}{}%
+\contentsline {section}{\numberline {12}CAP 12 -- Simulazione}{98}{}%
+\contentsline {subsection}{\numberline {12.1}Simulazione coda M/M/1 e intervalli di confidenza (code 1)}{98}{}%
+\contentsline {paragraph}{Contesto del problema}{98}{}%
+\contentsline {paragraph}{Conclusioni}{100}{}%
+\contentsline {subsection}{\numberline {12.2}Simulazione (s,S) con revisione periodica: script \emph {extremely naive} (code 2)}{100}{}%
+\contentsline {paragraph}{Contesto del problema}{100}{}%
+\contentsline {paragraph}{Conclusioni}{102}{}%
+\contentsline {subsection}{\numberline {12.3}Politica (s,S) a revisione periodica: simulazione su scenari e ottimizzazione dei parametri (code 3a, 3b, 3c)}{102}{}%
+\contentsline {paragraph}{Contesto del problema}{102}{}%
+\contentsline {paragraph}{Conclusioni}{105}{}%
+\contentsline {subsection}{\numberline {12.4}Coda M/M/1 con balking (FIFO): simulazione percentuale di clienti che rinunciano (code 4a, 4b)}{105}{}%
+\contentsline {paragraph}{Contesto del problema}{105}{}%
+\contentsline {paragraph}{Conclusioni}{108}{}%
+\contentsline {subsection}{\numberline {12.5}Two-stage ATP/ATO: modello ai valori attesi vs modello stocastico (code 5a,5b)}{109}{}%
+\contentsline {paragraph}{Contesto del problema}{109}{}%
+\contentsline {paragraph}{Conclusioni}{112}{}%
+\contentsline {subsection}{\numberline {12.6}Capacity control e tariffe aeree: protezione della classe alta e simulazione degli arrivi (code 6)}{113}{}%
+\contentsline {paragraph}{Contesto del problema}{113}{}%
+\contentsline {paragraph}{Conclusioni}{114}{}%
+\contentsline {subsection}{\numberline {12.7}Roll queue: simulazione a eventi discreti con buffer e domanda batch (code 7)}{115}{}%
+\contentsline {paragraph}{Contesto del problema}{115}{}%
+\contentsline {paragraph}{Conclusioni}{117}{}%
+\contentsline {subsection}{\numberline {12.8}Cutting stock: formulazione simmetrica e generazione di colonne (code 8a, 8b, 8c)}{117}{}%
+\contentsline {paragraph}{Contesto del problema}{117}{}%
+\contentsline {paragraph}{Osservazioni su (8a)}{118}{}%
+\contentsline {paragraph}{Conclusioni}{120}{}%
