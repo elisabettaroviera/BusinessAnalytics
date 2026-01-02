@@ -404,7 +404,7 @@ Il \textcolor{NavyBlue}{\textbf{modello stocastico a due stadi}} è
 \text{s.t.} \quad
 & \sum_{i \in [n_i]} T_{im} x_i \le L_m,
 && m \in [n_m] \\[0.3em]
-& y_j^s \le \bar{d}_j^{\,s},
+& y_j^s \le d_j^{\,s},
 && j \in [n_j],\ s \in [n_s] \\[0.3em]
 & \sum_{j \in [n_j]} G_{ij} y_j^s \le x_i,
 && i \in [n_i],\ s \in [n_s] \\[0.3em]
@@ -6173,7 +6173,7 @@ for k = 1:numScenarios
     freqStockout(k) = sum(lostSales>0)/T;
 end
 \end{lstlisting}
-
+\vspace*{0.2cm}
 \begin{lstlisting}[style=matlabStyle]
 %% 3b - Optimization: Script to optimize (s,S) parameters
 % Economics
@@ -6470,6 +6470,7 @@ objCoeff = [compCost; -endPrice];
 lb = zeros(numComp+numItems,1);
 ub = [repmat(Inf,numComp,1); demandAverage];
 
+
 % Vincoli componenti: gozinto' * sell <= make
 A1 = [-eye(numComp), gozinto'];
 b1 = zeros(numComp,1);
@@ -6579,9 +6580,9 @@ x = optimvar('x', numComp, 1, 'LowerBound', 0, 'Type', typeVar);                
 y = optimvar('y', numItems, numScenarios, 'LowerBound', 0, 'UpperBound', demand, ...
              'Type', typeVar);                                                  % secondo stadio per scenario
 
+
 % Ricavo atteso: per ogni scenario calcolo endPrice'*y(:,s) e faccio media pesata
 probRP.Objective = -dot(compCost,x) + dot(endPrice'*y, probs);
-
 probRP.Constraints.cons1 = needRes' * x <= availRes;     % vincoli primo stadio
 
 % Vincoli di componente per ogni scenario: gozinto' * y(:,s) <= x
@@ -6641,9 +6642,7 @@ Lo script modella un problema di \textcolor{Indigo}{\textbf{revenue management}}
 cap    = 100;   % capacita' totale (posti)
 price1 = 400;   % prezzo classe 1 (alta)
 price2 = 200;   % prezzo classe 2 (bassa)
-
-% Orizzonte temporale (giorni fino alla partenza)
-T = 60;
+T = 60; % Orizzonte temporale (giorni fino alla partenza)
 
 % Tassi di arrivo (per giorno): veri e stimati
 trueArrivalRate1 = 0.4;  % tasso vero classe 1
@@ -6656,7 +6655,6 @@ hatArrivalRate2  = 2;    % tasso stimato classe 2 (qui non entra nella regola)
 % Nota: il numero di richieste classe 1 sull'orizzonte T e' Poisson con media hatArrivalRate1*T.
 % Uso un quantile: protezioneLevel = quantile_{1 - price2/price1}(Poisson(hatArrivalRate1*T))
 protectionLevel = poissinv(1 - price2/price1, hatArrivalRate1*T);
-
 % Stato del sistema
 count1 = 0;   % numero di richieste accettate per classe 1
 count2 = 0;   % numero di richieste accettate per classe 2
@@ -6769,6 +6767,7 @@ blocked = false;   % se true: produzione bloccata per buffer pieno
 joinTime       = [];   % istante di ingresso in coda di ciascun cliente
 residualDemand = [];   % domanda residua per ciascun cliente in coda
 
+
 % Statistica: tempo totale di attesa (solo per clienti che effettivamente attendono)
 totalWaitingTime = 0;
 
@@ -6823,6 +6822,7 @@ while count <= toServe
                 buffer = buffer - demand;
                 count = count + 1;  % attesa nulla
             else
+            
                 % Buffer insufficiente: consumo tutto il buffer e il resto diventa attesa
                 demand = demand - buffer;
                 buffer = 0;
