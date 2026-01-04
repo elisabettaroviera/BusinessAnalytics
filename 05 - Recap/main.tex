@@ -7049,6 +7049,220 @@ confermando l’equivalenza matematica delle due implementazioni.\\
 mentre (8b--8c) rappresentano l’approccio standard ed efficiente
 per istanze realistiche di cutting stock.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textcolor{DarkViolet}{\section{RECAP -- MATLAB}}
+
+\paragraph{Obiettivo}
+Schemi MATLAB minimi per riconoscere la tipologia di esercizio e scrivere lo scheletro corretto tra programmazione dinamica, enumerazione discreta e simulazione.
+
+\paragraph{1. Sintassi MATLAB da memorizzare}
+Sintassi di base da ricordare per scrivere i codici.
+\begin{lstlisting}[style=matlabStyle]
+% script
+clear;
+clc;
+
+% vettori e matrici + preallocazione
+v = [1; 2; 3];          % colonna
+w = [1 2 3];            % riga
+M = zeros(n,m);         % preallocazione
+
+% indicizzazione (stati spesso da 0)
+V(state+1,t+1);
+policy(state+1,t);
+
+% for (backward tipico in DP)
+for t = T:-1:1
+    % codice
+end
+
+% while (iterazioni fino a tolleranza)
+diff = Inf;
+tol  = 1e-6;
+while diff > tol
+    % aggiorna diff
+end
+
+% if / elseif / else (condizione esplicita)
+x = 3;
+if x > 0
+    y = 1;
+elseif x == 0
+    y = 0;
+else
+    y = -1;
+end
+
+% max
+[val, idx] = max(vector);
+
+% valore atteso (scenari)
+EV = sum(prob .* payoff);
+\end{lstlisting}
+
+\paragraph{2. Programmazione dinamica backward} Esempio di programmazione dinamica.
+\begin{lstlisting}[style=matlabStyle]
+for t = T:-1:1
+    for s = 0:maxState
+        
+        value = zeros(numActions,1);
+        
+        for a = 1:numActions
+            value(a) = reward + beta*V(nextState+1,t+1);
+        end
+        
+        [V(s+1,t), policy(s+1,t)] = max(value);
+        
+    end
+end
+\end{lstlisting}
+
+\paragraph{3. Enumerazione discreta} Esempio di enumerazione discreta per trovare la soluzione ottima.
+\begin{lstlisting}[style=matlabStyle]
+for q = 0:maxQ
+    profit(q+1) = computeProfit(q);
+end
+[maxProfit, qStar] = max(profit);
+\end{lstlisting}
+
+\paragraph{4. Valore atteso su scenari} Calcolo del valore atteso dato un vettore di probabilità e payoff.
+\begin{lstlisting}[style=matlabStyle]
+EV = sum(prob .* payoff);
+\end{lstlisting}
+
+\paragraph{5. Simulazione a eventi discreti} Struttura generale di un simulatore a eventi discreti.
+
+\begin{lstlisting}[style=matlabStyle]
+% struttura DES
+clock = 0;
+eventTimes = [nextArrival; nextCompletion];
+
+while clock <= horizon
+    [clock, idx] = min(eventTimes);
+    switch idx
+        case 1
+            % arrivo
+        case 2
+            % completamento
+    end
+end
+\end{lstlisting}
+
+\begin{lstlisting}[style=matlabStyle]
+% scheletro DES (1 server + coda)
+arrivalRate = ...;
+horizon = ...;
+
+idle = 0;
+busy = 1;
+
+clock = 0;
+queue = [];
+serverState = idle;
+
+eventTimes = [exprnd(1/arrivalRate); inf];
+
+totalWaitingTime = 0;
+completed = 0;
+
+while clock <= horizon
+    
+    [clock, idx] = min(eventTimes);
+    
+    switch idx
+        
+        case 1
+            eventTimes(1) = clock + exprnd(1/arrivalRate);
+            
+            if serverState == idle
+                serverState = busy;
+                serviceTime = unifrnd(a,b);
+                eventTimes(2) = clock + serviceTime;
+                completed = completed + 1;
+            else
+                queue(end+1) = clock;
+            end
+            
+        case 2
+            if ~isempty(queue)
+                totalWaitingTime = totalWaitingTime + clock - queue(1);
+                queue(1) = [];
+                
+                serviceTime = unifrnd(a,b);
+                eventTimes(2) = clock + serviceTime;
+                completed = completed + 1;
+            else
+                serverState = idle;
+                eventTimes(2) = inf;
+            end
+    end
+end
+
+averageWaitingTime = totalWaitingTime / completed;
+\end{lstlisting}
+
+\paragraph{Distribuzioni da ricordare} Generazione di variabili casuali con distribuzioni comuni.
+\begin{lstlisting}[style=matlabStyle]
+exprnd(1/lambda)
+unifrnd(a,b)
+poissrnd(lambda*T)
+randi([a,b])
+\end{lstlisting}
+
+\paragraph{6. Simulazione time--driven} Struttura generale di un simulatore time--driven.
+
+\begin{lstlisting}[style=matlabStyle]
+% schema time-driven
+for t = 1:horizon
+    % aggiorna stato
+end
+\end{lstlisting}
+
+\begin{lstlisting}[style=matlabStyle]
+% scheletro time-driven (inventario con shelf life)
+horizon = 300;
+S = 100;
+
+onHand = [0;0;0];
+onOrder = S;
+
+totalWaste = 0;
+
+for t = 1:horizon
+    
+    onHand(1) = onOrder;
+    
+    demand = randi([dmin,dmax]);
+    residualDemand = demand;
+    
+    for k = 1:length(onHand)
+        if residualDemand <= onHand(k)
+            onHand(k) = onHand(k) - residualDemand;
+            residualDemand = 0;
+            break
+        else
+            residualDemand = residualDemand - onHand(k);
+            onHand(k) = 0;
+        end
+    end
+    
+    totalWaste = totalWaste + onHand(end);
+    
+    for k = length(onHand):-1:2
+        onHand(k) = onHand(k-1);
+    end
+    onHand(1) = 0;
+    
+    onOrder = S - sum(onHand);
+end
+\end{lstlisting}
+
+\paragraph{Checklist}
+arrivi $\Rightarrow$ DES \\
+tempo discreto $\Rightarrow$ time--driven \\
+stato + decisione $\Rightarrow$ DP \\
+scenari $\Rightarrow$ valore atteso
 
 
 
