@@ -451,14 +451,14 @@ Le decisioni di secondo stadio sono anche dette \textcolor{NavyBlue}{\textbf{dec
 Il modello può essere formulato come \textcolor{NavyBlue}{\textbf{due problemi di ottimizzazione annidati}}
 \[
 \begin{aligned}
-\min_{x}\;& c^{T}x + Q(x) \\
+\min_{x}\;& c^{T}x + \mathbf{Q}(x) \\
 \text{s.t. }\;& Ax=b \\
 & x \ge 0,
 \end{aligned}
 \]
 dove la \textbf{funzione di ricorso} è definita come
 \(
-Q(x) = \mathbb{E}_{\mathbb{P}}\!\left[Q(x,\tilde{\xi})\right].
+\mathbf{Q}(x) = \mathbb{E}_{\mathbb{P}}\!\left[Q(x,\tilde{\xi})\right].
 \)
 Il \textcolor{NavyBlue}{\textbf{problema al secondo stadio}} è
 \[
@@ -555,7 +555,6 @@ Le variabili di localizzazione $y_i$ sono \textbf{di primo stadio} (design), men
 && \forall s \in S,\ \forall i \in \mathcal{P} \\[0.3em]
 & x_{ij}^s \ge 0, y_i \in \{0,1\}.
 \end{align*}
-
 
 \paragraph{Scenari estremi e necessità di formulazioni elastiche}
 È opportuno chiedersi \emph{cosa accade se viene incluso uno scenario estremo con domanda molto elevata}.
@@ -861,6 +860,8 @@ s_{it} \in \mathbb{Z}_+,\
 q_{it}^{\omega} \ge 0,
 && i \in [I],\ t \in [T],\ \omega \in \Omega.
 \end{align*}
+
+
 
 \paragraph{Osservazioni critiche sul modello}
 Si notano due aspetti rilevanti

@@ -1,0 +1,127 @@
+%% SIMULAZIONE A EVENTI DISCRETI
+Perché si usa la DES
+
+Si usa quando ci sono:
+
+arrivi casuali
+
+code
+
+server/macchine
+
+completamenti di servizio
+
+blocking, balking, manutenzione
+
+Esempi tipici:
+
+coda M/M/1
+
+sistemi produttivi
+
+buffer finiti
+
+In una simulazione a eventi discreti:
+
+il tempo non scorre in modo continuo
+
+il tempo salta da un evento al successivo
+
+lo stato del sistema cambia solo quando accade un evento
+
+
+% Definisco dati: arrivalRate, lowerProc, upperProc, maxWorkTime, maintenanceTime
+% Definisco costanti per descrivere lo stato delle macchine (codificato
+% come array di due elementi)
+idle = 0;
+busy = 1;
+maintenance = 2;
+totalWork = [0;0];
+machState = [idle;idle];
+
+% Definisco (e inizializzo) variabili di stato:
+% clock, eventTimes (array per CINQUE tipi eventi; soluzione pulita, 
+% ma volendo si puo' fare con tre), coda
+% contatori statistici totalWaitingTime e completed
+% horizon e' l'orizzonte simulato
+totalWaitingTime = 0;
+completed = 0;
+eventTimes = [exprnd(1/arrivalRate); inf; inf; inf; inf];
+% ultime due posizioni per manutenzioni
+queue = [];
+clock = 0;
+while clock <= horizon % loop di simulazione
+    [clock, idx] = min(eventTimes);
+    switch  idx
+        case 1
+            manageArrival();
+        case 2
+            manageCompletion(1); % una sola funzione con parametro per mach
+        case 3
+            manageCompletion(2);
+        case 4  % una sola funzione con parametro per mach
+            manageEndMaintenance(1);
+        case 5
+            manageEndMaintenance(2);
+    end
+end
+averageWaitingTime = totalWaitingTime/completed;
+
+%%%%%%%%%%%%%%%%%
+function manageArrival()
+    eventTimes(1) = clock + exprnd(1/arrivalRate);
+    if machState(1) == idle % macchina 1 libera 
+        machState(1) = busy;
+        procTime = unifrnd(lowerProc,upperProc);
+        totalWork(1) = totalWork(1) + procTime;
+        eventTimes(2) = clock + procTime;
+        completed = completed + 1;
+    elseif machState(2) == idle % macchina 2 libera 
+        machState(2) = busy;
+        procTime = unifrnd(lowerProc,upperProc);
+        totalWork(2) = totalWork(2) + procTime;
+        eventTimes(3) = clock + procTime;
+        completed = completed + 1;
+    else
+        queue(end+1) = clock; % accodo e registro inizio wait
+    end
+
+end
+
+%%%%%%%%%%%%%%%%%%
+function manageCompletion(machIdx)
+    % gestisco eventuale inizio manutenzione
+    if totalWork(machIdx) > maxWorkTime 
+        eventTimes(1+machIdx) = inf;
+        eventTimes(3+machIdx) = clock + maintenanceTime;
+        machState(machIdx) = maintenance;
+    else
+        if length(queue) > 0 % se coda, passa al prossimo 
+            totalWaitingTime = totalWaitingTime + clock - queue(1);
+            queue(1) = [];
+            completed = completed + 1;
+            procTime = unifrnd(lowerProc,upperProc);
+            totalWork(machIdx) = totalWork(machIdx) + procTime;
+            eventTimes(1+machIdx) = clock + procTime;
+        else % coda vuota, mach idle
+            machState(machIdx) = idle;
+            eventTimes(1+machIdx) = inf;
+        end
+    end
+end
+
+%%%%%%%%%%%%%%%%%%
+function manageEndMaintenance(machIdx)
+    totalWork(machIdx) = 0;
+    eventTimes(3+machIdx) = inf;
+    machState(machIdx) = idle;
+    if length(queue) > 0 % se coda, passa al prossimo 
+            totalWaitingTime = totalWaitingTime + clock - queue(1);
+            queue(1) = [];
+            completed = completed + 1;
+            procTime = unifrnd(lowerProc,upperProc);
+            totalWork(machIdx) = totalWork(machIdx) + procTime;
+            eventTimes(1+machIdx) = clock + procTime;
+            machState(machIdx) = busy;
+    end
+end
