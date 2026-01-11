@@ -38,9 +38,9 @@
 \contentsline {paragraph}{Descrizione del problema e rete bipartita}{9}{}%
 \contentsline {paragraph}{Scenari estremi e necessità di formulazioni elastiche}{10}{}%
 \contentsline {paragraph}{Modello elastico con domanda non soddisfatta penalizzata}{10}{}%
-\contentsline {paragraph}{Osservazioni di modellazione}{10}{}%
-\contentsline {subsubsection}{\numberline {1.6.2}Modello del newsvendor a due stadi}{10}{}%
-\contentsline {paragraph}{Motivazione e struttura informativa}{10}{}%
+\contentsline {paragraph}{Osservazioni di modellazione}{11}{}%
+\contentsline {subsubsection}{\numberline {1.6.2}Modello del newsvendor a due stadi}{11}{}%
+\contentsline {paragraph}{Motivazione e struttura informativa}{11}{}%
 \contentsline {subsubsection}{\numberline {1.6.3}Programmazione lineare stocastica multistadio con ricorso}{11}{}%
 \contentsline {paragraph}{Generalizzazione ai modelli multistadio}{11}{}%
 \contentsline {subsubsection}{\numberline {1.6.4}Un modello di pianificazione finanziaria multistadio con costi di transazione proporzionali}{12}{}%
@@ -50,8 +50,8 @@
 \contentsline {paragraph}{Esplosione dell’albero di scenario nei modelli multistadio}{13}{}%
 \contentsline {paragraph}{Multiperiodo non significa multistage}{13}{}%
 \contentsline {paragraph}{Caso particolare del two-stage multiperiod}{13}{}%
-\contentsline {subsubsection}{\numberline {1.7.1}Un modello multiperiodo a due stadi: Unit commitment}{13}{}%
-\contentsline {paragraph}{Domanda aleatoria come processo discreto nel tempo}{13}{}%
+\contentsline {subsubsection}{\numberline {1.7.1}Un modello multiperiodo a due stadi: Unit commitment}{14}{}%
+\contentsline {paragraph}{Domanda aleatoria come processo discreto nel tempo}{14}{}%
 \contentsline {paragraph}{Classi di generatori e struttura dei costi}{14}{}%
 \contentsline {paragraph}{Osservazioni critiche sul modello}{14}{}%
 \contentsline {subsection}{\numberline {1.8}Generazione di scenari e stabilità nella programmazione stocastica}{15}{}%

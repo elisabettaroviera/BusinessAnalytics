@@ -428,6 +428,9 @@ R^s(\mathbf{x}^\circ) = \max \quad
 & y_j^s \in \mathbb{Z}_+,
 && j \in [n_j].
 \end{align*}
+
+
+
 Dove $R^s(\mathbf{x}^\circ)$ è il \textbf{ricavo ottimo} che otteniamo nello scenario $s$,
 dato il vettore di decisione di \textbf{primo stadio} $\mathbf{x}^\circ$, sfruttando in modo
 ottimale i componenti disponibili per soddisfare la domanda. Si noti che, in questo modello, la disponibilità dei componenti $\mathbf{x}^\circ$ è data,
@@ -554,6 +557,19 @@ Le variabili di localizzazione $y_i$ sono \textbf{di primo stadio} (design), men
 & \sum_{j \in \mathcal{D}} x_{ij}^s \le R_i y_i,
 && \forall s \in S,\ \forall i \in \mathcal{P} \\[0.3em]
 & x_{ij}^s \ge 0, y_i \in \{0,1\}.
+\end{align*}
+
+\begin{align*}
+\min \quad 
+& \sum_{i\in\mathcal{P}} f_i y_i 
++ \sum_{s\in S} \pi^s 
+\sum_{i\in\mathcal{P}} \sum_{j\in\mathcal{D}} c_{ij} x_{ij}^s \\[0.4em]
+\text{s.t.} \quad
+& \sum_{i\in\mathcal{P}} x_{ij}^s = d_j^s
+\qquad s\in S,\, j\in\mathcal{D} \\[0.3em]
+& \sum_{j\in\mathcal{D}} x_{ij}^s \le R_i y_i
+\qquad s\in S,\, i\in\mathcal{P} \\[0.3em]
+& x_{ij}^s \ge 0,\; y_i \in \{0,1\}.
 \end{align*}
 
 \paragraph{Scenari estremi e necessità di formulazioni elastiche}
