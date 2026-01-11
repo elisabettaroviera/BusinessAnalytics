@@ -559,19 +559,6 @@ Le variabili di localizzazione $y_i$ sono \textbf{di primo stadio} (design), men
 & x_{ij}^s \ge 0, y_i \in \{0,1\}.
 \end{align*}
 
-\begin{align*}
-\min \quad 
-& \sum_{i\in\mathcal{P}} f_i y_i 
-+ \sum_{s\in S} \pi^s 
-\sum_{i\in\mathcal{P}} \sum_{j\in\mathcal{D}} c_{ij} x_{ij}^s \\[0.4em]
-\text{s.t.} \quad
-& \sum_{i\in\mathcal{P}} x_{ij}^s = d_j^s
-\qquad s\in S,\, j\in\mathcal{D} \\[0.3em]
-& \sum_{j\in\mathcal{D}} x_{ij}^s \le R_i y_i
-\qquad s\in S,\, i\in\mathcal{P} \\[0.3em]
-& x_{ij}^s \ge 0,\; y_i \in \{0,1\}.
-\end{align*}
-
 \paragraph{Scenari estremi e necessità di formulazioni elastiche}
 È opportuno chiedersi \emph{cosa accade se viene incluso uno scenario estremo con domanda molto elevata}.
 Potrebbe non essere nemmeno possibile soddisfare tale domanda; inoltre, la pianificazione della capacità verrebbe guidata da
@@ -599,6 +586,7 @@ Tali variabili entrano nell’obiettivo moltiplicate per un coefficiente di pena
 && \forall s \in S,\ \forall i \in \mathcal{P} \\[0.3em]
 & x_{ij}^s \ge 0,\ z_j^s \ge 0, y_i \in \{0,1\}.
 \end{align*}
+
 La \textcolor{NavyBlue}{\textbf{quantificazione delle penalità}} $\beta_j$ dipende dal significato di $z^{s}_{j}$: 
 può rappresentare \emph{domanda effettivamente non servita} (con penalità differenziate per priorità di mercato)
  oppure \emph{domanda soddisfatta tramite fornitori terzi} (con penalità pari al costo effettivo di tale opzione).
